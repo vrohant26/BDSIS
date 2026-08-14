@@ -10,21 +10,21 @@
 				<!-- Card 1 -->
 				<div class="footer-card-item card-rotate-left-lg">
 					<div class="footer-card-inner">
-						<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/footer images/Exported Photo DSC1318 1.webp' ); ?>" alt="Science Lab Experiment">
+						<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/footer images/Exported Photo DSC1318 1.webp' ); ?>" alt="Science Lab Experiment" loading="lazy" decoding="async">
 					</div>
 				</div>
 
 				<!-- Card 2 -->
 				<div class="footer-card-item card-rotate-right-sm">
 					<div class="footer-card-inner">
-						<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/footer images/Image from Google Drive (7) 1.webp' ); ?>" alt="School Campus Building">
+						<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/footer images/Image from Google Drive (7) 1.webp' ); ?>" alt="School Campus Building" loading="lazy" decoding="async">
 					</div>
 				</div>
 
 				<!-- Card 3 -->
 				 <div class="footer-card-item card-rotate-right-lg">
 					<div class="footer-card-inner">
-						<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/footer images/Day 2 Card 4 Images DSC1216 1.webp' ); ?>" alt="Outdoor Sports Activities">
+						<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/footer images/Day 2 Card 4 Images DSC1216 1.webp' ); ?>" alt="Outdoor Sports Activities" loading="lazy" decoding="async">
 					</div>
 				</div>
 			
@@ -32,14 +32,14 @@
 				<!-- Card 4 -->
 					<div class="footer-card-item card-rotate-left-sm">
 					<div class="footer-card-inner">
-						<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/footer images/Day 2 Card 9 Images DSC01811 1.webp' ); ?>" alt="Students Reading Books">
+						<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/footer images/Day 2 Card 9 Images DSC01811 1.webp' ); ?>" alt="Students Reading Books" loading="lazy" decoding="async">
 					</div>
 				</div>
 
 				<!-- Card 5 -->
 				<div class="footer-card-item card-rotate-left-md">
 					<div class="footer-card-inner">
-						<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/footer images/Day 1 Card 5 DSC00899 1.webp' ); ?>" alt="Happy Students Learning">
+						<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/footer images/Day 1 Card 5 DSC00899 1.webp' ); ?>" alt="Happy Students Learning" loading="lazy" decoding="async">
 					</div>
 				</div>
 
@@ -95,14 +95,25 @@
 						</ul>
 					</div>
 
+					<?php
+						$f_home_url  = esc_url( home_url( '/' ) );
+						$f_about_url = esc_url( home_url( '/about/' ) );
+						$f_faq_url   = esc_url( home_url( '/faq/' ) );
+
+						$f_is_faq   = is_page_template( 'page-faq.php' ) || is_page( 'faq' );
+						$f_is_about = is_page_template( 'page-about.php' ) || is_page( 'about' ) || is_page( 'about-us' );
+						$f_is_home  = ( is_front_page() || is_home() ) && ! $f_is_faq && ! $f_is_about;
+
+						$f_prefix = $f_is_home ? '' : $f_home_url;
+					?>
 					<!-- Column 2: Admissions -->
 					<div class="footer-col">
 						<h3 class="footer-col-title">Admissions</h3>
 						<ul class="footer-links">
-							<li><a href="#apply">Apply Now</a></li>
-							<li><a href="#process">Process</a></li>
-							<li><a href="#faq">Faq</a></li>
-							<li><a href="#campus">Campus</a></li>
+							<li><a href="<?php echo $f_prefix; ?>#apply">Apply Now</a></li>
+							<li><a href="<?php echo $f_prefix; ?>#process">Process</a></li>
+							<li><a href="<?php echo $f_faq_url; ?>" class="<?php echo $f_is_faq ? 'active' : ''; ?>">Faq</a></li>
+							<li><a href="<?php echo $f_prefix; ?>#campus-life">Campus</a></li>
 						</ul>
 					</div>
 
@@ -110,12 +121,12 @@
 					<div class="footer-col">
 						<h3 class="footer-col-title">Links</h3>
 						<ul class="footer-links">
-							<li><a href="<?php echo esc_url( home_url( '/' ) ); ?>">Home</a></li>
-							<li><a href="#about">About us</a></li>
-							<li><a href="#approach">Our Approach</a></li>
-							<li><a href="#academics">Academics</a></li>
-							<li><a href="#gallery">Gallery</a></li>
-							<li><a href="#contact">Contact us</a></li>
+							<li><a href="<?php echo $f_home_url; ?>" class="<?php echo $f_is_home ? 'active' : ''; ?>">Home</a></li>
+							<li><a href="<?php echo $f_about_url; ?>" class="<?php echo $f_is_about ? 'active' : ''; ?>">About us</a></li>
+							<li><a href="<?php echo $f_prefix; ?>#our-approach">Our Approach</a></li>
+							<li><a href="<?php echo $f_prefix; ?>#academics">Academics</a></li>
+							<li><a href="<?php echo $f_prefix; ?>#gallery">Gallery</a></li>
+							<li><a href="<?php echo $f_prefix; ?>#contact">Contact us</a></li>
 						</ul>
 					</div>
 
@@ -123,11 +134,11 @@
 					<div class="footer-col">
 						<h3 class="footer-col-title">Academics</h3>
 						<ul class="footer-links">
-							<li><a href="#daycare">Daycare</a></li>
-							<li><a href="#pre-primary">Pre-Primary</a></li>
-							<li><a href="#primary">Primary</a></li>
-							<li><a href="#middle-school">Middle school</a></li>
-							<li><a href="#after-school">After School</a></li>
+							<li><a href="<?php echo $f_prefix; ?>#daycare">Daycare</a></li>
+							<li><a href="<?php echo $f_prefix; ?>#pre-primary">Pre-Primary</a></li>
+							<li><a href="<?php echo $f_prefix; ?>#primary">Primary</a></li>
+							<li><a href="<?php echo $f_prefix; ?>#middle">Middle school</a></li>
+							<li><a href="<?php echo $f_prefix; ?>#after-school">After School</a></li>
 						</ul>
 					</div>
 
@@ -168,9 +179,9 @@
 
 				<!-- Copyright Bottom Bar -->
 				<div class="footer-bottom-bar flex-between align-center flex-wrap gap-sm">
-					<p class="copyright-text">&copy; 2026 B.D. Somani International School, Kharghar</p>
+					<p class="copyright-text">&copy; <?php echo date( 'Y' ); ?> B.D. Somani International School, Kharghar</p>
 					<div class="legal-links flex gap-md">
-						<a href="#terms">Terms and Conitions</a>
+						<a href="#terms">Terms and Conditions</a>
 						<a href="#privacy">Privacy Policy</a>
 					</div>
 				</div>

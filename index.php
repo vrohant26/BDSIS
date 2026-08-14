@@ -510,11 +510,11 @@ get_header();
 				<div class="experiential-media-wrapper relative">
 					<div class="experiential-media-card placeholder-card relative overflow-hidden">
 						<div class="experiential-slides">
-							<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/indoor and outdoor sports.webp' ); ?>" alt="Indoor &amp; Outdoor Sports" class="experiential-img-slide active" data-index="0">
-							<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/performing arts.webp' ); ?>" alt="Performing Arts" class="experiential-img-slide" data-index="1">
-							<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/clubs and activities.webp' ); ?>" alt="Clubs &amp; Activities" class="experiential-img-slide" data-index="2">
-							<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/reading and literature club.webp' ); ?>" alt="Reading &amp; Literary Clubs" class="experiential-img-slide" data-index="3">
-							<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/innovation and design workshop.webp' ); ?>" alt="Innovation &amp; Design Workshops" class="experiential-img-slide" data-index="4">
+							<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/indoor and outdoor sports.webp' ); ?>" alt="Indoor &amp; Outdoor Sports" class="experiential-img-slide active" data-index="0" loading="lazy" decoding="async">
+							<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/performing arts.webp' ); ?>" alt="Performing Arts" class="experiential-img-slide" data-index="1" loading="lazy" decoding="async">
+							<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/clubs and activities.webp' ); ?>" alt="Clubs &amp; Activities" class="experiential-img-slide" data-index="2" loading="lazy" decoding="async">
+							<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/reading and literature club.webp' ); ?>" alt="Reading &amp; Literary Clubs" class="experiential-img-slide" data-index="3" loading="lazy" decoding="async">
+							<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/innovation and design workshop.webp' ); ?>" alt="Innovation &amp; Design Workshops" class="experiential-img-slide" data-index="4" loading="lazy" decoding="async">
 						</div>
 					</div>
 				</div>
@@ -684,7 +684,7 @@ get_header();
 							<div class="parents-card-group flex gap-md">
 								<!-- Video Thumbnail Box -->
 								<div class="parents-video-box relative">
-									<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/parent 1.webp' ); ?>" alt="Ms. Zahabia Khairullah" class="parents-video-img">
+									<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/parent 1.webp' ); ?>" alt="Ms. Zahabia Khairullah" class="parents-video-img" loading="lazy" decoding="async">
 									<div class="parents-play-overlay flex-center">
 										<button class="parents-play-btn flex-center" aria-label="Play video testimonial">
 											<svg width="20" height="24" viewBox="0 0 20 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -712,7 +712,7 @@ get_header();
 							<div class="parents-card-group flex gap-md">
 								<!-- Video Thumbnail Box -->
 								<div class="parents-video-box relative">
-									<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/parent 2.webp' ); ?>" alt="Ms. Jasmita Kaur Kohli" class="parents-video-img">
+									<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/parent 2.webp' ); ?>" alt="Ms. Jasmita Kaur Kohli" class="parents-video-img" loading="lazy" decoding="async">
 									<div class="parents-play-overlay flex-center">
 										<button class="parents-play-btn flex-center" aria-label="Play video testimonial">
 											<svg width="20" height="24" viewBox="0 0 20 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -756,7 +756,7 @@ get_header();
 			<!-- Main Rounded CTA Card Container -->
 			<div class="cta-card-wrapper relative overflow-hidden">
 				<!-- Background Campus Image -->
-				<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/CTA.webp' ); ?>" alt="B.D. Somani International School Campus" class="cta-bg-img">
+				<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/CTA.webp' ); ?>" alt="B.D. Somani International School Campus" class="cta-bg-img" loading="lazy" decoding="async">
 				
 				<!-- Dark Gradient Overlay for optimal contrast -->
 				<div class="cta-overlay-gradient"></div>

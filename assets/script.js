@@ -16,19 +16,19 @@ document.addEventListener("DOMContentLoaded", () => {
       smoothWheel: true,
     });
 
-    function raf(time) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
-    }
-    requestAnimationFrame(raf);
-
-    // Synchronize Lenis with GSAP ScrollTrigger if available
-    if (typeof ScrollTrigger !== "undefined") {
+    // Synchronize Lenis with GSAP ScrollTrigger if available, otherwise use native rAF
+    if (typeof ScrollTrigger !== "undefined" && typeof gsap !== "undefined") {
       lenis.on("scroll", ScrollTrigger.update);
       gsap.ticker.add((time) => {
         lenis.raf(time * 1000);
       });
       gsap.ticker.lagSmoothing(0);
+    } else {
+      function raf(time) {
+        lenis.raf(time);
+        requestAnimationFrame(raf);
+      }
+      requestAnimationFrame(raf);
     }
   }
 
@@ -94,6 +94,17 @@ document.addEventListener("DOMContentLoaded", () => {
       ".split-word-title",
       "h1:not(.no-reveal)",
       "h2:not(.no-reveal)",
+      ".about-hero-desc",
+      ".about-approach-lead",
+      ".about-approach-footer-text",
+      ".experiential-desc",
+      ".cta-subtitle",
+      ".about-leadership-lead",
+      ".about-potential-title",
+      ".about-potential-lead",
+      ".about-purpose-title",
+      ".about-purpose-subtitle",
+      ".about-purpose-body",
     ].join(", ");
 
     const textElements = document.querySelectorAll(revealSelectors);
@@ -1022,16 +1033,24 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
 
-    // Recalculate max-height on window resize for open accordion cards
-    window.addEventListener("resize", () => {
-      accordionButtons.forEach((btn) => {
-        if (btn.getAttribute("aria-expanded") === "true") {
-          const targetId = btn.getAttribute("aria-controls");
-          const bodyEl = document.getElementById(targetId);
-          if (bodyEl) bodyEl.style.maxHeight = bodyEl.scrollHeight + "px";
-        }
-      });
-    });
+    // Recalculate max-height on window resize for open accordion cards with debounce
+    let resizeTimer;
+    window.addEventListener(
+      "resize",
+      () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+          accordionButtons.forEach((btn) => {
+            if (btn.getAttribute("aria-expanded") === "true") {
+              const targetId = btn.getAttribute("aria-controls");
+              const bodyEl = document.getElementById(targetId);
+              if (bodyEl) bodyEl.style.maxHeight = bodyEl.scrollHeight + "px";
+            }
+          });
+        }, 100);
+      },
+      { passive: true },
+    );
 
     // 2. Smooth Scroll on Tab Clicks
     categoryTabs.forEach((tab) => {
@@ -1059,25 +1078,467 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
 
-    // 3. ScrollSpy: Highlight active tab as user scrolls down
-    window.addEventListener("scroll", () => {
-      let currentSectionId = "";
-      sections.forEach((sec) => {
-        const secTop = sec.offsetTop - 230;
-        if (window.scrollY >= secTop) {
-          currentSectionId = sec.getAttribute("id");
+    // 3. ScrollSpy: Highlight active tab as user scrolls down with rAF throttle
+    let isScrollTicking = false;
+    window.addEventListener(
+      "scroll",
+      () => {
+        if (!isScrollTicking) {
+          window.requestAnimationFrame(() => {
+            let currentSectionId = "";
+            sections.forEach((sec) => {
+              const secTop = sec.offsetTop - 230;
+              if (window.scrollY >= secTop) {
+                currentSectionId = sec.getAttribute("id");
+              }
+            });
+
+            if (currentSectionId) {
+              categoryTabs.forEach((tab) => {
+                const matches =
+                  tab.getAttribute("data-target") === currentSectionId;
+                tab.classList.toggle("active", matches);
+                tab.setAttribute("aria-selected", matches ? "true" : "false");
+              });
+            }
+            isScrollTicking = false;
+          });
+          isScrollTicking = true;
+        }
+      },
+      { passive: true },
+    );
+  }
+
+  initFAQPageInteractive();
+
+  // --------------------------------------------------------------------------
+  // Custom Gallery Page Functionality: Category Filtering & Lightbox Modal
+  // --------------------------------------------------------------------------
+  function initGalleryPageInteractive() {
+    const galleryContainer = document.querySelector(".gallery-page-custom");
+    if (!galleryContainer) return;
+
+    const categoryTabs = galleryContainer.querySelectorAll(".gallery-tab-link");
+    const galleryCards =
+      galleryContainer.querySelectorAll(".gallery-card-item");
+    const lightboxModal = document.getElementById("galleryLightbox");
+    const lightboxImg = document.getElementById("lightboxActiveImg");
+    const lightboxCaption = document.getElementById("lightboxCaption");
+    const lightboxCloseBtn = galleryContainer.querySelector(
+      ".lightbox-close-btn",
+    );
+    const lightboxBackdrop =
+      galleryContainer.querySelector(".lightbox-backdrop");
+    const prevBtn = document.getElementById("lightboxPrevBtn");
+    const nextBtn = document.getElementById("lightboxNextBtn");
+
+    let currentVisibleCards = Array.from(galleryCards);
+    let activeIndex = 0;
+
+    // 1. Category Filtering
+    categoryTabs.forEach((tab) => {
+      tab.addEventListener("click", () => {
+        const selectedCategory = tab.getAttribute("data-category");
+
+        categoryTabs.forEach((t) => {
+          t.classList.remove("active");
+          t.setAttribute("aria-selected", "false");
+        });
+        tab.classList.add("active");
+        tab.setAttribute("aria-selected", "true");
+
+        currentVisibleCards = [];
+
+        galleryCards.forEach((card) => {
+          const cardCategories = card.getAttribute("data-category") || "";
+          const categoryArray = cardCategories.split(" ");
+
+          if (
+            selectedCategory === "all" ||
+            categoryArray.includes(selectedCategory)
+          ) {
+            card.classList.remove("hide");
+            currentVisibleCards.push(card);
+          } else {
+            card.classList.add("hide");
+          }
+        });
+      });
+    });
+
+    // 2. Lightbox Modal Preview
+    function openLightbox(index) {
+      if (!lightboxModal || !currentVisibleCards[index]) return;
+
+      activeIndex = index;
+      const targetCard = currentVisibleCards[index];
+      const imgEl = targetCard.querySelector(".gallery-img");
+      const titleEl = targetCard.querySelector(".gallery-card-title");
+
+      if (imgEl && lightboxImg) {
+        lightboxImg.src = imgEl.src;
+        lightboxImg.alt = imgEl.alt || "Gallery Image";
+      }
+
+      if (titleEl && lightboxCaption) {
+        lightboxCaption.textContent = titleEl.textContent;
+      }
+
+      lightboxModal.classList.add("is-open");
+      lightboxModal.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeLightbox() {
+      if (!lightboxModal) return;
+      lightboxModal.classList.remove("is-open");
+      lightboxModal.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+    }
+
+    galleryCards.forEach((card) => {
+      card.addEventListener("click", () => {
+        const idx = currentVisibleCards.indexOf(card);
+        if (idx !== -1) {
+          openLightbox(idx);
         }
       });
+    });
 
-      if (currentSectionId) {
-        categoryTabs.forEach((tab) => {
-          const matches = tab.getAttribute("data-target") === currentSectionId;
-          tab.classList.toggle("active", matches);
-          tab.setAttribute("aria-selected", matches ? "true" : "false");
-        });
+    if (lightboxCloseBtn)
+      lightboxCloseBtn.addEventListener("click", closeLightbox);
+    if (lightboxBackdrop)
+      lightboxBackdrop.addEventListener("click", closeLightbox);
+
+    if (prevBtn) {
+      prevBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        if (currentVisibleCards.length === 0) return;
+        const newIndex =
+          (activeIndex - 1 + currentVisibleCards.length) %
+          currentVisibleCards.length;
+        openLightbox(newIndex);
+      });
+    }
+
+    if (nextBtn) {
+      nextBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        if (currentVisibleCards.length === 0) return;
+        const newIndex = (activeIndex + 1) % currentVisibleCards.length;
+        openLightbox(newIndex);
+      });
+    }
+
+    // Keyboard Shortcuts (ESC to close, Left/Right arrows to navigate)
+    window.addEventListener("keydown", (e) => {
+      if (!lightboxModal || !lightboxModal.classList.contains("is-open"))
+        return;
+
+      if (e.key === "Escape") {
+        closeLightbox();
+      } else if (e.key === "ArrowLeft" && prevBtn) {
+        prevBtn.click();
+      } else if (e.key === "ArrowRight" && nextBtn) {
+        nextBtn.click();
       }
     });
   }
 
-  initFAQPageInteractive();
+  initGalleryPageInteractive();
+
+  // Bouncy Scale-In Animation for About Page Merits Cards
+  function initAboutMeritsAnimation() {
+    if (!hasGsap()) return;
+    const cards = document.querySelectorAll(".about-merit-card");
+    if (cards.length === 0) return;
+
+    gsap.fromTo(
+      cards,
+      { scale: 0, y: 70 },
+      {
+        scale: 1,
+        y: 0,
+        duration: 1.1,
+        stagger: 0.12,
+        ease: "back.out(1.8)",
+        scrollTrigger: {
+          trigger: ".about-merits-grid",
+          start: "top 85%",
+          toggleActions: "play none none none",
+        },
+      },
+    );
+  }
+
+  initAboutMeritsAnimation();
+
+  // DrawSVG drawing animation for About Page Wavy SVGs
+  function initAboutWavyAnimation() {
+    if (!hasGsap()) return;
+    const topPath = document.querySelector(
+      ".about-approach-bg-doodle-top svg path",
+    );
+    const bottomPath = document.querySelector(
+      ".about-approach-bg-doodle-bottom svg path",
+    );
+
+    if (!topPath && !bottomPath) return;
+
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: ".about-approach-section",
+        start: "top 80%",
+        toggleActions: "play none none none",
+      },
+    });
+
+    const paths = [topPath, bottomPath].filter(Boolean);
+
+    paths.forEach((path) => {
+      if (typeof DrawSVGPlugin !== "undefined") {
+        tl.fromTo(
+          path,
+          { drawSVG: "100% 100%" },
+          { drawSVG: "0% 100%", duration: 2.2, ease: "power2.inOut" },
+          0,
+        );
+      } else {
+        const pathLength = path.getTotalLength ? path.getTotalLength() : 1500;
+        gsap.set(path, {
+          strokeDasharray: pathLength,
+          strokeDashoffset: pathLength,
+        });
+        tl.to(
+          path,
+          { strokeDashoffset: 0, duration: 2.2, ease: "power2.inOut" },
+          0,
+        );
+      }
+    });
+  }
+
+  initAboutWavyAnimation();
+
+  // Bouncy Scale-In / Fade-In Animation for About Page Leader Cards & Arrow Drawing
+  function initAboutLeadershipAnimation() {
+    if (!hasGsap()) return;
+    const section = document.querySelector(".about-leadership-section");
+    if (!section) return;
+
+    const cards = section.querySelectorAll(".about-leader-card-wrapper");
+    const dashedPath = section.querySelector(
+      ".about-leadership-annotation svg #maskPath",
+    );
+    const arrowHead = section.querySelector(
+      ".about-leadership-annotation svg g[clip-path] path",
+    );
+
+    // Pre-set initial hidden state to prevent FOUC / visual jump on load
+    if (arrowHead) {
+      gsap.set(arrowHead, {
+        opacity: 0,
+        scale: 0.5,
+        transformOrigin: "center center",
+      });
+    }
+
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: section,
+        start: "top 80%",
+        toggleActions: "play none none none",
+      },
+    });
+
+    // 1. Draw dashed arrow line using DrawSVG/fallback
+    if (dashedPath) {
+      if (typeof DrawSVGPlugin !== "undefined") {
+        tl.fromTo(
+          dashedPath,
+          { drawSVG: "100% 100%" },
+          { drawSVG: "0% 100%", duration: 1.6, ease: "power2.out" },
+          0,
+        );
+      } else {
+        const pathLength = dashedPath.getTotalLength
+          ? dashedPath.getTotalLength()
+          : 500;
+        gsap.set(dashedPath, {
+          strokeDasharray: pathLength,
+          strokeDashoffset: pathLength,
+        });
+        tl.to(
+          dashedPath,
+          { strokeDashoffset: 0, duration: 1.6, ease: "power2.out" },
+          0,
+        );
+      }
+    }
+
+    // 2. Fade in arrowhead
+    if (arrowHead) {
+      tl.fromTo(
+        arrowHead,
+        { opacity: 0, scale: 0.5, transformOrigin: "center center" },
+        { opacity: 1, scale: 1, duration: 0.4, ease: "back.out(2)" },
+        "-=0.4",
+      );
+    }
+
+    // 3. Stagger reveal leadership cards
+    if (cards.length > 0) {
+      tl.fromTo(
+        cards,
+        { opacity: 0, y: 55 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.95,
+          stagger: 0.18,
+          ease: "power2.out",
+        },
+        "-=1.0",
+      );
+    }
+  }
+
+  initAboutLeadershipAnimation();
+
+  // 3D Card Flipping interactive control for Leadership Cards
+  function initLeadershipCardFlip() {
+    const wrappers = document.querySelectorAll(".about-leader-card-wrapper");
+    wrappers.forEach((wrapper) => {
+      const btn = wrapper.querySelector(".about-leader-link-btn");
+      const card = wrapper.querySelector(".about-leader-card");
+      if (!btn || !card) return;
+
+      btn.addEventListener("click", (e) => {
+        e.preventDefault();
+        const isFlipped = card.classList.contains("is-flipped");
+
+        // Toggle flip class
+        card.classList.toggle("is-flipped");
+
+        // Toggle button label
+        if (isFlipped) {
+          btn.textContent = "Read Their Message";
+        } else {
+          btn.textContent = "Show Photo";
+        }
+      });
+    });
+  }
+
+  initLeadershipCardFlip();
+
+  // Swiper Carousel for merits cards on mobile only
+  function initMeritsSwiper() {
+    const swiperEl = document.querySelector(".about-merits-grid");
+    if (!swiperEl || typeof Swiper === "undefined") return;
+
+    const progressBar = document.getElementById("meritsProgressBar");
+
+    function updateMeritsProgressBar(swiper) {
+      if (!progressBar) return;
+      const totalSlides = swiper.slides.length || 5;
+      const progress = ((swiper.activeIndex + 1) / totalSlides) * 100;
+      progressBar.style.width = progress + "%";
+    }
+
+    const meritsSwiper = new Swiper(".about-merits-grid", {
+      slidesPerView: 1.35,
+      spaceBetween: 16,
+      grabCursor: true,
+      breakpoints: {
+        // Disable swiper on viewport widths >= 769px
+        769: {
+          enabled: false,
+        },
+      },
+      on: {
+        init: function () {
+          updateMeritsProgressBar(this);
+        },
+        slideChange: function () {
+          updateMeritsProgressBar(this);
+        },
+      },
+    });
+  }
+
+  initMeritsSwiper();
+
+  // ScrollTrigger Animation for the Extraordinary Potential Video Section
+  function initAboutPotentialAnimation() {
+    if (!hasGsap()) return;
+    const section = document.querySelector(".about-potential-section");
+    if (!section) return;
+
+    const videoWrap = section.querySelector(".about-potential-video-wrap");
+
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: section,
+        start: "top 80%",
+        toggleActions: "play none none none",
+      },
+    });
+
+    // Scale/Fade in yellow-bordered video wrapper
+    if (videoWrap) {
+      tl.fromTo(
+        videoWrap,
+        { scale: 0.5, opacity: 0 },
+        { scale: 1, opacity: 1, duration: 1.2, ease: "back.out(1.5)" },
+        0,
+      );
+    }
+  }
+
+  initAboutPotentialAnimation();
+
+  // ScrollTrigger Animations for Purpose Section rows
+  function initAboutPurposeAnimation() {
+    if (!hasGsap()) return;
+    const rows = document.querySelectorAll(".about-purpose-row");
+    if (!rows.length) return;
+
+    rows.forEach((row, i) => {
+      const imgWrap = row.querySelector(".about-purpose-img-wrap");
+      const textCol = row.querySelector(".about-purpose-text");
+      const isReverse = row.classList.contains("about-purpose-row--reverse");
+
+      const imgFrom = { x: isReverse ? 60 : -60, opacity: 0 };
+      const textFrom = { x: isReverse ? -60 : 60, opacity: 0 };
+
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: row,
+          start: "top 80%",
+          toggleActions: "play none none none",
+        },
+      });
+
+      if (imgWrap) {
+        tl.fromTo(
+          imgWrap,
+          imgFrom,
+          { x: 0, opacity: 1, duration: 0.9, ease: "power3.out" },
+          0,
+        );
+      }
+      if (textCol) {
+        tl.fromTo(
+          textCol,
+          textFrom,
+          { x: 0, opacity: 1, duration: 0.9, ease: "power3.out" },
+          0.15,
+        );
+      }
+    });
+  }
+
+  initAboutPurposeAnimation();
 });

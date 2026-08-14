@@ -16,7 +16,16 @@ get_header();
 		<!-- Breadcrumb Navigation -->
 		<nav class="faq-breadcrumb" aria-label="Breadcrumb">
 			<a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="breadcrumb-home-link" aria-label="Home">
-				<iconify-icon icon="lucide:home"></iconify-icon>
+				<?php 
+				$home_svg_path = get_template_directory() . '/assets/svgs/home svg.svg';
+				if ( file_exists( $home_svg_path ) ) {
+					echo file_get_contents( $home_svg_path );
+				} else {
+					?>
+					<iconify-icon icon="lucide:home"></iconify-icon>
+					<?php
+				}
+				?>
 			</a>
 			<span class="breadcrumb-separator">/</span>
 			<span class="breadcrumb-current">Frequently Asked Questions</span>

@@ -42,14 +42,23 @@
 				</a>
 
 				<?php 
-					$home_prefix = is_front_page() ? '' : esc_url( home_url( '/' ) );
-					$is_faq = is_page_template( 'page-faq.php' ) || is_page( 'faq' );
+					$home_url    = esc_url( home_url( '/' ) );
+					$about_url   = esc_url( home_url( '/about/' ) );
+					$faq_url     = esc_url( home_url( '/faq/' ) );
+					$gallery_url = esc_url( home_url( '/gallery/' ) );
+
+					$is_faq     = is_page_template( 'page-faq.php' ) || is_page( 'faq' );
+					$is_about   = is_page_template( 'page-about.php' ) || is_page( 'about' ) || is_page( 'about-us' );
+					$is_gallery = is_page_template( 'page-gallery.php' ) || is_page( 'gallery' ) || is_post_type_archive( 'gallery' );
+					$is_home    = ( is_front_page() || is_home() ) && ! $is_faq && ! $is_about && ! $is_gallery;
+
+					$home_prefix = $is_home ? '' : $home_url;
 				?>
 				<!-- Desktop Navigation Menu -->
 				<nav class="main-nav" aria-label="Main Navigation">
 					<ul class="nav-menu flex gap-md">
-						<li class="nav-item"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="nav-link <?php echo ( is_front_page() && ! $is_faq ) ? 'active' : ''; ?>">HOME</a></li>
-						<li class="nav-item"><a href="<?php echo $home_prefix; ?>#about" class="nav-link">ABOUT</a></li>
+						<li class="nav-item"><a href="<?php echo $home_url; ?>" class="nav-link <?php echo $is_home ? 'active' : ''; ?>">HOME</a></li>
+						<li class="nav-item"><a href="<?php echo $about_url; ?>" class="nav-link <?php echo $is_about ? 'active' : ''; ?>">ABOUT</a></li>
 						<li class="nav-item dropdown">
 							<a href="<?php echo $home_prefix; ?>#academics" class="nav-link">
 								ACADEMICS
@@ -71,8 +80,8 @@
 						</li>
 						<li class="nav-item"><a href="<?php echo $home_prefix; ?>#campus-life" class="nav-link">CAMPUS LIFE</a></li>
 						<li class="nav-item"><a href="<?php echo $home_prefix; ?>#admissions" class="nav-link">ADMISSIONS</a></li>
-						<li class="nav-item"><a href="<?php echo $home_prefix; ?>#gallery" class="nav-link">GALLERY</a></li>
-						<li class="nav-item"><a href="<?php echo esc_url( home_url( '/faq/' ) ); ?>" class="nav-link <?php echo $is_faq ? 'active' : ''; ?>">FAQ</a></li>
+						<li class="nav-item"><a href="<?php echo $gallery_url; ?>" class="nav-link <?php echo $is_gallery ? 'active' : ''; ?>">GALLERY</a></li>
+						<li class="nav-item"><a href="<?php echo $faq_url; ?>" class="nav-link <?php echo $is_faq ? 'active' : ''; ?>">FAQ</a></li>
 						<li class="nav-item"><a href="<?php echo $home_prefix; ?>#contact" class="nav-link">CONTACT US</a></li>
 					</ul>
 				</nav>
@@ -94,8 +103,8 @@
 			<div class="mobile-nav-wrapper" id="mobile-nav">
 				<div class="mobile-nav-card">
 					<ul class="mobile-nav-menu">
-						<li class="mobile-nav-item"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="mobile-link <?php echo ( is_front_page() && ! $is_faq ) ? 'active' : ''; ?>">HOME</a></li>
-						<li class="mobile-nav-item"><a href="<?php echo $home_prefix; ?>#about" class="mobile-link">ABOUT US</a></li>
+						<li class="mobile-nav-item"><a href="<?php echo $home_url; ?>" class="mobile-link <?php echo $is_home ? 'active' : ''; ?>">HOME</a></li>
+						<li class="mobile-nav-item"><a href="<?php echo $about_url; ?>" class="mobile-link <?php echo $is_about ? 'active' : ''; ?>">ABOUT US</a></li>
 						<li class="mobile-nav-item mobile-dropdown-item">
 							<div class="mobile-dropdown-header flex-between align-center">
 								<a href="<?php echo $home_prefix; ?>#academics" class="mobile-link">ACADEMICS</a>
@@ -116,8 +125,8 @@
 						</li>
 						<li class="mobile-nav-item"><a href="<?php echo $home_prefix; ?>#campus-life" class="mobile-link">CAMPUS LIFE</a></li>
 						<li class="mobile-nav-item"><a href="<?php echo $home_prefix; ?>#admissions" class="mobile-link">ADMISSIONS</a></li>
-						<li class="mobile-nav-item"><a href="<?php echo $home_prefix; ?>#gallery" class="mobile-link">GALLERY</a></li>
-						<li class="mobile-nav-item"><a href="<?php echo esc_url( home_url( '/faq/' ) ); ?>" class="mobile-link <?php echo $is_faq ? 'active' : ''; ?>">FAQ</a></li>
+						<li class="mobile-nav-item"><a href="<?php echo $gallery_url; ?>" class="mobile-link <?php echo $is_gallery ? 'active' : ''; ?>">GALLERY</a></li>
+						<li class="mobile-nav-item"><a href="<?php echo $faq_url; ?>" class="mobile-link <?php echo $is_faq ? 'active' : ''; ?>">FAQ</a></li>
 						<li class="mobile-nav-item"><a href="<?php echo $home_prefix; ?>#contact" class="mobile-link">CONTACT US</a></li>
 					</ul>
 					<div class="mobile-cta-box">
