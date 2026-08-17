@@ -130,16 +130,21 @@
 					</div>
 
 					<?php
-						$f_home_url        = esc_url( home_url( '/' ) );
-						$f_about_url       = esc_url( home_url( '/about/' ) );
-						$f_faq_url         = esc_url( home_url( '/faq/' ) );
-						$f_approach_url    = esc_url( home_url( '/approach/' ) );
-						$f_campus_life_url = esc_url( home_url( '/campus-life/' ) );
-						$f_admissions_url  = esc_url( home_url( '/admissions/' ) );
-						$f_contact_url     = esc_url( home_url( '/contact-us/' ) );
-						$f_careers_url     = esc_url( home_url( '/careers/' ) );
-						$f_privacy_url     = esc_url( home_url( '/privacy-policy/' ) );
-						$f_terms_url       = esc_url( home_url( '/terms-and-conditions/' ) );
+						$f_home_url            = esc_url( home_url( '/' ) );
+						$f_about_url           = esc_url( home_url( '/about/' ) );
+						$f_faq_url             = esc_url( home_url( '/faq/' ) );
+						$f_approach_url        = esc_url( home_url( '/approach/' ) );
+						$f_daycare_url         = esc_url( home_url( '/daycare/' ) );
+						$f_pre_primary_url     = esc_url( home_url( '/pre-primary-school/' ) );
+						$f_primary_url         = esc_url( home_url( '/primary-school/' ) );
+						$f_middle_url          = esc_url( home_url( '/middle-school/' ) );
+						$f_post_school_act_url = esc_url( home_url( '/post-school-activities/' ) );
+						$f_campus_life_url     = esc_url( home_url( '/campus-life/' ) );
+						$f_admissions_url      = esc_url( home_url( '/admissions/' ) );
+						$f_contact_url         = esc_url( home_url( '/contact-us/' ) );
+						$f_careers_url         = esc_url( home_url( '/careers/' ) );
+						$f_privacy_url         = esc_url( home_url( '/privacy-policy/' ) );
+						$f_terms_url           = esc_url( home_url( '/terms-and-conditions/' ) );
 
 						$f_is_faq         = is_page_template( 'page-faq.php' ) || is_page( 'faq' );
 						$f_is_about       = is_page_template( 'page-about.php' ) || is_page( 'about' ) || is_page( 'about-us' );
@@ -185,11 +190,11 @@
 					<div class="footer-col">
 						<h3 class="footer-col-title">Academics</h3>
 						<ul class="footer-links">
-							<li><a href="<?php echo $f_prefix; ?>#daycare">Daycare</a></li>
-							<li><a href="<?php echo $f_prefix; ?>#pre-primary">Pre-Primary</a></li>
-							<li><a href="<?php echo $f_prefix; ?>#primary">Primary</a></li>
-							<li><a href="<?php echo $f_prefix; ?>#middle">Middle school</a></li>
-							<li><a href="<?php echo $f_prefix; ?>#after-school">After School</a></li>
+							<li><a href="<?php echo $f_daycare_url; ?>">Daycare</a></li>
+							<li><a href="<?php echo $f_pre_primary_url; ?>">Pre-Primary School</a></li>
+							<li><a href="<?php echo $f_primary_url; ?>">Primary School</a></li>
+							<li><a href="<?php echo $f_middle_url; ?>">Middle School</a></li>
+							<li><a href="<?php echo $f_post_school_act_url; ?>">Post-School Activities</a></li>
 						</ul>
 					</div>
 
