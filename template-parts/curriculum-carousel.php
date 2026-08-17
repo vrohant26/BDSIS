@@ -89,7 +89,7 @@
 								<p class="curriculum-topic-desc">Designed for working parents, our Day Care Facilities offer children a safe and engaging environment with meaningful after-school activities.</p>
 
 								<div class="curriculum-cta-wrapper">
-									<a href="<?php echo esc_url( home_url( '/daycare/' ) ); ?>" class="btn btn-yellow">
+									<a href="<?php echo esc_url( home_url( '/academics/daycare/' ) ); ?>" class="btn btn-yellow">
 										<span>KNOW MORE ABOUT DAY CARE PROGRAM</span>
 										<svg class="btn-arrow" width="18" height="14" viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg">
 											<path d="M11 1L17 7M17 7L11 13M17 7H1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -124,7 +124,7 @@
 								<p class="curriculum-topic-desc">Our Pre-Primary School lays the foundation for lifelong learning through play-based experiences, engaging activities, and a nurturing daily rhythm.</p>
 
 								<div class="curriculum-cta-wrapper">
-									<a href="<?php echo esc_url( home_url( '/pre-primary-school/' ) ); ?>" class="btn btn-yellow">
+									<a href="<?php echo esc_url( home_url( '/academics/pre-primary-school/' ) ); ?>" class="btn btn-yellow">
 										<span>EXPLORE OUR PRE-PRIMARY SCHOOL</span>
 										<svg class="btn-arrow" width="18" height="14" viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg">
 											<path d="M11 1L17 7M17 7L11 13M17 7H1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -157,7 +157,7 @@
 								<p class="curriculum-topic-desc">The Primary years introduce students to structured learning, where they develop independent thinking, collaboration and problem-solving skills.</p>
 
 								<div class="curriculum-cta-wrapper">
-									<a href="<?php echo esc_url( home_url( '/primary-school/' ) ); ?>" class="btn btn-yellow">
+									<a href="<?php echo esc_url( home_url( '/academics/primary-school/' ) ); ?>" class="btn btn-yellow">
 										<span>CHECK OUR PRIMARY SCHOOL</span>
 										<svg class="btn-arrow" width="18" height="14" viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg">
 											<path d="M11 1L17 7M17 7L11 13M17 7H1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -190,7 +190,7 @@
 								<p class="curriculum-topic-desc">Our Middle School offers the flexibility of ICSE and IGCSE curricula, supported by academic guidance that helps students choose the pathway best suited to their aspirations.</p>
 
 								<div class="curriculum-cta-wrapper">
-									<a href="<?php echo esc_url( home_url( '/middle-school/' ) ); ?>" class="btn btn-yellow">
+									<a href="<?php echo esc_url( home_url( '/academics/middle-school/' ) ); ?>" class="btn btn-yellow">
 										<span>EXPLORE MIDDLE SCHOOL</span>
 										<svg class="btn-arrow" width="18" height="14" viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg">
 											<path d="M11 1L17 7M17 7L11 13M17 7H1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>

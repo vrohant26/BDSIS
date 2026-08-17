@@ -134,11 +134,11 @@
 						$f_about_url           = esc_url( home_url( '/about/' ) );
 						$f_faq_url             = esc_url( home_url( '/faq/' ) );
 						$f_approach_url        = esc_url( home_url( '/approach/' ) );
-						$f_daycare_url         = esc_url( home_url( '/daycare/' ) );
-						$f_pre_primary_url     = esc_url( home_url( '/pre-primary-school/' ) );
-						$f_primary_url         = esc_url( home_url( '/primary-school/' ) );
-						$f_middle_url          = esc_url( home_url( '/middle-school/' ) );
-						$f_post_school_act_url = esc_url( home_url( '/post-school-activities/' ) );
+						$f_daycare_url         = esc_url( home_url( '/academics/daycare/' ) );
+						$f_pre_primary_url     = esc_url( home_url( '/academics/pre-primary-school/' ) );
+						$f_primary_url         = esc_url( home_url( '/academics/primary-school/' ) );
+						$f_middle_url          = esc_url( home_url( '/academics/middle-school/' ) );
+						$f_post_school_act_url = esc_url( home_url( '/academics/post-school-activities/' ) );
 						$f_campus_life_url     = esc_url( home_url( '/campus-life/' ) );
 						$f_admissions_url      = esc_url( home_url( '/admissions/' ) );
 						$f_contact_url         = esc_url( home_url( '/contact-us/' ) );

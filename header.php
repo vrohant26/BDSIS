@@ -48,11 +48,11 @@
 					$gallery_url     = esc_url( home_url( '/gallery/' ) );
 
 					$approach_url        = esc_url( home_url( '/approach/' ) );
-					$daycare_url         = esc_url( home_url( '/daycare/' ) );
-					$pre_primary_url     = esc_url( home_url( '/pre-primary-school/' ) );
-					$primary_url         = esc_url( home_url( '/primary-school/' ) );
-					$middle_url          = esc_url( home_url( '/middle-school/' ) );
-					$post_school_act_url = esc_url( home_url( '/post-school-activities/' ) );
+					$daycare_url         = esc_url( home_url( '/academics/daycare/' ) );
+					$pre_primary_url     = esc_url( home_url( '/academics/pre-primary-school/' ) );
+					$primary_url         = esc_url( home_url( '/academics/primary-school/' ) );
+					$middle_url          = esc_url( home_url( '/academics/middle-school/' ) );
+					$post_school_act_url = esc_url( home_url( '/academics/post-school-activities/' ) );
 					$campus_life_url     = esc_url( home_url( '/campus-life/' ) );
 					$admissions_url      = esc_url( home_url( '/admissions/' ) );
 					$contact_url         = esc_url( home_url( '/contact-us/' ) );
