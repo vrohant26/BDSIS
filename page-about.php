@@ -562,8 +562,8 @@ get_header();
 		</div>
 	</section>
 
-	<!-- Section 8: Families Who Chose B.D. Somani International School (Testimonial Component) -->
-	<?php get_template_part( 'template-parts/testimonials' ); ?>
+	<!-- Section 8: Teacher Testimonials Component -->
+	<?php get_template_part( 'template-parts/teachers-testimonials' ); ?>
 
 
 </main>

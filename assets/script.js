@@ -714,20 +714,38 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function updateParentsProgressBar(swiper) {
       if (!progressBar) return;
-      const totalSlides = swiper.slides.length || 2;
-      const progress = ((swiper.activeIndex + 1) / totalSlides) * 100;
-      progressBar.style.width = progress + "%";
+      const maxIndex = swiper.snapGrid ? swiper.snapGrid.length - 1 : (swiper.slides ? swiper.slides.length - 1 : 1);
+      const activeIdx = swiper.activeIndex || 0;
+      const pct = maxIndex > 0 ? (activeIdx / maxIndex) * 100 : 100;
+      const fillPct = Math.min(100, Math.max(16.6, pct));
+      progressBar.style.width = fillPct + "%";
     }
 
     const parentsSwiper = new Swiper(".parents-swiper", {
-      slidesPerView: 1.2,
-      spaceBetween: 10,
+      slidesPerView: 1.35,
+      spaceBetween: 24,
       speed: 700,
       grabCursor: true,
       loop: false,
+      bounds: true,
+      watchOverflow: true,
       navigation: {
         nextEl: "#parentsNextBtn",
         prevEl: "#parentsPrevBtn",
+      },
+      breakpoints: {
+        320: {
+          slidesPerView: 1.05,
+          spaceBetween: 14,
+        },
+        768: {
+          slidesPerView: 1.2,
+          spaceBetween: 20,
+        },
+        1024: {
+          slidesPerView: 1.35,
+          spaceBetween: 24,
+        },
       },
       on: {
         init: function () {
@@ -741,6 +759,61 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   initParentsCarousel();
+
+  // 7. Teacher Testimonials Swiper Carousel
+  function initTeachersCarousel() {
+    const swiperEl = document.querySelector(".teachers-swiper");
+    if (!swiperEl || typeof Swiper === "undefined") return;
+
+    const progressBar = document.getElementById("teachersProgressBar");
+
+    function updateTeachersProgressBar(swiper) {
+      if (!progressBar) return;
+      const maxIndex = swiper.snapGrid ? swiper.snapGrid.length - 1 : (swiper.slides ? swiper.slides.length - 1 : 1);
+      const activeIdx = swiper.activeIndex || 0;
+      const pct = maxIndex > 0 ? (activeIdx / maxIndex) * 100 : 100;
+      const fillPct = Math.min(100, Math.max(20, pct));
+      progressBar.style.width = fillPct + "%";
+    }
+
+    new Swiper(".teachers-swiper", {
+      slidesPerView: 1.35,
+      spaceBetween: 24,
+      speed: 700,
+      grabCursor: true,
+      loop: false,
+      bounds: true,
+      watchOverflow: true,
+      navigation: {
+        nextEl: "#teachersNextBtn",
+        prevEl: "#teachersPrevBtn",
+      },
+      breakpoints: {
+        320: {
+          slidesPerView: 1.05,
+          spaceBetween: 14,
+        },
+        768: {
+          slidesPerView: 1.2,
+          spaceBetween: 20,
+        },
+        1024: {
+          slidesPerView: 1.35,
+          spaceBetween: 24,
+        },
+      },
+      on: {
+        init: function () {
+          updateTeachersProgressBar(this);
+        },
+        slideChange: function () {
+          updateTeachersProgressBar(this);
+        },
+      },
+    });
+  }
+
+  initTeachersCarousel();
 
   /* ==========================================================================
      Smooth Background & Text Color Switch to Purple Mode on Scroll

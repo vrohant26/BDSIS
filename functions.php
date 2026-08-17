@@ -238,8 +238,55 @@ function theme_add_academics_metaboxes( $post_type, $post = null ) {
 		'normal',
 		'high'
 	);
+
+	add_meta_box(
+		'bds_academics_potential_mb',
+		__( 'Academics Potential Banner / Video Section Settings', 'bd-somani' ),
+		'theme_academics_potential_metabox_callback',
+		'page',
+		'normal',
+		'high'
+	);
 }
 add_action( 'add_meta_boxes', 'theme_add_academics_metaboxes', 10, 2 );
+
+function theme_academics_potential_metabox_callback( $post ) {
+	$visibility = metadata_exists( 'post', $post->ID, '_bds_academics_potential_visibility' ) ? get_post_meta( $post->ID, '_bds_academics_potential_visibility', true ) : 'show';
+	$title      = metadata_exists( 'post', $post->ID, '_bds_academics_potential_title' ) ? get_post_meta( $post->ID, '_bds_academics_potential_title', true ) : __( 'A Place to Discover Your Superpower', 'bd-somani' );
+	$desc       = metadata_exists( 'post', $post->ID, '_bds_academics_potential_desc' ) ? get_post_meta( $post->ID, '_bds_academics_potential_desc', true ) : __( 'Every student brings unique strengths. Our campus gives them the opportunities to explore, develop, and let those strengths shine.', 'bd-somani' );
+	$video_url  = metadata_exists( 'post', $post->ID, '_bds_academics_potential_video' ) ? get_post_meta( $post->ID, '_bds_academics_potential_video', true ) : '';
+	?>
+	<div id="bds-academics-potential-metabox" style="display: flex; flex-direction: column; gap: 16px; margin-top: 10px;">
+		<div>
+			<label for="bds_academics_potential_visibility" style="font-weight: 600; display: block; margin-bottom: 4px;"><?php esc_html_e( 'Section Visibility', 'bd-somani' ); ?></label>
+			<select id="bds_academics_potential_visibility" name="bds_academics_potential_visibility">
+				<option value="show" <?php selected( $visibility, 'show' ); ?>><?php esc_html_e( 'Show Section', 'bd-somani' ); ?></option>
+				<option value="hide" <?php selected( $visibility, 'hide' ); ?>><?php esc_html_e( 'Hide Section', 'bd-somani' ); ?></option>
+			</select>
+		</div>
+
+		<div>
+			<label for="bds_academics_potential_title" style="font-weight: 600; display: block; margin-bottom: 4px;"><?php esc_html_e( 'Banner Title', 'bd-somani' ); ?></label>
+			<input type="text" id="bds_academics_potential_title" name="bds_academics_potential_title" value="<?php echo esc_attr( $title ); ?>" class="large-text" style="font-size: 16px; padding: 6px 10px;">
+		</div>
+
+		<div>
+			<label for="bds_academics_potential_desc" style="font-weight: 600; display: block; margin-bottom: 4px;"><?php esc_html_e( 'Banner Description', 'bd-somani' ); ?></label>
+			<textarea id="bds_academics_potential_desc" name="bds_academics_potential_desc" rows="3" class="large-text"><?php echo esc_textarea( $desc ); ?></textarea>
+		</div>
+
+		<div>
+			<label for="bds_academics_potential_video" style="font-weight: 600; display: block; margin-bottom: 4px;"><?php esc_html_e( 'Banner Video File URL (MP4 / WebM)', 'bd-somani' ); ?></label>
+			<div style="display: flex; gap: 10px; align-items: center;">
+				<input type="text" id="bds_academics_potential_video" name="bds_academics_potential_video" value="<?php echo esc_attr( $video_url ); ?>" class="large-text" placeholder="https://... or upload from media library">
+				<button type="button" class="button button-secondary" id="bds-upload-potential-video-btn"><?php esc_html_e( 'Select / Upload Video', 'bd-somani' ); ?></button>
+				<button type="button" class="button button-link-delete" id="bds-remove-potential-video-btn" style="<?php echo $video_url ? '' : 'display:none;'; ?>"><?php esc_html_e( 'Remove', 'bd-somani' ); ?></button>
+			</div>
+			<span class="description"><?php esc_html_e( 'Leave empty to use default theme video (A2.webm).', 'bd-somani' ); ?></span>
+		</div>
+	</div>
+	<?php
+}
 
 // Add Careers Page Metabox
 function theme_add_careers_metaboxes() {
@@ -1041,6 +1088,10 @@ function theme_save_academics_hero_meta( $post_id ) {
 		'bds_academics_app_card5_title'         => '_bds_academics_app_card5_title',
 		'bds_academics_app_card5_desc'          => '_bds_academics_app_card5_desc',
 		'bds_academics_app_card5_img'           => '_bds_academics_app_card5_img',
+		'bds_academics_potential_visibility'    => '_bds_academics_potential_visibility',
+		'bds_academics_potential_title'         => '_bds_academics_potential_title',
+		'bds_academics_potential_desc'          => '_bds_academics_potential_desc',
+		'bds_academics_potential_video'         => '_bds_academics_potential_video',
 		'bds_academics_exp_main_title'          => '_bds_academics_exp_main_title',
 		'bds_academics_exp_sub_title'           => '_bds_academics_exp_sub_title',
 		'bds_academics_exp_sub_desc'            => '_bds_academics_exp_sub_desc',
@@ -1057,6 +1108,7 @@ function theme_save_academics_hero_meta( $post_id ) {
 		'bds_academics_app_card3_desc',
 		'bds_academics_app_card4_desc',
 		'bds_academics_app_card5_desc',
+		'bds_academics_potential_desc',
 		'bds_academics_exp_sub_desc',
 		'bds_academics_cs_tab1_desc',
 		'bds_academics_cs_tab2_desc',
@@ -1203,9 +1255,29 @@ function theme_academics_admin_footer_js() {
 			setupImageUploader('#bds-upload-cs-tab' + k + '-img-btn', '#bds-remove-cs-tab' + k + '-img-btn', '#bds_academics_cs_tab' + k + '_img', '#bds-cs-tab' + k + '-img-preview', 'Select Cornerstone Tab ' + k + ' Photo');
 		}
 
+		$('#bds-upload-potential-video-btn').on('click', function(e) {
+			e.preventDefault();
+			var customUploader = wp.media({
+				title: 'Select / Upload Banner Video',
+				button: { text: 'Use this video' },
+				library: { type: 'video' },
+				multiple: false
+			}).on('select', function() {
+				var attachment = customUploader.state().get('selection').first().toJSON();
+				$('#bds_academics_potential_video').val(attachment.url);
+				$('#bds-remove-potential-video-btn').show();
+			}).open();
+		});
+
+		$('#bds-remove-potential-video-btn').on('click', function(e) {
+			e.preventDefault();
+			$('#bds_academics_potential_video').val('');
+			$(this).hide();
+		});
+
 		// Toggle Metabox & Block Editor Appender visibility based on template selection
 		function checkAcademicsTemplate() {
-			var $metaBoxes = $('#bds_academics_hero_mb, #bds_academics_programme_mb, #bds_academics_approach_mb, #bds_academics_experiences_mb, #bds_academics_cornerstones_mb, #bds_academics_care_mb, #bds_academics_interest_mb');
+			var $metaBoxes = $('#bds_academics_hero_mb, #bds_academics_programme_mb, #bds_academics_potential_mb, #bds_academics_approach_mb, #bds_academics_experiences_mb, #bds_academics_cornerstones_mb, #bds_academics_care_mb, #bds_academics_interest_mb');
 
 			var templateVal = '';
 			if (wp.data && wp.data.select('core/editor')) {

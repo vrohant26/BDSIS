@@ -159,8 +159,8 @@ $sub_img_url  = $sub_img_id ? wp_get_attachment_image_url( $sub_img_id, 'full' )
 	<section class="academics-programme-section">
 		<!-- Organic Background Wave Shape -->
 		<div class="programme-bg-wave" aria-hidden="true">
-			<svg width="532" height="291" viewBox="0 0 532 291" fill="none" xmlns="http://www.w3.org/2000/svg">
-				<path d="M-53.669 135.552C186.691 -224.42 176.581 431.125 326.736 188.922C476.891 -53.2813 560.882 305.083 417.111 421.674C273.341 538.264 531.158 606.456 504.921 629.618" stroke="#FFE9DB" stroke-width="50"/>
+			<svg width="542" height="301" viewBox="0 0 542 301" fill="none" xmlns="http://www.w3.org/2000/svg">
+				<path d="M-53.6729 145.556C186.687 -214.416 176.577 441.129 326.732 198.926C476.887 -43.2773 560.878 315.087 417.107 431.678C273.341 548.268 531.154 616.46 504.917 639.622" stroke="#FFEEE2" stroke-width="70"/>
 			</svg>
 		</div>
 
@@ -239,6 +239,55 @@ $sub_img_url  = $sub_img_id ? wp_get_attachment_image_url( $sub_img_id, 'full' )
 					</div>
 				<?php endif; ?>
 			</div>
+	</section>
+	<?php endif; ?>
+
+	<?php
+	// Potential Banner / Video Section Metadata & Visibility
+	$potential_visibility = get_post_meta( $post_id, '_bds_academics_potential_visibility', true );
+	$show_potential_sec   = ( 'hide' !== $potential_visibility );
+
+	$potential_title = metadata_exists( 'post', $post_id, '_bds_academics_potential_title' ) ? get_post_meta( $post_id, '_bds_academics_potential_title', true ) : __( 'A Place to Discover Your Superpower', 'bd-somani' );
+	$potential_desc  = metadata_exists( 'post', $post_id, '_bds_academics_potential_desc' ) ? get_post_meta( $post_id, '_bds_academics_potential_desc', true ) : __( 'Every student brings unique strengths. Our campus gives them the opportunities to explore, develop, and let those strengths shine.', 'bd-somani' );
+	$potential_video = get_post_meta( $post_id, '_bds_academics_potential_video', true );
+
+	if ( empty( $potential_video ) ) {
+		$potential_video = get_template_directory_uri() . '/assets/video/A2.webm';
+	}
+	?>
+
+	<?php if ( $show_potential_sec ) : ?>
+	<!-- Section: A Place to Discover Your Superpower Banner -->
+	<section class="about-potential-section relative overflow-hidden">
+		<div class="site-container relative z-2">
+			<div class="about-potential-grid">
+				
+				<!-- Left Column: Content -->
+				<div class="about-potential-content">
+					<?php if ( ! empty( $potential_title ) ) : ?>
+						<h2 class="about-potential-title"><?php echo esc_html( $potential_title ); ?></h2>
+					<?php endif; ?>
+
+					<?php if ( ! empty( $potential_desc ) ) : ?>
+						<p class="about-potential-lead"><?php echo esc_html( $potential_desc ); ?></p>
+					<?php endif; ?>
+				</div>
+
+				<!-- Right Column: Video Frame -->
+				<div class="about-potential-media flex-center">
+					<div class="about-potential-video-container relative">
+						<div class="about-potential-video-wrap">
+							<video autoplay loop muted playsinline>
+								<source src="<?php echo esc_url( $potential_video ); ?>" type="video/mp4">
+								<source src="<?php echo esc_url( $potential_video ); ?>" type="video/webm">
+								<?php esc_html_e( 'Your browser does not support the video tag.', 'bd-somani' ); ?>
+							</video>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
 	</section>
 	<?php endif; ?>
 

@@ -67,8 +67,8 @@ get_header();
 	<section class="academics-programme-section" id="campus-programme">
 		<!-- Organic Background Wave Shape -->
 		<div class="programme-bg-wave" aria-hidden="true">
-			<svg width="532" height="291" viewBox="0 0 532 291" fill="none" xmlns="http://www.w3.org/2000/svg">
-				<path d="M-53.669 135.552C186.691 -224.42 176.581 431.125 326.736 188.922C476.891 -53.2813 560.882 305.083 417.111 421.674C273.341 538.264 531.158 606.456 504.921 629.618" stroke="#FFE9DB" stroke-width="50"/>
+			<svg width="542" height="301" viewBox="0 0 542 301" fill="none" xmlns="http://www.w3.org/2000/svg">
+				<path d="M-53.6729 145.556C186.687 -214.416 176.577 441.129 326.732 198.926C476.887 -43.2773 560.878 315.087 417.107 431.678C273.337 548.268 531.154 616.46 504.917 639.622" stroke="#FFEEE2" stroke-width="70"/>
 			</svg>
 		</div>
 
@@ -313,21 +313,19 @@ get_header();
 				<div class="spaces-tab-pane active" id="tab-classrooms" role="tabpanel">
 					<div class="spaces-card-grid">
 						<div class="spaces-card-text">
-							<h3 class="spaces-card-title"><?php esc_html_e( 'Modern Classrooms', 'bd-somani' ); ?></h3>
-							<p class="spaces-card-desc"><?php esc_html_e( 'Our thoughtfully designed classrooms foster curiosity, collaboration, and active participation. Equipped with modern learning tools and flexible spaces, they create an engaging environment where every student feels inspired to explore, question, and grow.', 'bd-somani' ); ?></p>
-							
 							<div class="spaces-highlights-wrap">
-								<h4 class="spaces-highlights-heading"><?php esc_html_e( 'Highlights', 'bd-somani' ); ?></h4>
+								<h3 class="spaces-highlights-heading"><?php esc_html_e( 'Highlights', 'bd-somani' ); ?></h3>
 								<ul class="spaces-highlights-list">
-									<li><?php esc_html_e( '• Interactive & technology-enabled learning', 'bd-somani' ); ?></li>
-									<li><?php esc_html_e( '• Student-centred classroom environment', 'bd-somani' ); ?></li>
-									<li><?php esc_html_e( '• Collaborative and flexible learning spaces', 'bd-somani' ); ?></li>
-									<li><?php esc_html_e( '• Safe, bright, and engaging atmosphere', 'bd-somani' ); ?></li>
+									<li><?php esc_html_e( 'Inquiry-led lessons that encourage students to question, analyse, and think independently', 'bd-somani' ); ?></li>
+									<li><?php esc_html_e( 'Interactive lessons supported by modern learning technologies.', 'bd-somani' ); ?></li>
+									<li><?php esc_html_e( 'Collaborative discussions that value every perspective and every voice', 'bd-somani' ); ?></li>
+									<li><?php esc_html_e( 'Personalised guidance tailored to individual learning needs', 'bd-somani' ); ?></li>
+									<li><?php esc_html_e( 'Real-world experiences that strengthen understanding beyond textbooks', 'bd-somani' ); ?></li>
 								</ul>
 							</div>
 						</div>
 						<div class="spaces-card-media">
-							<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/primary school 1.webp' ); ?>" alt="<?php esc_attr_e( 'Modern Classrooms', 'bd-somani' ); ?>" class="spaces-card-img">
+							<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/classrooms.webp' ); ?>" alt="<?php esc_attr_e( 'Classroom', 'bd-somani' ); ?>" class="spaces-card-img">
 						</div>
 					</div>
 				</div>
@@ -336,21 +334,19 @@ get_header();
 				<div class="spaces-tab-pane" id="tab-library" role="tabpanel">
 					<div class="spaces-card-grid">
 						<div class="spaces-card-text">
-							<h3 class="spaces-card-title"><?php esc_html_e( 'Knowledge & Resource Library', 'bd-somani' ); ?></h3>
-							<p class="spaces-card-desc"><?php esc_html_e( 'A quiet, inspiring haven stocked with diverse books, digital resources, and comfortable reading nooks that encourage a lifelong love for reading, research, and independent inquiry.', 'bd-somani' ); ?></p>
-							
 							<div class="spaces-highlights-wrap">
-								<h4 class="spaces-highlights-heading"><?php esc_html_e( 'Highlights', 'bd-somani' ); ?></h4>
+								<h3 class="spaces-highlights-heading"><?php esc_html_e( 'Highlights', 'bd-somani' ); ?></h3>
 								<ul class="spaces-highlights-list">
-									<li><?php esc_html_e( '• Extensive physical & digital library collection', 'bd-somani' ); ?></li>
-									<li><?php esc_html_e( '• Cozy reading corners & quiet study zones', 'bd-somani' ); ?></li>
-									<li><?php esc_html_e( '• Guided reading programs & literature circles', 'bd-somani' ); ?></li>
-									<li><?php esc_html_e( '• Interactive research stations', 'bd-somani' ); ?></li>
+									<li><?php esc_html_e( 'A thoughtfully curated collection that encourages reading across genres and interests', 'bd-somani' ); ?></li>
+									<li><?php esc_html_e( 'Dedicated spaces for reading, storytelling, and independent study', 'bd-somani' ); ?></li>
+									<li><?php esc_html_e( 'Resources that strengthen information literacy and research skills', 'bd-somani' ); ?></li>
+									<li><?php esc_html_e( 'Reading experiences that broaden perspectives and develop lifelong learning habits', 'bd-somani' ); ?></li>
+									<li><?php esc_html_e( 'A quiet environment that inspires curiosity and a love for books', 'bd-somani' ); ?></li>
 								</ul>
 							</div>
 						</div>
 						<div class="spaces-card-media">
-							<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/reading and literature club.webp' ); ?>" alt="<?php esc_attr_e( 'Library', 'bd-somani' ); ?>" class="spaces-card-img">
+							<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/library.webp' ); ?>" alt="<?php esc_attr_e( 'Library', 'bd-somani' ); ?>" class="spaces-card-img">
 						</div>
 					</div>
 				</div>
@@ -359,21 +355,19 @@ get_header();
 				<div class="spaces-tab-pane" id="tab-labs" role="tabpanel">
 					<div class="spaces-card-grid">
 						<div class="spaces-card-text">
-							<h3 class="spaces-card-title"><?php esc_html_e( 'Discovery & Science Labs', 'bd-somani' ); ?></h3>
-							<p class="spaces-card-desc"><?php esc_html_e( 'State-of-the-art physics, chemistry, and biology laboratories designed for practical experimentation, hands-on learning, and scientific discovery under expert supervision.', 'bd-somani' ); ?></p>
-							
 							<div class="spaces-highlights-wrap">
-								<h4 class="spaces-highlights-heading"><?php esc_html_e( 'Highlights', 'bd-somani' ); ?></h4>
+								<h3 class="spaces-highlights-heading"><?php esc_html_e( 'Highlights', 'bd-somani' ); ?></h3>
 								<ul class="spaces-highlights-list">
-									<li><?php esc_html_e( '• Modern scientific apparatus & safety equipment', 'bd-somani' ); ?></li>
-									<li><?php esc_html_e( '• Hands-on practical experiment sessions', 'bd-somani' ); ?></li>
-									<li><?php esc_html_e( '• Guided research & STEM projects', 'bd-somani' ); ?></li>
-									<li><?php esc_html_e( '• Interactive laboratory workstations', 'bd-somani' ); ?></li>
+									<li><?php esc_html_e( 'Subject-specific Physics, Chemistry, and Biology laboratories for practical learning', 'bd-somani' ); ?></li>
+									<li><?php esc_html_e( 'Hands-on experiments that reinforce scientific concepts through application', 'bd-somani' ); ?></li>
+									<li><?php esc_html_e( 'Safe, well-equipped spaces that encourage exploration with precision and responsibility', 'bd-somani' ); ?></li>
+									<li><?php esc_html_e( 'Opportunities to investigate, analyse, and draw evidence-based conclusions', 'bd-somani' ); ?></li>
+									<li><?php esc_html_e( 'Practical experiences that instill scientific temper and analytical thinking', 'bd-somani' ); ?></li>
 								</ul>
 							</div>
 						</div>
 						<div class="spaces-card-media">
-							<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/innovation and design workshop.webp' ); ?>" alt="<?php esc_attr_e( 'Science Labs', 'bd-somani' ); ?>" class="spaces-card-img">
+							<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/science lab.webp' ); ?>" alt="<?php esc_attr_e( 'Science Labs', 'bd-somani' ); ?>" class="spaces-card-img">
 						</div>
 					</div>
 				</div>
@@ -382,21 +376,19 @@ get_header();
 				<div class="spaces-tab-pane" id="tab-sports" role="tabpanel">
 					<div class="spaces-card-grid">
 						<div class="spaces-card-text">
-							<h3 class="spaces-card-title"><?php esc_html_e( 'Sports & Athletics Arena', 'bd-somani' ); ?></h3>
-							<p class="spaces-card-desc"><?php esc_html_e( 'Spacious indoor and outdoor sports facilities that promote physical fitness, teamwork, sportsmanship, and personal excellence across multiple athletic disciplines.', 'bd-somani' ); ?></p>
-							
 							<div class="spaces-highlights-wrap">
-								<h4 class="spaces-highlights-heading"><?php esc_html_e( 'Highlights', 'bd-somani' ); ?></h4>
+								<h3 class="spaces-highlights-heading"><?php esc_html_e( 'Highlights', 'bd-somani' ); ?></h3>
 								<ul class="spaces-highlights-list">
-									<li><?php esc_html_e( '• Multi-purpose sports court & turf grounds', 'bd-somani' ); ?></li>
-									<li><?php esc_html_e( '• Professional coaching & athletic training', 'bd-somani' ); ?></li>
-									<li><?php esc_html_e( '• Inter-school competitions & sports meets', 'bd-somani' ); ?></li>
-									<li><?php esc_html_e( '• Focus on agility, stamina, and team spirit', 'bd-somani' ); ?></li>
+									<li><?php esc_html_e( 'A well-rounded sports programme across indoor and outdoor disciplines', 'bd-somani' ); ?></li>
+									<li><?php esc_html_e( 'Coaching across cricket, football, basketball, chess, taekwondo, and more', 'bd-somani' ); ?></li>
+									<li><?php esc_html_e( 'Regular training that builds discipline, perseverance, and team spirit', 'bd-somani' ); ?></li>
+									<li><?php esc_html_e( 'Competitive opportunities that inspire resilience and sportsmanship', 'bd-somani' ); ?></li>
+									<li><?php esc_html_e( 'Physical activity that promotes fitness, confidence, and overall well-being', 'bd-somani' ); ?></li>
 								</ul>
 							</div>
 						</div>
 						<div class="spaces-card-media">
-							<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/indoor and outdoor sports.webp' ); ?>" alt="<?php esc_attr_e( 'Sports Arena', 'bd-somani' ); ?>" class="spaces-card-img">
+							<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/sports.webp' ); ?>" alt="<?php esc_attr_e( 'Sports', 'bd-somani' ); ?>" class="spaces-card-img">
 						</div>
 					</div>
 				</div>
@@ -405,21 +397,19 @@ get_header();
 				<div class="spaces-tab-pane" id="tab-creativity" role="tabpanel">
 					<div class="spaces-card-grid">
 						<div class="spaces-card-text">
-							<h3 class="spaces-card-title"><?php esc_html_e( 'Creativity & Innovation Studios', 'bd-somani' ); ?></h3>
-							<p class="spaces-card-desc"><?php esc_html_e( 'Dedicated spaces for visual arts, music, drama, and maker innovation where students express themselves freely and bring imaginative ideas to life.', 'bd-somani' ); ?></p>
-							
 							<div class="spaces-highlights-wrap">
-								<h4 class="spaces-highlights-heading"><?php esc_html_e( 'Highlights', 'bd-somani' ); ?></h4>
+								<h3 class="spaces-highlights-heading"><?php esc_html_e( 'Highlights', 'bd-somani' ); ?></h3>
 								<ul class="spaces-highlights-list">
-									<li><?php esc_html_e( '• Equipped art studios & music rooms', 'bd-somani' ); ?></li>
-									<li><?php esc_html_e( '• Maker spaces & design workshops', 'bd-somani' ); ?></li>
-									<li><?php esc_html_e( '• Drama & theatrical performance stages', 'bd-somani' ); ?></li>
-									<li><?php esc_html_e( '• Exhibitions & creative showcases', 'bd-somani' ); ?></li>
+									<li><?php esc_html_e( 'Pursue a passion for music by learning the piano, guitar, drums, vocals, and a range of other instruments.', 'bd-somani' ); ?></li>
+									<li><?php esc_html_e( 'Discover the world of dramatics and performing arts with rehearsals and stage performances.', 'bd-somani' ); ?></li>
+									<li><?php esc_html_e( 'Turn curiosity into innovation with hands-on STEM projects that encourage designing, building, and experimenting.', 'bd-somani' ); ?></li>
+									<li><?php esc_html_e( 'Build the confidence to express different perspectives in debates and collaborative forums.', 'bd-somani' ); ?></li>
+									<li><?php esc_html_e( 'Share stories and spark conversations through student-led podcasts and media projects.', 'bd-somani' ); ?></li>
 								</ul>
 							</div>
 						</div>
 						<div class="spaces-card-media">
-							<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/performing arts.webp' ); ?>" alt="<?php esc_attr_e( 'Creativity & Innovation', 'bd-somani' ); ?>" class="spaces-card-img">
+							<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/Creativity & Innovation.webp' ); ?>" alt="<?php esc_attr_e( 'Creativity & Innovation', 'bd-somani' ); ?>" class="spaces-card-img">
 						</div>
 					</div>
 				</div>
@@ -428,21 +418,18 @@ get_header();
 				<div class="spaces-tab-pane" id="tab-outdoor" role="tabpanel">
 					<div class="spaces-card-grid">
 						<div class="spaces-card-text">
-							<h3 class="spaces-card-title"><?php esc_html_e( 'Outdoor & Green Grounds', 'bd-somani' ); ?></h3>
-							<p class="spaces-card-desc"><?php esc_html_e( 'Beautifully landscaped courtyards, green open lawns, and outdoor play areas designed for recreation, social bonding, and fresh-air learning activities.', 'bd-somani' ); ?></p>
-							
 							<div class="spaces-highlights-wrap">
-								<h4 class="spaces-highlights-heading"><?php esc_html_e( 'Highlights', 'bd-somani' ); ?></h4>
+								<h3 class="spaces-highlights-heading"><?php esc_html_e( 'Highlights', 'bd-somani' ); ?></h3>
 								<ul class="spaces-highlights-list">
-									<li><?php esc_html_e( '• Shaded seating & garden courtyards', 'bd-somani' ); ?></li>
-									<li><?php esc_html_e( '• Safe outdoor play structures for junior students', 'bd-somani' ); ?></li>
-									<li><?php esc_html_e( '• Environmental & eco-club activity zones', 'bd-somani' ); ?></li>
-									<li><?php esc_html_e( '• Spacious social gathering areas', 'bd-somani' ); ?></li>
+									<li><?php esc_html_e( 'Open corridors, a light-filled atrium, and lush green views create a calm learning environment', 'bd-somani' ); ?></li>
+									<li><?php esc_html_e( 'Outdoor spaces on every floor encourage students to step out, interact, and learn in the open.', 'bd-somani' ); ?></li>
+									<li><?php esc_html_e( 'Hydroponics and nature-based activities encourage students to connect with the environment.', 'bd-somani' ); ?></li>
+									<li><?php esc_html_e( 'Field trips and outdoor activities make learning more immersive.', 'bd-somani' ); ?></li>
 								</ul>
 							</div>
 						</div>
 						<div class="spaces-card-media">
-							<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/recess.webp' ); ?>" alt="<?php esc_attr_e( 'Outdoor Spaces', 'bd-somani' ); ?>" class="spaces-card-img">
+							<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/outdoor spaces.webp' ); ?>" alt="<?php esc_attr_e( 'Outdoor Spaces', 'bd-somani' ); ?>" class="spaces-card-img">
 						</div>
 					</div>
 				</div>

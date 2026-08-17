@@ -106,6 +106,118 @@
 						</div>
 					</div>
 
+					<!-- Slide 3: Mr. Vibhaav Ruparel -->
+					<div class="swiper-slide parents-slide-item">
+						<div class="parents-card-group flex gap-md">
+							<!-- Video Thumbnail Box -->
+							<a href="https://www.youtube.com/watch?v=Jwngof63i44" target="_blank" rel="noopener noreferrer" class="parents-video-box relative" aria-label="<?php esc_attr_e( 'Watch Mr. Vibhaav Ruparel video testimonial on YouTube', 'bd-somani' ); ?>">
+								<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/vaibhaav.webp' ); ?>" alt="Mr. Vibhaav Ruparel" class="parents-video-img" loading="lazy" decoding="async">
+								<div class="parents-play-overlay flex-center">
+									<div class="parents-play-btn flex-center">
+										<svg width="20" height="24" viewBox="0 0 20 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+											<path d="M18 10.2679C19.3333 11.0377 19.3333 12.9623 18 13.7321L4.5 21.5263C3.16667 22.2961 1.5 21.3338 1.5 19.7942L1.5 4.20577C1.5 2.66617 3.16667 1.70392 4.5 2.47372L18 10.2679Z" fill="#FFFFFF"/>
+										</svg>
+									</div>
+								</div>
+							</a>
+							<!-- Quote Details Box -->
+							<div class="parents-quote-box relative flex-column flex-between">
+								<div class="parents-quote-content">
+									<h3 class="parents-quote-heading">The School’s Diverse Curriculum And Welcoming Environment Have Helped My Son Grow In Confidence, Communication, And Curiosity.</h3>
+									<p class="parents-quote-text">"In just a year and a half, I’ve seen my son become much more confident and comfortable speaking with others. His English and Hindi communication skills have improved significantly, and his vocabulary continues to surprise us. I especially appreciate the diverse curriculum, which goes beyond academics to introduce children to the world around them. The school’s welcoming environment and infrastructure make it a place where we’re very happy to see him grow."</p>
+								</div>
+								<div class="parents-quote-author">
+									<h4 class="parents-author-name">Mr. Vibhaav Ruparel</h4>
+									<p class="parents-author-info">Father of Hridaan Ruparel, Grade Sr. KG</p>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- Slide 4: Ms. Meenu Dhoot -->
+					<div class="swiper-slide parents-slide-item">
+						<div class="parents-card-group flex gap-md">
+							<!-- Video Thumbnail Box -->
+							<a href="https://www.youtube.com/watch?v=DdNCC5WAfT0" target="_blank" rel="noopener noreferrer" class="parents-video-box relative" aria-label="<?php esc_attr_e( 'Watch Ms. Meenu Dhoot video testimonial on YouTube', 'bd-somani' ); ?>">
+								<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/meenu.webp' ); ?>" alt="Ms. Meenu Dhoot" class="parents-video-img" loading="lazy" decoding="async">
+								<div class="parents-play-overlay flex-center">
+									<div class="parents-play-btn flex-center">
+										<svg width="20" height="24" viewBox="0 0 20 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+											<path d="M18 10.2679C19.3333 11.0377 19.3333 12.9623 18 13.7321L4.5 21.5263C3.16667 22.2961 1.5 21.3338 1.5 19.7942L1.5 4.20577C1.5 2.66617 3.16667 1.70392 4.5 2.47372L18 10.2679Z" fill="#FFFFFF"/>
+										</svg>
+									</div>
+								</div>
+							</a>
+							<!-- Quote Details Box -->
+							<div class="parents-quote-box relative flex-column flex-between">
+								<div class="parents-quote-content">
+									<h3 class="parents-quote-heading">The School’s Unique Learning Approach And Focus On Holistic Development Truly Set It Apart.</h3>
+									<p class="parents-quote-text">"We are really glad that a reputed school like B.D. Somani International School has opened in Kharghar. My child is truly blessed to be part of this school. The teaching methods and techniques are very different and have helped my child grow both academically and through extracurricular activities. The Radio Station and Makers Lab are unique initiatives that I have not seen in other schools in Navi Mumbai. What I love most is that the school focuses not just on academics, but on the overall, holistic development of every child."</p>
+								</div>
+								<div class="parents-quote-author">
+									<h4 class="parents-author-name">Ms. Meenu Dhoot</h4>
+									<p class="parents-author-info">Mother of Anaya Dhoot, Grade 4</p>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- Slide 5: Ms. Urvashi Tripathi -->
+					<div class="swiper-slide parents-slide-item">
+						<div class="parents-card-group flex gap-md">
+							<!-- Video Thumbnail Box -->
+							<a href="https://www.youtube.com/watch?v=n1Lugd9nDKI" target="_blank" rel="noopener noreferrer" class="parents-video-box relative" aria-label="<?php esc_attr_e( 'Watch Ms. Urvashi Tripathi video testimonial on YouTube', 'bd-somani' ); ?>">
+								<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/urvashi.webp' ); ?>" alt="Ms. Urvashi Tripathi" class="parents-video-img" loading="lazy" decoding="async">
+								<div class="parents-play-overlay flex-center">
+									<div class="parents-play-btn flex-center">
+										<svg width="20" height="24" viewBox="0 0 20 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+											<path d="M18 10.2679C19.3333 11.0377 19.3333 12.9623 18 13.7321L4.5 21.5263C3.16667 22.2961 1.5 21.3338 1.5 19.7942L1.5 4.20577C1.5 2.66617 3.16667 1.70392 4.5 2.47372L18 10.2679Z" fill="#FFFFFF"/>
+										</svg>
+									</div>
+								</div>
+							</a>
+							<!-- Quote Details Box -->
+							<div class="parents-quote-box relative flex-column flex-between">
+								<div class="parents-quote-content">
+									<h3 class="parents-quote-heading">A Happy Child, Practical Learning, And Personal Attention Make The School Stand Out.</h3>
+									<p class="parents-quote-text">"My daughter is in Grade 2 and this is her second year at the school. She is very happy here and always looks forward to coming to school. She especially enjoys the extracurricular activities, including Bharatanatyam and Taekwondo. We are very happy with the infrastructure and teaching methods, particularly the practical approach to learning and its application in daily life. The teachers and staff are wonderful and give personal attention to every child. We truly feel it is one of the best schools in Navi Mumbai."</p>
+								</div>
+								<div class="parents-quote-author">
+									<h4 class="parents-author-name">Ms. Urvashi Tripathi</h4>
+									<p class="parents-author-info">Mother of Pavaki Chandra, Grade 2</p>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- Slide 6: Ms. Geeta Bhosale -->
+					<div class="swiper-slide parents-slide-item">
+						<div class="parents-card-group flex gap-md">
+							<!-- Video Thumbnail Box -->
+							<a href="https://www.youtube.com/watch?v=Sd4BtKguZ5M" target="_blank" rel="noopener noreferrer" class="parents-video-box relative" aria-label="<?php esc_attr_e( 'Watch Ms. Geeta Bhosale video testimonial on YouTube', 'bd-somani' ); ?>">
+								<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/Geeta.webp' ); ?>" alt="Ms. Geeta Bhosale" class="parents-video-img" loading="lazy" decoding="async">
+								<div class="parents-play-overlay flex-center">
+									<div class="parents-play-btn flex-center">
+										<svg width="20" height="24" viewBox="0 0 20 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+											<path d="M18 10.2679C19.3333 11.0377 19.3333 12.9623 18 13.7321L4.5 21.5263C3.16667 22.2961 1.5 21.3338 1.5 19.7942L1.5 4.20577C1.5 2.66617 3.16667 1.70392 4.5 2.47372L18 10.2679Z" fill="#FFFFFF"/>
+										</svg>
+									</div>
+								</div>
+							</a>
+							<!-- Quote Details Box -->
+							<div class="parents-quote-box relative flex-column flex-between">
+								<div class="parents-quote-content">
+									<h3 class="parents-quote-heading">A School That Nurtures Responsible, Caring Individuals Through Values, Activities, And Genuine Support.</h3>
+									<p class="parents-quote-text">"As parents, we always worry about how our children will grow up to become responsible and caring individuals. I feel truly blessed to be a part of the B.D. Somani family. The school instils strong values in children and provides them with so many activities that help them grow and develop. I am also grateful to Ms. Shrutika for patiently listening to our concerns and guiding us with such warmth and understanding. We are truly blessed to be a part of this family."</p>
+								</div>
+								<div class="parents-quote-author">
+									<h4 class="parents-author-name">Ms. Geeta Bhosale</h4>
+									<p class="parents-author-info">Mother of Mahi Pillai, Grade 2</p>
+								</div>
+							</div>
+						</div>
+					</div>
+
 				</div>
 			</div>
 
