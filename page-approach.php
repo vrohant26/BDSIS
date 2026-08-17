@@ -35,8 +35,7 @@ get_header();
 		</div>
 	</section>
 
-	<!-- Brand Marquee Scrolling Banner -->
-	<?php get_template_part( 'template-parts/brand-marquee' ); ?>
+
 
 
 	<!-- Main Interactive Diagram Section with Diagonal Split & Floating Accordion Cards -->
