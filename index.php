@@ -252,249 +252,33 @@ get_header();
 	</section>
 
 	<!-- Section 4: Brand Values Full-Width Purple Marquee (Below Video Section) -->
-	<section class="values-marquee-section">
-		<div class="values-marquee-container" aria-label="School Values Marquee">
-			<div class="marquee-track">
-				<div class="marquee-content">
-					<span>STUDENT-CENTRED LEARNING</span>
-					<span class="marquee-star">★</span>
-					<span>GLOBAL OUTLOOK</span>
-					<span class="marquee-star">★</span>
-					<span>NURTURING ENVIRONMENT</span>
-					<span class="marquee-star">★</span>
-					<span>COLLABORATIVE CULTURE</span>
-					<span class="marquee-star">★</span>
-					<span>STUDENT-CENTRED LEARNING</span>
-					<span class="marquee-star">★</span>
-					<span>GLOBAL OUTLOOK</span>
-					<span class="marquee-star">★</span>
-					<span>NURTURING ENVIRONMENT</span>
-					<span class="marquee-star">★</span>
-					<span>COLLABORATIVE CULTURE</span>
-					<span class="marquee-star">★</span>
-				</div>
-				<div class="marquee-content" aria-hidden="true">
-					<span>STUDENT-CENTRED LEARNING</span>
-					<span class="marquee-star">★</span>
-					<span>GLOBAL OUTLOOK</span>
-					<span class="marquee-star">★</span>
-					<span>NURTURING ENVIRONMENT</span>
-					<span class="marquee-star">★</span>
-					<span>COLLABORATIVE CULTURE</span>
-					<span class="marquee-star">★</span>
-					<span>STUDENT-CENTRED LEARNING</span>
-					<span class="marquee-star">★</span>
-					<span>GLOBAL OUTLOOK</span>
-					<span class="marquee-star">★</span>
-					<span>NURTURING ENVIRONMENT</span>
-					<span class="marquee-star">★</span>
-					<span>COLLABORATIVE CULTURE</span>
-					<span class="marquee-star">★</span>
-				</div>
+    <section class="academics-marquee-section" aria-label="Academics values marquee">
+		<div class="marquee-track">
+			<div class="marquee-content academics-marquee-content">
+				<span>STUDENT-CENTRED LEARNING</span>
+				<span class="marquee-star">★</span>
+				<span>GLOBAL OUTLOOK</span>
+				<span class="marquee-star">★</span>
+				<span>NURTURING ENVIRONMENT</span>
+				<span class="marquee-star">★</span>
+				<span>COLLABORATIVE CULTURE</span>
+				<span class="marquee-star">★</span>
+			</div>
+			<div class="marquee-content academics-marquee-content" aria-hidden="true">
+				<span>STUDENT-CENTRED LEARNING</span>
+				<span class="marquee-star">★</span>
+				<span>GLOBAL OUTLOOK</span>
+				<span class="marquee-star">★</span>
+				<span>NURTURING ENVIRONMENT</span>
+				<span class="marquee-star">★</span>
+				<span>COLLABORATIVE CULTURE</span>
+				<span class="marquee-star">★</span>
 			</div>
 		</div>
 	</section>
 
-	<!-- Section 5: Curriculum Stage Timeline Carousel (An Education Built on Excellence, Care & Growth) -->
-	<section class="curriculum-carousel-section relative" id="academics">
-		<!-- Screen-Edge Halfway Navigation Arrow (Left) -->
-		<button class="carousel-nav-btn prev-btn flex-center" id="curriculumPrevBtn" aria-label="Previous Topic">
-			<svg width="24" height="18" viewBox="0 0 20 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-				<path d="M7 15L1 8M1 8L7 1M1 8H19" stroke="#222222" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-			</svg>
-		</button>
-
-		<!-- Screen-Edge Halfway Navigation Arrow (Right) -->
-		<button class="carousel-nav-btn next-btn flex-center" id="curriculumNextBtn" aria-label="Next Topic">
-			<svg width="24" height="18" viewBox="0 0 20 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-				<path d="M13 1L19 8M19 8L13 15M19 8H1" stroke="#222222" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-			</svg>
-		</button>
-
-		<div class="site-container relative">
-			<!-- Header Content -->
-			<div class="curriculum-header text-center flex-column align-center gap-xs">
-				<h2 class="section-title curriculum-title">An Education Built on Excellence, Care &amp; Growth</h2>
-				<div class="curriculum-subtitle-wrapper relative">
-					<p class="section-subtitle">Guided by care and driven by excellence, every stage of learning empowers students to grow with confidence, curiosity, character, and purpose.</p>
-					<!-- Hand-Drawn Doodle Arrow Graphic (Reusing Section 2 SVG Image) -->
-					<div class="curriculum-doodle-arrow">
-						<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/svgs/Doodle Arrow Icons .svg' ); ?>" alt="Doodle Arrow Icon" width="80" height="60">
-					</div>
-				</div>
-			</div>
-
-			<!-- Interactive Timeline Stepper Bar -->
-			<div class="timeline-stepper-wrapper">
-				<div class="timeline-stepper-track">
-					<div class="timeline-progress-bar" id="timelineProgressBar"></div>
-					<div class="timeline-steps flex-between">
-						<button class="timeline-step-btn active" data-step="0">
-							<span class="timeline-step-dot"></span>
-							<span class="timeline-step-label">Day Care</span>
-						</button>
-						<button class="timeline-step-btn" data-step="1">
-							<span class="timeline-step-dot"></span>
-							<span class="timeline-step-label">Pre-Primary School</span>
-						</button>
-						<button class="timeline-step-btn" data-step="2">
-							<span class="timeline-step-dot"></span>
-							<span class="timeline-step-label">Primary School</span>
-						</button>
-						<button class="timeline-step-btn" data-step="3">
-							<span class="timeline-step-dot"></span>
-							<span class="timeline-step-label">Middle School</span>
-						</button>
-					</div>
-				</div>
-			</div>
-
-			<!-- Carousel Slider Main Area -->
-			<div class="curriculum-carousel-container relative">
-				<!-- Swiper Carousel Container -->
-				<div class="swiper curriculum-swiper">
-					<div class="swiper-wrapper">
-
-						<!-- Slide 1: Daycare -->
-						<div class="swiper-slide curriculum-slide" data-slide-index="0">
-							<div class="curriculum-slide-inner flex align-center gap-lg">
-								<!-- Left Overlapping Images Box -->
-								<div class="curriculum-media-box relative">
-									<div class="main-photo-card placeholder-card">
-										<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/daycare1.webp' ); ?>" alt="Daycare Outdoor Play Area" loading="lazy">
-									</div>
-									<div class="secondary-photo-card placeholder-card">
-										<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/daycare2.webp' ); ?>" alt="Daycare Activity Corner" loading="lazy">
-									</div>
-								</div>
-
-								<!-- Right Topic Details Box -->
-								<div class="curriculum-info-box flex-column gap-sm relative">
-									<!-- Background Iconify Doodle Icons -->
-									<iconify-icon icon="ph:sun-duotone" class="curriculum-doodle-icon doodle-pos-1" style="color: var(--clr-primary-yellow);"></iconify-icon>
-									<iconify-icon icon="ph:balloon-duotone" class="curriculum-doodle-icon doodle-pos-3" style="color: var(--clr-primary-yellow);"></iconify-icon>
-
-									<h3 class="curriculum-topic-title">Daycare</h3>
-									<p class="curriculum-topic-desc">Designed for working parents, our Day Care Facilities offer children a safe and engaging environment with meaningful after-school activities.</p>
-
-									<div class="curriculum-cta-wrapper">
-										<a href="#daycare" class="btn btn-yellow">
-											<span>KNOW MORE ABOUT DAY CARE PROGRAM</span>
-											<svg class="btn-arrow" width="18" height="14" viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-												<path d="M11 1L17 7M17 7L11 13M17 7H1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-											</svg>
-										</a>
-									</div>
-
-									<iconify-icon icon="ph:teddy-bear-duotone" class="curriculum-doodle-icon doodle-pos-2" style="color: var(--clr-primary-purple);"></iconify-icon>
-								</div>
-							</div>
-						</div>
-
-						<!-- Slide 2: Pre-Primary School -->
-						<div class="swiper-slide curriculum-slide" data-slide-index="1">
-							<div class="curriculum-slide-inner flex align-center gap-lg">
-								<!-- Left Overlapping Images Box -->
-								<div class="curriculum-media-box relative">
-									<div class="main-photo-card placeholder-card">
-										<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/pre-primary 1.webp' ); ?>" alt="Pre-Primary Classroom" loading="lazy">
-									</div>
-									<div class="secondary-photo-card placeholder-card">
-										<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/pre-primary 2.webp' ); ?>" alt="Pre-Primary Play Group" loading="lazy">
-									</div>
-									<!-- Background Iconify Doodle Icons -->
-									<iconify-icon icon="ph:puzzle-piece-duotone" class="curriculum-doodle-icon media-doodle-1" style="color: var(--clr-primary-purple);"></iconify-icon>
-									<iconify-icon icon="ph:palette-duotone" class="curriculum-doodle-icon media-doodle-2" style="color: var(--clr-primary-yellow);"></iconify-icon>
-								</div>
-
-								<!-- Right Topic Details Box -->
-								<div class="curriculum-info-box flex-column gap-sm relative">
-									<h3 class="curriculum-topic-title">Pre-Primary</h3>
-									<p class="curriculum-topic-desc">Our Pre-Primary School lays the foundation for lifelong learning through play-based experiences, engaging activities, and a nurturing daily rhythm.</p>
-
-									<div class="curriculum-cta-wrapper">
-										<a href="#pre-primary" class="btn btn-yellow">
-											<span>EXPLORE OUR PRE-PRIMARY SCHOOL</span>
-											<svg class="btn-arrow" width="18" height="14" viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-												<path d="M11 1L17 7M17 7L11 13M17 7H1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-											</svg>
-										</a>
-									</div>
-								</div>
-							</div>
-						</div>
-
-						<!-- Slide 3: Primary School -->
-						<div class="swiper-slide curriculum-slide" data-slide-index="2">
-							<div class="curriculum-slide-inner flex align-center gap-lg">
-								<!-- Left Overlapping Images Box -->
-								<div class="curriculum-media-box relative">
-									<div class="main-photo-card placeholder-card">
-										<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/primary school 1.webp' ); ?>" alt="Primary School Robotics & Lab" loading="lazy">
-									</div>
-									<div class="secondary-photo-card placeholder-card">
-										<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/primary school 2.webp' ); ?>" alt="Primary School Classroom Learning" loading="lazy">
-									</div>
-									<!-- Background Iconify Doodle Icons -->
-									<iconify-icon icon="ph:pencil-line-duotone" class="curriculum-doodle-icon media-doodle-1" style="color: var(--clr-primary-purple);"></iconify-icon>
-									<iconify-icon icon="ph:atom-duotone" class="curriculum-doodle-icon media-doodle-2" style="color: var(--clr-primary-yellow);"></iconify-icon>
-								</div>
-
-								<!-- Right Topic Details Box -->
-								<div class="curriculum-info-box flex-column gap-sm relative">
-									<h3 class="curriculum-topic-title">Primary School</h3>
-									<p class="curriculum-topic-desc">The Primary years introduce students to structured learning, where they develop independent thinking, collaboration and problem-solving skills.</p>
-
-									<div class="curriculum-cta-wrapper">
-										<a href="#primary" class="btn btn-yellow">
-											<span>CHECK OUR PRIMARY SCHOOL</span>
-											<svg class="btn-arrow" width="18" height="14" viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-												<path d="M11 1L17 7M17 7L11 13M17 7H1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-											</svg>
-										</a>
-									</div>
-								</div>
-							</div>
-						</div>
-
-						<!-- Slide 4: Middle School -->
-						<div class="swiper-slide curriculum-slide" data-slide-index="3">
-							<div class="curriculum-slide-inner flex align-center gap-lg">
-								<!-- Left Overlapping Images Box -->
-								<div class="curriculum-media-box relative">
-									<div class="main-photo-card placeholder-card">
-										<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/middle school 1.webp' ); ?>" alt="Middle School Classroom & Science" loading="lazy">
-									</div>
-									<div class="secondary-photo-card placeholder-card">
-										<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/middle school 2.webp' ); ?>" alt="Middle School Outdoor Field & Activities" loading="lazy">
-									</div>
-									<!-- Background Iconify Doodle Icons -->
-									<iconify-icon icon="ph:compass-duotone" class="curriculum-doodle-icon media-doodle-1" style="color: var(--clr-primary-yellow);"></iconify-icon>
-									<iconify-icon icon="ph:graduation-cap-duotone" class="curriculum-doodle-icon media-doodle-2" style="color: var(--clr-primary-purple);"></iconify-icon>
-								</div>
-
-								<!-- Right Topic Details Box -->
-								<div class="curriculum-info-box flex-column gap-sm relative">
-									<h3 class="curriculum-topic-title">Middle School</h3>
-									<p class="curriculum-topic-desc">Our Middle School offers the flexibility of ICSE and IGCSE curricula, supported by academic guidance that helps students choose the pathway best suited to their aspirations.</p>
-
-									<div class="curriculum-cta-wrapper">
-										<a href="#middle" class="btn btn-yellow">
-											<span>EXPLORE MIDDLE SCHOOL</span>
-											<svg class="btn-arrow" width="18" height="14" viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-												<path d="M11 1L17 7M17 7L11 13M17 7H1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-											</svg>
-										</a>
-									</div>
-								</div>
-							</div>
-						</div>
-
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
+	<!-- Section 5: Curriculum Stage Timeline Carousel Component -->
+	<?php get_template_part( 'template-parts/curriculum-carousel' ); ?>
 
 	<!-- Section 6: Experiential Learning Carousel (100svh Solid Purple Section) -->
 	<section class="purple-full-section relative overflow-hidden flex-center" id="student-life">
@@ -642,113 +426,8 @@ get_header();
 		</div>
 	</section>
 
-	<!-- Section 8: Families Who Chose B.D. Somani International School -->
-	<section class="parents-testimonial-section relative overflow-hidden" id="parents-testimonials">
-		<!-- Screen-Edge Navigation Arrow Buttons (Yellow Circles) -->
-		<button class="parents-nav-btn parents-prev-btn flex-center" id="parentsPrevBtn" aria-label="Previous testimonial">
-			<svg width="24" height="18" viewBox="0 0 20 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-				<path d="M7 15L1 8M1 8L7 1M1 8H19" stroke="#2B182C" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-			</svg>
-		</button>
-		<button class="parents-nav-btn parents-next-btn flex-center" id="parentsNextBtn" aria-label="Next testimonial">
-			<svg width="24" height="18" viewBox="0 0 20 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-				<path d="M13 1L19 8M19 8L13 15M19 8H1" stroke="#2B182C" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-			</svg>
-		</button>
-
-		<!-- Background Floating Decorative Quotes -->
-		<div class="parents-quote-decor parents-quote-left">
-			<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/svgs/quotation.svg' ); ?>" alt="Quote Icon">
-		</div>
-		<div class="parents-quote-decor parents-quote-right">
-			<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/svgs/quotation.svg' ); ?>" alt="Quote Icon">
-		</div>
-
-		<div class="site-container relative z-2">
-			
-			<!-- Section Header -->
-			<div class="parents-header text-center margin-bottom-lg">
-				<h2 class="parents-main-title section-title">Families Who Chose<br>B.D. Somani International School, Kharghar</h2>
-				<p class="parents-subtitle section-subtitle">We value the trust B.D. Somani families place in us. Their experiences are the truest reflection of who we are as a school.</p>
-			</div>
-
-			<!-- Parents Carousel Stage Container -->
-			<div class="parents-carousel-wrapper relative">
-				
-				<!-- Swiper Container -->
-				<div class="swiper parents-swiper">
-					<div class="swiper-wrapper">
-						
-						<!-- Slide 1: Ms. Zahabia Khairullah -->
-						<div class="swiper-slide parents-slide-item">
-							<div class="parents-card-group flex gap-md">
-								<!-- Video Thumbnail Box -->
-								<div class="parents-video-box relative">
-									<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/parent 1.webp' ); ?>" alt="Ms. Zahabia Khairullah" class="parents-video-img" loading="lazy" decoding="async">
-									<div class="parents-play-overlay flex-center">
-										<button class="parents-play-btn flex-center" aria-label="Play video testimonial">
-											<svg width="20" height="24" viewBox="0 0 20 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-												<path d="M18 10.2679C19.3333 11.0377 19.3333 12.9623 18 13.7321L4.5 21.5263C3.16667 22.2961 1.5 21.3338 1.5 19.7942L1.5 4.20577C1.5 2.66617 3.16667 1.70392 4.5 2.47372L18 10.2679Z" fill="#FFFFFF"/>
-											</svg>
-										</button>
-									</div>
-								</div>
-								<!-- Quote Details Box -->
-								<div class="parents-quote-box relative flex-column flex-between">
-									<div class="parents-quote-content">
-										<h3 class="parents-quote-heading">The school's focus on happiness, holistic development, and critical thinking is what truly sets it apart.</h3>
-										<p class="parents-quote-text">"As a parent, my biggest priority is that my child is happy at school, and that's exactly what I see every day. The school balances academics with extracurricular activities while encouraging critical thinking beyond textbooks. I'm very happy with my son's overall development, and I believe this holistic approach truly sets the school apart."</p>
-									</div>
-									<div class="parents-quote-author">
-										<h4 class="parents-author-name">Ms. Zahabia Khairullah</h4>
-										<p class="parents-author-info">Mother of Ayaan Khairullah Grade 2 and Aqeel Khairullah Jr. KG</p>
-									</div>
-								</div>
-							</div>
-						</div>
-
-						<!-- Slide 2: Ms. Jasmita Kaur Kohli -->
-						<div class="swiper-slide parents-slide-item">
-							<div class="parents-card-group flex gap-md">
-								<!-- Video Thumbnail Box -->
-								<div class="parents-video-box relative">
-									<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/parent 2.webp' ); ?>" alt="Ms. Jasmita Kaur Kohli" class="parents-video-img" loading="lazy" decoding="async">
-									<div class="parents-play-overlay flex-center">
-										<button class="parents-play-btn flex-center" aria-label="Play video testimonial">
-											<svg width="20" height="24" viewBox="0 0 20 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-												<path d="M18 10.2679C19.3333 11.0377 19.3333 12.9623 18 13.7321L4.5 21.5263C3.16667 22.2961 1.5 21.3338 1.5 19.7942L1.5 4.20577C1.5 2.66617 3.16667 1.70392 4.5 2.47372L18 10.2679Z" fill="#FFFFFF"/>
-											</svg>
-										</button>
-									</div>
-								</div>
-								<!-- Quote Details Box -->
-								<div class="parents-quote-box relative flex-column flex-between">
-									<div class="parents-quote-content">
-										<h3 class="parents-quote-heading">The school's focus on happiness, holistic development, and critical thinking is what truly sets it apart.</h3>
-										<p class="parents-quote-text">"As a parent, my biggest priority is that my child is happy at school, and that's exactly what I see every day. The school balances academics with extracurricular activities while encouraging critical thinking beyond textbooks. I'm very happy with my son's overall development, and I believe this holistic approach truly sets the school apart."</p>
-									</div>
-									<div class="parents-quote-author">
-										<h4 class="parents-author-name">Ms. Jasmita Kaur Kohli</h4>
-										<p class="parents-author-info">Mother of Priyana Kaur Kohli, Grade 2</p>
-									</div>
-								</div>
-							</div>
-						</div>
-
-					</div>
-				</div>
-
-				<!-- Bottom Progress Bar Control -->
-				<div class="parents-progress-wrapper margin-top-lg flex-center">
-					<div class="parents-progress-bar-track relative">
-						<div class="parents-progress-bar-fill" id="parentsProgressBar"></div>
-					</div>
-				</div>
-
-			</div>
-
-		</div>
-	</section>
+	<!-- Section 8: Families Who Chose B.D. Somani International School (Testimonial Component) -->
+	<?php get_template_part( 'template-parts/testimonials' ); ?>
 
 	<!-- Section 9: Call To Action (CTA) Section -->
 	<section class="cta-banner-section relative" id="cta-banner">

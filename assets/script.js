@@ -105,6 +105,11 @@ document.addEventListener("DOMContentLoaded", () => {
       ".about-purpose-title",
       ".about-purpose-subtitle",
       ".about-purpose-body",
+      ".academics-hero-subtitle",
+      ".programme-tagline",
+      ".programme-desc",
+      ".academics-approach-p",
+      ".academics-exp-sub-desc",
     ].join(", ");
 
     const textElements = document.querySelectorAll(revealSelectors);
@@ -1541,4 +1546,235 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   initAboutPurposeAnimation();
+
+  // ---------------------------------------------------------------------------
+  // Our Approach Page Dropdown / Accordion Interactivity
+  // Subtle Scroll Parallax for Programme Section Floating Images
+  function initAcademicsProgrammeParallax() {
+    if (!hasGsap()) return;
+
+    const section = document.querySelector(".academics-programme-section");
+    if (!section) return;
+
+    const leftCard = section.querySelector(".programme-left-card");
+    const rightCard = section.querySelector(".programme-right-card");
+
+    if (leftCard) {
+      gsap.fromTo(
+        leftCard,
+        { y: 110 },
+        {
+          y: -110,
+          ease: "none",
+          scrollTrigger: {
+            trigger: section,
+            start: "top bottom",
+            end: "bottom top",
+            scrub: 1,
+          },
+        },
+      );
+    }
+
+    if (rightCard) {
+      gsap.fromTo(
+        rightCard,
+        { y: 140 },
+        {
+          y: -130,
+          ease: "none",
+          scrollTrigger: {
+            trigger: section,
+            start: "top bottom",
+            end: "bottom top",
+            scrub: 1.2,
+          },
+        },
+      );
+    }
+  }
+
+  initAcademicsProgrammeParallax();
+
+  // GSAP ScrollTrigger Pinning for Academics Approach Left Column
+  function initAcademicsApproachPinning() {
+    if (!hasGsap()) return;
+
+    const section = document.querySelector(".academics-approach-section");
+    const stickyCol = document.querySelector(".academics-approach-left-sticky");
+    const cardsCol = document.querySelector(".academics-approach-cards-col");
+
+    if (!section || !stickyCol || !cardsCol) return;
+
+    ScrollTrigger.matchMedia({
+      "(min-width: 901px)": function () {
+        ScrollTrigger.create({
+          trigger: section,
+          pin: stickyCol,
+          start: "top 105px",
+          end: "bottom bottom",
+          pinSpacing: false,
+          invalidateOnRefresh: true,
+        });
+      },
+    });
+  }
+
+  initAcademicsApproachPinning();
+
+  // ---------------------------------------------------------------------------
+  function initApproachAccordions() {
+    const accordionCards = document.querySelectorAll(".approach-card");
+    if (!accordionCards.length) return;
+
+    accordionCards.forEach((card) => {
+      const header = card.querySelector(".approach-card-header");
+      const body = card.querySelector(".approach-card-body");
+      if (!header || !body) return;
+
+      header.addEventListener("click", () => {
+        const isExpanded = header.getAttribute("aria-expanded") === "true";
+
+        // Close other cards for a clean single-open overlay experience
+        accordionCards.forEach((otherCard) => {
+          if (otherCard !== card) {
+            const otherHeader = otherCard.querySelector(
+              ".approach-card-header",
+            );
+            const otherBody = otherCard.querySelector(".approach-card-body");
+            if (otherHeader && otherBody) {
+              otherHeader.setAttribute("aria-expanded", "false");
+              otherBody.removeAttribute("data-open");
+              otherCard.removeAttribute("data-active");
+            }
+          }
+        });
+
+        // Toggle current card
+        if (isExpanded) {
+          header.setAttribute("aria-expanded", "false");
+          body.removeAttribute("data-open");
+          card.removeAttribute("data-active");
+        } else {
+          header.setAttribute("aria-expanded", "true");
+          body.setAttribute("data-open", "true");
+          card.setAttribute("data-active", "true");
+        }
+      });
+    });
+  }
+
+  initApproachAccordions();
+
+  // Swiper Carousel for Academics Experiences Section (Single Carousel with Progress Bar)
+  function initExperiencesSwiper() {
+    const swiperEl = document.querySelector(".experiences-swiper");
+    if (!swiperEl || typeof Swiper === "undefined") return;
+
+    const progressBar = document.getElementById("experiencesProgressBar");
+
+    function updateExperiencesProgressBar(swiper) {
+      if (!progressBar) return;
+      const maxIndex = swiper.snapGrid ? swiper.snapGrid.length - 1 : (swiper.slides ? swiper.slides.length - 1 : 1);
+      const activeIdx = swiper.activeIndex || 0;
+      const pct = maxIndex > 0 ? (activeIdx / maxIndex) * 100 : 100;
+      const fillPct = Math.min(100, Math.max(20, pct));
+      progressBar.style.width = fillPct + "%";
+    }
+
+    new Swiper(swiperEl, {
+      slidesPerView: "auto",
+      spaceBetween: 28,
+      grabCursor: true,
+      navigation: {
+        nextEl: ".experiences-next-btn",
+        prevEl: ".experiences-prev-btn",
+      },
+      on: {
+        init: function () {
+          updateExperiencesProgressBar(this);
+        },
+        slideChange: function () {
+          updateExperiencesProgressBar(this);
+        },
+      },
+    });
+  }
+
+  initExperiencesSwiper();
+
+  // Academics Cornerstones Interactive Accordion & Image Crossfade with Auto-Loop on Scroll
+  function initCornerstonesTabs() {
+    const section = document.querySelector(".academics-cornerstones-section");
+    if (!section) return;
+
+    const tabItems = section.querySelectorAll(".cornerstones-tab-item");
+    const imgSlides = section.querySelectorAll(".cornerstones-img-slide");
+    if (!tabItems.length) return;
+
+    let currentIndex = 0;
+    let autoPlayInterval = null;
+
+    function activateTab(index) {
+      currentIndex = index;
+      tabItems.forEach((t, i) => {
+        if (i === index) {
+          t.classList.add("active");
+        } else {
+          t.classList.remove("active");
+        }
+      });
+
+      imgSlides.forEach((img) => {
+        if (parseInt(img.getAttribute("data-index"), 10) === index) {
+          img.classList.add("active");
+        } else {
+          img.classList.remove("active");
+        }
+      });
+    }
+
+    function startAutoPlay() {
+      if (autoPlayInterval) return;
+      autoPlayInterval = setInterval(() => {
+        const nextIndex = (currentIndex + 1) % tabItems.length;
+        activateTab(nextIndex);
+      }, 4000);
+    }
+
+    function stopAutoPlay() {
+      if (autoPlayInterval) {
+        clearInterval(autoPlayInterval);
+        autoPlayInterval = null;
+      }
+    }
+
+    tabItems.forEach((item, idx) => {
+      item.addEventListener("click", () => {
+        activateTab(idx);
+        stopAutoPlay();
+        startAutoPlay();
+      });
+    });
+
+    if ("IntersectionObserver" in window) {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              startAutoPlay();
+            } else {
+              stopAutoPlay();
+            }
+          });
+        },
+        { threshold: 0.3 }
+      );
+      observer.observe(section);
+    } else {
+      startAutoPlay();
+    }
+  }
+
+  initCornerstonesTabs();
 });

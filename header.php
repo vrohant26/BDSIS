@@ -42,15 +42,22 @@
 				</a>
 
 				<?php 
-					$home_url    = esc_url( home_url( '/' ) );
-					$about_url   = esc_url( home_url( '/about/' ) );
-					$faq_url     = esc_url( home_url( '/faq/' ) );
-					$gallery_url = esc_url( home_url( '/gallery/' ) );
+					$home_url        = esc_url( home_url( '/' ) );
+					$about_url       = esc_url( home_url( '/about/' ) );
+					$faq_url         = esc_url( home_url( '/faq/' ) );
+					$gallery_url     = esc_url( home_url( '/gallery/' ) );
 
-					$is_faq     = is_page_template( 'page-faq.php' ) || is_page( 'faq' );
-					$is_about   = is_page_template( 'page-about.php' ) || is_page( 'about' ) || is_page( 'about-us' );
-					$is_gallery = is_page_template( 'page-gallery.php' ) || is_page( 'gallery' ) || is_post_type_archive( 'gallery' );
-					$is_home    = ( is_front_page() || is_home() ) && ! $is_faq && ! $is_about && ! $is_gallery;
+					$approach_url    = esc_url( home_url( '/approach/' ) );
+					$daycare_url     = esc_url( home_url( '/daycare/' ) );
+					$campus_life_url = esc_url( home_url( '/campus-life/' ) );
+
+					$is_faq         = is_page_template( 'page-faq.php' ) || is_page( 'faq' );
+					$is_about       = is_page_template( 'page-about.php' ) || is_page( 'about' ) || is_page( 'about-us' );
+					$is_gallery     = is_page_template( 'page-gallery.php' ) || is_page( 'gallery' ) || is_post_type_archive( 'gallery' );
+					$is_approach    = is_page_template( 'page-approach.php' ) || is_page( 'approach' ) || is_page( 'our-approach' );
+					$is_daycare     = is_page_template( 'page-academics.php' ) || is_page( 'daycare' ) || is_singular( 'academics' );
+					$is_campus_life = is_page_template( 'page-campus-life.php' ) || is_page( 'campus-life' );
+					$is_home        = ( is_front_page() || is_home() ) && ! $is_faq && ! $is_about && ! $is_gallery && ! $is_approach && ! $is_daycare && ! $is_campus_life;
 
 					$home_prefix = $is_home ? '' : $home_url;
 				?>
@@ -60,7 +67,7 @@
 						<li class="nav-item"><a href="<?php echo $home_url; ?>" class="nav-link <?php echo $is_home ? 'active' : ''; ?>">HOME</a></li>
 						<li class="nav-item"><a href="<?php echo $about_url; ?>" class="nav-link <?php echo $is_about ? 'active' : ''; ?>">ABOUT</a></li>
 						<li class="nav-item dropdown">
-							<a href="<?php echo $home_prefix; ?>#academics" class="nav-link">
+							<a href="<?php echo $home_prefix; ?>#academics" class="nav-link <?php echo ( $is_approach || $is_daycare ) ? 'active' : ''; ?>">
 								ACADEMICS
 								<svg class="dropdown-icon" width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
 									<path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -69,8 +76,8 @@
 							<div class="dropdown-menu">
 								<span class="dropdown-header-title">ACADEMICS</span>
 								<ul class="dropdown-list">
-									<li><a href="<?php echo $home_prefix; ?>#our-approach">OUR APPROACH</a></li>
-									<li><a href="<?php echo $home_prefix; ?>#daycare">DAYCARE</a></li>
+									<li><a href="<?php echo $approach_url; ?>" class="<?php echo $is_approach ? 'active' : ''; ?>">OUR APPROACH</a></li>
+									<li><a href="<?php echo $daycare_url; ?>" class="<?php echo $is_daycare ? 'active' : ''; ?>">DAYCARE</a></li>
 									<li><a href="<?php echo $home_prefix; ?>#pre-primary">PRE-PRIMARY</a></li>
 									<li><a href="<?php echo $home_prefix; ?>#primary">PRIMARY</a></li>
 									<li><a href="<?php echo $home_prefix; ?>#middle">MIDDLE</a></li>
@@ -78,7 +85,7 @@
 								</ul>
 							</div>
 						</li>
-						<li class="nav-item"><a href="<?php echo $home_prefix; ?>#campus-life" class="nav-link">CAMPUS LIFE</a></li>
+						<li class="nav-item"><a href="<?php echo $campus_life_url; ?>" class="nav-link <?php echo $is_campus_life ? 'active' : ''; ?>">CAMPUS LIFE</a></li>
 						<li class="nav-item"><a href="<?php echo $home_prefix; ?>#admissions" class="nav-link">ADMISSIONS</a></li>
 						<li class="nav-item"><a href="<?php echo $gallery_url; ?>" class="nav-link <?php echo $is_gallery ? 'active' : ''; ?>">GALLERY</a></li>
 						<li class="nav-item"><a href="<?php echo $faq_url; ?>" class="nav-link <?php echo $is_faq ? 'active' : ''; ?>">FAQ</a></li>
@@ -107,7 +114,7 @@
 						<li class="mobile-nav-item"><a href="<?php echo $about_url; ?>" class="mobile-link <?php echo $is_about ? 'active' : ''; ?>">ABOUT US</a></li>
 						<li class="mobile-nav-item mobile-dropdown-item">
 							<div class="mobile-dropdown-header flex-between align-center">
-								<a href="<?php echo $home_prefix; ?>#academics" class="mobile-link">ACADEMICS</a>
+								<a href="<?php echo $home_prefix; ?>#academics" class="mobile-link <?php echo ( $is_approach || $is_daycare ) ? 'active' : ''; ?>">ACADEMICS</a>
 								<button class="mobile-dropdown-toggle" aria-label="Toggle Academics submenu">
 									<svg class="mobile-dropdown-arrow" width="12" height="8" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
 										<path d="M1 1L5 5L9 1" stroke="#9C5E91" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -115,15 +122,15 @@
 								</button>
 							</div>
 							<ul class="mobile-submenu">
-								<li><a href="<?php echo $home_prefix; ?>#our-approach">OUR APPROACH</a></li>
-								<li><a href="<?php echo $home_prefix; ?>#daycare">DAYCARE</a></li>
+								<li><a href="<?php echo $approach_url; ?>" class="<?php echo $is_approach ? 'active' : ''; ?>">OUR APPROACH</a></li>
+								<li><a href="<?php echo $daycare_url; ?>" class="<?php echo $is_daycare ? 'active' : ''; ?>">DAYCARE</a></li>
 								<li><a href="<?php echo $home_prefix; ?>#pre-primary">PRE-PRIMARY</a></li>
 								<li><a href="<?php echo $home_prefix; ?>#primary">PRIMARY</a></li>
 								<li><a href="<?php echo $home_prefix; ?>#middle">MIDDLE</a></li>
 								<li><a href="<?php echo $home_prefix; ?>#after-school">AFTER SCHOOL</a></li>
 							</ul>
 						</li>
-						<li class="mobile-nav-item"><a href="<?php echo $home_prefix; ?>#campus-life" class="mobile-link">CAMPUS LIFE</a></li>
+						<li class="mobile-nav-item"><a href="<?php echo $campus_life_url; ?>" class="mobile-link <?php echo $is_campus_life ? 'active' : ''; ?>">CAMPUS LIFE</a></li>
 						<li class="mobile-nav-item"><a href="<?php echo $home_prefix; ?>#admissions" class="mobile-link">ADMISSIONS</a></li>
 						<li class="mobile-nav-item"><a href="<?php echo $gallery_url; ?>" class="mobile-link <?php echo $is_gallery ? 'active' : ''; ?>">GALLERY</a></li>
 						<li class="mobile-nav-item"><a href="<?php echo $faq_url; ?>" class="mobile-link <?php echo $is_faq ? 'active' : ''; ?>">FAQ</a></li>

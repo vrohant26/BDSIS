@@ -96,13 +96,17 @@
 					</div>
 
 					<?php
-						$f_home_url  = esc_url( home_url( '/' ) );
-						$f_about_url = esc_url( home_url( '/about/' ) );
-						$f_faq_url   = esc_url( home_url( '/faq/' ) );
+						$f_home_url        = esc_url( home_url( '/' ) );
+						$f_about_url       = esc_url( home_url( '/about/' ) );
+						$f_faq_url         = esc_url( home_url( '/faq/' ) );
+						$f_approach_url    = esc_url( home_url( '/approach/' ) );
+						$f_campus_life_url = esc_url( home_url( '/campus-life/' ) );
 
-						$f_is_faq   = is_page_template( 'page-faq.php' ) || is_page( 'faq' );
-						$f_is_about = is_page_template( 'page-about.php' ) || is_page( 'about' ) || is_page( 'about-us' );
-						$f_is_home  = ( is_front_page() || is_home() ) && ! $f_is_faq && ! $f_is_about;
+						$f_is_faq         = is_page_template( 'page-faq.php' ) || is_page( 'faq' );
+						$f_is_about       = is_page_template( 'page-about.php' ) || is_page( 'about' ) || is_page( 'about-us' );
+						$f_is_approach    = is_page_template( 'page-approach.php' ) || is_page( 'approach' ) || is_page( 'our-approach' );
+						$f_is_campus_life = is_page_template( 'page-campus-life.php' ) || is_page( 'campus-life' );
+						$f_is_home        = ( is_front_page() || is_home() ) && ! $f_is_faq && ! $f_is_about && ! $f_is_approach && ! $f_is_campus_life;
 
 						$f_prefix = $f_is_home ? '' : $f_home_url;
 					?>
@@ -113,7 +117,7 @@
 							<li><a href="<?php echo $f_prefix; ?>#apply">Apply Now</a></li>
 							<li><a href="<?php echo $f_prefix; ?>#process">Process</a></li>
 							<li><a href="<?php echo $f_faq_url; ?>" class="<?php echo $f_is_faq ? 'active' : ''; ?>">Faq</a></li>
-							<li><a href="<?php echo $f_prefix; ?>#campus-life">Campus</a></li>
+							<li><a href="<?php echo $f_campus_life_url; ?>" class="<?php echo $f_is_campus_life ? 'active' : ''; ?>">Campus</a></li>
 						</ul>
 					</div>
 
@@ -123,7 +127,8 @@
 						<ul class="footer-links">
 							<li><a href="<?php echo $f_home_url; ?>" class="<?php echo $f_is_home ? 'active' : ''; ?>">Home</a></li>
 							<li><a href="<?php echo $f_about_url; ?>" class="<?php echo $f_is_about ? 'active' : ''; ?>">About us</a></li>
-							<li><a href="<?php echo $f_prefix; ?>#our-approach">Our Approach</a></li>
+							<li><a href="<?php echo $f_approach_url; ?>" class="<?php echo $f_is_approach ? 'active' : ''; ?>">Our Approach</a></li>
+							<li><a href="<?php echo $f_campus_life_url; ?>" class="<?php echo $f_is_campus_life ? 'active' : ''; ?>">Campus Life</a></li>
 							<li><a href="<?php echo $f_prefix; ?>#academics">Academics</a></li>
 							<li><a href="<?php echo $f_prefix; ?>#gallery">Gallery</a></li>
 							<li><a href="<?php echo $f_prefix; ?>#contact">Contact us</a></li>
