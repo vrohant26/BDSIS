@@ -54,16 +54,16 @@
 					<div class="swiper-slide parents-slide-item">
 						<div class="parents-card-group flex gap-md">
 							<!-- Video Thumbnail Box -->
-							<div class="parents-video-box relative">
+							<a href="https://www.youtube.com/watch?v=X2f28ryaOfY" target="_blank" rel="noopener noreferrer" class="parents-video-box relative" aria-label="<?php esc_attr_e( 'Watch Ms. Zahabia Khairullah video testimonial on YouTube', 'bd-somani' ); ?>">
 								<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/parent 1.webp' ); ?>" alt="Ms. Zahabia Khairullah" class="parents-video-img" loading="lazy" decoding="async">
 								<div class="parents-play-overlay flex-center">
-									<button class="parents-play-btn flex-center" aria-label="Play video testimonial">
+									<div class="parents-play-btn flex-center">
 										<svg width="20" height="24" viewBox="0 0 20 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 											<path d="M18 10.2679C19.3333 11.0377 19.3333 12.9623 18 13.7321L4.5 21.5263C3.16667 22.2961 1.5 21.3338 1.5 19.7942L1.5 4.20577C1.5 2.66617 3.16667 1.70392 4.5 2.47372L18 10.2679Z" fill="#FFFFFF"/>
 										</svg>
-									</button>
+									</div>
 								</div>
-							</div>
+							</a>
 							<!-- Quote Details Box -->
 							<div class="parents-quote-box relative flex-column flex-between">
 								<div class="parents-quote-content">
@@ -82,16 +82,16 @@
 					<div class="swiper-slide parents-slide-item">
 						<div class="parents-card-group flex gap-md">
 							<!-- Video Thumbnail Box -->
-							<div class="parents-video-box relative">
+							<a href="https://www.youtube.com/watch?v=6BEbjY-88_Q" target="_blank" rel="noopener noreferrer" class="parents-video-box relative" aria-label="<?php esc_attr_e( 'Watch Ms. Jasmita Kaur Kohli video testimonial on YouTube', 'bd-somani' ); ?>">
 								<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/parent 2.webp' ); ?>" alt="Ms. Jasmita Kaur Kohli" class="parents-video-img" loading="lazy" decoding="async">
 								<div class="parents-play-overlay flex-center">
-									<button class="parents-play-btn flex-center" aria-label="Play video testimonial">
+									<div class="parents-play-btn flex-center">
 										<svg width="20" height="24" viewBox="0 0 20 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 											<path d="M18 10.2679C19.3333 11.0377 19.3333 12.9623 18 13.7321L4.5 21.5263C3.16667 22.2961 1.5 21.3338 1.5 19.7942L1.5 4.20577C1.5 2.66617 3.16667 1.70392 4.5 2.47372L18 10.2679Z" fill="#FFFFFF"/>
 										</svg>
-									</button>
+									</div>
 								</div>
-							</div>
+							</a>
 							<!-- Quote Details Box -->
 							<div class="parents-quote-box relative flex-column flex-between">
 								<div class="parents-quote-content">

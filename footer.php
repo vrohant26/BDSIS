@@ -137,6 +137,9 @@
 						$f_campus_life_url = esc_url( home_url( '/campus-life/' ) );
 						$f_admissions_url  = esc_url( home_url( '/admissions/' ) );
 						$f_contact_url     = esc_url( home_url( '/contact-us/' ) );
+						$f_careers_url     = esc_url( home_url( '/careers/' ) );
+						$f_privacy_url     = esc_url( home_url( '/privacy-policy/' ) );
+						$f_terms_url       = esc_url( home_url( '/terms-and-conditions/' ) );
 
 						$f_is_faq         = is_page_template( 'page-faq.php' ) || is_page( 'faq' );
 						$f_is_about       = is_page_template( 'page-about.php' ) || is_page( 'about' ) || is_page( 'about-us' );
@@ -144,7 +147,10 @@
 						$f_is_campus_life = is_page_template( 'page-campus-life.php' ) || is_page( 'campus-life' );
 						$f_is_admissions  = is_page_template( 'page-admissions.php' ) || is_page( 'admissions' );
 						$f_is_contact     = is_page_template( 'page-contact-us.php' ) || is_page( 'contact-us' ) || is_page( 'contact' );
-						$f_is_home        = ( is_front_page() || is_home() ) && ! $f_is_faq && ! $f_is_about && ! $f_is_approach && ! $f_is_campus_life && ! $f_is_admissions && ! $f_is_contact;
+						$f_is_careers     = is_page_template( 'page-careers.php' ) || is_page( 'careers' );
+						$f_is_privacy     = is_page_template( 'page-privacy-policy.php' ) || is_page( 'privacy-policy' );
+						$f_is_terms       = is_page_template( 'page-terms-conditions.php' ) || is_page( 'terms-and-conditions' ) || is_page( 'terms-conditions' ) || is_page( 'terms' );
+						$f_is_home        = ( is_front_page() || is_home() ) && ! $f_is_faq && ! $f_is_about && ! $f_is_approach && ! $f_is_campus_life && ! $f_is_admissions && ! $f_is_contact && ! $f_is_careers && ! $f_is_privacy && ! $f_is_terms;
 
 						$f_prefix = $f_is_home ? '' : $f_home_url;
 					?>
@@ -169,7 +175,9 @@
 							<li><a href="<?php echo $f_approach_url; ?>" class="<?php echo $f_is_approach ? 'active' : ''; ?>">Our Approach</a></li>
 							<li><a href="<?php echo $f_campus_life_url; ?>" class="<?php echo $f_is_campus_life ? 'active' : ''; ?>">Campus Life</a></li>
 							<li><a href="<?php echo $f_prefix; ?>#academics">Academics</a></li>
+							<li><a href="<?php echo $f_careers_url; ?>" class="<?php echo $f_is_careers ? 'active' : ''; ?>">Careers</a></li>
 							<li><a href="<?php echo $f_contact_url; ?>" class="<?php echo $f_is_contact ? 'active' : ''; ?>">Contact us</a></li>
+							<li><a href="<?php echo $f_terms_url; ?>" class="<?php echo $f_is_terms ? 'active' : ''; ?>">Terms & Conditions</a></li>
 						</ul>
 					</div>
 
@@ -224,8 +232,8 @@
 				<div class="footer-bottom-bar flex-between align-center flex-wrap gap-sm">
 					<p class="copyright-text">&copy; <?php echo date( 'Y' ); ?> B.D. Somani International School, Kharghar</p>
 					<div class="legal-links flex gap-md">
-						<a href="#terms">Terms and Conditions</a>
-						<a href="#privacy">Privacy Policy</a>
+						<a href="<?php echo $f_terms_url; ?>" class="<?php echo $f_is_terms ? 'active' : ''; ?>">Terms and Conditions</a>
+						<a href="<?php echo $f_privacy_url; ?>" class="<?php echo $f_is_privacy ? 'active' : ''; ?>">Privacy Policy</a>
 					</div>
 				</div>
 

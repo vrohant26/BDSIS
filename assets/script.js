@@ -1782,6 +1782,57 @@ document.addEventListener("DOMContentLoaded", () => {
 
   initAdmissionsProcessSwiper();
 
+  // Swiper Carousel for Safety & Well-Being Section (Campus Life)
+  function initSafetySwiper() {
+    const swiperEl = document.querySelector(".safety-swiper");
+    if (!swiperEl || typeof Swiper === "undefined") return;
+
+    const progressBar = document.getElementById("safetyProgressBar");
+
+    function updateSafetyProgressBar(swiper) {
+      if (!progressBar) return;
+      const maxIndex = swiper.snapGrid ? swiper.snapGrid.length - 1 : (swiper.slides ? swiper.slides.length - 1 : 1);
+      const activeIdx = swiper.activeIndex || 0;
+      const pct = maxIndex > 0 ? (activeIdx / maxIndex) * 100 : 100;
+      const fillPct = Math.min(100, Math.max(25, pct));
+      progressBar.style.width = fillPct + "%";
+    }
+
+    new Swiper(swiperEl, {
+      slidesPerView: 3,
+      spaceBetween: 28,
+      grabCursor: true,
+      navigation: {
+        nextEl: ".safety-next-btn",
+        prevEl: ".safety-prev-btn",
+      },
+      breakpoints: {
+        320: {
+          slidesPerView: 1.15,
+          spaceBetween: 16,
+        },
+        640: {
+          slidesPerView: 2.1,
+          spaceBetween: 20,
+        },
+        1024: {
+          slidesPerView: 3,
+          spaceBetween: 28,
+        },
+      },
+      on: {
+        init: function () {
+          updateSafetyProgressBar(this);
+        },
+        slideChange: function () {
+          updateSafetyProgressBar(this);
+        },
+      },
+    });
+  }
+
+  initSafetySwiper();
+
   // Academics Cornerstones Interactive Accordion & Image Crossfade with Auto-Loop on Scroll
   function initCornerstonesTabs() {
     const section = document.querySelector(".academics-cornerstones-section");

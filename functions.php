@@ -241,6 +241,96 @@ function theme_add_academics_metaboxes( $post_type, $post = null ) {
 }
 add_action( 'add_meta_boxes', 'theme_add_academics_metaboxes', 10, 2 );
 
+// Add Careers Page Metabox
+function theme_add_careers_metaboxes() {
+	add_meta_box(
+		'bds_careers_hero_mb',
+		__( 'Careers Page Settings & HR Details', 'bd-somani' ),
+		'theme_careers_hero_metabox_callback',
+		'page',
+		'normal',
+		'high'
+	);
+}
+add_action( 'add_meta_boxes', 'theme_add_careers_metaboxes' );
+
+function theme_careers_hero_metabox_callback( $post ) {
+	wp_nonce_field( 'theme_save_careers', 'theme_careers_nonce' );
+
+	$title    = metadata_exists( 'post', $post->ID, '_bds_careers_hero_title' ) ? get_post_meta( $post->ID, '_bds_careers_hero_title', true ) : __( 'Join Our Team of Educator Pioneers', 'bd-somani' );
+	$sub      = metadata_exists( 'post', $post->ID, '_bds_careers_hero_subtitle' ) ? get_post_meta( $post->ID, '_bds_careers_hero_subtitle', true ) : __( 'At B.D. Somani International School, our educators embody a unique blend of compassion, creativity, and enthusiasm. With open minds and a commitment to lifelong learning, they serve as facilitators, encouraging inquiry and exploration in the classroom.', 'bd-somani' );
+	$hr_email = metadata_exists( 'post', $post->ID, '_bds_careers_hr_email' ) ? get_post_meta( $post->ID, '_bds_careers_hr_email', true ) : 'hr@bdsiskharghar.org';
+	$hr_phone = metadata_exists( 'post', $post->ID, '_bds_careers_hr_phone' ) ? get_post_meta( $post->ID, '_bds_careers_hr_phone', true ) : '+91 86577 97826';
+	$location = metadata_exists( 'post', $post->ID, '_bds_careers_location' ) ? get_post_meta( $post->ID, '_bds_careers_location', true ) : __( 'B.D. Somani International School, Plot No. 92, Ranjanpada, Sector 27, Kharghar', 'bd-somani' );
+	?>
+	<div id="bds-careers-metabox" style="display: flex; flex-direction: column; gap: 16px; margin-top: 10px;">
+		<div>
+			<label for="bds_careers_hero_title" style="font-weight: 600; display: block; margin-bottom: 4px;"><?php esc_html_e( 'Careers Hero Title', 'bd-somani' ); ?></label>
+			<input type="text" id="bds_careers_hero_title" name="bds_careers_hero_title" value="<?php echo esc_attr( $title ); ?>" class="large-text" style="font-size: 16px; padding: 6px 10px;">
+		</div>
+
+		<div>
+			<label for="bds_careers_hero_subtitle" style="font-weight: 600; display: block; margin-bottom: 4px;"><?php esc_html_e( 'Introductory Letter / Description', 'bd-somani' ); ?></label>
+			<textarea id="bds_careers_hero_subtitle" name="bds_careers_hero_subtitle" rows="3" class="large-text"><?php echo esc_textarea( $sub ); ?></textarea>
+		</div>
+
+		<hr style="border: 0; border-top: 1px solid #ccc; margin-block: 5px;">
+		<h4 style="margin: 0;"><?php esc_html_e( 'HR Contact & Location Details', 'bd-somani' ); ?></h4>
+
+		<div style="display: flex; gap: 20px; flex-wrap: wrap;">
+			<div style="flex: 1; min-width: 250px;">
+				<label for="bds_careers_hr_email" style="font-weight: 600; display: block; margin-bottom: 4px;"><?php esc_html_e( 'HR Email Address', 'bd-somani' ); ?></label>
+				<input type="email" id="bds_careers_hr_email" name="bds_careers_hr_email" value="<?php echo esc_attr( $hr_email ); ?>" class="regular-text">
+			</div>
+			<div style="flex: 1; min-width: 250px;">
+				<label for="bds_careers_hr_phone" style="font-weight: 600; display: block; margin-bottom: 4px;"><?php esc_html_e( 'HR Phone Number', 'bd-somani' ); ?></label>
+				<input type="text" id="bds_careers_hr_phone" name="bds_careers_hr_phone" value="<?php echo esc_attr( $hr_phone ); ?>" class="regular-text">
+			</div>
+		</div>
+
+		<div>
+			<label for="bds_careers_location" style="font-weight: 600; display: block; margin-bottom: 4px;"><?php esc_html_e( 'School Location Address', 'bd-somani' ); ?></label>
+			<input type="text" id="bds_careers_location" name="bds_careers_location" value="<?php echo esc_attr( $location ); ?>" class="large-text">
+		</div>
+	</div>
+	<?php
+}
+
+function theme_save_careers_meta( $post_id ) {
+	if ( ! isset( $_POST['theme_careers_nonce'] ) || ! wp_verify_nonce( $_POST['theme_careers_nonce'], 'theme_save_careers' ) ) {
+		return;
+	}
+
+	if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+		return;
+	}
+
+	if ( ! current_user_can( 'edit_post', $post_id ) ) {
+		return;
+	}
+
+	$fields = array(
+		'bds_careers_hero_title'    => '_bds_careers_hero_title',
+		'bds_careers_hero_subtitle' => '_bds_careers_hero_subtitle',
+		'bds_careers_hr_email'      => '_bds_careers_hr_email',
+		'bds_careers_hr_phone'      => '_bds_careers_hr_phone',
+		'bds_careers_location'      => '_bds_careers_location',
+	);
+
+	foreach ( $fields as $post_key => $meta_key ) {
+		if ( isset( $_POST[ $post_key ] ) ) {
+			if ( 'bds_careers_hero_subtitle' === $post_key ) {
+				update_post_meta( $post_id, $meta_key, sanitize_textarea_field( $_POST[ $post_key ] ) );
+			} elseif ( 'bds_careers_hr_email' === $post_key ) {
+				update_post_meta( $post_id, $meta_key, sanitize_email( $_POST[ $post_key ] ) );
+			} else {
+				update_post_meta( $post_id, $meta_key, sanitize_text_field( $_POST[ $post_key ] ) );
+			}
+		}
+	}
+}
+add_action( 'save_post', 'theme_save_careers_meta' );
+
 // Remove default block editor when editing a page using Academics Sub Page template
 function theme_remove_editor_for_academics_template() {
 	if ( isset( $_GET['post'] ) ) {
@@ -519,10 +609,14 @@ function theme_academics_approach_metabox_callback( $post ) {
 			'title' => __( 'Guided Exploration', 'bd-somani' ),
 			'desc'  => __( 'Our age-appropriate programme encourages children to wonder, question and communicate through stories and play.', 'bd-somani' ),
 		),
+		5 => array(
+			'title' => __( 'Holistic Development', 'bd-somani' ),
+			'desc'  => __( 'Promoting physical, emotional, and creative growth through engaging hands-on experiences and caring guidance.', 'bd-somani' ),
+		),
 	);
 
 	$cards_data = array();
-	for ( $i = 1; $i <= 4; $i++ ) {
+	for ( $i = 1; $i <= 5; $i++ ) {
 		$cards_data[ $i ] = array(
 			'title' => metadata_exists( 'post', $post->ID, "_bds_academics_app_card{$i}_title" ) ? get_post_meta( $post->ID, "_bds_academics_app_card{$i}_title", true ) : $default_cards[ $i ]['title'],
 			'desc'  => metadata_exists( 'post', $post->ID, "_bds_academics_app_card{$i}_desc" ) ? get_post_meta( $post->ID, "_bds_academics_app_card{$i}_desc", true ) : $default_cards[ $i ]['desc'],
@@ -545,10 +639,10 @@ function theme_academics_approach_metabox_callback( $post ) {
 		</div>
 
 		<hr style="border: 0; border-top: 1px solid #ccc; margin-block: 10px;">
-		<h4 style="margin: 0; font-size: 15px;"><?php esc_html_e( 'Right Column Feature Cards (Up to 4 Cards)', 'bd-somani' ); ?></h4>
+		<h4 style="margin: 0; font-size: 15px;"><?php esc_html_e( 'Right Column Feature Cards (Up to 5 Cards)', 'bd-somani' ); ?></h4>
 
 		<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
-			<?php for ( $i = 1; $i <= 4; $i++ ) :
+			<?php for ( $i = 1; $i <= 5; $i++ ) :
 				$c_thumb = $cards_data[ $i ]['img'] ? wp_get_attachment_image_url( $cards_data[ $i ]['img'], 'medium' ) : '';
 				?>
 				<div style="background: #f9f9f9; padding: 15px; border: 1px solid #e0e0e0; border-radius: 8px; display: flex; flex-direction: column; gap: 10px;">
@@ -944,6 +1038,9 @@ function theme_save_academics_hero_meta( $post_id ) {
 		'bds_academics_app_card4_title'         => '_bds_academics_app_card4_title',
 		'bds_academics_app_card4_desc'          => '_bds_academics_app_card4_desc',
 		'bds_academics_app_card4_img'           => '_bds_academics_app_card4_img',
+		'bds_academics_app_card5_title'         => '_bds_academics_app_card5_title',
+		'bds_academics_app_card5_desc'          => '_bds_academics_app_card5_desc',
+		'bds_academics_app_card5_img'           => '_bds_academics_app_card5_img',
 		'bds_academics_exp_main_title'          => '_bds_academics_exp_main_title',
 		'bds_academics_exp_sub_title'           => '_bds_academics_exp_sub_title',
 		'bds_academics_exp_sub_desc'            => '_bds_academics_exp_sub_desc',
@@ -959,6 +1056,7 @@ function theme_save_academics_hero_meta( $post_id ) {
 		'bds_academics_app_card2_desc',
 		'bds_academics_app_card3_desc',
 		'bds_academics_app_card4_desc',
+		'bds_academics_app_card5_desc',
 		'bds_academics_exp_sub_desc',
 		'bds_academics_cs_tab1_desc',
 		'bds_academics_cs_tab2_desc',
@@ -1069,7 +1167,7 @@ function theme_academics_admin_footer_js() {
 		setupImageUploader('#bds-upload-exp-main-img-btn', '#bds-remove-exp-main-img-btn', '#bds_academics_exp_main_img', '#bds-exp-main-img-preview', 'Select Experiences Left Main Photo');
 		setupImageUploader('#bds-upload-exp-sub-img-btn', '#bds-remove-exp-sub-img-btn', '#bds_academics_exp_sub_img', '#bds-exp-sub-img-preview', 'Select Experiences Left Overlapping Photo');
 
-		for (var i = 1; i <= 4; i++) {
+		for (var i = 1; i <= 5; i++) {
 			setupImageUploader('#bds-upload-app-card' + i + '-img-btn', '#bds-remove-app-card' + i + '-img-btn', '#bds_academics_app_card' + i + '_img', '#bds-app-card' + i + '-img-preview', 'Select Card ' + i + ' Photo');
 		}
 
@@ -1126,8 +1224,27 @@ function theme_academics_admin_footer_js() {
 			}
 		}
 
+		function checkCareersTemplate() {
+			var $careersMb = $('#bds_careers_hero_mb');
+			var templateVal = '';
+			if (wp.data && wp.data.select('core/editor')) {
+				templateVal = wp.data.select('core/editor').getEditedPostAttribute('template') || '';
+			}
+			if (!templateVal) {
+				templateVal = $('.editor-page-attributes__template select').val() || $('select[name="page_template"]').val() || '';
+			}
+
+			if (templateVal === 'page-careers.php' || (templateVal && templateVal.indexOf('careers') !== -1)) {
+				$careersMb.show();
+			} else {
+				$careersMb.hide();
+			}
+		}
+
 		checkAcademicsTemplate();
+		checkCareersTemplate();
 		setInterval(checkAcademicsTemplate, 1000);
+		setInterval(checkCareersTemplate, 1000);
 	});
 	</script>
 	<style>

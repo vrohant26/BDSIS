@@ -292,12 +292,16 @@ $sub_img_url  = $sub_img_id ? wp_get_attachment_image_url( $sub_img_id, 'full' )
 			'title' => __( 'Guided Exploration', 'bd-somani' ),
 			'desc'  => __( 'Our age-appropriate programme encourages children to wonder, question and communicate through stories and play.', 'bd-somani' ),
 		),
+		5 => array(
+			'title' => __( 'Holistic Development', 'bd-somani' ),
+			'desc'  => __( 'Promoting physical, emotional, and creative growth through engaging hands-on experiences and caring guidance.', 'bd-somani' ),
+		),
 	);
 
 	$app_cards = array();
 	$has_any_card_content = false;
 
-	for ( $i = 1; $i <= 4; $i++ ) {
+	for ( $i = 1; $i <= 5; $i++ ) {
 		$c_title_meta = get_post_meta( $post_id, "_bds_academics_app_card{$i}_title", true );
 		$c_desc_meta  = get_post_meta( $post_id, "_bds_academics_app_card{$i}_desc", true );
 		$c_img_id     = get_post_meta( $post_id, "_bds_academics_app_card{$i}_img", true );
@@ -389,7 +393,7 @@ $sub_img_url  = $sub_img_id ? wp_get_attachment_image_url( $sub_img_id, 'full' )
 						<?php if ( ! empty( $card['url'] ) ) : ?>
 							<img src="<?php echo esc_url( $card['url'] ); ?>" alt="<?php echo esc_attr( $card['title'] ); ?>" class="academics-card-bg-img">
 						<?php else : ?>
-							<div class="academics-card-bg-placeholder placeholder-gradient-<?php echo ( ( $idx % 4 ) + 1 ); ?>"></div>
+							<div class="academics-card-bg-placeholder placeholder-gradient-<?php echo ( ( $idx % 5 ) + 1 ); ?>"></div>
 						<?php endif; ?>
 
 						<!-- Dark Gradient Text Overlay -->
