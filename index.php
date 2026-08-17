@@ -352,7 +352,7 @@ get_header();
 						<div class="value-card-box relative">
 							<div class="value-card-header flex-between align-center">
 								<span class="value-card-title">COLLABORATION</span>
-								<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/svgs/clubs and activities.svg' ); ?>" class="value-card-icon" alt="Collaboration Icon">
+								<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/svgs/collaboration.svg' ); ?>" class="value-card-icon" alt="Collaboration Icon">
 							</div>
 							<p class="value-card-desc">We cultivate respectful communicators who value teamwork, diverse thinking and shared success.</p>
 						</div>
@@ -373,7 +373,7 @@ get_header();
 							<div class="value-card-box relative">
 								<div class="value-card-header flex-between align-center">
 									<span class="value-card-title">COURAGE</span>
-									<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/svgs/sun.svg' ); ?>" class="value-card-icon" alt="Courage Icon">
+									<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/svgs/courage.svg' ); ?>" class="value-card-icon" alt="Courage Icon">
 								</div>
 								<p class="value-card-desc">We inspire confident individuals who act with integrity, empathy and a strong sense of responsibility.</p>
 							</div>
@@ -384,7 +384,7 @@ get_header();
 							<div class="value-card-box relative">
 								<div class="value-card-header flex-between align-center">
 									<span class="value-card-title">CURIOSITY</span>
-									<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/svgs/innovation and design workshop.svg' ); ?>" class="value-card-icon" alt="Curiosity Icon">
+									<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/svgs/curiosity.svg' ); ?>" class="value-card-icon" alt="Curiosity Icon">
 								</div>
 								<p class="value-card-desc">We nurture inquisitive minds that explore ideas, embrace perspectives and seek meaningful answers.</p>
 							</div>

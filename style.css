@@ -1677,8 +1677,8 @@ body.theme-purple-mode .timeline-progress-bar {
 }
 
 .value-card-icon {
-    width: 30px;
-    height: 30px;
+    width: clamp(38px, 3vw, 46px);
+    height: clamp(38px, 3vw, 46px);
     object-fit: contain;
 }
 
