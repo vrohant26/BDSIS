@@ -174,6 +174,9 @@ get_header();
 			</div>
 		</section>
 
+		<!-- Brand Marquee Scrolling Banner -->
+		<?php get_template_part( 'template-parts/brand-marquee' ); ?>
+
 	</div>
 
 	<!-- Bottom Section: Map & Nearby Highlights -->

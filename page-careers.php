@@ -115,6 +115,9 @@ if ( empty( $location ) ) {
 			</div>
 		</section>
 
+		<!-- Brand Marquee Scrolling Banner -->
+		<?php get_template_part( 'template-parts/brand-marquee' ); ?>
+
 		<!-- WE ARE HIRING / Positions Section -->
 		<section id="openings" class="careers-openings-section relative">
 			<div class="careers-section-header text-center">

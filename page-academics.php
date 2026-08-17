@@ -108,6 +108,9 @@ $sub_img_url  = $sub_img_id ? wp_get_attachment_image_url( $sub_img_id, 'full' )
 		</div>
 	</section>
 
+	<!-- Brand Marquee Scrolling Banner -->
+	<?php get_template_part( 'template-parts/brand-marquee' ); ?>
+
 
 
 	<?php

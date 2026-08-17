@@ -5197,7 +5197,7 @@ body.theme-purple-mode .timeline-progress-bar {
    ACADEMICS PROGRAMME / OVERVIEW SECTION STYLES
    ========================================================================== */
 .academics-programme-section {
-    min-height: 100svh;
+    min-height: 80svh;
     display: flex;
     flex-direction: column;
     align-items: center;
