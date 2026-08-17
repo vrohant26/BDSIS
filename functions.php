@@ -220,6 +220,24 @@ function theme_add_academics_metaboxes( $post_type, $post = null ) {
 		'normal',
 		'high'
 	);
+
+	add_meta_box(
+		'bds_academics_care_mb',
+		__( 'Academics Circle of Care & Communication Section Settings', 'bd-somani' ),
+		'theme_academics_care_metabox_callback',
+		'page',
+		'normal',
+		'high'
+	);
+
+	add_meta_box(
+		'bds_academics_interest_mb',
+		__( 'Academics After-School / Co-Curricular Section Settings', 'bd-somani' ),
+		'theme_academics_interest_metabox_callback',
+		'page',
+		'normal',
+		'high'
+	);
 }
 add_action( 'add_meta_boxes', 'theme_add_academics_metaboxes', 10, 2 );
 
@@ -267,6 +285,9 @@ function theme_academics_hero_metabox_callback( $post ) {
 	if ( empty( $cta_url ) ) {
 		$cta_url = '#';
 	}
+
+	$top_marquee_vis    = metadata_exists( 'post', $post->ID, '_bds_academics_top_marquee_visibility' ) ? get_post_meta( $post->ID, '_bds_academics_top_marquee_visibility', true ) : 'show';
+	$bottom_marquee_vis = metadata_exists( 'post', $post->ID, '_bds_academics_bottom_marquee_visibility' ) ? get_post_meta( $post->ID, '_bds_academics_bottom_marquee_visibility', true ) : 'show';
 
 	$main_thumb = $main_img_id ? wp_get_attachment_image_url( $main_img_id, 'medium' ) : '';
 	$sub_thumb  = $sub_img_id ? wp_get_attachment_image_url( $sub_img_id, 'thumbnail' ) : '';
@@ -330,6 +351,27 @@ function theme_academics_hero_metabox_callback( $post ) {
 				</div>
 				<button type="button" class="button button-secondary" id="bds-upload-sub-img-btn"><?php esc_html_e( 'Select Secondary Photo', 'bd-somani' ); ?></button>
 				<button type="button" class="button button-link-delete" id="bds-remove-sub-img-btn" style="<?php echo $sub_thumb ? '' : 'display:none;'; ?> margin-left: 10px;"><?php esc_html_e( 'Remove Image', 'bd-somani' ); ?></button>
+			</div>
+		</div>
+
+		<!-- Marquee Visibility Toggles -->
+		<div style="background: #f4f6f9; padding: 15px; border: 1px solid #ccd0d4; border-radius: 8px; margin-top: 5px;">
+			<h4 style="margin: 0 0 12px 0; color: #1d2327;"><?php esc_html_e( 'Brand Marquee Scrolling Banner Options', 'bd-somani' ); ?></h4>
+			<div style="display: flex; gap: 30px; flex-wrap: wrap;">
+				<div>
+					<label for="bds_academics_top_marquee_visibility" style="font-weight: 600; display: block; margin-bottom: 4px;"><?php esc_html_e( 'Top Marquee (Below Hero Section)', 'bd-somani' ); ?></label>
+					<select id="bds_academics_top_marquee_visibility" name="bds_academics_top_marquee_visibility" style="font-weight: 600; padding: 4px 10px;">
+						<option value="show" <?php selected( $top_marquee_vis, 'show' ); ?>><?php esc_html_e( 'Show Top Marquee Banner', 'bd-somani' ); ?></option>
+						<option value="hide" <?php selected( $top_marquee_vis, 'hide' ); ?>><?php esc_html_e( 'Hide Top Marquee Banner', 'bd-somani' ); ?></option>
+					</select>
+				</div>
+				<div>
+					<label for="bds_academics_bottom_marquee_visibility" style="font-weight: 600; display: block; margin-bottom: 4px;"><?php esc_html_e( 'Bottom Marquee (Above Footer)', 'bd-somani' ); ?></label>
+					<select id="bds_academics_bottom_marquee_visibility" name="bds_academics_bottom_marquee_visibility" style="font-weight: 600; padding: 4px 10px;">
+						<option value="show" <?php selected( $bottom_marquee_vis, 'show' ); ?>><?php esc_html_e( 'Show Bottom Marquee Banner', 'bd-somani' ); ?></option>
+						<option value="hide" <?php selected( $bottom_marquee_vis, 'hide' ); ?>><?php esc_html_e( 'Hide Bottom Marquee Banner', 'bd-somani' ); ?></option>
+					</select>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -541,8 +583,8 @@ function theme_academics_approach_metabox_callback( $post ) {
 
 function theme_academics_experiences_metabox_callback( $post ) {
 	$main_title = metadata_exists( 'post', $post->ID, '_bds_academics_exp_main_title' ) ? get_post_meta( $post->ID, '_bds_academics_exp_main_title', true ) : __( 'Experiences that Enrich Classroom Learning', 'bd-somani' );
-	$sub_title  = metadata_exists( 'post', $post->ID, '_bds_academics_exp_sub_title' ) ? get_post_meta( $post->ID, '_bds_academics_exp_sub_title', true ) : __( 'No two learning days at our school are ever the same.', 'bd-somani' );
-	$sub_desc   = metadata_exists( 'post', $post->ID, '_bds_academics_exp_sub_desc' ) ? get_post_meta( $post->ID, '_bds_academics_exp_sub_desc', true ) : __( 'Every experience is curated to introduce fresh discoveries and unique ways of engaging with the world.', 'bd-somani' );
+	$sub_title  = metadata_exists( 'post', $post->ID, '_bds_academics_exp_sub_title' ) ? get_post_meta( $post->ID, '_bds_academics_exp_sub_title', true ) : '';
+	$sub_desc   = metadata_exists( 'post', $post->ID, '_bds_academics_exp_sub_desc' ) ? get_post_meta( $post->ID, '_bds_academics_exp_sub_desc', true ) : '';
 
 	$main_img_id = get_post_meta( $post->ID, '_bds_academics_exp_main_img', true );
 	$sub_img_id  = get_post_meta( $post->ID, '_bds_academics_exp_sub_img', true );
@@ -555,30 +597,37 @@ function theme_academics_experiences_metabox_callback( $post ) {
 			'title' => __( 'Theme-Based Learning', 'bd-somani' ),
 			'desc'  => __( 'Themes like My Family, Community Helpers, and Seasons connect learning across subjects, helping children relate classroom concepts to everyday life.', 'bd-somani' ),
 		),
-		2 => array(
-			'title' => __( 'Sensory & Play-Based Learning', 'bd-somani' ),
-			'desc'  => __( 'Hands-on activities and tactile exploration foster curiosity, motor skills, and creative problem solving.', 'bd-somani' ),
-		),
-		3 => array(
-			'title' => __( 'Outdoor & Nature Discovery', 'bd-somani' ),
-			'desc'  => __( 'Active outdoor experiences encourage physical well-being, environmental awareness, and teamwork.', 'bd-somani' ),
-		),
 	);
 
+	$max_cards = 20;
+	$last_visible_card = 1;
 	$exp_cards = array();
-	for ( $i = 1; $i <= 6; $i++ ) {
+
+	for ( $i = 1; $i <= $max_cards; $i++ ) {
 		$default_t = isset( $default_cards[ $i ] ) ? $default_cards[ $i ]['title'] : '';
 		$default_d = isset( $default_cards[ $i ] ) ? $default_cards[ $i ]['desc'] : '';
 
+		$has_t = metadata_exists( 'post', $post->ID, "_bds_academics_exp_card{$i}_title" );
+		$has_d = metadata_exists( 'post', $post->ID, "_bds_academics_exp_card{$i}_desc" );
+		$has_i = metadata_exists( 'post', $post->ID, "_bds_academics_exp_card{$i}_img" );
+
+		$c_t   = $has_t ? get_post_meta( $post->ID, "_bds_academics_exp_card{$i}_title", true ) : $default_t;
+		$c_d   = $has_d ? get_post_meta( $post->ID, "_bds_academics_exp_card{$i}_desc", true ) : $default_d;
+		$c_img = $has_i ? get_post_meta( $post->ID, "_bds_academics_exp_card{$i}_img", true ) : '';
+
 		$exp_cards[ $i ] = array(
-			'title' => metadata_exists( 'post', $post->ID, "_bds_academics_exp_card{$i}_title" ) ? get_post_meta( $post->ID, "_bds_academics_exp_card{$i}_title", true ) : $default_t,
-			'desc'  => metadata_exists( 'post', $post->ID, "_bds_academics_exp_card{$i}_desc" ) ? get_post_meta( $post->ID, "_bds_academics_exp_card{$i}_desc", true ) : $default_d,
-			'img'   => get_post_meta( $post->ID, "_bds_academics_exp_card{$i}_img", true ),
+			'title' => $c_t,
+			'desc'  => $c_d,
+			'img'   => $c_img,
 		);
+
+		if ( ! empty( trim( $c_t ) ) || ! empty( trim( $c_d ) ) || ! empty( $c_img ) ) {
+			$last_visible_card = max( $last_visible_card, $i );
+		}
 	}
 	?>
 	<div id="bds-academics-experiences-metabox" style="display: flex; flex-direction: column; gap: 16px; margin-top: 10px;">
-		<p class="description"><?php esc_html_e( 'Configure the "Experiences that Enrich Classroom Learning" section and purple cards carousel. Leave all fields empty if you wish to hide this section entirely from the frontend.', 'bd-somani' ); ?></p>
+		<p class="description"><?php esc_html_e( 'Configure the "Experiences that Enrich Classroom Learning" section and purple cards carousel. Leave left sub-heading, sub-description, and photos blank if you wish to hide the left content slide.', 'bd-somani' ); ?></p>
 
 		<div>
 			<label for="bds_academics_exp_main_title" style="font-weight: 600; display: block; margin-bottom: 4px;"><?php esc_html_e( 'Section Main Title (Centered)', 'bd-somani' ); ?></label>
@@ -588,11 +637,11 @@ function theme_academics_experiences_metabox_callback( $post ) {
 		<div style="display: flex; gap: 20px; flex-wrap: wrap;">
 			<div style="flex: 1; min-width: 250px;">
 				<label for="bds_academics_exp_sub_title" style="font-weight: 600; display: block; margin-bottom: 4px;"><?php esc_html_e( 'Left Content Sub-Heading', 'bd-somani' ); ?></label>
-				<input type="text" id="bds_academics_exp_sub_title" name="bds_academics_exp_sub_title" value="<?php echo esc_attr( $sub_title ); ?>" class="large-text">
+				<input type="text" id="bds_academics_exp_sub_title" name="bds_academics_exp_sub_title" value="<?php echo esc_attr( $sub_title ); ?>" class="large-text" placeholder="<?php esc_attr_e( 'Leave empty to hide left slide...', 'bd-somani' ); ?>">
 			</div>
 			<div style="flex: 1; min-width: 250px;">
 				<label for="bds_academics_exp_sub_desc" style="font-weight: 600; display: block; margin-bottom: 4px;"><?php esc_html_e( 'Left Content Sub-Description', 'bd-somani' ); ?></label>
-				<textarea id="bds_academics_exp_sub_desc" name="bds_academics_exp_sub_desc" rows="2" class="large-text"><?php echo esc_textarea( $sub_desc ); ?></textarea>
+				<textarea id="bds_academics_exp_sub_desc" name="bds_academics_exp_sub_desc" rows="2" class="large-text" placeholder="<?php esc_attr_e( 'Leave empty to hide left slide...', 'bd-somani' ); ?>"><?php echo esc_textarea( $sub_desc ); ?></textarea>
 			</div>
 		</div>
 
@@ -631,14 +680,21 @@ function theme_academics_experiences_metabox_callback( $post ) {
 		</div>
 
 		<hr style="border: 0; border-top: 1px solid #ccc; margin-block: 10px;">
-		<h4 style="margin: 0; font-size: 15px;"><?php esc_html_e( 'Right Carousel Purple Cards (Up to 6 Cards)', 'bd-somani' ); ?></h4>
+		<div style="display: flex; justify-content: space-between; align-items: center;">
+			<h4 style="margin: 0; font-size: 15px;"><?php esc_html_e( 'Right Carousel Purple Cards', 'bd-somani' ); ?></h4>
+			<button type="button" class="button button-primary" id="bds-add-exp-card-btn"><?php esc_html_e( '+ Add Purple Card', 'bd-somani' ); ?></button>
+		</div>
 
-		<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
-			<?php for ( $i = 1; $i <= 6; $i++ ) :
+		<div id="bds-exp-cards-container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
+			<?php for ( $i = 1; $i <= $max_cards; $i++ ) :
 				$card_thumb = $exp_cards[ $i ]['img'] ? wp_get_attachment_image_url( $exp_cards[ $i ]['img'], 'medium' ) : '';
+				$is_visible = ( $i <= $last_visible_card );
 				?>
-				<div style="background: #f4ecf3; padding: 15px; border: 1px solid #d3a2c7; border-radius: 8px; display: flex; flex-direction: column; gap: 10px;">
-					<h5 style="margin: 0; color: #683969;"><?php printf( esc_html__( 'Purple Card %d', 'bd-somani' ), $i ); ?></h5>
+				<div class="bds-exp-card-row" data-card-index="<?php echo $i; ?>" style="background: #f4ecf3; padding: 15px; border: 1px solid #d3a2c7; border-radius: 8px; display: <?php echo $is_visible ? 'flex' : 'none'; ?>; flex-direction: column; gap: 10px; relative">
+					<div style="display: flex; justify-content: space-between; align-items: center;">
+						<h5 style="margin: 0; color: #683969;"><?php printf( esc_html__( 'Purple Card %d', 'bd-somani' ), $i ); ?></h5>
+						<button type="button" class="button button-link-delete bds-remove-exp-card-row-btn" style="font-size: 12px;"><?php esc_html_e( 'Delete Card', 'bd-somani' ); ?></button>
+					</div>
 					<div>
 						<label style="font-weight: 600; display: block; margin-bottom: 2px;"><?php esc_html_e( 'Card Title', 'bd-somani' ); ?></label>
 						<input type="text" name="bds_academics_exp_card<?php echo $i; ?>_title" value="<?php echo esc_attr( $exp_cards[ $i ]['title'] ); ?>" class="large-text">
@@ -650,7 +706,7 @@ function theme_academics_experiences_metabox_callback( $post ) {
 					<div>
 						<label style="font-weight: 600; display: block; margin-bottom: 4px;"><?php esc_html_e( 'Card Header Photo', 'bd-somani' ); ?></label>
 						<input type="hidden" name="bds_academics_exp_card<?php echo $i; ?>_img" id="bds_academics_exp_card<?php echo $i; ?>_img" value="<?php echo esc_attr( $exp_cards[ $i ]['img'] ); ?>">
-						<div id="bds-exp-card<?php echo $i; ?>-img-preview" style="margin-bottom: 8px; min-height: 90px; display: flex; align-items: center; justify-content: center; background: #fff; border: 2px dashed #bbb; border-radius: 6px; overflow: hidden;">
+						<div id="bds-exp-card<?php echo $i; ?>-img-preview" class="bds-img-preview-box" style="margin-bottom: 8px; min-height: 90px; display: flex; align-items: center; justify-content: center; background: #fff; border: 2px dashed #bbb; border-radius: 6px; overflow: hidden;">
 							<?php if ( $card_thumb ) : ?>
 								<img src="<?php echo esc_url( $card_thumb ); ?>" style="max-width: 100%; max-height: 120px; object-fit: cover;">
 							<?php else : ?>
@@ -742,6 +798,111 @@ function theme_academics_cornerstones_metabox_callback( $post ) {
 	<?php
 }
 
+function theme_academics_care_metabox_callback( $post ) {
+	$visibility = metadata_exists( 'post', $post->ID, '_bds_academics_care_visibility' ) ? get_post_meta( $post->ID, '_bds_academics_care_visibility', true ) : 'show';
+	$care_title = metadata_exists( 'post', $post->ID, '_bds_academics_care_title' ) ? get_post_meta( $post->ID, '_bds_academics_care_title', true ) : __( 'A Circle of Care & Communication', 'bd-somani' );
+	$care_sub   = metadata_exists( 'post', $post->ID, '_bds_academics_care_sub' ) ? get_post_meta( $post->ID, '_bds_academics_care_sub', true ) : __( 'We believe a child\'s growth is strongest when school and home work together. Through open communication, dedicated support, and a caring community, we keep parents actively involved in every step of the learning journey.', 'bd-somani' );
+
+	$care_cards_def = array(
+		1 => array(
+			'title' => __( 'School App', 'bd-somani' ),
+			'desc'  => __( 'Regular updates, announcements and classroom communication through EduSprint and MISC.', 'bd-somani' ),
+		),
+		2 => array(
+			'title' => __( 'Dedicated Support', 'bd-somani' ),
+			'desc'  => __( 'Coordinators and qualified staff on every floor.', 'bd-somani' ),
+		),
+		3 => array(
+			'title' => __( 'Student Counselling', 'bd-somani' ),
+			'desc'  => __( 'Two in-house counsellors for student well-being.', 'bd-somani' ),
+		),
+	);
+
+	$care_cards = array();
+	for ( $i = 1; $i <= 3; $i++ ) {
+		$c_t = metadata_exists( 'post', $post->ID, "_bds_academics_care_card{$i}_title" ) ? get_post_meta( $post->ID, "_bds_academics_care_card{$i}_title", true ) : $care_cards_def[ $i ]['title'];
+		$c_d = metadata_exists( 'post', $post->ID, "_bds_academics_care_card{$i}_desc" ) ? get_post_meta( $post->ID, "_bds_academics_care_card{$i}_desc", true ) : $care_cards_def[ $i ]['desc'];
+
+		$care_cards[ $i ] = array(
+			'title' => $c_t,
+			'desc'  => $c_d,
+		);
+	}
+	?>
+	<div id="bds-academics-care-metabox" style="display: flex; flex-direction: column; gap: 16px; margin-top: 10px;">
+		<p class="description"><?php esc_html_e( 'Configure the "Circle of Care & Communication" section. You can toggle visibility to show or hide this section on this page.', 'bd-somani' ); ?></p>
+
+		<!-- Show / Hide Section Toggle -->
+		<div style="background: #fff8e5; padding: 12px 16px; border: 1px solid #f1c822; border-radius: 8px; display: flex; align-items: center; justify-content: space-between;">
+			<label for="bds_academics_care_visibility" style="font-weight: 700; font-size: 14px; color: #3d213e;"><?php esc_html_e( 'Section Visibility:', 'bd-somani' ); ?></label>
+			<select id="bds_academics_care_visibility" name="bds_academics_care_visibility" style="font-weight: 600; padding: 4px 12px; font-size: 14px;">
+				<option value="show" <?php selected( $visibility, 'show' ); ?>><?php esc_html_e( 'Show Circle of Care Section', 'bd-somani' ); ?></option>
+				<option value="hide" <?php selected( $visibility, 'hide' ); ?>><?php esc_html_e( 'Hide Circle of Care Section', 'bd-somani' ); ?></option>
+			</select>
+		</div>
+
+		<div>
+			<label for="bds_academics_care_title" style="font-weight: 600; display: block; margin-bottom: 4px;"><?php esc_html_e( 'Section Main Title', 'bd-somani' ); ?></label>
+			<input type="text" id="bds_academics_care_title" name="bds_academics_care_title" value="<?php echo esc_attr( $care_title ); ?>" class="large-text" style="font-size: 16px; padding: 6px 10px;">
+		</div>
+
+		<div>
+			<label for="bds_academics_care_sub" style="font-weight: 600; display: block; margin-bottom: 4px;"><?php esc_html_e( 'Section Subtitle / Description', 'bd-somani' ); ?></label>
+			<textarea id="bds_academics_care_sub" name="bds_academics_care_sub" rows="3" class="large-text"><?php echo esc_textarea( $care_sub ); ?></textarea>
+		</div>
+
+		<hr style="border: 0; border-top: 1px solid #ccc; margin-block: 5px;">
+		<h4 style="margin: 0; font-size: 15px;"><?php esc_html_e( 'Cards Content', 'bd-somani' ); ?></h4>
+
+		<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px;">
+			<?php for ( $i = 1; $i <= 3; $i++ ) : ?>
+				<div style="background: #f9f9f9; padding: 15px; border: 1px solid #e0e0e0; border-radius: 8px; display: flex; flex-direction: column; gap: 10px;">
+					<h5 style="margin: 0; color: #3d213e;"><?php printf( esc_html__( 'Card %d', 'bd-somani' ), $i ); ?></h5>
+					<div>
+						<label style="font-weight: 600; display: block; margin-bottom: 2px;"><?php esc_html_e( 'Card Title', 'bd-somani' ); ?></label>
+						<input type="text" name="bds_academics_care_card<?php echo $i; ?>_title" value="<?php echo esc_attr( $care_cards[ $i ]['title'] ); ?>" class="large-text">
+					</div>
+					<div>
+						<label style="font-weight: 600; display: block; margin-bottom: 2px;"><?php esc_html_e( 'Card Description', 'bd-somani' ); ?></label>
+						<textarea name="bds_academics_care_card<?php echo $i; ?>_desc" rows="3" class="large-text"><?php echo esc_textarea( $care_cards[ $i ]['desc'] ); ?></textarea>
+					</div>
+				</div>
+			<?php endfor; ?>
+		</div>
+	</div>
+	<?php
+}
+
+function theme_academics_interest_metabox_callback( $post ) {
+	$visibility = metadata_exists( 'post', $post->ID, '_bds_academics_interest_visibility' ) ? get_post_meta( $post->ID, '_bds_academics_interest_visibility', true ) : 'show';
+	$title      = metadata_exists( 'post', $post->ID, '_bds_academics_interest_title' ) ? get_post_meta( $post->ID, '_bds_academics_interest_title', true ) : __( 'Taking Every Interest Further', 'bd-somani' );
+	$sub        = metadata_exists( 'post', $post->ID, '_bds_academics_interest_sub' ) ? get_post_meta( $post->ID, '_bds_academics_interest_sub', true ) : __( 'Our commitment to nurturing curious, courageous, and collaborative learners continues beyond the classroom through enriching after-school experiences that help students discover new interests and grow with confidence.', 'bd-somani' );
+	?>
+	<div id="bds-academics-interest-metabox" style="display: flex; flex-direction: column; gap: 16px; margin-top: 10px;">
+		<p class="description"><?php esc_html_e( 'Configure the "Taking Every Interest Further" After-School Co-Curricular section. Toggle section visibility to show or hide this section on this page.', 'bd-somani' ); ?></p>
+
+		<!-- Show / Hide Section Toggle -->
+		<div style="background: #fff8e5; padding: 12px 16px; border: 1px solid #f1c822; border-radius: 8px; display: flex; align-items: center; justify-content: space-between;">
+			<label for="bds_academics_interest_visibility" style="font-weight: 700; font-size: 14px; color: #3d213e;"><?php esc_html_e( 'Section Visibility:', 'bd-somani' ); ?></label>
+			<select id="bds_academics_interest_visibility" name="bds_academics_interest_visibility" style="font-weight: 600; padding: 4px 12px; font-size: 14px;">
+				<option value="show" <?php selected( $visibility, 'show' ); ?>><?php esc_html_e( 'Show After-School Co-Curricular Section', 'bd-somani' ); ?></option>
+				<option value="hide" <?php selected( $visibility, 'hide' ); ?>><?php esc_html_e( 'Hide After-School Co-Curricular Section', 'bd-somani' ); ?></option>
+			</select>
+		</div>
+
+		<div>
+			<label for="bds_academics_interest_title" style="font-weight: 600; display: block; margin-bottom: 4px;"><?php esc_html_e( 'Section Main Title', 'bd-somani' ); ?></label>
+			<input type="text" id="bds_academics_interest_title" name="bds_academics_interest_title" value="<?php echo esc_attr( $title ); ?>" class="large-text" style="font-size: 16px; padding: 6px 10px;">
+		</div>
+
+		<div>
+			<label for="bds_academics_interest_sub" style="font-weight: 600; display: block; margin-bottom: 4px;"><?php esc_html_e( 'Section Subtitle / Description', 'bd-somani' ); ?></label>
+			<textarea id="bds_academics_interest_sub" name="bds_academics_interest_sub" rows="3" class="large-text"><?php echo esc_textarea( $sub ); ?></textarea>
+		</div>
+	</div>
+	<?php
+}
+
 function theme_save_academics_hero_meta( $post_id ) {
 	if ( ! isset( $_POST['theme_academics_hero_nonce'] ) || ! wp_verify_nonce( $_POST['theme_academics_hero_nonce'], 'theme_save_academics_hero' ) ) {
 		return;
@@ -788,43 +949,6 @@ function theme_save_academics_hero_meta( $post_id ) {
 		'bds_academics_exp_sub_desc'            => '_bds_academics_exp_sub_desc',
 		'bds_academics_exp_main_img'            => '_bds_academics_exp_main_img',
 		'bds_academics_exp_sub_img'             => '_bds_academics_exp_sub_img',
-		'bds_academics_exp_card1_title'          => '_bds_academics_exp_card1_title',
-		'bds_academics_exp_card1_desc'           => '_bds_academics_exp_card1_desc',
-		'bds_academics_exp_card1_img'            => '_bds_academics_exp_card1_img',
-		'bds_academics_exp_card2_title'          => '_bds_academics_exp_card2_title',
-		'bds_academics_exp_card2_desc'           => '_bds_academics_exp_card2_desc',
-		'bds_academics_exp_card2_img'            => '_bds_academics_exp_card2_img',
-		'bds_academics_exp_card3_title'          => '_bds_academics_exp_card3_title',
-		'bds_academics_exp_card3_desc'           => '_bds_academics_exp_card3_desc',
-		'bds_academics_exp_card3_img'            => '_bds_academics_exp_card3_img',
-		'bds_academics_exp_card4_title'          => '_bds_academics_exp_card4_title',
-		'bds_academics_exp_card4_desc'           => '_bds_academics_exp_card4_desc',
-		'bds_academics_exp_card4_img'            => '_bds_academics_exp_card4_img',
-		'bds_academics_exp_card5_title'          => '_bds_academics_exp_card5_title',
-		'bds_academics_exp_card5_desc'           => '_bds_academics_exp_card5_desc',
-		'bds_academics_exp_card5_img'            => '_bds_academics_exp_card5_img',
-		'bds_academics_exp_card6_title'          => '_bds_academics_exp_card6_title',
-		'bds_academics_exp_card6_desc'           => '_bds_academics_exp_card6_desc',
-		'bds_academics_exp_card6_img'            => '_bds_academics_exp_card6_img',
-		'bds_academics_cs_title'                => '_bds_academics_cs_title',
-		'bds_academics_cs_tab1_title'           => '_bds_academics_cs_tab1_title',
-		'bds_academics_cs_tab1_desc'            => '_bds_academics_cs_tab1_desc',
-		'bds_academics_cs_tab1_img'             => '_bds_academics_cs_tab1_img',
-		'bds_academics_cs_tab2_title'           => '_bds_academics_cs_tab2_title',
-		'bds_academics_cs_tab2_desc'            => '_bds_academics_cs_tab2_desc',
-		'bds_academics_cs_tab2_img'             => '_bds_academics_cs_tab2_img',
-		'bds_academics_cs_tab3_title'           => '_bds_academics_cs_tab3_title',
-		'bds_academics_cs_tab3_desc'            => '_bds_academics_cs_tab3_desc',
-		'bds_academics_cs_tab3_img'             => '_bds_academics_cs_tab3_img',
-		'bds_academics_cs_tab4_title'           => '_bds_academics_cs_tab4_title',
-		'bds_academics_cs_tab4_desc'            => '_bds_academics_cs_tab4_desc',
-		'bds_academics_cs_tab4_img'             => '_bds_academics_cs_tab4_img',
-		'bds_academics_cs_tab5_title'           => '_bds_academics_cs_tab5_title',
-		'bds_academics_cs_tab5_desc'            => '_bds_academics_cs_tab5_desc',
-		'bds_academics_cs_tab5_img'             => '_bds_academics_cs_tab5_img',
-		'bds_academics_cs_tab6_title'           => '_bds_academics_cs_tab6_title',
-		'bds_academics_cs_tab6_desc'            => '_bds_academics_cs_tab6_desc',
-		'bds_academics_cs_tab6_img'             => '_bds_academics_cs_tab6_img',
 	);
 
 	$textarea_keys = array(
@@ -836,12 +960,6 @@ function theme_save_academics_hero_meta( $post_id ) {
 		'bds_academics_app_card3_desc',
 		'bds_academics_app_card4_desc',
 		'bds_academics_exp_sub_desc',
-		'bds_academics_exp_card1_desc',
-		'bds_academics_exp_card2_desc',
-		'bds_academics_exp_card3_desc',
-		'bds_academics_exp_card4_desc',
-		'bds_academics_exp_card5_desc',
-		'bds_academics_exp_card6_desc',
 		'bds_academics_cs_tab1_desc',
 		'bds_academics_cs_tab2_desc',
 		'bds_academics_cs_tab3_desc',
@@ -849,7 +967,40 @@ function theme_save_academics_hero_meta( $post_id ) {
 		'bds_academics_cs_tab5_desc',
 		'bds_academics_cs_tab6_desc',
 	);
-	$url_keys      = array( 'bds_academics_cta_url', 'bds_academics_overview_pdf_url' );
+
+	for ( $c = 1; $c <= 20; $c++ ) {
+		$fields[ "bds_academics_exp_card{$c}_title" ] = "_bds_academics_exp_card{$c}_title";
+		$fields[ "bds_academics_exp_card{$c}_desc" ]  = "_bds_academics_exp_card{$c}_desc";
+		$fields[ "bds_academics_exp_card{$c}_img" ]   = "_bds_academics_exp_card{$c}_img";
+		$textarea_keys[] = "bds_academics_exp_card{$c}_desc";
+	}
+
+	for ( $tab = 1; $tab <= 6; $tab++ ) {
+		$fields[ "bds_academics_cs_tab{$tab}_title" ] = "_bds_academics_cs_tab{$tab}_title";
+		$fields[ "bds_academics_cs_tab{$tab}_desc" ]  = "_bds_academics_cs_tab{$tab}_desc";
+		$fields[ "bds_academics_cs_tab{$tab}_img" ]   = "_bds_academics_cs_tab{$tab}_img";
+	}
+
+	$fields['bds_academics_care_visibility'] = '_bds_academics_care_visibility';
+	$fields['bds_academics_care_title']      = '_bds_academics_care_title';
+	$fields['bds_academics_care_sub']        = '_bds_academics_care_sub';
+	$textarea_keys[]                         = 'bds_academics_care_sub';
+
+	for ( $cc = 1; $cc <= 3; $cc++ ) {
+		$fields[ "bds_academics_care_card{$cc}_title" ] = "_bds_academics_care_card{$cc}_title";
+		$fields[ "bds_academics_care_card{$cc}_desc" ]  = "_bds_academics_care_card{$cc}_desc";
+		$textarea_keys[]                               = "bds_academics_care_card{$cc}_desc";
+	}
+
+	$fields['bds_academics_interest_visibility'] = '_bds_academics_interest_visibility';
+	$fields['bds_academics_interest_title']      = '_bds_academics_interest_title';
+	$fields['bds_academics_interest_sub']        = '_bds_academics_interest_sub';
+	$textarea_keys[]                             = 'bds_academics_interest_sub';
+
+	$fields['bds_academics_top_marquee_visibility']    = '_bds_academics_top_marquee_visibility';
+	$fields['bds_academics_bottom_marquee_visibility'] = '_bds_academics_bottom_marquee_visibility';
+
+	$url_keys = array( 'bds_academics_cta_url', 'bds_academics_overview_pdf_url' );
 
 	foreach ( $fields as $post_key => $meta_key ) {
 		if ( isset( $_POST[ $post_key ] ) ) {
@@ -922,9 +1073,33 @@ function theme_academics_admin_footer_js() {
 			setupImageUploader('#bds-upload-app-card' + i + '-img-btn', '#bds-remove-app-card' + i + '-img-btn', '#bds_academics_app_card' + i + '_img', '#bds-app-card' + i + '-img-preview', 'Select Card ' + i + ' Photo');
 		}
 
-		for (var j = 1; j <= 6; j++) {
+		for (var j = 1; j <= 20; j++) {
 			setupImageUploader('#bds-upload-exp-card' + j + '-img-btn', '#bds-remove-exp-card' + j + '-img-btn', '#bds_academics_exp_card' + j + '_img', '#bds-exp-card' + j + '-img-preview', 'Select Purple Card ' + j + ' Photo');
 		}
+
+		$('#bds-add-exp-card-btn').on('click', function(e) {
+			e.preventDefault();
+			var $hiddenCards = $('.bds-exp-card-row:hidden');
+			if ($hiddenCards.length > 0) {
+				$hiddenCards.first().css('display', 'flex');
+			} else {
+				alert('Maximum 20 purple cards reached.');
+			}
+		});
+
+		$('.bds-remove-exp-card-row-btn').on('click', function(e) {
+			e.preventDefault();
+			var $cardRow = $(this).closest('.bds-exp-card-row');
+			$cardRow.find('input[type="text"]').val('');
+			$cardRow.find('textarea').val('');
+			$cardRow.find('input[type="hidden"]').val('');
+			$cardRow.find('.bds-img-preview-box').html('<span style="color: #999; font-size: 12px;">No Photo Selected</span>');
+			$cardRow.find('.button-link-delete').not(this).hide();
+			
+			if ($('.bds-exp-card-row:visible').length > 1) {
+				$cardRow.hide();
+			}
+		});
 
 		for (var k = 1; k <= 6; k++) {
 			setupImageUploader('#bds-upload-cs-tab' + k + '-img-btn', '#bds-remove-cs-tab' + k + '-img-btn', '#bds_academics_cs_tab' + k + '_img', '#bds-cs-tab' + k + '-img-preview', 'Select Cornerstone Tab ' + k + ' Photo');
@@ -932,7 +1107,7 @@ function theme_academics_admin_footer_js() {
 
 		// Toggle Metabox & Block Editor Appender visibility based on template selection
 		function checkAcademicsTemplate() {
-			var $metaBoxes = $('#bds_academics_hero_mb, #bds_academics_programme_mb, #bds_academics_approach_mb, #bds_academics_experiences_mb, #bds_academics_cornerstones_mb');
+			var $metaBoxes = $('#bds_academics_hero_mb, #bds_academics_programme_mb, #bds_academics_approach_mb, #bds_academics_experiences_mb, #bds_academics_cornerstones_mb, #bds_academics_care_mb, #bds_academics_interest_mb');
 
 			var templateVal = '';
 			if (wp.data && wp.data.select('core/editor')) {
@@ -962,6 +1137,7 @@ function theme_academics_admin_footer_js() {
 			display: none !important;
 		}
 	</style>
+	<?php
 }
 
 // Auto-seed default taxonomy categories once in WP Admin

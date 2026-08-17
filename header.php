@@ -50,6 +50,8 @@
 					$approach_url    = esc_url( home_url( '/approach/' ) );
 					$daycare_url     = esc_url( home_url( '/daycare/' ) );
 					$campus_life_url = esc_url( home_url( '/campus-life/' ) );
+					$admissions_url  = esc_url( home_url( '/admissions/' ) );
+					$contact_url     = esc_url( home_url( '/contact-us/' ) );
 
 					$is_faq         = is_page_template( 'page-faq.php' ) || is_page( 'faq' );
 					$is_about       = is_page_template( 'page-about.php' ) || is_page( 'about' ) || is_page( 'about-us' );
@@ -57,7 +59,9 @@
 					$is_approach    = is_page_template( 'page-approach.php' ) || is_page( 'approach' ) || is_page( 'our-approach' );
 					$is_daycare     = is_page_template( 'page-academics.php' ) || is_page( 'daycare' ) || is_singular( 'academics' );
 					$is_campus_life = is_page_template( 'page-campus-life.php' ) || is_page( 'campus-life' );
-					$is_home        = ( is_front_page() || is_home() ) && ! $is_faq && ! $is_about && ! $is_gallery && ! $is_approach && ! $is_daycare && ! $is_campus_life;
+					$is_admissions  = is_page_template( 'page-admissions.php' ) || is_page( 'admissions' );
+					$is_contact     = is_page_template( 'page-contact-us.php' ) || is_page( 'contact-us' ) || is_page( 'contact' );
+					$is_home        = ( is_front_page() || is_home() ) && ! $is_faq && ! $is_about && ! $is_gallery && ! $is_approach && ! $is_daycare && ! $is_campus_life && ! $is_admissions && ! $is_contact;
 
 					$home_prefix = $is_home ? '' : $home_url;
 				?>
@@ -86,16 +90,16 @@
 							</div>
 						</li>
 						<li class="nav-item"><a href="<?php echo $campus_life_url; ?>" class="nav-link <?php echo $is_campus_life ? 'active' : ''; ?>">CAMPUS LIFE</a></li>
-						<li class="nav-item"><a href="<?php echo $home_prefix; ?>#admissions" class="nav-link">ADMISSIONS</a></li>
+						<li class="nav-item"><a href="<?php echo $admissions_url; ?>" class="nav-link <?php echo $is_admissions ? 'active' : ''; ?>">ADMISSIONS</a></li>
 						<li class="nav-item"><a href="<?php echo $gallery_url; ?>" class="nav-link <?php echo $is_gallery ? 'active' : ''; ?>">GALLERY</a></li>
 						<li class="nav-item"><a href="<?php echo $faq_url; ?>" class="nav-link <?php echo $is_faq ? 'active' : ''; ?>">FAQ</a></li>
-						<li class="nav-item"><a href="<?php echo $home_prefix; ?>#contact" class="nav-link">CONTACT US</a></li>
+						<li class="nav-item"><a href="<?php echo $contact_url; ?>" class="nav-link <?php echo $is_contact ? 'active' : ''; ?>">CONTACT US</a></li>
 					</ul>
 				</nav>
 
 				<!-- Header CTA Button -->
 				<div class="header-cta flex-center">
-					<a href="<?php echo $home_prefix; ?>#apply" class="btn btn-yellow radius-md">APPLY NOW</a>
+					<a href="<?php echo $admissions_url; ?>" class="btn btn-yellow radius-md">APPLY NOW</a>
 				</div>
 
 				<!-- Mobile Menu Toggle Button -->
@@ -131,13 +135,13 @@
 							</ul>
 						</li>
 						<li class="mobile-nav-item"><a href="<?php echo $campus_life_url; ?>" class="mobile-link <?php echo $is_campus_life ? 'active' : ''; ?>">CAMPUS LIFE</a></li>
-						<li class="mobile-nav-item"><a href="<?php echo $home_prefix; ?>#admissions" class="mobile-link">ADMISSIONS</a></li>
+						<li class="mobile-nav-item"><a href="<?php echo $admissions_url; ?>" class="mobile-link <?php echo $is_admissions ? 'active' : ''; ?>">ADMISSIONS</a></li>
 						<li class="mobile-nav-item"><a href="<?php echo $gallery_url; ?>" class="mobile-link <?php echo $is_gallery ? 'active' : ''; ?>">GALLERY</a></li>
 						<li class="mobile-nav-item"><a href="<?php echo $faq_url; ?>" class="mobile-link <?php echo $is_faq ? 'active' : ''; ?>">FAQ</a></li>
-						<li class="mobile-nav-item"><a href="<?php echo $home_prefix; ?>#contact" class="mobile-link">CONTACT US</a></li>
+						<li class="mobile-nav-item"><a href="<?php echo $contact_url; ?>" class="mobile-link <?php echo $is_contact ? 'active' : ''; ?>">CONTACT US</a></li>
 					</ul>
 					<div class="mobile-cta-box">
-						<a href="<?php echo $home_prefix; ?>#apply" class="btn btn-yellow radius-md btn-full">APPLY NOW</a>
+						<a href="<?php echo $admissions_url; ?>" class="btn btn-yellow radius-md btn-full">APPLY NOW</a>
 					</div>
 				</div>
 			</div>

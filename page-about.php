@@ -84,6 +84,9 @@ get_header();
 		</div>
 	</section>
 
+	<!-- Brand Values Marquee Banner Component -->
+	<?php get_template_part( 'template-parts/brand-marquee' ); ?>
+
 	<!-- Section 2: Our Approach (Merits Every Student Carries Forward) -->
 	<section class="about-approach-section relative overflow-hidden" id="our-approach">
 		<!-- Background Organic Wavy Doodle Shapes -->
@@ -323,33 +326,7 @@ get_header();
 		</div>
 	</section>
 
-	<!-- Section 4: Extraordinary Potential Banner -->
-	<section class="about-potential-section relative overflow-hidden">
-		<div class="site-container relative z-2">
-			<div class="about-potential-grid">
-				
-				<!-- Left Column: Content -->
-				<div class="about-potential-content">
-					<h2 class="about-potential-title">From Little Dreams to Big Achievements.</h2>
-					<p class="about-potential-lead">Every champion begins with a small dream, nurtured with learning, shaped by courage, and celebrated through achievement.</p>
-				</div>
 
-				<!-- Right Column: Circular Video Frame -->
-				<div class="about-potential-media flex-center">
-					<div class="about-potential-video-container relative">
-						<!-- Video Frame -->
-						<div class="about-potential-video-wrap">
-							<video autoplay loop muted playsinline>
-								<source src="<?php echo esc_url( get_template_directory_uri() . '/assets/video/about video.mp4' ); ?>" type="video/mp4">
-								Your browser does not support the video tag.
-							</video>
-						</div>
-					</div>
-				</div>
-
-			</div>
-		</div>
-	</section>
 
 	<!-- Section 5: The Purpose that Guides Us -->
 	<section class="about-purpose-section relative overflow-hidden">

@@ -252,30 +252,7 @@ get_header();
 	</section>
 
 	<!-- Section 4: Brand Values Full-Width Purple Marquee (Below Video Section) -->
-    <section class="academics-marquee-section" aria-label="Academics values marquee">
-		<div class="marquee-track">
-			<div class="marquee-content academics-marquee-content">
-				<span>STUDENT-CENTRED LEARNING</span>
-				<span class="marquee-star">★</span>
-				<span>GLOBAL OUTLOOK</span>
-				<span class="marquee-star">★</span>
-				<span>NURTURING ENVIRONMENT</span>
-				<span class="marquee-star">★</span>
-				<span>COLLABORATIVE CULTURE</span>
-				<span class="marquee-star">★</span>
-			</div>
-			<div class="marquee-content academics-marquee-content" aria-hidden="true">
-				<span>STUDENT-CENTRED LEARNING</span>
-				<span class="marquee-star">★</span>
-				<span>GLOBAL OUTLOOK</span>
-				<span class="marquee-star">★</span>
-				<span>NURTURING ENVIRONMENT</span>
-				<span class="marquee-star">★</span>
-				<span>COLLABORATIVE CULTURE</span>
-				<span class="marquee-star">★</span>
-			</div>
-		</div>
-	</section>
+	<?php get_template_part( 'template-parts/brand-marquee' ); ?>
 
 	<!-- Section 5: Curriculum Stage Timeline Carousel Component -->
 	<?php get_template_part( 'template-parts/curriculum-carousel' ); ?>
@@ -430,40 +407,7 @@ get_header();
 	<?php get_template_part( 'template-parts/testimonials' ); ?>
 
 	<!-- Section 9: Call To Action (CTA) Section -->
-	<section class="cta-banner-section relative" id="cta-banner">
-		<div class="site-container">
-			<!-- Main Rounded CTA Card Container -->
-			<div class="cta-card-wrapper relative overflow-hidden">
-				<!-- Background Campus Image -->
-				<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/CTA.webp' ); ?>" alt="B.D. Somani International School Campus" class="cta-bg-img" loading="lazy" decoding="async">
-				
-				<!-- Dark Gradient Overlay for optimal contrast -->
-				<div class="cta-overlay-gradient"></div>
-
-				<!-- Left Glassmorphism Content Box -->
-				<div class="cta-glass-box relative z-2 flex-column">
-					<h2 class="cta-title">Some opportunities shape a lifetime. Choosing the right school is one of them.</h2>
-					<p class="cta-subtitle">Give your child the opportunity to pursue the extraordinary. Visit our campus, meet our educators, and experience the opportunities that define a B.D. Somani education.</p>
-					
-					<!-- CTA Buttons -->
-					<div class="cta-buttons-group flex align-center gap-sm flex-wrap">
-						<a href="#apply" class="btn btn-yellow cta-btn-primary">
-							<span>SCHEDULE A CAMPUS VISIT</span>
-							<svg class="btn-arrow" width="16" height="14" viewBox="0 0 16 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-								<path d="M9 1L15 7M15 7L9 13M15 7H1" stroke="#2B182C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-							</svg>
-						</a>
-						<a href="#gallery" class="btn btn-outline-white cta-btn-secondary">
-							<span>VIEW GALLERY</span>
-							<svg class="btn-arrow" width="16" height="14" viewBox="0 0 16 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-								<path d="M9 1L15 7M15 7L9 13M15 7H1" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-							</svg>
-						</a>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
+	
 </main>
 
 <?php

@@ -91,13 +91,7 @@ $sub_img_url  = $sub_img_id ? wp_get_attachment_image_url( $sub_img_id, 'full' )
 						<?php if ( ! empty( $main_img_url ) ) : ?>
 							<img src="<?php echo esc_url( $main_img_url ); ?>" alt="<?php echo esc_attr( $hero_title ); ?>" class="academics-main-img">
 						<?php else : ?>
-							<!-- Main Image Visual Placeholder -->
-							<div class="academics-image-placeholder academics-main-placeholder">
-								<div class="placeholder-content">
-									<iconify-icon icon="lucide:image" class="ph-icon"></iconify-icon>
-									<span class="ph-text"><?php esc_html_e( 'Main Hero Photo Placeholder', 'bd-somani' ); ?></span>
-								</div>
-							</div>
+							<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/life at bd somani big image 1.webp' ); ?>" alt="<?php esc_attr_e( 'Main Hero Photo', 'bd-somani' ); ?>" class="academics-main-img">
 						<?php endif; ?>
 					</div>
 
@@ -106,13 +100,7 @@ $sub_img_url  = $sub_img_id ? wp_get_attachment_image_url( $sub_img_id, 'full' )
 						<?php if ( ! empty( $sub_img_url ) ) : ?>
 							<img src="<?php echo esc_url( $sub_img_url ); ?>" alt="<?php esc_attr_e( 'Sub Hero Photo', 'bd-somani' ); ?>" class="academics-sub-img">
 						<?php else : ?>
-							<!-- Secondary Image Visual Placeholder -->
-							<div class="academics-image-placeholder academics-sub-placeholder">
-								<div class="placeholder-content">
-									<iconify-icon icon="lucide:image-plus" class="ph-icon-sm"></iconify-icon>
-									<span class="ph-text-sm"><?php esc_html_e( 'Secondary Photo Placeholder', 'bd-somani' ); ?></span>
-								</div>
-							</div>
+							<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/life at bd somani sub image .webp' ); ?>" alt="<?php esc_attr_e( 'Sub Hero Photo', 'bd-somani' ); ?>" class="academics-sub-img">
 						<?php endif; ?>
 					</div>
 				</div>
@@ -120,31 +108,7 @@ $sub_img_url  = $sub_img_id ? wp_get_attachment_image_url( $sub_img_id, 'full' )
 		</div>
 	</section>
 
-	<!-- Academics Brand Marquee Banner -->
-	<section class="academics-marquee-section" aria-label="Academics values marquee">
-		<div class="marquee-track">
-			<div class="marquee-content academics-marquee-content">
-				<span>STUDENT-CENTRED LEARNING</span>
-				<span class="marquee-star">★</span>
-				<span>GLOBAL OUTLOOK</span>
-				<span class="marquee-star">★</span>
-				<span>NURTURING ENVIRONMENT</span>
-				<span class="marquee-star">★</span>
-				<span>COLLABORATIVE CULTURE</span>
-				<span class="marquee-star">★</span>
-			</div>
-			<div class="marquee-content academics-marquee-content" aria-hidden="true">
-				<span>STUDENT-CENTRED LEARNING</span>
-				<span class="marquee-star">★</span>
-				<span>GLOBAL OUTLOOK</span>
-				<span class="marquee-star">★</span>
-				<span>NURTURING ENVIRONMENT</span>
-				<span class="marquee-star">★</span>
-				<span>COLLABORATIVE CULTURE</span>
-				<span class="marquee-star">★</span>
-			</div>
-		</div>
-	</section>
+
 
 	<?php
 	// Programme / Overview section metadata
@@ -442,6 +406,169 @@ $sub_img_url  = $sub_img_id ? wp_get_attachment_image_url( $sub_img_id, 'full' )
 	<?php endif; ?>
 
 	<?php
+	// Taking Every Interest Further Section Metadata & Visibility
+	$interest_visibility = get_post_meta( $post_id, '_bds_academics_interest_visibility', true );
+	$show_interest_section = ( 'hide' !== $interest_visibility );
+
+	$interest_title = get_post_meta( $post_id, '_bds_academics_interest_title', true );
+	$interest_sub   = get_post_meta( $post_id, '_bds_academics_interest_sub', true );
+
+	if ( empty( $interest_title ) && ! metadata_exists( 'post', $post_id, '_bds_academics_interest_title' ) ) {
+		$interest_title = __( 'Taking Every Interest Further', 'bd-somani' );
+	}
+	if ( empty( $interest_sub ) && ! metadata_exists( 'post', $post_id, '_bds_academics_interest_sub' ) ) {
+		$interest_sub = __( 'Our commitment to nurturing curious, courageous, and collaborative learners continues beyond the classroom through enriching after-school experiences that help students discover new interests and grow with confidence.', 'bd-somani' );
+	}
+	?>
+
+	<?php if ( $show_interest_section ) : ?>
+	<!-- Academics After-School / Co-Curricular Section (Taking Every Interest Further) -->
+	<section class="academics-interest-section relative overflow-hidden">
+		<div class="site-container relative">
+
+			<!-- Top Left Music Icon Doodle SVG -->
+			<div class="academics-interest-music-doodle" aria-hidden="true">
+				<?php
+				$music_svg_path = get_template_directory() . '/assets/svgs/music icon.svg';
+				if ( file_exists( $music_svg_path ) ) {
+					include $music_svg_path;
+				}
+				?>
+			</div>
+
+			<!-- Section Header Content -->
+			<div class="academics-interest-header text-center relative">
+				<h2 class="academics-interest-title"><?php echo esc_html( $interest_title ); ?></h2>
+				<p class="academics-interest-subtitle"><?php echo esc_html( $interest_sub ); ?></p>
+
+				<!-- Top Right Annotation Doodle SVG (Help Them Discover What They Love) -->
+				<div class="academics-interest-discover-doodle" aria-hidden="true">
+					<?php
+					$discover_svg_path = get_template_directory() . '/assets/svgs/help them discover what they love.svg';
+					if ( file_exists( $discover_svg_path ) ) {
+						include $discover_svg_path;
+					}
+					?>
+				</div>
+			</div>
+
+			<!-- 3 Accordions Stack -->
+			<div class="academics-interest-accordions flex-column gap-md">
+
+				<!-- Accordion 1: Be Curious (Yellow) -->
+				<div class="academics-interest-card accordion-yellow open">
+					<button type="button" class="interest-accordion-header flex-between" aria-expanded="true">
+						<h3 class="interest-accordion-title"><?php esc_html_e( 'Be Curious', 'bd-somani' ); ?></h3>
+						<span class="interest-accordion-toggle-icon" aria-hidden="true"></span>
+					</button>
+					<div class="interest-accordion-body">
+						<div class="interest-accordion-grid grid-3-cols">
+							<!-- Item 1: Gyansthan Chess -->
+							<div class="interest-item-box">
+								<div class="interest-item-icon-wrap flex-center">
+									<iconify-icon icon="ph:horse-fill"></iconify-icon>
+								</div>
+								<h4 class="interest-item-title"><?php esc_html_e( 'Gyansthan Chess', 'bd-somani' ); ?></h4>
+								<p class="interest-item-desc"><?php esc_html_e( 'Every move strengthens strategic thinking, decision-making, and problem-solving. Students are guided through expert coaching, practice sessions, and tournaments to continually refine their game.', 'bd-somani' ); ?></p>
+							</div>
+
+							<!-- Item 2: Young Rembrandts' Art -->
+							<div class="interest-item-box">
+								<div class="interest-item-icon-wrap flex-center">
+									<iconify-icon icon="ph:palette-fill"></iconify-icon>
+								</div>
+								<h4 class="interest-item-title"><?php esc_html_e( 'Young Rembrandts\' Art', 'bd-somani' ); ?></h4>
+								<p class="interest-item-desc"><?php esc_html_e( 'A vibrant art programme where imagination comes to life through drawing, painting and sculpting. Every session inspires creative expression while sharpening students’ focus, observation and coordination.', 'bd-somani' ); ?></p>
+							</div>
+
+							<!-- Item 3: Sanskar Varg -->
+							<div class="interest-item-box">
+								<div class="interest-item-icon-wrap flex-center">
+									<iconify-icon icon="ph:flower-lotus-fill"></iconify-icon>
+								</div>
+								<h4 class="interest-item-title"><?php esc_html_e( 'Sanskar Varg', 'bd-somani' ); ?></h4>
+								<p class="interest-item-desc"><?php esc_html_e( 'Rooted in Indian traditions, Sanskar Varg introduces students to Sanskrit mantras and cultural practices in an engaging way. Every session supports speech, breathing, and holistic well-being.', 'bd-somani' ); ?></p>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Accordion 2: Be Collaborative (Lavender / Purple) -->
+				<div class="academics-interest-card accordion-lavender">
+					<button type="button" class="interest-accordion-header flex-between" aria-expanded="false">
+						<h3 class="interest-accordion-title"><?php esc_html_e( 'Be Collaborative', 'bd-somani' ); ?></h3>
+						<span class="interest-accordion-toggle-icon" aria-hidden="true"></span>
+					</button>
+					<div class="interest-accordion-body">
+						<div class="interest-accordion-grid grid-3-cols">
+							<!-- Item 1: Musical Bonding -->
+							<div class="interest-item-box">
+								<div class="interest-item-icon-wrap flex-center">
+									<iconify-icon icon="ph:music-notes-fill"></iconify-icon>
+								</div>
+								<h4 class="interest-item-title"><?php esc_html_e( 'Musical Bonding', 'bd-somani' ); ?></h4>
+								<p class="interest-item-desc"><?php esc_html_e( 'Designed for parents and young learners, Musical Bonding transforms music and movement into joyful shared experiences. Every session nurtures rhythm, interaction, and meaningful connections through play.', 'bd-somani' ); ?></p>
+							</div>
+
+							<!-- Item 2: Pyjama Drama -->
+							<div class="interest-item-box">
+								<div class="interest-item-icon-wrap flex-center">
+									<iconify-icon icon="ph:mask-happy-fill"></iconify-icon>
+								</div>
+								<h4 class="interest-item-title"><?php esc_html_e( 'Pyjama Drama', 'bd-somani' ); ?></h4>
+								<p class="interest-item-desc"><?php esc_html_e( 'An internationally acclaimed drama programme that brings stories to life through music, movement and imaginative play. Students learn to collaborate and communicate while building social connections.', 'bd-somani' ); ?></p>
+							</div>
+
+							<!-- Item 3: Speech & Drama -->
+							<div class="interest-item-box">
+								<div class="interest-item-icon-wrap flex-center">
+									<iconify-icon icon="ph:microphone-stage-fill"></iconify-icon>
+								</div>
+								<h4 class="interest-item-title"><?php esc_html_e( 'Speech & Drama', 'bd-somani' ); ?></h4>
+								<p class="interest-item-desc"><?php esc_html_e( 'From voice and performance to scriptwriting and stagecraft, students learn to express themselves and captivate an audience. Such collaborative performances encourage teamwork, creativity, and storytelling.', 'bd-somani' ); ?></p>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Accordion 3: Be Courageous (Peach) -->
+				<div class="academics-interest-card accordion-peach">
+					<button type="button" class="interest-accordion-header flex-between" aria-expanded="false">
+						<h3 class="interest-accordion-title"><?php esc_html_e( 'Be Courageous', 'bd-somani' ); ?></h3>
+						<span class="interest-accordion-toggle-icon" aria-hidden="true"></span>
+					</button>
+					<div class="interest-accordion-body">
+						<div class="interest-accordion-grid grid-3-cols">
+							<!-- Item 1: Football -->
+							<div class="interest-item-box">
+								<div class="interest-item-icon-wrap flex-center">
+									<iconify-icon icon="ph:soccer-ball-fill"></iconify-icon>
+								</div>
+								<h4 class="interest-item-title"><?php esc_html_e( 'Football', 'bd-somani' ); ?></h4>
+								<p class="interest-item-desc"><?php esc_html_e( 'Delivered in partnership with LaLiga Academy, students build technique, game awareness and teamwork through structured coaching and match play. Every challenge on the field instils resilience, discipline and the confidence to keep pushing further.', 'bd-somani' ); ?></p>
+							</div>
+
+							<!-- Item 2: Basketball -->
+							<div class="interest-item-box">
+								<div class="interest-item-icon-wrap flex-center">
+									<iconify-icon icon="ph:basketball-fill"></iconify-icon>
+								</div>
+								<h4 class="interest-item-title"><?php esc_html_e( 'Basketball', 'bd-somani' ); ?></h4>
+								<p class="interest-item-desc"><?php esc_html_e( 'Powered by NBA Basketball School, students hone their technical skills, coordination and teamwork through structured training and gameplay. Every game reinforces quick decision-making, perseverance and the confidence to perform under pressure.', 'bd-somani' ); ?></p>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+
+		</div>
+	</section>
+	<?php endif; ?>
+
+
+
+	<?php
 	// Experiences Section Metadata
 	$exp_has_title = metadata_exists( 'post', $post_id, '_bds_academics_exp_main_title' );
 	$exp_main_title = get_post_meta( $post_id, '_bds_academics_exp_main_title', true );
@@ -450,12 +577,6 @@ $sub_img_url  = $sub_img_id ? wp_get_attachment_image_url( $sub_img_id, 'full' )
 
 	if ( ! $exp_has_title && empty( $exp_main_title ) ) {
 		$exp_main_title = __( 'Experiences that Enrich Classroom Learning', 'bd-somani' );
-	}
-	if ( empty( $exp_sub_title ) && ! metadata_exists( 'post', $post_id, '_bds_academics_exp_sub_title' ) ) {
-		$exp_sub_title = __( 'No two learning days at our school are ever the same.', 'bd-somani' );
-	}
-	if ( empty( $exp_sub_desc ) && ! metadata_exists( 'post', $post_id, '_bds_academics_exp_sub_desc' ) ) {
-		$exp_sub_desc = __( 'Every experience is curated to introduce fresh discoveries and unique ways of engaging with the world.', 'bd-somani' );
 	}
 
 	$exp_main_img_id = get_post_meta( $post_id, '_bds_academics_exp_main_img', true );
@@ -469,20 +590,12 @@ $sub_img_url  = $sub_img_id ? wp_get_attachment_image_url( $sub_img_id, 'full' )
 			'title' => __( 'Theme-Based Learning', 'bd-somani' ),
 			'desc'  => __( 'Themes like My Family, Community Helpers, and Seasons connect learning across subjects, helping children relate classroom concepts to everyday life.', 'bd-somani' ),
 		),
-		2 => array(
-			'title' => __( 'Sensory & Play-Based Learning', 'bd-somani' ),
-			'desc'  => __( 'Hands-on activities and tactile exploration foster curiosity, motor skills, and creative problem solving.', 'bd-somani' ),
-		),
-		3 => array(
-			'title' => __( 'Outdoor & Nature Discovery', 'bd-somani' ),
-			'desc'  => __( 'Active outdoor experiences encourage physical well-being, environmental awareness, and teamwork.', 'bd-somani' ),
-		),
 	);
 
 	$exp_cards = array();
 	$has_any_exp_card_content = false;
 
-	for ( $i = 1; $i <= 6; $i++ ) {
+	for ( $i = 1; $i <= 20; $i++ ) {
 		$c_t_meta = get_post_meta( $post_id, "_bds_academics_exp_card{$i}_title", true );
 		$c_d_meta = get_post_meta( $post_id, "_bds_academics_exp_card{$i}_desc", true );
 		$c_i_id   = get_post_meta( $post_id, "_bds_academics_exp_card{$i}_img", true );
@@ -501,13 +614,12 @@ $sub_img_url  = $sub_img_id ? wp_get_attachment_image_url( $sub_img_id, 'full' )
 
 		if ( ! empty( trim( $c_t ) ) || ! empty( trim( $c_d ) ) || ! empty( $c_i_id ) ) {
 			$has_any_exp_card_content = true;
+			$exp_cards[] = array(
+				'title' => $c_t,
+				'desc'  => $c_d,
+				'url'   => $c_i_id ? wp_get_attachment_image_url( $c_i_id, 'full' ) : '',
+			);
 		}
-
-		$exp_cards[] = array(
-			'title' => $c_t,
-			'desc'  => $c_d,
-			'url'   => $c_i_id ? wp_get_attachment_image_url( $c_i_id, 'full' ) : '',
-		);
 	}
 
 	$show_experiences_section = ! (
@@ -557,7 +669,7 @@ $sub_img_url  = $sub_img_id ? wp_get_attachment_image_url( $sub_img_id, 'full' )
 					<div class="swiper-wrapper">
 
 						<!-- SLIDE 1: Left Content Block (Photos + Text) -->
-						<?php if ( ! empty( $exp_sub_title ) || ! empty( $exp_sub_desc ) || ! empty( $exp_main_img_url ) ) : ?>
+						<?php if ( ! empty( trim( $exp_sub_title ) ) || ! empty( trim( $exp_sub_desc ) ) || ! empty( $exp_main_img_url ) || ! empty( $exp_sub_img_url ) ) : ?>
 							<div class="swiper-slide experiences-left-content-slide">
 								<div class="academics-exp-left-col">
 									<!-- Left Photo Stack Container -->
@@ -777,41 +889,93 @@ $sub_img_url  = $sub_img_id ? wp_get_attachment_image_url( $sub_img_id, 'full' )
 		</div>
 	</section>
 	<?php endif; ?>
+	<?php
+	// Circle of Care & Communication Section Metadata & Visibility
+	$care_visibility = get_post_meta( $post_id, '_bds_academics_care_visibility', true );
+	$show_care_section = ( 'hide' !== $care_visibility );
 
-	<section class="cta-banner-section relative" id="cta-banner">
-		<div class="site-container">
-			<!-- Main Rounded CTA Card Container -->
-			<div class="cta-card-wrapper relative overflow-hidden">
-				<!-- Background Campus Image -->
-				<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/CTA.webp' ); ?>" alt="B.D. Somani International School Campus" class="cta-bg-img" loading="lazy" decoding="async">
-				
-				<!-- Dark Gradient Overlay for optimal contrast -->
-				<div class="cta-overlay-gradient"></div>
+	$care_title = get_post_meta( $post_id, '_bds_academics_care_title', true );
+	$care_sub   = get_post_meta( $post_id, '_bds_academics_care_sub', true );
 
-				<!-- Left Glassmorphism Content Box -->
-				<div class="cta-glass-box relative z-2 flex-column">
-					<h2 class="cta-title">Some opportunities shape a lifetime. Choosing the right school is one of them.</h2>
-					<p class="cta-subtitle">Give your child the opportunity to pursue the extraordinary. Visit our campus, meet our educators, and experience the opportunities that define a B.D. Somani education.</p>
-					
-					<!-- CTA Buttons -->
-					<div class="cta-buttons-group flex align-center gap-sm flex-wrap">
-						<a href="#apply" class="btn btn-yellow cta-btn-primary">
-							<span>SCHEDULE A CAMPUS VISIT</span>
-							<svg class="btn-arrow" width="16" height="14" viewBox="0 0 16 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-								<path d="M9 1L15 7M15 7L9 13M15 7H1" stroke="#2B182C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-							</svg>
-						</a>
-						<a href="#gallery" class="btn btn-outline-white cta-btn-secondary">
-							<span>VIEW GALLERY</span>
-							<svg class="btn-arrow" width="16" height="14" viewBox="0 0 16 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-								<path d="M9 1L15 7M15 7L9 13M15 7H1" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-							</svg>
-						</a>
-					</div>
+	if ( empty( $care_title ) && ! metadata_exists( 'post', $post_id, '_bds_academics_care_title' ) ) {
+		$care_title = __( 'A Circle of Care & Communication', 'bd-somani' );
+	}
+	if ( empty( $care_sub ) && ! metadata_exists( 'post', $post_id, '_bds_academics_care_sub' ) ) {
+		$care_sub = __( 'We believe a child\'s growth is strongest when school and home work together. Through open communication, dedicated support, and a caring community, we keep parents actively involved in every step of the learning journey.', 'bd-somani' );
+	}
+
+	$care_cards_def = array(
+		1 => array(
+			'title' => __( 'School App', 'bd-somani' ),
+			'desc'  => __( 'Regular updates, announcements and classroom communication through EduSprint and MISC.', 'bd-somani' ),
+			'icon'  => 'school app.svg',
+		),
+		2 => array(
+			'title' => __( 'Dedicated Support', 'bd-somani' ),
+			'desc'  => __( 'Coordinators and qualified staff on every floor.', 'bd-somani' ),
+			'icon'  => 'dedicated support.svg',
+		),
+		3 => array(
+			'title' => __( 'Student Counselling', 'bd-somani' ),
+			'desc'  => __( 'Two in-house counsellors for student well-being.', 'bd-somani' ),
+			'icon'  => 'student counceling.svg',
+		),
+	);
+	?>
+
+	<?php if ( $show_care_section ) : ?>
+	<!-- Academics Circle of Care & Communication Section -->
+	<section class="academics-care-section relative overflow-hidden">
+		<div class="site-container relative">
+
+			<!-- Header Content with Top-Right Doodle Annotation -->
+			<div class="academics-care-header text-center relative">
+				<h2 class="academics-care-title"><?php echo esc_html( $care_title ); ?></h2>
+				<p class="academics-care-subtitle"><?php echo esc_html( $care_sub ); ?></p>
+
+				<!-- Top Right Annotation Doodle SVG (Keeping Parents in the Loop) -->
+				<div class="academics-care-loop-doodle" aria-hidden="true">
+					<?php
+					$loop_doodle_path = get_template_directory() . '/assets/svgs/keeping the parents in the loop.svg';
+					if ( file_exists( $loop_doodle_path ) ) {
+						include $loop_doodle_path;
+					}
+					?>
 				</div>
 			</div>
+
+			<!-- 3 Cards Grid -->
+			<div class="academics-care-grid">
+				<?php for ( $c = 1; $c <= 3; $c++ ) : ?>
+					<?php
+					$card_t_meta = get_post_meta( $post_id, "_bds_academics_care_card{$c}_title", true );
+					$card_d_meta = get_post_meta( $post_id, "_bds_academics_care_card{$c}_desc", true );
+					
+					$card_t = metadata_exists( 'post', $post_id, "_bds_academics_care_card{$c}_title" ) ? $card_t_meta : $care_cards_def[ $c ]['title'];
+					$card_d = metadata_exists( 'post', $post_id, "_bds_academics_care_card{$c}_desc" ) ? $card_d_meta : $care_cards_def[ $c ]['desc'];
+					$icon_name = $care_cards_def[ $c ]['icon'];
+					?>
+					<div class="academics-care-card">
+						<div class="care-card-icon-wrap flex-center">
+							<?php
+							$icon_file_path = get_template_directory() . '/assets/svgs/' . $icon_name;
+							if ( file_exists( $icon_file_path ) ) {
+								include $icon_file_path;
+							}
+							?>
+						</div>
+						<h3 class="care-card-title"><?php echo esc_html( $card_t ); ?></h3>
+						<p class="care-card-desc"><?php echo esc_html( $card_d ); ?></p>
+					</div>
+				<?php endfor; ?>
+			</div>
+
 		</div>
 	</section>
+	<?php endif; ?>
+
+
+
 </main>
 
 <?php

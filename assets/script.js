@@ -631,16 +631,25 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const progressBar = document.getElementById("timelineProgressBar");
     const stepBtns = document.querySelectorAll(".timeline-step-btn");
+    const stepperWrapper = document.querySelector(".timeline-stepper-wrapper");
 
     function updateTimeline(index) {
+      const totalSteps = stepBtns.length > 1 ? stepBtns.length - 1 : 3;
       if (progressBar) {
-        const pct = (index / 3) * 100;
+        const pct = (index / totalSteps) * 100;
         progressBar.style.width = pct + "%";
       }
 
       stepBtns.forEach((btn, idx) => {
         if (idx === index) {
           btn.classList.add("active");
+          if (stepperWrapper && btn.offsetLeft !== undefined) {
+            const containerWidth = stepperWrapper.clientWidth;
+            const btnLeft = btn.offsetLeft;
+            const btnWidth = btn.clientWidth;
+            const scrollTarget = btnLeft - (containerWidth / 2) + (btnWidth / 2);
+            stepperWrapper.scrollTo({ left: Math.max(0, scrollTarget), behavior: "smooth" });
+          }
         } else {
           btn.classList.remove("active");
         }
@@ -653,17 +662,28 @@ document.addEventListener("DOMContentLoaded", () => {
       speed: 800,
       parallax: false,
       grabCursor: true,
-      loop: false,
+      loop: true,
       navigation: {
         nextEl: "#curriculumNextBtn",
         prevEl: "#curriculumPrevBtn",
       },
+      breakpoints: {
+        320: {
+          spaceBetween: 40,
+        },
+        768: {
+          spaceBetween: 100,
+        },
+        1024: {
+          spaceBetween: 200,
+        },
+      },
       on: {
         init: function () {
-          updateTimeline(this.activeIndex);
+          updateTimeline(this.realIndex !== undefined ? this.realIndex : this.activeIndex);
         },
         slideChange: function () {
-          updateTimeline(this.activeIndex);
+          updateTimeline(this.realIndex !== undefined ? this.realIndex : this.activeIndex);
         },
       },
     });
@@ -673,7 +693,11 @@ document.addEventListener("DOMContentLoaded", () => {
         e.preventDefault();
         const stepIndex = parseInt(this.getAttribute("data-step"), 10);
         if (!isNaN(stepIndex)) {
-          curriculumSwiper.slideTo(stepIndex);
+          if (curriculumSwiper.params.loop) {
+            curriculumSwiper.slideToLoop(stepIndex);
+          } else {
+            curriculumSwiper.slideTo(stepIndex);
+          }
         }
       });
     });
@@ -719,29 +743,29 @@ document.addEventListener("DOMContentLoaded", () => {
   initParentsCarousel();
 
   /* ==========================================================================
-     Instant Background & Text Color Switch to Purple Mode on Scroll
+     Smooth Background & Text Color Switch to Purple Mode on Scroll
      ========================================================================== */
   if (hasGsap()) {
     const purpleSection = document.querySelector(".purple-full-section");
     if (purpleSection) {
       ScrollTrigger.create({
         trigger: ".purple-full-section",
-        start: "top 60%",
-        end: "bottom top",
+        start: "top 65%",
+        end: "bottom 35%",
         onEnter: () => {
           document.body.classList.add("theme-purple-mode");
           gsap.to("body, .site-wrapper", {
             backgroundColor: "#49274A",
-            duration: 0.25,
-            ease: "power1.out",
+            duration: 0.4,
+            ease: "power2.out",
           });
         },
         onLeaveBack: () => {
           document.body.classList.remove("theme-purple-mode");
           gsap.to("body, .site-wrapper", {
             backgroundColor: "#FFFFFF",
-            duration: 0.25,
-            ease: "power1.out",
+            duration: 0.4,
+            ease: "power2.out",
           });
         },
       });
@@ -1703,6 +1727,61 @@ document.addEventListener("DOMContentLoaded", () => {
 
   initExperiencesSwiper();
 
+  // Swiper Carousel for Admissions Process Section
+  function initAdmissionsProcessSwiper() {
+    const swiperEl = document.querySelector(".admissions-process-swiper");
+    if (!swiperEl || typeof Swiper === "undefined") return;
+
+    const progressBar = document.getElementById("admissionsProcessProgressBar");
+
+    function updateProcessProgressBar(swiper) {
+      if (!progressBar) return;
+      const maxIndex = swiper.snapGrid ? swiper.snapGrid.length - 1 : (swiper.slides ? swiper.slides.length - 1 : 1);
+      const activeIdx = swiper.activeIndex || 0;
+      const pct = maxIndex > 0 ? (activeIdx / maxIndex) * 100 : 100;
+      const fillPct = Math.min(100, Math.max(20, pct));
+      progressBar.style.width = fillPct + "%";
+    }
+
+    new Swiper(swiperEl, {
+      slidesPerView: 4,
+      spaceBetween: 20,
+      grabCursor: true,
+      breakpoints: {
+        320: {
+          slidesPerView: 1.15,
+          spaceBetween: 16,
+        },
+        640: {
+          slidesPerView: 2.1,
+          spaceBetween: 18,
+        },
+        992: {
+          slidesPerView: 3.1,
+          spaceBetween: 20,
+        },
+        1200: {
+          slidesPerView: 4,
+          spaceBetween: 20,
+        },
+      },
+      navigation: {
+        nextEl: ".process-next-btn",
+        prevEl: ".process-prev-btn",
+      },
+      on: {
+        init: function () {
+          updateProcessProgressBar(this);
+        },
+        slideChange: function () {
+          updateProcessProgressBar(this);
+        },
+      },
+    });
+  }
+
+  initAdmissionsProcessSwiper();
+
   // Academics Cornerstones Interactive Accordion & Image Crossfade with Auto-Loop on Scroll
   function initCornerstonesTabs() {
     const section = document.querySelector(".academics-cornerstones-section");
@@ -1777,4 +1856,96 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   initCornerstonesTabs();
+
+  // Campus Life: Section 4 Tab Navigation ("A Learning Space Designed for Every Learner")
+  function initCampusSpacesTabs() {
+    const tabBtns = document.querySelectorAll(".spaces-tab-btn");
+    const tabPanes = document.querySelectorAll(".spaces-tab-pane");
+
+    if (!tabBtns.length || !tabPanes.length) return;
+
+    tabBtns.forEach((btn) => {
+      btn.addEventListener("click", function () {
+        const targetTab = this.getAttribute("data-tab");
+
+        tabBtns.forEach((b) => {
+          b.classList.remove("active");
+          b.setAttribute("aria-selected", "false");
+        });
+        tabPanes.forEach((p) => p.classList.remove("active"));
+
+        this.classList.add("active");
+        this.setAttribute("aria-selected", "true");
+
+        const activePane = document.getElementById(targetTab);
+        if (activePane) {
+          activePane.classList.add("active");
+        }
+      });
+    });
+  }
+
+  initCampusSpacesTabs();
+
+  // Academics Sub-Page: After-School Co-Curricular Accordions ("Taking Every Interest Further")
+  function initAcademicsInterestAccordions() {
+    const cards = document.querySelectorAll(".academics-interest-card");
+    if (!cards.length) return;
+
+    // Set initial height for open card
+    cards.forEach((card) => {
+      const body = card.querySelector(".interest-accordion-body");
+      if (!body) return;
+      if (card.classList.contains("open")) {
+        body.style.maxHeight = body.scrollHeight + "px";
+      } else {
+        body.style.maxHeight = "0px";
+      }
+    });
+
+    cards.forEach((card) => {
+      const header = card.querySelector(".interest-accordion-header");
+      const body = card.querySelector(".interest-accordion-body");
+      if (!header || !body) return;
+
+      header.addEventListener("click", function (e) {
+        e.preventDefault();
+        const isOpen = card.classList.contains("open");
+
+        // Close other cards smoothly
+        cards.forEach((c) => {
+          if (c !== card && c.classList.contains("open")) {
+            c.classList.remove("open");
+            const cBody = c.querySelector(".interest-accordion-body");
+            if (cBody) cBody.style.maxHeight = "0px";
+            const btn = c.querySelector(".interest-accordion-header");
+            if (btn) btn.setAttribute("aria-expanded", "false");
+          }
+        });
+
+        // Toggle current card
+        if (isOpen) {
+          card.classList.remove("open");
+          body.style.maxHeight = "0px";
+          header.setAttribute("aria-expanded", "false");
+        } else {
+          card.classList.add("open");
+          body.style.maxHeight = body.scrollHeight + "px";
+          header.setAttribute("aria-expanded", "true");
+        }
+      });
+    });
+
+    // Recalculate heights on window resize
+    window.addEventListener("resize", function () {
+      cards.forEach((card) => {
+        if (card.classList.contains("open")) {
+          const body = card.querySelector(".interest-accordion-body");
+          if (body) body.style.maxHeight = body.scrollHeight + "px";
+        }
+      });
+    });
+  }
+
+  initAcademicsInterestAccordions();
 });

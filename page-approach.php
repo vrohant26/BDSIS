@@ -22,6 +22,8 @@ get_header();
 				</a>
 				<span class="breadcrumb-sep">/</span>
 				<a href="<?php echo esc_url( home_url( '/#academics' ) ); ?>" class="breadcrumb-link">Academics</a>
+				<span class="breadcrumb-sep">/</span>
+				<span class="breadcrumb-current">Our Approach</span>
 			</nav>
 
 			<!-- Hero Title & Subtitle -->
@@ -32,6 +34,7 @@ get_header();
 
 		</div>
 	</section>
+
 
 	<!-- Main Interactive Diagram Section with Diagonal Split & Floating Accordion Cards -->
 	<section class="approach-diagram-section relative overflow-hidden">
@@ -175,6 +178,7 @@ get_header();
 
 	</section>
 
+	<!-- banner section -->
 	<section class="about-potential-section relative overflow-hidden">
 		<div class="site-container relative z-2">
 			<div class="about-potential-grid">
@@ -191,6 +195,7 @@ get_header();
 						<!-- Video Frame -->
 						<div class="about-potential-video-wrap">
 							<video autoplay loop muted playsinline>
+								<source src="<?php echo esc_url( get_template_directory_uri() . '/assets/video/A1 WEBM.webm' ); ?>" type="video/webm">
 								<source src="<?php echo esc_url( get_template_directory_uri() . '/assets/video/about video.mp4' ); ?>" type="video/mp4">
 								Your browser does not support the video tag.
 							</video>
@@ -276,9 +281,9 @@ get_header();
 
 								<!-- Right Topic Details Box -->
 								<div class="curriculum-info-box flex-column gap-sm relative">
-									<!-- Background Iconify Doodle Icons -->
-									<iconify-icon icon="ph:sun-duotone" class="curriculum-doodle-icon doodle-pos-1" style="color: var(--clr-primary-yellow);"></iconify-icon>
-									<iconify-icon icon="ph:balloon-duotone" class="curriculum-doodle-icon doodle-pos-3" style="color: var(--clr-primary-yellow);"></iconify-icon>
+									<!-- Background Iconify Doodle Icons (Light Solid Color Fill) -->
+									<iconify-icon icon="ph:sun-fill" class="curriculum-doodle-icon doodle-pos-1" style="color: rgba(241, 200, 34, 0.28);"></iconify-icon>
+									<iconify-icon icon="ph:balloon-fill" class="curriculum-doodle-icon doodle-pos-3" style="color: rgba(248, 214, 179, 0.35);"></iconify-icon>
 
 									<h3 class="curriculum-topic-title">Daycare</h3>
 									<p class="curriculum-topic-desc">Designed for working parents, our Day Care Facilities offer children a safe and engaging environment with meaningful after-school activities.</p>
@@ -292,7 +297,7 @@ get_header();
 										</a>
 									</div>
 
-									<iconify-icon icon="ph:teddy-bear-duotone" class="curriculum-doodle-icon doodle-pos-2" style="color: var(--clr-primary-purple);"></iconify-icon>
+									<iconify-icon icon="ph:teddy-bear-fill" class="curriculum-doodle-icon doodle-pos-2" style="color: rgba(73, 39, 74, 0.22);"></iconify-icon>
 								</div>
 							</div>
 						</div>
@@ -309,8 +314,8 @@ get_header();
 										<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/pre-primary 2.webp' ); ?>" alt="Pre-Primary Play Group" loading="lazy">
 									</div>
 									<!-- Background Iconify Doodle Icons -->
-									<iconify-icon icon="ph:puzzle-piece-duotone" class="curriculum-doodle-icon media-doodle-1" style="color: var(--clr-primary-purple);"></iconify-icon>
-									<iconify-icon icon="ph:palette-duotone" class="curriculum-doodle-icon media-doodle-2" style="color: var(--clr-primary-yellow);"></iconify-icon>
+									<iconify-icon icon="ph:puzzle-piece-fill" class="curriculum-doodle-icon media-doodle-1" style="color: rgba(73, 39, 74, 0.22);"></iconify-icon>
+									<iconify-icon icon="ph:palette-fill" class="curriculum-doodle-icon media-doodle-2" style="color: rgba(241, 200, 34, 0.28);"></iconify-icon>
 								</div>
 
 								<!-- Right Topic Details Box -->
@@ -342,8 +347,8 @@ get_header();
 										<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/primary school 2.webp' ); ?>" alt="Primary School Classroom Learning" loading="lazy">
 									</div>
 									<!-- Background Iconify Doodle Icons -->
-									<iconify-icon icon="ph:pencil-line-duotone" class="curriculum-doodle-icon media-doodle-1" style="color: var(--clr-primary-purple);"></iconify-icon>
-									<iconify-icon icon="ph:atom-duotone" class="curriculum-doodle-icon media-doodle-2" style="color: var(--clr-primary-yellow);"></iconify-icon>
+									<iconify-icon icon="ph:pencil-fill" class="curriculum-doodle-icon media-doodle-1" style="color: rgba(73, 39, 74, 0.22);"></iconify-icon>
+									<iconify-icon icon="ph:atom-fill" class="curriculum-doodle-icon media-doodle-2" style="color: rgba(241, 200, 34, 0.28);"></iconify-icon>
 								</div>
 
 								<!-- Right Topic Details Box -->
@@ -375,8 +380,8 @@ get_header();
 										<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/middle school 2.webp' ); ?>" alt="Middle School Outdoor Field & Activities" loading="lazy">
 									</div>
 									<!-- Background Iconify Doodle Icons -->
-									<iconify-icon icon="ph:compass-duotone" class="curriculum-doodle-icon media-doodle-1" style="color: var(--clr-primary-yellow);"></iconify-icon>
-									<iconify-icon icon="ph:graduation-cap-duotone" class="curriculum-doodle-icon media-doodle-2" style="color: var(--clr-primary-purple);"></iconify-icon>
+									<iconify-icon icon="ph:compass-fill" class="curriculum-doodle-icon media-doodle-1" style="color: rgba(241, 200, 34, 0.28);"></iconify-icon>
+									<iconify-icon icon="ph:graduation-cap-fill" class="curriculum-doodle-icon media-doodle-2" style="color: rgba(73, 39, 74, 0.22);"></iconify-icon>
 								</div>
 
 								<!-- Right Topic Details Box -->
@@ -405,40 +410,7 @@ get_header();
 	<!-- Section: Families Who Chose B.D. Somani International School (Testimonial Component) -->
 	<?php get_template_part( 'template-parts/testimonials' ); ?>
 
-	<section class="cta-banner-section relative" id="cta-banner">
-		<div class="site-container">
-			<!-- Main Rounded CTA Card Container -->
-			<div class="cta-card-wrapper relative overflow-hidden">
-				<!-- Background Campus Image -->
-				<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/CTA.webp' ); ?>" alt="B.D. Somani International School Campus" class="cta-bg-img" loading="lazy" decoding="async">
-				
-				<!-- Dark Gradient Overlay for optimal contrast -->
-				<div class="cta-overlay-gradient"></div>
-
-				<!-- Left Glassmorphism Content Box -->
-				<div class="cta-glass-box relative z-2 flex-column">
-					<h2 class="cta-title">Some opportunities shape a lifetime. Choosing the right school is one of them.</h2>
-					<p class="cta-subtitle">Give your child the opportunity to pursue the extraordinary. Visit our campus, meet our educators, and experience the opportunities that define a B.D. Somani education.</p>
-					
-					<!-- CTA Buttons -->
-					<div class="cta-buttons-group flex align-center gap-sm flex-wrap">
-						<a href="#apply" class="btn btn-yellow cta-btn-primary">
-							<span>SCHEDULE A CAMPUS VISIT</span>
-							<svg class="btn-arrow" width="16" height="14" viewBox="0 0 16 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-								<path d="M9 1L15 7M15 7L9 13M15 7H1" stroke="#2B182C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-							</svg>
-						</a>
-						<a href="#gallery" class="btn btn-outline-white cta-btn-secondary">
-							<span>VIEW GALLERY</span>
-							<svg class="btn-arrow" width="16" height="14" viewBox="0 0 16 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-								<path d="M9 1L15 7M15 7L9 13M15 7H1" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-							</svg>
-						</a>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
+	
 
 </main>
 

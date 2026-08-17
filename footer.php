@@ -1,4 +1,38 @@
-	</div><!-- /.site-wrapper -->
+	<!-- CTA Banner Section -->
+	<section class="cta-banner-section relative" id="cta-banner">
+		<div class="site-container">
+			<!-- Main Rounded CTA Card Container -->
+			<div class="cta-card-wrapper relative overflow-hidden">
+				<!-- Background Campus Image -->
+				<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/CTA.webp' ); ?>" alt="<?php esc_attr_e( 'B.D. Somani International School Campus', 'bd-somani' ); ?>" class="cta-bg-img" loading="lazy" decoding="async">
+				
+				<!-- Dark Gradient Overlay for optimal contrast -->
+				<div class="cta-overlay-gradient"></div>
+
+				<!-- Left Glassmorphism Content Box -->
+				<div class="cta-glass-box relative z-2 flex-column">
+					<h2 class="cta-title"><?php esc_html_e( 'Some opportunities shape a lifetime. Choosing the right school is one of them.', 'bd-somani' ); ?></h2>
+					<p class="cta-subtitle"><?php esc_html_e( 'Give your child the opportunity to pursue the extraordinary. Visit our campus, meet our educators, and experience the opportunities that define a B.D. Somani education.', 'bd-somani' ); ?></p>
+					
+					<!-- CTA Buttons -->
+					<div class="cta-buttons-group flex align-center gap-sm flex-wrap">
+						<a href="<?php echo esc_url( home_url( '/contact-us/#enquire' ) ); ?>" class="btn btn-yellow cta-btn-primary">
+							<span><?php esc_html_e( 'SCHEDULE A CAMPUS VISIT', 'bd-somani' ); ?></span>
+							<svg class="btn-arrow" width="16" height="14" viewBox="0 0 16 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<path d="M9 1L15 7M15 7L9 13M15 7H1" stroke="#2B182C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+							</svg>
+						</a>
+						<a href="<?php echo esc_url( home_url( '/gallery/' ) ); ?>" class="btn btn-outline-white cta-btn-secondary">
+							<span><?php esc_html_e( 'VIEW GALLERY', 'bd-somani' ); ?></span>
+							<svg class="btn-arrow" width="16" height="14" viewBox="0 0 16 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<path d="M9 1L15 7M15 7L9 13M15 7H1" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+							</svg>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
 
 	<!-- Site Footer Section -->
 	<footer class="site-footer relative" id="site-footer">
@@ -101,12 +135,16 @@
 						$f_faq_url         = esc_url( home_url( '/faq/' ) );
 						$f_approach_url    = esc_url( home_url( '/approach/' ) );
 						$f_campus_life_url = esc_url( home_url( '/campus-life/' ) );
+						$f_admissions_url  = esc_url( home_url( '/admissions/' ) );
+						$f_contact_url     = esc_url( home_url( '/contact-us/' ) );
 
 						$f_is_faq         = is_page_template( 'page-faq.php' ) || is_page( 'faq' );
 						$f_is_about       = is_page_template( 'page-about.php' ) || is_page( 'about' ) || is_page( 'about-us' );
 						$f_is_approach    = is_page_template( 'page-approach.php' ) || is_page( 'approach' ) || is_page( 'our-approach' );
 						$f_is_campus_life = is_page_template( 'page-campus-life.php' ) || is_page( 'campus-life' );
-						$f_is_home        = ( is_front_page() || is_home() ) && ! $f_is_faq && ! $f_is_about && ! $f_is_approach && ! $f_is_campus_life;
+						$f_is_admissions  = is_page_template( 'page-admissions.php' ) || is_page( 'admissions' );
+						$f_is_contact     = is_page_template( 'page-contact-us.php' ) || is_page( 'contact-us' ) || is_page( 'contact' );
+						$f_is_home        = ( is_front_page() || is_home() ) && ! $f_is_faq && ! $f_is_about && ! $f_is_approach && ! $f_is_campus_life && ! $f_is_admissions && ! $f_is_contact;
 
 						$f_prefix = $f_is_home ? '' : $f_home_url;
 					?>
@@ -114,8 +152,8 @@
 					<div class="footer-col">
 						<h3 class="footer-col-title">Admissions</h3>
 						<ul class="footer-links">
-							<li><a href="<?php echo $f_prefix; ?>#apply">Apply Now</a></li>
-							<li><a href="<?php echo $f_prefix; ?>#process">Process</a></li>
+							<li><a href="<?php echo $f_admissions_url; ?>#enquire">Apply Now</a></li>
+							<li><a href="<?php echo $f_admissions_url; ?>" class="<?php echo $f_is_admissions ? 'active' : ''; ?>">Overview & Process</a></li>
 							<li><a href="<?php echo $f_faq_url; ?>" class="<?php echo $f_is_faq ? 'active' : ''; ?>">Faq</a></li>
 							<li><a href="<?php echo $f_campus_life_url; ?>" class="<?php echo $f_is_campus_life ? 'active' : ''; ?>">Campus</a></li>
 						</ul>
@@ -127,11 +165,11 @@
 						<ul class="footer-links">
 							<li><a href="<?php echo $f_home_url; ?>" class="<?php echo $f_is_home ? 'active' : ''; ?>">Home</a></li>
 							<li><a href="<?php echo $f_about_url; ?>" class="<?php echo $f_is_about ? 'active' : ''; ?>">About us</a></li>
+							<li><a href="<?php echo $f_admissions_url; ?>" class="<?php echo $f_is_admissions ? 'active' : ''; ?>">Admissions</a></li>
 							<li><a href="<?php echo $f_approach_url; ?>" class="<?php echo $f_is_approach ? 'active' : ''; ?>">Our Approach</a></li>
 							<li><a href="<?php echo $f_campus_life_url; ?>" class="<?php echo $f_is_campus_life ? 'active' : ''; ?>">Campus Life</a></li>
 							<li><a href="<?php echo $f_prefix; ?>#academics">Academics</a></li>
-							<li><a href="<?php echo $f_prefix; ?>#gallery">Gallery</a></li>
-							<li><a href="<?php echo $f_prefix; ?>#contact">Contact us</a></li>
+							<li><a href="<?php echo $f_contact_url; ?>" class="<?php echo $f_is_contact ? 'active' : ''; ?>">Contact us</a></li>
 						</ul>
 					</div>
 

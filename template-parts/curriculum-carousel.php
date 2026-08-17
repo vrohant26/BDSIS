@@ -81,9 +81,9 @@
 
 							<!-- Right Topic Details Box -->
 							<div class="curriculum-info-box flex-column gap-sm relative">
-								<!-- Background Iconify Doodle Icons -->
-								<iconify-icon icon="ph:sun-duotone" class="curriculum-doodle-icon doodle-pos-1" style="color: var(--clr-primary-yellow);"></iconify-icon>
-								<iconify-icon icon="ph:balloon-duotone" class="curriculum-doodle-icon doodle-pos-3" style="color: var(--clr-primary-yellow);"></iconify-icon>
+								<!-- Background Iconify Doodle Icons (Light Solid Color Fill) -->
+								<iconify-icon icon="ph:sun-fill" class="curriculum-doodle-icon doodle-pos-1" style="color: rgba(241, 200, 34, 0.28);"></iconify-icon>
+								<iconify-icon icon="ph:balloon-fill" class="curriculum-doodle-icon doodle-pos-3" style="color: rgba(248, 214, 179, 0.35);"></iconify-icon>
 
 								<h3 class="curriculum-topic-title">Daycare</h3>
 								<p class="curriculum-topic-desc">Designed for working parents, our Day Care Facilities offer children a safe and engaging environment with meaningful after-school activities.</p>
@@ -97,7 +97,7 @@
 									</a>
 								</div>
 
-								<iconify-icon icon="ph:teddy-bear-duotone" class="curriculum-doodle-icon doodle-pos-2" style="color: var(--clr-primary-purple);"></iconify-icon>
+								<iconify-icon icon="ph:teddy-bear-fill" class="curriculum-doodle-icon doodle-pos-2" style="color: rgba(73, 39, 74, 0.22);"></iconify-icon>
 							</div>
 						</div>
 					</div>
@@ -114,8 +114,8 @@
 									<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/pre-primary 2.webp' ); ?>" alt="Pre-Primary Play Group" loading="lazy">
 								</div>
 								<!-- Background Iconify Doodle Icons -->
-								<iconify-icon icon="ph:puzzle-piece-duotone" class="curriculum-doodle-icon media-doodle-1" style="color: var(--clr-primary-purple);"></iconify-icon>
-								<iconify-icon icon="ph:palette-duotone" class="curriculum-doodle-icon media-doodle-2" style="color: var(--clr-primary-yellow);"></iconify-icon>
+								<iconify-icon icon="ph:puzzle-piece-fill" class="curriculum-doodle-icon media-doodle-1" style="color: rgba(73, 39, 74, 0.22);"></iconify-icon>
+								<iconify-icon icon="ph:palette-fill" class="curriculum-doodle-icon media-doodle-2" style="color: rgba(241, 200, 34, 0.28);"></iconify-icon>
 							</div>
 
 							<!-- Right Topic Details Box -->
@@ -147,8 +147,8 @@
 									<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/primary school 2.webp' ); ?>" alt="Primary School Classroom Learning" loading="lazy">
 								</div>
 								<!-- Background Iconify Doodle Icons -->
-								<iconify-icon icon="ph:pencil-line-duotone" class="curriculum-doodle-icon media-doodle-1" style="color: var(--clr-primary-purple);"></iconify-icon>
-								<iconify-icon icon="ph:atom-duotone" class="curriculum-doodle-icon media-doodle-2" style="color: var(--clr-primary-yellow);"></iconify-icon>
+								<iconify-icon icon="ph:pencil-fill" class="curriculum-doodle-icon media-doodle-1" style="color: rgba(73, 39, 74, 0.22);"></iconify-icon>
+								<iconify-icon icon="ph:atom-fill" class="curriculum-doodle-icon media-doodle-2" style="color: rgba(241, 200, 34, 0.28);"></iconify-icon>
 							</div>
 
 							<!-- Right Topic Details Box -->
@@ -180,8 +180,8 @@
 									<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/middle school 2.webp' ); ?>" alt="Middle School Outdoor Field & Activities" loading="lazy">
 								</div>
 								<!-- Background Iconify Doodle Icons -->
-								<iconify-icon icon="ph:compass-duotone" class="curriculum-doodle-icon media-doodle-1" style="color: var(--clr-primary-yellow);"></iconify-icon>
-								<iconify-icon icon="ph:graduation-cap-duotone" class="curriculum-doodle-icon media-doodle-2" style="color: var(--clr-primary-purple);"></iconify-icon>
+								<iconify-icon icon="ph:compass-fill" class="curriculum-doodle-icon media-doodle-1" style="color: rgba(241, 200, 34, 0.28);"></iconify-icon>
+								<iconify-icon icon="ph:graduation-cap-fill" class="curriculum-doodle-icon media-doodle-2" style="color: rgba(73, 39, 74, 0.22);"></iconify-icon>
 							</div>
 
 							<!-- Right Topic Details Box -->
