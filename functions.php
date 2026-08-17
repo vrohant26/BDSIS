@@ -716,6 +716,7 @@ function theme_academics_approach_metabox_callback( $post ) {
 }
 
 function theme_academics_experiences_metabox_callback( $post ) {
+	$visibility = metadata_exists( 'post', $post->ID, '_bds_academics_exp_visibility' ) ? get_post_meta( $post->ID, '_bds_academics_exp_visibility', true ) : 'show';
 	$main_title = metadata_exists( 'post', $post->ID, '_bds_academics_exp_main_title' ) ? get_post_meta( $post->ID, '_bds_academics_exp_main_title', true ) : __( 'Experiences that Enrich Classroom Learning', 'bd-somani' );
 	$sub_title  = metadata_exists( 'post', $post->ID, '_bds_academics_exp_sub_title' ) ? get_post_meta( $post->ID, '_bds_academics_exp_sub_title', true ) : '';
 	$sub_desc   = metadata_exists( 'post', $post->ID, '_bds_academics_exp_sub_desc' ) ? get_post_meta( $post->ID, '_bds_academics_exp_sub_desc', true ) : '';
@@ -762,6 +763,14 @@ function theme_academics_experiences_metabox_callback( $post ) {
 	?>
 	<div id="bds-academics-experiences-metabox" style="display: flex; flex-direction: column; gap: 16px; margin-top: 10px;">
 		<p class="description"><?php esc_html_e( 'Configure the "Experiences that Enrich Classroom Learning" section and purple cards carousel. Leave left sub-heading, sub-description, and photos blank if you wish to hide the left content slide.', 'bd-somani' ); ?></p>
+
+		<div>
+			<label for="bds_academics_exp_visibility" style="font-weight: 600; display: block; margin-bottom: 4px;"><?php esc_html_e( 'Section Visibility', 'bd-somani' ); ?></label>
+			<select id="bds_academics_exp_visibility" name="bds_academics_exp_visibility">
+				<option value="show" <?php selected( $visibility, 'show' ); ?>><?php esc_html_e( 'Show Section', 'bd-somani' ); ?></option>
+				<option value="hide" <?php selected( $visibility, 'hide' ); ?>><?php esc_html_e( 'Hide Section', 'bd-somani' ); ?></option>
+			</select>
+		</div>
 
 		<div>
 			<label for="bds_academics_exp_main_title" style="font-weight: 600; display: block; margin-bottom: 4px;"><?php esc_html_e( 'Section Main Title (Centered)', 'bd-somani' ); ?></label>
@@ -1085,6 +1094,7 @@ function theme_save_academics_hero_meta( $post_id ) {
 		'bds_academics_potential_title'         => '_bds_academics_potential_title',
 		'bds_academics_potential_desc'          => '_bds_academics_potential_desc',
 		'bds_academics_potential_video'         => '_bds_academics_potential_video',
+		'bds_academics_exp_visibility'          => '_bds_academics_exp_visibility',
 		'bds_academics_exp_main_title'          => '_bds_academics_exp_main_title',
 		'bds_academics_exp_sub_title'           => '_bds_academics_exp_sub_title',
 		'bds_academics_exp_sub_desc'            => '_bds_academics_exp_sub_desc',

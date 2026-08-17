@@ -626,7 +626,8 @@ $sub_img_url  = $sub_img_id ? wp_get_attachment_image_url( $sub_img_id, 'full' )
 
 	<?php
 	// Experiences Section Metadata
-	$exp_has_title = metadata_exists( 'post', $post_id, '_bds_academics_exp_main_title' );
+	$exp_visibility = get_post_meta( $post_id, '_bds_academics_exp_visibility', true );
+	$exp_has_title  = metadata_exists( 'post', $post_id, '_bds_academics_exp_main_title' );
 	$exp_main_title = get_post_meta( $post_id, '_bds_academics_exp_main_title', true );
 	$exp_sub_title  = get_post_meta( $post_id, '_bds_academics_exp_sub_title', true );
 	$exp_sub_desc   = get_post_meta( $post_id, '_bds_academics_exp_sub_desc', true );
@@ -678,7 +679,7 @@ $sub_img_url  = $sub_img_id ? wp_get_attachment_image_url( $sub_img_id, 'full' )
 		}
 	}
 
-	$show_experiences_section = ! (
+	$show_experiences_section = ( 'hide' !== $exp_visibility ) && ! (
 		empty( trim( $exp_main_title ) ) &&
 		empty( trim( $exp_sub_title ) ) &&
 		empty( trim( $exp_sub_desc ) ) &&
