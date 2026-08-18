@@ -829,7 +829,14 @@ $sub_img_url  = $sub_img_id ? wp_get_attachment_image_url( $sub_img_id, 'full' )
 
 	<?php
 	// Section: Cornerstones of Our Pre-Primary Programme Metadata
-	$cs_main_title = metadata_exists( 'post', $post_id, '_bds_academics_cs_title' ) ? get_post_meta( $post_id, '_bds_academics_cs_title', true ) : __( 'Cornerstones of Our Pre-Primary Programme', 'bd-somani' );
+	$cs_visibility = get_post_meta( $post_id, '_bds_academics_cs_visibility', true );
+	$cs_has_title  = metadata_exists( 'post', $post_id, '_bds_academics_cs_title' );
+	$cs_main_title = get_post_meta( $post_id, '_bds_academics_cs_title', true );
+	if ( ! $cs_has_title && empty( $cs_main_title ) ) {
+		$cs_main_title = __( 'Cornerstones of Our Pre-Primary Programme', 'bd-somani' );
+	}
+
+	$has_custom_cs_meta = metadata_exists( 'post', $post_id, '_bds_academics_cs_title' ) || metadata_exists( 'post', $post_id, '_bds_academics_cs_tab1_title' );
 
 	$default_cs_tabs = array(
 		1 => array(
@@ -851,8 +858,8 @@ $sub_img_url  = $sub_img_id ? wp_get_attachment_image_url( $sub_img_id, 'full' )
 
 	$cs_tabs = array();
 	for ( $i = 1; $i <= 6; $i++ ) {
-		$def_t  = isset( $default_cs_tabs[ $i ] ) ? $default_cs_tabs[ $i ]['title'] : '';
-		$def_d  = isset( $default_cs_tabs[ $i ] ) ? $default_cs_tabs[ $i ]['desc'] : '';
+		$def_t  = $has_custom_cs_meta ? '' : ( isset( $default_cs_tabs[ $i ] ) ? $default_cs_tabs[ $i ]['title'] : '' );
+		$def_d  = $has_custom_cs_meta ? '' : ( isset( $default_cs_tabs[ $i ] ) ? $default_cs_tabs[ $i ]['desc'] : '' );
 		$def_ic = isset( $default_cs_tabs[ $i ] ) ? $default_cs_tabs[ $i ]['icon'] : 'lucide:sparkles';
 
 		$tab_t       = metadata_exists( 'post', $post_id, "_bds_academics_cs_tab{$i}_title" ) ? get_post_meta( $post_id, "_bds_academics_cs_tab{$i}_title", true ) : $def_t;
@@ -870,7 +877,7 @@ $sub_img_url  = $sub_img_id ? wp_get_attachment_image_url( $sub_img_id, 'full' )
 		}
 	}
 
-	$show_cs_section = ! ( empty( trim( $cs_main_title ) ) && empty( $cs_tabs ) );
+	$show_cs_section = ( 'hide' !== $cs_visibility ) && ! empty( $cs_tabs );
 	?>
 
 	<?php if ( $show_cs_section ) : ?>

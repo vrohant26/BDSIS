@@ -1601,6 +1601,46 @@ document.addEventListener("DOMContentLoaded", () => {
 
   initAboutPotentialAnimation();
 
+  // ScrollTrigger Animation for Academics Subpage Hero Images (Bouncy Scale-In)
+  function initAcademicsHeroAnimation() {
+    if (!hasGsap()) return;
+    const heroMedias = document.querySelectorAll(".academics-hero-media");
+    if (!heroMedias.length) return;
+
+    heroMedias.forEach((heroMedia) => {
+      const mainImg = heroMedia.querySelector(".academics-main-image-wrap");
+      const subImg  = heroMedia.querySelector(".academics-sub-image-wrap");
+
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: heroMedia,
+          start: "top 88%",
+          toggleActions: "play none none none",
+        },
+      });
+
+      if (mainImg) {
+        tl.fromTo(
+          mainImg,
+          { scale: 0.65, opacity: 0, y: 35 },
+          { scale: 1, opacity: 1, y: 0, duration: 1.0, ease: "back.out(1.5)" },
+          0
+        );
+      }
+
+      if (subImg) {
+        tl.fromTo(
+          subImg,
+          { scale: 0.45, opacity: 0, y: 25 },
+          { scale: 1, opacity: 1, y: 0, duration: 1.1, ease: "back.out(1.8)" },
+          0.18
+        );
+      }
+    });
+  }
+
+  initAcademicsHeroAnimation();
+
   // ScrollTrigger Animations for Purpose Section rows
   function initAboutPurposeAnimation() {
     if (!hasGsap()) return;
