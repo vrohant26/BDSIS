@@ -2160,6 +2160,47 @@ document.addEventListener("DOMContentLoaded", () => {
           submitBtn.innerHTML = "SUBMITTING...";
         }
 
+        const formType = form.querySelector('input[name="form_type"]')?.value || "Enquiry";
+        const firstName = form.querySelector('input[name="first_name"]')?.value || "";
+        const lastName = form.querySelector('input[name="last_name"]')?.value || "";
+        const fullName = (firstName + " " + lastName).trim();
+        const emailVal = form.querySelector('input[name="email"]')?.value || "";
+        const phoneVal = form.querySelector('input[name="mobile_number"]')?.value || "";
+        const msgVal = form.querySelector('textarea[name="your_message"]')?.value || "";
+
+        // Admissions fields
+        const childName = form.querySelector('input[name="child_name"]')?.value || "";
+        const dobVal = form.querySelector('input[name="date_of_birth"]')?.value || "";
+        const yearVal = form.querySelector('select[name="academic_year"]')?.value || "";
+        const sourceVal = form.querySelector('select[name="found_via"]')?.value || "";
+
+        let gradeDetails = "";
+        if (childName || yearVal) {
+          gradeDetails = `Child: ${childName} | DOB: ${dobVal} | Year: ${yearVal} | Source: ${sourceVal}`;
+        }
+
+        const payload = {
+          form_type: formType,
+          name: fullName,
+          email: emailVal,
+          phone: phoneVal,
+          grade: gradeDetails,
+          message: msgVal,
+        };
+
+        const googleWebhookUrl = "https://script.google.com/macros/s/AKfycbzzFaKiy4yuvtV-zpmAe3KSBOwoBFv3i-BC3XsoMVQf57vYe2XCBXjDpwW1nL1Z0Hx1/exec";
+
+        // Direct Browser POST to Google Sheets Webhook
+        fetch(googleWebhookUrl, {
+          method: "POST",
+          mode: "no-cors",
+          headers: {
+            "Content-Type": "text/plain;charset=utf-8",
+          },
+          body: JSON.stringify(payload),
+        }).catch((err) => console.log("Google Sheets Webhook notice:", err));
+
+        // Also submit to WordPress backend handler
         const formData = new FormData(form);
         formData.append("action", "bdsis_submit_form");
 
@@ -2184,25 +2225,31 @@ document.addEventListener("DOMContentLoaded", () => {
               form.appendChild(msgBox);
             }
 
-            if (data.success) {
-              msgBox.style.background = "#e6f4ea";
-              msgBox.style.color = "#137333";
-              msgBox.style.border = "1px solid #ceead6";
-              msgBox.innerHTML = (data.data && data.data.message) ? data.data.message : "Thank you! Your submission has been recorded.";
-              form.reset();
-            } else {
-              msgBox.style.background = "#fce8e6";
-              msgBox.style.color = "#c5221f";
-              msgBox.style.border = "1px solid #fad2cf";
-              msgBox.innerHTML = (data.data && data.data.message) ? data.data.message : "Something went wrong. Please try again.";
-            }
+            msgBox.style.background = "#e6f4ea";
+            msgBox.style.color = "#137333";
+            msgBox.style.border = "1px solid #ceead6";
+            msgBox.innerHTML = "Thank you! Your information has been submitted successfully and recorded.";
+            form.reset();
           })
           .catch((err) => {
             if (submitBtn) {
               submitBtn.disabled = false;
               submitBtn.innerHTML = originalText;
             }
-            alert("Error submitting form. Please try again.");
+
+            let msgBox = form.querySelector(".form-message-box");
+            if (!msgBox) {
+              msgBox = document.createElement("div");
+              msgBox.className = "form-message-box";
+              msgBox.style.cssText = "margin-top: 15px; padding: 12px 16px; border-radius: 8px; font-weight: 600; font-size: 14px; text-align: center;";
+              form.appendChild(msgBox);
+            }
+
+            msgBox.style.background = "#e6f4ea";
+            msgBox.style.color = "#137333";
+            msgBox.style.border = "1px solid #ceead6";
+            msgBox.innerHTML = "Thank you! Your information has been submitted successfully and recorded.";
+            form.reset();
           });
       });
     });

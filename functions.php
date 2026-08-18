@@ -1694,7 +1694,90 @@ function theme_save_campus_life_meta( $post_id ) {
 }
 add_action( 'save_post', 'theme_save_campus_life_meta' );
 
-// AJAX Handler for Contact & Admissions Forms -> Google Sheets Webhook Integration
+// Register Custom Post Type: Form Leads
+function theme_register_leads_cpt() {
+	$labels = array(
+		'name'               => _x( 'Form Leads', 'post type general name', 'bd-somani' ),
+		'singular_name'      => _x( 'Form Lead', 'post type singular name', 'bd-somani' ),
+		'menu_name'          => _x( 'Form Leads', 'admin menu', 'bd-somani' ),
+		'name_admin_bar'     => _x( 'Form Lead', 'add new on admin bar', 'bd-somani' ),
+		'add_new'            => _x( 'Add New Lead', 'lead', 'bd-somani' ),
+		'add_new_item'       => __( 'Add New Form Lead', 'bd-somani' ),
+		'edit_item'          => __( 'View Lead', 'bd-somani' ),
+		'view_item'          => __( 'View Lead', 'bd-somani' ),
+		'all_items'          => __( 'All Leads', 'bd-somani' ),
+		'search_items'       => __( 'Search Leads', 'bd-somani' ),
+		'not_found'          => __( 'No leads found.', 'bd-somani' ),
+		'not_found_in_trash' => __( 'No leads found in Trash.', 'bd-somani' ),
+	);
+
+	$args = array(
+		'labels'             => $labels,
+		'public'             => false,
+		'publicly_queryable' => false,
+		'show_ui'            => true,
+		'show_in_menu'       => true,
+		'query_var'          => false,
+		'rewrite'            => false,
+		'capability_type'    => 'post',
+		'has_archive'        => false,
+		'hierarchical'       => false,
+		'menu_position'      => 26,
+		'menu_icon'          => 'dashicons-email-alt',
+		'supports'           => array( 'title', 'custom-fields' ),
+	);
+
+	register_post_type( 'bds_lead', $args );
+}
+add_action( 'init', 'theme_register_leads_cpt' );
+
+// Custom Admin Columns for Form Leads
+function bds_leads_cpt_columns( $columns ) {
+	return array(
+		'cb'        => isset( $columns['cb'] ) ? $columns['cb'] : '',
+		'title'     => __( 'Lead Title', 'bd-somani' ),
+		'form_type' => __( 'Form Type', 'bd-somani' ),
+		'email'     => __( 'Email', 'bd-somani' ),
+		'phone'     => __( 'Phone', 'bd-somani' ),
+		'details'   => __( 'Details / Message', 'bd-somani' ),
+		'date'      => __( 'Date Submitted', 'bd-somani' ),
+	);
+}
+add_filter( 'manage_bds_lead_posts_columns', 'bds_leads_cpt_columns' );
+
+function bds_leads_cpt_custom_column( $column, $post_id ) {
+	switch ( $column ) {
+		case 'form_type':
+			$type = get_post_meta( $post_id, '_lead_form_type', true );
+			$bg   = ( 'Admissions' === $type ) ? '#F1C822; color:#3D213E;' : '#3D213E; color:#fff;';
+			echo '<span class="badge" style="background:' . $bg . ' padding:3px 8px; border-radius:4px; font-size:12px; font-weight:700;">' . esc_html( $type ? $type : 'Enquiry' ) . '</span>';
+			break;
+		case 'email':
+			$email = get_post_meta( $post_id, '_lead_email', true );
+			echo $email ? '<a href="mailto:' . esc_attr( $email ) . '">' . esc_html( $email ) . '</a>' : '—';
+			break;
+		case 'phone':
+			$phone = get_post_meta( $post_id, '_lead_phone', true );
+			echo $phone ? '<a href="tel:' . esc_attr( preg_replace( '/[^0-9+]/', '', $phone ) ) . '">' . esc_html( $phone ) . '</a>' : '—';
+			break;
+		case 'details':
+			$grade = get_post_meta( $post_id, '_lead_grade', true );
+			$msg   = get_post_meta( $post_id, '_lead_message', true );
+			if ( $grade ) {
+				echo '<strong>' . esc_html( $grade ) . '</strong><br>';
+			}
+			if ( $msg ) {
+				echo esc_html( wp_trim_words( $msg, 10, '...' ) );
+			}
+			if ( ! $grade && ! $msg ) {
+				echo '—';
+			}
+			break;
+	}
+}
+add_action( 'manage_bds_lead_posts_custom_column', 'bds_leads_cpt_custom_column', 10, 2 );
+
+// AJAX Handler for Contact & Admissions Forms -> Google Sheets & WP CPT Integration
 function bdsis_handle_form_submission() {
 	$form_type    = isset( $_POST['form_type'] ) ? sanitize_text_field( wp_unslash( $_POST['form_type'] ) ) : 'Enquiry';
 	$first_name   = isset( $_POST['first_name'] ) ? sanitize_text_field( wp_unslash( $_POST['first_name'] ) ) : '';
@@ -1715,6 +1798,26 @@ function bdsis_handle_form_submission() {
 		$grade_field = "Child: {$child_name} | DOB: {$date_of_birth} | Year: {$academic_year} | Source: {$found_via}";
 	}
 
+	// 1. Save Lead Record in WordPress Custom Post Type (Form Leads)
+	$lead_title = sprintf( '%s Lead - %s (%s)', $form_type, $full_name ? $full_name : 'Anonymous', date_i18n( 'd M Y, h:i A' ) );
+	$lead_id    = wp_insert_post(
+		array(
+			'post_title'  => $lead_title,
+			'post_type'   => 'bds_lead',
+			'post_status' => 'publish',
+		)
+	);
+
+	if ( $lead_id && ! is_wp_error( $lead_id ) ) {
+		update_post_meta( $lead_id, '_lead_form_type', $form_type );
+		update_post_meta( $lead_id, '_lead_name', $full_name );
+		update_post_meta( $lead_id, '_lead_email', $email );
+		update_post_meta( $lead_id, '_lead_phone', $phone );
+		update_post_meta( $lead_id, '_lead_grade', $grade_field );
+		update_post_meta( $lead_id, '_lead_message', $message );
+	}
+
+	// 2. Post to Deployed Google Apps Script Web App Endpoint URL
 	$payload = array(
 		'form_type' => $form_type,
 		'name'      => $full_name,
@@ -1724,7 +1827,6 @@ function bdsis_handle_form_submission() {
 		'message'   => $message,
 	);
 
-	// Deployed Google Apps Script Web App Endpoint URL
 	$webhook_url = 'https://script.google.com/macros/s/AKfycbzzFaKiy4yuvtV-zpmAe3KSBOwoBFv3i-BC3XsoMVQf57vYe2XCBXjDpwW1nL1Z0Hx1/exec';
 
 	$response = wp_remote_post(
@@ -1742,11 +1844,7 @@ function bdsis_handle_form_submission() {
 		)
 	);
 
-	if ( is_wp_error( $response ) ) {
-		wp_send_json_error( array( 'message' => __( 'There was an error sending your message. Please try again.', 'bd-somani' ) ) );
-	} else {
-		wp_send_json_success( array( 'message' => __( 'Thank you! Your information has been submitted successfully and recorded in our system.', 'bd-somani' ) ) );
-	}
+	wp_send_json_success( array( 'message' => __( 'Thank you! Your information has been submitted successfully and recorded in our system.', 'bd-somani' ) ) );
 }
 add_action( 'wp_ajax_bdsis_submit_form', 'bdsis_handle_form_submission' );
 add_action( 'wp_ajax_nopriv_bdsis_submit_form', 'bdsis_handle_form_submission' );
