@@ -4953,7 +4953,7 @@ body.theme-purple-mode .timeline-progress-bar {
 /* Wavy Arrow SVG Positioned to the Right of Title */
 .academics-hero-doodle-arrow {
     position: absolute;
-    top: 85%;
+    top: 150%;
     right: clamp(-30px, -2vw, 10px);
     transform: translateY(-50%);
     pointer-events: none;
