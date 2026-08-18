@@ -325,7 +325,7 @@ get_header();
 							</div>
 						</div>
 						<div class="spaces-card-media">
-							<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/classrooms.webp' ); ?>" alt="<?php esc_attr_e( 'Classroom', 'bd-somani' ); ?>" class="spaces-card-img">
+							<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/ifp modern classroom.webp' ); ?>" alt="<?php esc_attr_e( 'Modern Classroom with IFP Panel', 'bd-somani' ); ?>" class="spaces-card-img">
 						</div>
 					</div>
 				</div>

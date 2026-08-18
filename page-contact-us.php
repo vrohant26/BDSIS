@@ -84,6 +84,16 @@ get_header();
 								<a href="mailto:admissions.kharghar@bdsomani.org" class="contact-detail-link">admissions.kharghar@bdsomani.org</a>
 							</div>
 						</li>
+
+						<li class="contact-detail-item">
+							<div class="contact-icon-wrap" aria-hidden="true">
+								<iconify-icon icon="lucide:clock"></iconify-icon>
+							</div>
+							<div class="contact-detail-text">
+								<strong><?php esc_html_e( 'Admission Desk Hours:', 'bd-somani' ); ?></strong><br>
+								<?php esc_html_e( 'Monday to Saturday, 8:00 AM – 5:00 PM', 'bd-somani' ); ?>
+							</div>
+						</li>
 					</ul>
 
 					<!-- Additional Links (Pill Buttons) -->
@@ -173,11 +183,10 @@ get_header();
 
 			</div>
 		</section>
-
-		<!-- Brand Marquee Scrolling Banner -->
-		<?php get_template_part( 'template-parts/brand-marquee' ); ?>
-
 	</div>
+
+	<!-- Brand Marquee Scrolling Banner -->
+	<?php get_template_part( 'template-parts/brand-marquee' ); ?>
 
 	<!-- Bottom Section: Map & Nearby Highlights -->
 	<section class="contact-map-section relative">

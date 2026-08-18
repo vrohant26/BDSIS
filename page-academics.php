@@ -964,7 +964,7 @@ $sub_img_url  = $sub_img_id ? wp_get_attachment_image_url( $sub_img_id, 'full' )
 	$care_cards_def = array(
 		1 => array(
 			'title' => __( 'School App', 'bd-somani' ),
-			'desc'  => __( 'Regular updates, announcements and classroom communication through EduSprint and MISC.', 'bd-somani' ),
+			'desc'  => __( 'Regular updates, announcements and classroom communication through EduSprint.', 'bd-somani' ),
 			'icon'  => 'school app.svg',
 		),
 		2 => array(

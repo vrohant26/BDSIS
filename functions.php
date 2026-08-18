@@ -949,7 +949,7 @@ function theme_academics_care_metabox_callback( $post ) {
 	$care_cards_def = array(
 		1 => array(
 			'title' => __( 'School App', 'bd-somani' ),
-			'desc'  => __( 'Regular updates, announcements and classroom communication through EduSprint and MISC.', 'bd-somani' ),
+			'desc'  => __( 'Regular updates, announcements and classroom communication through EduSprint.', 'bd-somani' ),
 		),
 		2 => array(
 			'title' => __( 'Dedicated Support', 'bd-somani' ),
