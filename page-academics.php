@@ -770,6 +770,15 @@ $sub_img_url  = $sub_img_id ? wp_get_attachment_image_url( $sub_img_id, 'full' )
 											<p class="academics-exp-sub-desc reveal-text"><?php echo esc_html( $exp_sub_desc ); ?></p>
 										<?php endif; ?>
 
+										<div class="academics-exp-cta-wrap" style="margin-top: 1.5rem; position: relative; z-index: 2;">
+											<a href="<?php echo esc_url( home_url( '/campus-life/' ) ); ?>" class="btn btn-yellow">
+												<span><?php esc_html_e( 'EXPLORE STUDENT LIFE AT BDSIS', 'bd-somani' ); ?></span>
+												<svg class="btn-arrow" width="18" height="14" viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+													<path d="M11 1L17 7M17 7L11 13M17 7H1" stroke="#3D213E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+												</svg>
+											</a>
+										</div>
+
 										<!-- Chess Pieces Doodle Graphic at bottom right -->
 										<div class="academics-exp-chess-doodle" aria-hidden="true">
 											<?php

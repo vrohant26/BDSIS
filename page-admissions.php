@@ -182,8 +182,35 @@ get_header();
 		</section>
 	</div><!-- /.site-container -->
 
-	<!-- Section 2: Brand Values Marquee Banner Component (Full-Width Edge to Edge) -->
-	<?php get_template_part( 'template-parts/brand-marquee' ); ?>
+	
+
+
+		<section class="about-potential-section relative overflow-hidden">
+		<div class="site-container relative z-2">
+			<div class="about-potential-grid">
+				
+				<!-- Left Column: Content -->
+				<div class="about-potential-content">
+					<h2 class="about-potential-title">Where Their <br> Journey Begins.</h2>
+					<p class="about-potential-lead">Take the first step towards a learning experience that nurtures curiosity, builds confidence, and prepares children for what lies ahead.</p>
+				</div>
+
+				<!-- Right Column: Circular Video Frame -->
+				<div class="about-potential-media flex-center">
+					<div class="about-potential-video-container relative">
+						<!-- Video Frame -->
+						<div class="about-potential-video-wrap">
+							<video autoplay loop muted playsinline>
+								<source src="<?php echo esc_url( get_template_directory_uri() . '/assets/video/desk2.mp4' ); ?>" type="video/mp4">
+								Your browser does not support the video tag.
+							</video>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</section>
 
 		<!-- Section 3: Admissions Process Swiper Carousel -->
 		<section class="admissions-process-section relative overflow-hidden" id="process">
@@ -410,32 +437,9 @@ get_header();
 
 		</section>
 
-			<section class="about-potential-section relative overflow-hidden">
-		<div class="site-container relative z-2">
-			<div class="about-potential-grid">
-				
-				<!-- Left Column: Content -->
-				<div class="about-potential-content">
-					<h2 class="about-potential-title">From Little Dreams to Big Achievements.</h2>
-					<p class="about-potential-lead">Every champion begins with a small dream, nurtured with learning, shaped by courage, and celebrated through achievement.</p>
-				</div>
+			<?php get_template_part( 'template-parts/brand-marquee' ); ?>
 
-				<!-- Right Column: Circular Video Frame -->
-				<div class="about-potential-media flex-center">
-					<div class="about-potential-video-container relative">
-						<!-- Video Frame -->
-						<div class="about-potential-video-wrap">
-							<video autoplay loop muted playsinline>
-								<source src="<?php echo esc_url( get_template_directory_uri() . '/assets/video/about video.mp4' ); ?>" type="video/mp4">
-								Your browser does not support the video tag.
-							</video>
-						</div>
-					</div>
-				</div>
 
-			</div>
-		</div>
-	</section>
 </main>
 
 <?php
