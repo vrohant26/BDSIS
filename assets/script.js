@@ -2188,19 +2188,7 @@ document.addEventListener("DOMContentLoaded", () => {
           message: msgVal,
         };
 
-        const googleWebhookUrl = "https://script.google.com/macros/s/AKfycbzzFaKiy4yuvtV-zpmAe3KSBOwoBFv3i-BC3XsoMVQf57vYe2XCBXjDpwW1nL1Z0Hx1/exec";
-
-        // Direct Browser POST to Google Sheets Webhook
-        fetch(googleWebhookUrl, {
-          method: "POST",
-          mode: "no-cors",
-          headers: {
-            "Content-Type": "text/plain;charset=utf-8",
-          },
-          body: JSON.stringify(payload),
-        }).catch((err) => console.log("Google Sheets Webhook notice:", err));
-
-        // Also submit to WordPress backend handler
+        // Submit to WordPress backend handler (which saves CPT lead & sends to Google Sheets)
         const formData = new FormData(form);
         formData.append("action", "bdsis_submit_form");
 
