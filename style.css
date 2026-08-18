@@ -6023,6 +6023,66 @@ body.theme-purple-mode .timeline-progress-bar {
     color: #FFFFFF;
 }
 
+/* Timeline Progress Bar Below Image Card */
+.cornerstones-timeline-wrapper {
+    margin-top: 1.5rem;
+    position: relative;
+    width: 100%;
+    padding: 0 4px;
+}
+
+.cornerstones-timeline-track {
+    width: 100%;
+    height: 5px;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+    position: relative;
+    overflow: hidden;
+}
+
+.cornerstones-timeline-bar {
+    height: 100%;
+    width: 33.33%;
+    background-color: var(--clr-primary-yellow);
+    border-radius: 4px;
+    transition: width 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.cornerstones-timeline-dots {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    padding: 0 2px;
+}
+
+.cornerstones-dot-btn {
+    background: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    pointer-events: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cornerstones-dot-indicator {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.4);
+    border: 2px solid #3D213E;
+    transition: all 0.3s ease;
+}
+
+.cornerstones-dot-btn.active .cornerstones-dot-indicator {
+    background-color: var(--clr-primary-yellow);
+    transform: scale(1.35);
+}
+
 .academics-cornerstones-section .experiential-info-box {
     min-height: clamp(340px, 38vw, 480px);
 }

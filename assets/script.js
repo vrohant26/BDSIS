@@ -1913,6 +1913,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const tabItems = section.querySelectorAll(".cornerstones-tab-item");
     const imgSlides = section.querySelectorAll(".cornerstones-img-slide");
+    const progressBar = section.querySelector("#cornerstonesProgressBar");
+    const dotBtns = section.querySelectorAll(".cornerstones-dot-btn");
     if (!tabItems.length) return;
 
     let currentIndex = 0;
@@ -1935,6 +1937,19 @@ document.addEventListener("DOMContentLoaded", () => {
           img.classList.remove("active");
         }
       });
+
+      if (progressBar) {
+        const percent = ((index + 1) / tabItems.length) * 100;
+        progressBar.style.width = percent + "%";
+      }
+
+      dotBtns.forEach((dot, i) => {
+        if (i === index) {
+          dot.classList.add("active");
+        } else {
+          dot.classList.remove("active");
+        }
+      });
     }
 
     function startAutoPlay() {
@@ -1954,6 +1969,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
     tabItems.forEach((item, idx) => {
       item.addEventListener("click", () => {
+        activateTab(idx);
+        stopAutoPlay();
+        startAutoPlay();
+      });
+    });
+
+    dotBtns.forEach((dot, idx) => {
+      dot.addEventListener("click", () => {
         activateTab(idx);
         stopAutoPlay();
         startAutoPlay();

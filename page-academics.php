@@ -901,6 +901,20 @@ $sub_img_url  = $sub_img_id ? wp_get_attachment_image_url( $sub_img_id, 'full' )
 							<?php endforeach; ?>
 						</div>
 					</div>
+
+					<!-- Timeline Progress Bar Below Image -->
+					<div class="cornerstones-timeline-wrapper">
+						<div class="cornerstones-timeline-track">
+							<div class="cornerstones-timeline-bar" id="cornerstonesProgressBar"></div>
+						</div>
+						<div class="cornerstones-timeline-dots flex-between">
+							<?php foreach ( $cs_tabs as $idx => $tab ) : ?>
+								<button class="cornerstones-dot-btn <?php echo $idx === 0 ? 'active' : ''; ?>" data-dot-index="<?php echo $idx; ?>" aria-label="<?php echo esc_attr( $tab['title'] ); ?>">
+									<span class="cornerstones-dot-indicator"></span>
+								</button>
+							<?php endforeach; ?>
+						</div>
+					</div>
 				</div>
 
 				<!-- Right Topic & Interactive Accordion Tabs Box -->
