@@ -965,6 +965,7 @@ function theme_academics_care_metabox_callback( $post ) {
 	for ( $i = 1; $i <= 3; $i++ ) {
 		$c_t = metadata_exists( 'post', $post->ID, "_bds_academics_care_card{$i}_title" ) ? get_post_meta( $post->ID, "_bds_academics_care_card{$i}_title", true ) : $care_cards_def[ $i ]['title'];
 		$c_d = metadata_exists( 'post', $post->ID, "_bds_academics_care_card{$i}_desc" ) ? get_post_meta( $post->ID, "_bds_academics_care_card{$i}_desc", true ) : $care_cards_def[ $i ]['desc'];
+		$c_d = str_replace( array( ' and MISC.', ' and MISC', ' & MISC.', ' & MISC' ), '.', $c_d );
 
 		$care_cards[ $i ] = array(
 			'title' => $c_t,

@@ -84,8 +84,7 @@ get_header();
 		</div>
 	</section>
 
-	<!-- Brand Values Marquee Banner Component -->
-	<?php get_template_part( 'template-parts/brand-marquee' ); ?>
+	
 
 	<!-- Section 2: Our Approach (Merits Every Student Carries Forward) -->
 	<section class="about-approach-section relative overflow-hidden" id="our-approach">
@@ -326,7 +325,8 @@ get_header();
 		</div>
 	</section>
 
-
+					<!-- Brand Values Marquee Banner Component -->
+	<?php get_template_part( 'template-parts/brand-marquee' ); ?>
 
 	<!-- Section 5: The Purpose that Guides Us -->
 	<section class="about-purpose-section relative overflow-hidden">

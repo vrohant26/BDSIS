@@ -1010,6 +1010,7 @@ $sub_img_url  = $sub_img_id ? wp_get_attachment_image_url( $sub_img_id, 'full' )
 					
 					$card_t = metadata_exists( 'post', $post_id, "_bds_academics_care_card{$c}_title" ) ? $card_t_meta : $care_cards_def[ $c ]['title'];
 					$card_d = metadata_exists( 'post', $post_id, "_bds_academics_care_card{$c}_desc" ) ? $card_d_meta : $care_cards_def[ $c ]['desc'];
+					$card_d = str_replace( array( ' and MISC.', ' and MISC', ' & MISC.', ' & MISC' ), '.', $card_d );
 					$icon_name = $care_cards_def[ $c ]['icon'];
 					?>
 					<div class="academics-care-card">
