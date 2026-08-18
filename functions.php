@@ -1098,6 +1098,7 @@ function theme_save_academics_hero_meta( $post_id ) {
 		'bds_academics_exp_main_img'            => '_bds_academics_exp_main_img',
 		'bds_academics_exp_sub_img'             => '_bds_academics_exp_sub_img',
 		'bds_academics_cs_visibility'           => '_bds_academics_cs_visibility',
+		'bds_academics_cs_title'                => '_bds_academics_cs_title',
 	);
 
 	$textarea_keys = array(
