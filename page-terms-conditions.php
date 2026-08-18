@@ -169,20 +169,20 @@ get_header();
 					</div>
 				</div>
 
-				<!-- Important Notice: Zero Donation Policy -->
-				<div class="legal-block" style="border-bottom: none; margin-bottom: 1.5rem; padding-bottom: 0;">
-					<div class="legal-block-header flex align-center gap-xs">
+				<!-- Transparent Admission Policy Notice -->
+				<div class="legal-notice-block" style="background: #FFF5F5; border-left: 4px solid #D9534F; padding: 20px; border-radius: 8px; margin-bottom: 30px;">
+					<div class="legal-block-header flex gap-xs align-center" style="margin-bottom: 10px;">
 						<iconify-icon icon="ph:warning-circle-bold" class="legal-icon" style="color: #D9534F;"></iconify-icon>
 						<h2 class="legal-block-title" style="color: #D9534F;"><?php esc_html_e( 'Important Notice: Transparent Admission Policy', 'bd-somani' ); ?></h2>
 					</div>
 					<div class="legal-block-body">
-						<p><strong>B.D. Somani International School strictly does not accept donations for admissions.</strong> <?php esc_html_e( 'We uphold a transparent and merit-based admission process. If you encounter any request for a donation in exchange for admission, please report the incident immediately to', 'bd-somani' ); ?> <a href="mailto:admissions@bdsiskharghar.org" style="color: #D9534F; font-weight: 700;">admissions@bdsiskharghar.org</a>.</p>
+						<p><strong>B.D. Somani International School strictly does not accept donations for admissions.</strong> <?php esc_html_e( 'We uphold a transparent and merit-based admission process. If you encounter any request for a donation in exchange for admission, please report the incident immediately to', 'bd-somani' ); ?> <a href="mailto:info@bdsiskharghar.org" style="color: #D9534F; font-weight: 700;">info@bdsiskharghar.org</a>.</p>
 					</div>
 				</div>
 
 				<!-- Contact / Inquiries Note -->
 				<div class="legal-contact-footer">
-					<p><strong><?php esc_html_e( 'Have questions regarding fee structure or terms?', 'bd-somani' ); ?></strong> <?php esc_html_e( 'Please get in touch with our admissions desk at', 'bd-somani' ); ?> <a href="mailto:admissions@bdsiskharghar.org">admissions@bdsiskharghar.org</a> <?php esc_html_e( 'or call', 'bd-somani' ); ?> <a href="tel:+918657546982">+91 86575 46982</a>.</p>
+					<p><strong><?php esc_html_e( 'Have questions regarding fee structure or terms?', 'bd-somani' ); ?></strong> <?php esc_html_e( 'Please get in touch with our admissions desk at', 'bd-somani' ); ?> <a href="mailto:info@bdsiskharghar.org">info@bdsiskharghar.org</a> <?php esc_html_e( 'or call', 'bd-somani' ); ?> <a href="tel:+912268066697">+91 22 68066697</a>.</p>
 				</div>
 
 			</div>

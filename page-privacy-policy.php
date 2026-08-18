@@ -149,7 +149,7 @@ get_header();
 
 				<!-- Contact / Inquiries Note -->
 				<div class="legal-contact-footer">
-					<p><strong><?php esc_html_e( 'Questions or Concerns?', 'bd-somani' ); ?></strong> <?php esc_html_e( 'If you have any questions regarding this Privacy Policy or data privacy at B.D. Somani International School, Kharghar, please contact us at', 'bd-somani' ); ?> <a href="mailto:admissions@bdsiskharghar.org">admissions@bdsiskharghar.org</a>.</p>
+					<p><strong><?php esc_html_e( 'Questions or Concerns?', 'bd-somani' ); ?></strong> <?php esc_html_e( 'If you have any questions regarding this Privacy Policy or data privacy at B.D. Somani International School, Kharghar, please contact us at', 'bd-somani' ); ?> <a href="mailto:info@bdsiskharghar.org">info@bdsiskharghar.org</a>.</p>
 				</div>
 
 			</div>

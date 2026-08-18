@@ -70,8 +70,7 @@ get_header();
 							</div>
 							<div class="contact-detail-text">
 								<strong><?php esc_html_e( 'Phone:', 'bd-somani' ); ?></strong><br>
-								<a href="tel:+918976932746" class="contact-detail-link">+91 89769 32746</a> / 
-								<a href="tel:+918976932747" class="contact-detail-link">+91 89769 32747</a>
+								<a href="tel:+912268066697" class="contact-detail-link">+91 22 68066697</a>
 							</div>
 						</li>
 
@@ -81,7 +80,7 @@ get_header();
 							</div>
 							<div class="contact-detail-text">
 								<strong><?php esc_html_e( 'Email:', 'bd-somani' ); ?></strong><br>
-								<a href="mailto:admissions.kharghar@bdsomani.org" class="contact-detail-link">admissions.kharghar@bdsomani.org</a>
+								<a href="mailto:info@bdsiskharghar.org" class="contact-detail-link">info@bdsiskharghar.org</a>
 							</div>
 						</li>
 
