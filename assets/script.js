@@ -1913,15 +1913,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const tabItems = section.querySelectorAll(".cornerstones-tab-item");
     const imgSlides = section.querySelectorAll(".cornerstones-img-slide");
-    const progressBar = section.querySelector("#cornerstonesProgressBar");
-    const dotBtns = section.querySelectorAll(".cornerstones-dot-btn");
+    const segmentTracks = section.querySelectorAll(".cornerstones-segment-track");
     if (!tabItems.length) return;
 
     let currentIndex = 0;
-    let autoPlayInterval = null;
+    let autoPlayTimeout = null;
+    const duration = 4000; // 4 seconds per tab
 
     function activateTab(index) {
       currentIndex = index;
+
       tabItems.forEach((t, i) => {
         if (i === index) {
           t.classList.add("active");
@@ -1938,57 +1939,63 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       });
 
-      if (progressBar) {
-        const percent = ((index + 1) / tabItems.length) * 100;
-        progressBar.style.width = percent + "%";
-      }
+      // Update segmented progress bars
+      segmentTracks.forEach((track, i) => {
+        const fill = track.querySelector(".cornerstones-segment-fill");
+        if (!fill) return;
 
-      dotBtns.forEach((dot, i) => {
-        if (i === index) {
-          dot.classList.add("active");
+        fill.style.transition = "none";
+
+        if (i < index) {
+          fill.style.width = "100%";
+        } else if (i > index) {
+          fill.style.width = "0%";
         } else {
-          dot.classList.remove("active");
+          fill.style.width = "0%";
+          void fill.offsetWidth; // Force reflow
+          fill.style.transition = `width ${duration}ms linear`;
+          fill.style.width = "100%";
         }
       });
-    }
 
-    function startAutoPlay() {
-      if (autoPlayInterval) return;
-      autoPlayInterval = setInterval(() => {
+      // Schedule next slide automatically
+      stopAutoPlay();
+      autoPlayTimeout = setTimeout(() => {
         const nextIndex = (currentIndex + 1) % tabItems.length;
         activateTab(nextIndex);
-      }, 4000);
+      }, duration);
     }
 
     function stopAutoPlay() {
-      if (autoPlayInterval) {
-        clearInterval(autoPlayInterval);
-        autoPlayInterval = null;
+      if (autoPlayTimeout) {
+        clearTimeout(autoPlayTimeout);
+        autoPlayTimeout = null;
       }
     }
 
     tabItems.forEach((item, idx) => {
       item.addEventListener("click", () => {
         activateTab(idx);
-        stopAutoPlay();
-        startAutoPlay();
       });
     });
 
-    dotBtns.forEach((dot, idx) => {
-      dot.addEventListener("click", () => {
+    segmentTracks.forEach((track, idx) => {
+      track.addEventListener("click", () => {
         activateTab(idx);
-        stopAutoPlay();
-        startAutoPlay();
       });
     });
+
+    let hasStarted = false;
 
     if ("IntersectionObserver" in window) {
       const observer = new IntersectionObserver(
         (entries) => {
           entries.forEach((entry) => {
             if (entry.isIntersecting) {
-              startAutoPlay();
+              if (!hasStarted) {
+                hasStarted = true;
+                activateTab(0);
+              }
             } else {
               stopAutoPlay();
             }
@@ -1998,7 +2005,7 @@ document.addEventListener("DOMContentLoaded", () => {
       );
       observer.observe(section);
     } else {
-      startAutoPlay();
+      activateTab(0);
     }
   }
 
