@@ -2142,4 +2142,71 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   initAcademicsInterestAccordions();
+
+  // Handle Contact & Admissions Mock Forms AJAX Submit to Google Sheets
+  function initFormSubmissions() {
+    const forms = document.querySelectorAll(".contact-mock-form");
+    if (!forms.length) return;
+
+    forms.forEach((form) => {
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        const submitBtn = form.querySelector("button[type='submit']");
+        const originalText = submitBtn ? submitBtn.innerHTML : "SUBMIT";
+
+        if (submitBtn) {
+          submitBtn.disabled = true;
+          submitBtn.innerHTML = "SUBMITTING...";
+        }
+
+        const formData = new FormData(form);
+        formData.append("action", "bdsis_submit_form");
+
+        const ajaxUrl = (typeof bdsis_ajax !== "undefined" && bdsis_ajax.ajax_url) ? bdsis_ajax.ajax_url : "/wp-admin/admin-ajax.php";
+
+        fetch(ajaxUrl, {
+          method: "POST",
+          body: formData,
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            if (submitBtn) {
+              submitBtn.disabled = false;
+              submitBtn.innerHTML = originalText;
+            }
+
+            let msgBox = form.querySelector(".form-message-box");
+            if (!msgBox) {
+              msgBox = document.createElement("div");
+              msgBox.className = "form-message-box";
+              msgBox.style.cssText = "margin-top: 15px; padding: 12px 16px; border-radius: 8px; font-weight: 600; font-size: 14px; text-align: center;";
+              form.appendChild(msgBox);
+            }
+
+            if (data.success) {
+              msgBox.style.background = "#e6f4ea";
+              msgBox.style.color = "#137333";
+              msgBox.style.border = "1px solid #ceead6";
+              msgBox.innerHTML = (data.data && data.data.message) ? data.data.message : "Thank you! Your submission has been recorded.";
+              form.reset();
+            } else {
+              msgBox.style.background = "#fce8e6";
+              msgBox.style.color = "#c5221f";
+              msgBox.style.border = "1px solid #fad2cf";
+              msgBox.innerHTML = (data.data && data.data.message) ? data.data.message : "Something went wrong. Please try again.";
+            }
+          })
+          .catch((err) => {
+            if (submitBtn) {
+              submitBtn.disabled = false;
+              submitBtn.innerHTML = originalText;
+            }
+            alert("Error submitting form. Please try again.");
+          });
+      });
+    });
+  }
+
+  initFormSubmissions();
 });

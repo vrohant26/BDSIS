@@ -99,6 +99,7 @@ get_header();
 								// Mock HTML Form matching design structure
 								?>
 								<form action="#" method="post" class="contact-mock-form admissions-mock-form">
+									<input type="hidden" name="form_type" value="Admissions">
 									
 									<!-- Row 1: First Name & Last Name -->
 									<div class="form-row">

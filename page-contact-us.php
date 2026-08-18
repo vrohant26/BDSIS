@@ -139,6 +139,7 @@ get_header();
 								// Mock HTML Form matching design structure
 								?>
 								<form action="#" method="post" class="contact-mock-form">
+									<input type="hidden" name="form_type" value="Enquiry">
 									<div class="form-row">
 										<div class="form-group">
 											<label for="first_name"><?php esc_html_e( 'First Name', 'bd-somani' ); ?></label>

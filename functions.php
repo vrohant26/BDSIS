@@ -93,6 +93,11 @@ function theme_enqueue_assets() {
 
 	// Custom Theme Script (depends on GSAP, Lenis, and Swiper)
 	wp_enqueue_script( 'theme-script', get_template_directory_uri() . '/assets/script.js', array( 'gsap', 'gsap-scrolltrigger', 'gsap-drawsvg', 'lenis', 'swiper-script' ), $js_ver, true );
+
+	wp_localize_script( 'theme-script', 'bdsis_ajax', array(
+		'ajax_url' => admin_url( 'admin-ajax.php' ),
+		'nonce'    => wp_create_nonce( 'bdsis_form_nonce' ),
+	) );
 }
 add_action( 'wp_enqueue_scripts', 'theme_enqueue_assets' );
 
@@ -1688,4 +1693,62 @@ function theme_save_campus_life_meta( $post_id ) {
 	}
 }
 add_action( 'save_post', 'theme_save_campus_life_meta' );
+
+// AJAX Handler for Contact & Admissions Forms -> Google Sheets Webhook Integration
+function bdsis_handle_form_submission() {
+	$form_type    = isset( $_POST['form_type'] ) ? sanitize_text_field( wp_unslash( $_POST['form_type'] ) ) : 'Enquiry';
+	$first_name   = isset( $_POST['first_name'] ) ? sanitize_text_field( wp_unslash( $_POST['first_name'] ) ) : '';
+	$last_name    = isset( $_POST['last_name'] ) ? sanitize_text_field( wp_unslash( $_POST['last_name'] ) ) : '';
+	$full_name    = trim( $first_name . ' ' . $last_name );
+	$email        = isset( $_POST['email'] ) ? sanitize_email( wp_unslash( $_POST['email'] ) ) : '';
+	$phone        = isset( $_POST['mobile_number'] ) ? sanitize_text_field( wp_unslash( $_POST['mobile_number'] ) ) : '';
+	$message      = isset( $_POST['your_message'] ) ? sanitize_textarea_field( wp_unslash( $_POST['your_message'] ) ) : '';
+
+	// Admissions specific fields
+	$child_name    = isset( $_POST['child_name'] ) ? sanitize_text_field( wp_unslash( $_POST['child_name'] ) ) : '';
+	$date_of_birth = isset( $_POST['date_of_birth'] ) ? sanitize_text_field( wp_unslash( $_POST['date_of_birth'] ) ) : '';
+	$academic_year = isset( $_POST['academic_year'] ) ? sanitize_text_field( wp_unslash( $_POST['academic_year'] ) ) : '';
+	$found_via     = isset( $_POST['found_via'] ) ? sanitize_text_field( wp_unslash( $_POST['found_via'] ) ) : '';
+
+	$grade_field = '';
+	if ( ! empty( $child_name ) || ! empty( $academic_year ) ) {
+		$grade_field = "Child: {$child_name} | DOB: {$date_of_birth} | Year: {$academic_year} | Source: {$found_via}";
+	}
+
+	$payload = array(
+		'form_type' => $form_type,
+		'name'      => $full_name,
+		'email'     => $email,
+		'phone'     => $phone,
+		'grade'     => $grade_field,
+		'message'   => $message,
+	);
+
+	// Deployed Google Apps Script Web App Endpoint URL
+	$webhook_url = 'https://script.google.com/macros/s/AKfycbzzFaKiy4yuvtV-zpmAe3KSBOwoBFv3i-BC3XsoMVQf57vYe2XCBXjDpwW1nL1Z0Hx1/exec';
+
+	$response = wp_remote_post(
+		$webhook_url,
+		array(
+			'method'      => 'POST',
+			'timeout'     => 15,
+			'redirection' => 5,
+			'httpversion' => '1.0',
+			'blocking'    => true,
+			'headers'     => array(
+				'Content-Type' => 'application/json; charset=utf-8',
+			),
+			'body'        => wp_json_encode( $payload ),
+		)
+	);
+
+	if ( is_wp_error( $response ) ) {
+		wp_send_json_error( array( 'message' => __( 'There was an error sending your message. Please try again.', 'bd-somani' ) ) );
+	} else {
+		wp_send_json_success( array( 'message' => __( 'Thank you! Your information has been submitted successfully and recorded in our system.', 'bd-somani' ) ) );
+	}
+}
+add_action( 'wp_ajax_bdsis_submit_form', 'bdsis_handle_form_submission' );
+add_action( 'wp_ajax_nopriv_bdsis_submit_form', 'bdsis_handle_form_submission' );
+
 
