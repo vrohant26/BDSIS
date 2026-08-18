@@ -491,19 +491,6 @@ function theme_academics_hero_metabox_callback( $post ) {
 			</div>
 		</div>
 
-		<!-- Marquee Visibility Toggles -->
-		<div style="background: #f4f6f9; padding: 15px; border: 1px solid #ccd0d4; border-radius: 8px; margin-top: 5px;">
-			<h4 style="margin: 0 0 12px 0; color: #1d2327;"><?php esc_html_e( 'Brand Marquee Scrolling Banner Options', 'bd-somani' ); ?></h4>
-			<div style="display: flex; gap: 30px; flex-wrap: wrap;">
-				<div>
-					<label for="bds_academics_bottom_marquee_visibility" style="font-weight: 600; display: block; margin-bottom: 4px;"><?php esc_html_e( 'Bottom Marquee (Above Footer)', 'bd-somani' ); ?></label>
-					<select id="bds_academics_bottom_marquee_visibility" name="bds_academics_bottom_marquee_visibility" style="font-weight: 600; padding: 4px 10px;">
-						<option value="show" <?php selected( $bottom_marquee_vis, 'show' ); ?>><?php esc_html_e( 'Show Bottom Marquee Banner', 'bd-somani' ); ?></option>
-						<option value="hide" <?php selected( $bottom_marquee_vis, 'hide' ); ?>><?php esc_html_e( 'Hide Bottom Marquee Banner', 'bd-somani' ); ?></option>
-					</select>
-				</div>
-			</div>
-		</div>
 	</div>
 	<?php
 }

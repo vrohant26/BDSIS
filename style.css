@@ -5422,7 +5422,7 @@ body.theme-purple-mode .timeline-progress-bar {
    ACADEMICS STICKY APPROACH / CARDS SECTION STYLES
    ========================================================================== */
 .academics-approach-section {
-    padding-top: clamp(4rem, 7vw, 7.5rem);
+    padding-top: 7.5rem;
     padding-bottom: clamp(5rem, 8vw, 8.5rem);
     background-color: var(--clr-bg-light);
     position: relative;
