@@ -47,12 +47,45 @@ get_header();
 					</div>
 				</div>
 
-				<div class="academics-hero-media">
-					<div class="academics-main-image-wrap">
-						<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/reading and literature club.webp' ); ?>" alt="<?php esc_attr_e( 'Reading and Literature Club', 'bd-somani' ); ?>" class="academics-main-img">
+				<div class="academics-hero-media campus-hero-carousel-media">
+					<div class="swiper campus-hero-swiper">
+						<div class="swiper-wrapper">
+							<div class="swiper-slide">
+								<div class="campus-hero-slide-wrap">
+									<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/carousel swimming pool.webp' ); ?>" alt="<?php esc_attr_e( 'Swimming Pool', 'bd-somani' ); ?>" class="campus-hero-slide-img">
+								</div>
+							</div>
+							<div class="swiper-slide">
+								<div class="campus-hero-slide-wrap">
+									<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/carousel library.webp' ); ?>" alt="<?php esc_attr_e( 'Library', 'bd-somani' ); ?>" class="campus-hero-slide-img">
+								</div>
+							</div>
+							<div class="swiper-slide">
+								<div class="campus-hero-slide-wrap">
+									<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/carousel cafeteria.webp' ); ?>" alt="<?php esc_attr_e( 'Cafeteria', 'bd-somani' ); ?>" class="campus-hero-slide-img">
+								</div>
+							</div>
+						</div>
 					</div>
-					<div class="academics-sub-image-wrap">
-						<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/campus life hero image 2.webp' ); ?>" alt="<?php esc_attr_e( 'Campus Life Hero Image', 'bd-somani' ); ?>" class="academics-sub-img">
+					<!-- 3 Segmented Progressive Indicator Bars Below Carousel -->
+					<div class="campus-hero-progress-wrapper flex-center">
+						<div class="campus-hero-progress-container flex gap-xs">
+							<button type="button" class="campus-progress-item active" data-slide-index="0" aria-label="<?php esc_attr_e( 'Go to Swimming Pool', 'bd-somani' ); ?>">
+								<span class="campus-progress-track">
+									<span class="campus-progress-fill"></span>
+								</span>
+							</button>
+							<button type="button" class="campus-progress-item" data-slide-index="1" aria-label="<?php esc_attr_e( 'Go to Library', 'bd-somani' ); ?>">
+								<span class="campus-progress-track">
+									<span class="campus-progress-fill"></span>
+								</span>
+							</button>
+							<button type="button" class="campus-progress-item" data-slide-index="2" aria-label="<?php esc_attr_e( 'Go to Cafeteria', 'bd-somani' ); ?>">
+								<span class="campus-progress-track">
+									<span class="campus-progress-fill"></span>
+								</span>
+							</button>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -80,7 +113,7 @@ get_header();
 
 			<!-- Center Text & CTA Button -->
 			<div class="programme-center-content">
-				<h2 class="programme-title"><?php esc_html_e( 'Every Day Shapes Tomorrow.', 'bd-somani' ); ?></h2>
+				<h2 class="programme-title"><?php esc_html_e( 'Every Day Shapes <br>  Tomorrow.', 'bd-somani' ); ?></h2>
 				<p class="programme-desc"><?php esc_html_e( 'Campus life at B.D. Somani is built around experiences that inspire curiosity, encourage collaboration, and nurture confidence. Whether inside the classroom or beyond it, every moment is an opportunity to discover new passions, build meaningful friendships, and grow into a future-ready individual.', 'bd-somani' ); ?></p>
 				
 				<div class="programme-pdf-wrap flex-center">
@@ -178,7 +211,7 @@ get_header();
 							<div class="swiper-slide experiences-card-slide">
 								<div class="experiences-purple-card" style="transform: rotate(-2.5deg);">
 									<div class="experiences-card-img-wrap">
-										<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/Find their voice.webp' ); ?>" alt="<?php esc_attr_e( 'Find their Voice', 'bd-somani' ); ?>" class="experiences-card-photo" style="width:100%; height:100%; object-fit:cover; display:block;">
+										<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/Carousel 4.webp' ); ?>" alt="<?php esc_attr_e( 'Find their Voice', 'bd-somani' ); ?>" class="experiences-card-photo" style="width:100%; height:100%; object-fit:cover; display:block;">
 									</div>
 									<div class="experiences-card-content">
 										<h4 class="experiences-card-title"><?php esc_html_e( 'Find their Voice', 'bd-somani' ); ?></h4>

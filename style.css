@@ -5062,6 +5062,89 @@ body.theme-purple-mode .timeline-progress-bar {
     padding-left: 20px;
 }
 
+/* Campus Life Hero Single Carousel Media Overrides */
+.campus-hero-carousel-media {
+    padding-bottom: 0 !important;
+    padding-left: 0 !important;
+    max-width: 660px;
+}
+
+.campus-hero-swiper {
+    width: 100%;
+    border-radius: 28px;
+    overflow: hidden;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12);
+    background-color: #F3EEF3;
+    position: relative;
+}
+
+.campus-hero-slide-wrap {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    border-radius: 28px;
+}
+
+.campus-hero-slide-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* 3 Segmented Progressive Indicator Bars Below Carousel */
+.campus-hero-progress-wrapper {
+    width: 100%;
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+}
+
+.campus-hero-progress-container {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    width: 100%;
+}
+
+.campus-progress-item {
+    position: relative;
+    flex: 1;
+    height: 24px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 10px 0;
+    display: flex;
+    align-items: center;
+    pointer-events: auto;
+}
+
+.campus-progress-track {
+    position: relative;
+    width: 100%;
+    height: 4px;
+    background: rgba(73, 39, 74, 0.15);
+    border-radius: 4px;
+    overflow: hidden;
+    transition: background 0.3s ease;
+}
+
+.campus-progress-item:hover .campus-progress-track {
+    background: rgba(73, 39, 74, 0.3);
+}
+
+.campus-progress-fill {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 0%;
+    background-color: var(--clr-primary-purple, #49274A);
+    border-radius: 4px;
+    will-change: width;
+}
+
 /* Main Hero Image Wrapper */
 .academics-main-image-wrap {
     width: 100%;
@@ -5361,11 +5444,13 @@ body.theme-purple-mode .timeline-progress-bar {
     overflow: hidden;
     background-color: #FFFFFF;
     transition: transform 0.3s ease;
+    top: -20%
 }
 
 .programme-left-card {
     transform: translateY(50px) rotate(-6deg);
     left: clamp(1.5rem, 3.5vw, 5%);
+
 
 }
 
@@ -5373,15 +5458,9 @@ body.theme-purple-mode .timeline-progress-bar {
     transform: translateY(-50px) rotate(6deg);
     right: clamp(1.5rem, 3.5vw, 5%);
 
+
 }
 
-.programme-left-card:hover {
-    transform: translateY(45px) rotate(-3deg) scale(1.03);
-}
-
-.programme-right-card:hover {
-    transform: translateY(-55px) rotate(3deg) scale(1.03);
-}
 
 .programme-tilted-img {
     width: 100%;
@@ -5876,6 +5955,7 @@ body.theme-purple-mode .timeline-progress-bar {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: top center;
     display: block;
 }
 

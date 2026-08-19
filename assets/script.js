@@ -2243,5 +2243,81 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  // ---------------------------------------------------------------------------
+  // Campus Life Hero Carousel with 3 Segmented Progressive Indicator Bars
+  // ---------------------------------------------------------------------------
+  function initCampusHeroCarousel() {
+    const swiperEl = document.querySelector(".campus-hero-swiper");
+    if (!swiperEl) return;
+
+    const progressItems = document.querySelectorAll(".campus-progress-item");
+
+    function updateCompletedBars(realIndex) {
+      progressItems.forEach((p, idx) => {
+        const fill = p.querySelector(".campus-progress-fill");
+        if (!fill) return;
+
+        if (idx < realIndex) {
+          p.classList.remove("active");
+          fill.style.transition = "none";
+          fill.style.width = "100%";
+        } else if (idx > realIndex) {
+          p.classList.remove("active");
+          fill.style.transition = "none";
+          fill.style.width = "0%";
+        } else {
+          p.classList.add("active");
+          fill.style.transition = "none";
+        }
+      });
+    }
+
+    const heroSwiper = new Swiper(swiperEl, {
+      loop: true,
+      speed: 800,
+      effect: "fade",
+      fadeEffect: {
+        crossFade: true,
+      },
+      autoplay: {
+        delay: 3500,
+        disableOnInteraction: false,
+      },
+      on: {
+        init: function () {
+          updateCompletedBars(this.realIndex);
+        },
+        slideChange: function () {
+          updateCompletedBars(this.realIndex);
+        },
+        autoplayTimeLeft(swiper, time, progress) {
+          const activeIndex = swiper.realIndex;
+          const currentItem = progressItems[activeIndex];
+          if (!currentItem) return;
+
+          const currentFill = currentItem.querySelector(".campus-progress-fill");
+          if (currentFill) {
+            const fillPercent = Math.min(100, Math.max(0, (1 - progress) * 100));
+            currentFill.style.width = fillPercent + "%";
+          }
+        },
+      },
+    });
+
+    // Click handler for 3 progress bar buttons
+    progressItems.forEach((item) => {
+      item.addEventListener("click", () => {
+        const slideIndex = parseInt(item.getAttribute("data-slide-index"), 10);
+        if (!isNaN(slideIndex)) {
+          heroSwiper.slideToLoop(slideIndex);
+          if (heroSwiper.autoplay) {
+            heroSwiper.autoplay.start();
+          }
+        }
+      });
+    });
+  }
+
+  initCampusHeroCarousel();
   initFormSubmissions();
 });
