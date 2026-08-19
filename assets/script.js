@@ -1737,19 +1737,19 @@ document.addEventListener("DOMContentLoaded", () => {
   function initAcademicsApproachPinning() {
     if (!hasGsap()) return;
 
-    const section = document.querySelector(".academics-approach-section");
     const stickyCol = document.querySelector(".academics-approach-left-sticky");
     const cardsCol = document.querySelector(".academics-approach-cards-col");
+    const grid = document.querySelector(".academics-approach-grid");
 
-    if (!section || !stickyCol || !cardsCol) return;
+    if (!stickyCol || !cardsCol || !grid) return;
 
     ScrollTrigger.matchMedia({
       "(min-width: 901px)": function () {
         ScrollTrigger.create({
-          trigger: section,
+          trigger: grid,
           pin: stickyCol,
-          start: "top 105px",
-          end: "bottom bottom",
+          start: "top 115px",
+          end: () => "+=" + (cardsCol.offsetHeight - stickyCol.offsetHeight),
           pinSpacing: false,
           invalidateOnRefresh: true,
         });

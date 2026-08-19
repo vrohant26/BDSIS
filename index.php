@@ -184,7 +184,7 @@ get_header();
 		<!-- Top Right Background Decorative Wavy Line SVG -->
 		<div class="bg-wavy-line-svg">
 			<svg width="423" height="422" viewBox="0 0 423 422" fill="none" xmlns="http://www.w3.org/2000/svg">
-				<path d="M570.301 276.242C357.749 622.86 346.638 33.6598 214.397 265.741C82.1555 497.822 -7.27757 184.524 122.951 65.7798C253.18 -52.9641 10.9655 -88.8132 34.6725 -112.174" stroke="var(--clr-accent-cream)" stroke-width="66" stroke-linecap="round"/>
+				<path d="M570.301 276.242C357.749 622.86 346.638 33.6598 214.397 265.741C82.1555 497.822 -7.27757 184.524 122.951 65.7798C253.18 -52.9641 10.9655 -88.8132 34.6725 -112.174" stroke="var(--clr-wavy-purple-light)" stroke-width="66" stroke-linecap="round"/>
 			</svg>
 		</div>
 
@@ -261,7 +261,7 @@ get_header();
 	<section class="purple-full-section relative overflow-hidden flex-center" id="student-life">
 		<!-- Background Wavy Cream Ribbon SVG Path -->
 		<svg class="experiential-ribbon-svg" viewBox="0 0 1060 878" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
-			<path class="experiential-ribbon-path" d="M1033.64 -46.2938C1057.75 0.461853 590.175 55.3294 730.36 293.577C870.545 531.825 456.118 1134.19 403.613 675.948C351.109 217.711 -143.78 1360.05 -249.45 674.754" stroke="#FFF5EE" stroke-width="50" stroke-linecap="round"/>
+			<path class="experiential-ribbon-path" d="M1033.64 -46.2938C1057.75 0.461853 590.175 55.3294 730.36 293.577C870.545 531.825 456.118 1134.19 403.613 675.948C351.109 217.711 -143.78 1360.05 -249.45 674.754" stroke="var(--clr-wavy-purple-light)" stroke-width="50" stroke-linecap="round"/>
 		</svg>
 
 		<div class="site-container relative z-2">

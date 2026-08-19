@@ -91,12 +91,12 @@ get_header();
 		<!-- Background Organic Wavy Doodle Shapes -->
 		<div class="about-approach-bg-doodle about-approach-bg-doodle-top" aria-hidden="true">
 			<svg width="323" height="232" viewBox="0 0 323 232" fill="none" xmlns="http://www.w3.org/2000/svg">
-				<path d="M447.115 109.822C237.579 390.965 283.711 -51.9314 151.802 135.363C19.8932 322.658 -25.1132 95.0059 94.4674 -6.70432C214.048 -108.415 15.7675 -112.658 37.7 -132.488" stroke="#FFEDE1" stroke-width="50"/>
+				<path d="M447.115 109.822C237.579 390.965 283.711 -51.9314 151.802 135.363C19.8932 322.658 -25.1132 95.0059 94.4674 -6.70432C214.048 -108.415 15.7675 -112.658 37.7 -132.488" stroke="var(--clr-wavy-purple-light)" stroke-width="50"/>
 			</svg>
 		</div>
 		<div class="about-approach-bg-doodle about-approach-bg-doodle-bottom" aria-hidden="true">
 			<svg width="310" height="312" viewBox="0 0 310 312" fill="none" xmlns="http://www.w3.org/2000/svg">
-				<path d="M-137.143 122.166C72.3938 -158.977 26.2613 283.92 158.17 96.6249C290.079 -90.6699 335.086 136.982 215.505 238.693C95.9247 340.403 294.205 344.646 272.273 364.476" stroke="#FFEDE1" stroke-width="50"/>
+				<path d="M-137.143 122.166C72.3938 -158.977 26.2613 283.92 158.17 96.6249C290.079 -90.6699 335.086 136.982 215.505 238.693C95.9247 340.403 294.205 344.646 272.273 364.476" stroke="var(--clr-wavy-purple-light)" stroke-width="50"/>
 			</svg>
 		</div>
 
@@ -224,7 +224,7 @@ get_header();
 									<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/aradhana somani.webp' ); ?>" alt="Aradhana Somani" loading="lazy" decoding="async">
 								</div>
 								<div class="about-leader-info">
-									<h3 class="about-leader-name">Aradhana Somani</h3>
+									<h3 class="about-leader-name">Ms. Aradhana Somani</h3>
 									<p class="about-leader-role">Managing Trustee</p>
 								</div>
 							</div>
@@ -239,7 +239,7 @@ get_header();
 										<p class="about-leader-quote">I invite you to explore B.D. Somani International School and discover our commitment to helping every student **learn, grow and thrive**, prepared for whatever the future holds.</p>
 									</div>
 									<div class="about-leader-signature">
-										<span class="signature-name">- Aradhana Somani</span>
+										<span class="signature-name">- Ms. Aradhana Somani</span>
 										<span class="signature-role">Managing Trustee</span>
 									</div>
 								</div>
@@ -259,7 +259,7 @@ get_header();
 									<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/dhananjay somani.webp' ); ?>" alt="Dhananjay Somani" loading="lazy" decoding="async">
 								</div>
 								<div class="about-leader-info">
-									<h3 class="about-leader-name">Dhananjay Somani</h3>
+									<h3 class="about-leader-name">Mr. Dhananjay Somani</h3>
 									<p class="about-leader-role">Founding Director</p>
 								</div>
 							</div>
@@ -274,7 +274,7 @@ get_header();
 										<p class="about-leader-quote">**With gratitude for your support and enthusiasm,**</p>
 									</div>
 									<div class="about-leader-signature">
-										<span class="signature-name">- Dhananjay Somani</span>
+										<span class="signature-name">- Mr. Dhananjay Somani</span>
 										<span class="signature-role">Founding Director</span>
 									</div>
 								</div>
@@ -334,7 +334,7 @@ get_header();
 		<!-- Wavy Line Decoration: Left -->
 		<div class="about-purpose-wavy-line" aria-hidden="true">
 			<svg width="275" height="420" viewBox="0 0 275 420" fill="none" xmlns="http://www.w3.org/2000/svg">
-				<path d="M134.251 -27.1735C424.96 168.875 -19.6186 143.674 173.687 266.607C366.992 389.539 141.715 445.228 34.48 330.576C-72.7547 215.923 -67.6456 414.183 -88.4876 393.21" stroke="#FFE8D9" stroke-width="50"/>
+				<path d="M134.251 -27.1735C424.96 168.875 -19.6186 143.674 173.687 266.607C366.992 389.539 141.715 445.228 34.48 330.576C-72.7547 215.923 -67.6456 414.183 -88.4876 393.21" stroke="var(--clr-wavy-purple-light)" stroke-width="50"/>
 			</svg>
 		</div>
 
@@ -474,12 +474,12 @@ get_header();
 		<!-- Background Organic Wavy Doodle Shapes -->
 		<div class="about-approach-bg-doodle about-approach-bg-doodle-top" aria-hidden="true">
 			<svg width="323" height="232" viewBox="0 0 323 232" fill="none" xmlns="http://www.w3.org/2000/svg">
-				<path d="M447.115 109.822C237.579 390.965 283.711 -51.9314 151.802 135.363C19.8932 322.658 -25.1132 95.0059 94.4674 -6.70432C214.048 -108.415 15.7675 -112.658 37.7 -132.488" stroke="#FFEDE1" stroke-width="50"/>
+				<path d="M447.115 109.822C237.579 390.965 283.711 -51.9314 151.802 135.363C19.8932 322.658 -25.1132 95.0059 94.4674 -6.70432C214.048 -108.415 15.7675 -112.658 37.7 -132.488" stroke="var(--clr-wavy-purple-light)" stroke-width="50"/>
 			</svg>
 		</div>
 		<div class="about-approach-bg-doodle about-approach-bg-doodle-bottom" aria-hidden="true">
 			<svg width="310" height="312" viewBox="0 0 310 312" fill="none" xmlns="http://www.w3.org/2000/svg">
-				<path d="M-137.143 122.166C72.3938 -158.977 26.2613 283.92 158.17 96.6249C290.079 -90.6699 335.086 136.982 215.505 238.693C95.9247 340.403 294.205 344.646 272.273 364.476" stroke="#FFEDE1" stroke-width="50"/>
+				<path d="M-137.143 122.166C72.3938 -158.977 26.2613 283.92 158.17 96.6249C290.079 -90.6699 335.086 136.982 215.505 238.693C95.9247 340.403 294.205 344.646 272.273 364.476" stroke="var(--clr-wavy-purple-light)" stroke-width="50"/>
 			</svg>
 		</div>
 

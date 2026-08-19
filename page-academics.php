@@ -163,7 +163,7 @@ $sub_img_url  = $sub_img_id ? wp_get_attachment_image_url( $sub_img_id, 'full' )
 		<!-- Organic Background Wave Shape -->
 		<div class="programme-bg-wave" aria-hidden="true">
 			<svg width="542" height="301" viewBox="0 0 542 301" fill="none" xmlns="http://www.w3.org/2000/svg">
-				<path d="M-53.6729 145.556C186.687 -214.416 176.577 441.129 326.732 198.926C476.887 -43.2773 560.878 315.087 417.107 431.678C273.341 548.268 531.154 616.46 504.917 639.622" stroke="#FFEEE2" stroke-width="70"/>
+				<path d="M-53.6729 145.556C186.687 -214.416 176.577 441.129 326.732 198.926C476.887 -43.2773 560.878 315.087 417.107 431.678C273.341 548.268 531.154 616.46 504.917 639.622" stroke="var(--clr-wavy-purple-light)" stroke-width="70"/>
 			</svg>
 		</div>
 
@@ -296,6 +296,10 @@ $sub_img_url  = $sub_img_id ? wp_get_attachment_image_url( $sub_img_id, 'full' )
 
 	<?php
 	// Sticky Approach / Cards Section Metadata
+	$app_eyebrow   = get_post_meta( $post_id, '_bds_academics_app_eyebrow', true );
+	if ( empty( $app_eyebrow ) && ! metadata_exists( 'post', $post_id, '_bds_academics_app_eyebrow' ) ) {
+		$app_eyebrow = __( 'EXPLORE OUR PROGRAMME', 'bd-somani' );
+	}
 	$app_has_title = metadata_exists( 'post', $post_id, '_bds_academics_app_title' );
 	$app_title     = get_post_meta( $post_id, '_bds_academics_app_title', true );
 
@@ -395,6 +399,9 @@ $sub_img_url  = $sub_img_id ? wp_get_attachment_image_url( $sub_img_id, 'full' )
 			
 			<!-- Left Column (Pinned / Fixed on Scroll) -->
 			<div class="academics-approach-left-sticky">
+				<?php if ( ! empty( $app_eyebrow ) ) : ?>
+					<span class="academics-approach-eyebrow"><?php echo esc_html( $app_eyebrow ); ?></span>
+				<?php endif; ?>
 				<?php if ( ! empty( $app_title ) ) : ?>
 					<h2 class="academics-approach-title"><?php echo esc_html( $app_title ); ?></h2>
 				<?php endif; ?>
@@ -419,19 +426,19 @@ $sub_img_url  = $sub_img_id ? wp_get_attachment_image_url( $sub_img_id, 'full' )
 
 				<!-- Bottom Left Book & Stars Doodle -->
 				<div class="academics-book-stars-doodle" aria-hidden="true">
-					<svg width="140" height="110" viewBox="0 0 140 110" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<svg width="200" height="155" viewBox="0 0 140 110" fill="none" xmlns="http://www.w3.org/2000/svg">
 						<!-- Floating Stars -->
-						<path d="M78 12L80 18L86 20L80 22L78 28L76 22L70 20L76 18Z" fill="#D3A2C7"/>
-						<path d="M122 30L123.5 34L128 35.5L123.5 37L122 41L120.5 37L116 35.5L120.5 34Z" fill="#D3A2C7"/>
-						<path d="M18 70L19.5 73.5L23 75L19.5 76.5L18 80L16.5 76.5L13 75L16.5 73.5Z" fill="#D3A2C7"/>
+						<path d="M78 12L80 18L86 20L80 22L78 28L76 22L70 20L76 18Z" fill="#C28FB6"/>
+						<path d="M122 30L123.5 34L128 35.5L123.5 37L122 41L120.5 37L116 35.5L120.5 34Z" fill="#C28FB6"/>
+						<path d="M18 70L19.5 73.5L23 75L19.5 76.5L18 80L16.5 76.5L13 75L16.5 73.5Z" fill="#C28FB6"/>
 
-						<!-- Open Book Outline -->
-						<path d="M10 88C22 76 42 75 58 84V38C42 29 22 30 10 42V88Z" stroke="#D3A2C7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-						<path d="M106 88C94 76 74 75 58 84V38C74 29 94 30 106 42V88Z" stroke="#D3A2C7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-						<path d="M20 52C30 44 44 43 54 48" stroke="#D3A2C7" stroke-width="1.5" stroke-dasharray="3 3" stroke-linecap="round"/>
-						<path d="M20 64C30 56 44 55 54 60" stroke="#D3A2C7" stroke-width="1.5" stroke-dasharray="3 3" stroke-linecap="round"/>
-						<path d="M96 52C86 44 72 43 62 48" stroke="#D3A2C7" stroke-width="1.5" stroke-dasharray="3 3" stroke-linecap="round"/>
-						<path d="M96 64C86 56 72 55 62 60" stroke="#D3A2C7" stroke-width="1.5" stroke-dasharray="3 3" stroke-linecap="round"/>
+						<!-- Open Book Outline (Thickened) -->
+						<path d="M10 88C22 76 42 75 58 84V38C42 29 22 30 10 42V88Z" stroke="#C28FB6" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+						<path d="M106 88C94 76 74 75 58 84V38C74 29 94 30 106 42V88Z" stroke="#C28FB6" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+						<path d="M20 52C30 44 44 43 54 48" stroke="#C28FB6" stroke-width="2.5" stroke-dasharray="3 3" stroke-linecap="round"/>
+						<path d="M20 64C30 56 44 55 54 60" stroke="#C28FB6" stroke-width="2.5" stroke-dasharray="3 3" stroke-linecap="round"/>
+						<path d="M96 52C86 44 72 43 62 48" stroke="#C28FB6" stroke-width="2.5" stroke-dasharray="3 3" stroke-linecap="round"/>
+						<path d="M96 64C86 56 72 55 62 60" stroke="#C28FB6" stroke-width="2.5" stroke-dasharray="3 3" stroke-linecap="round"/>
 					</svg>
 				</div>
 			</div>
@@ -611,6 +618,15 @@ $sub_img_url  = $sub_img_id ? wp_get_attachment_image_url( $sub_img_id, 'full' )
 								</div>
 								<h4 class="interest-item-title"><?php esc_html_e( 'Basketball', 'bd-somani' ); ?></h4>
 								<p class="interest-item-desc"><?php esc_html_e( 'Powered by NBA Basketball School, students hone their technical skills, coordination and teamwork through structured training and gameplay. Every game reinforces quick decision-making, perseverance and the confidence to perform under pressure.', 'bd-somani' ); ?></p>
+							</div>
+
+							<!-- Item 3: Taekwondo -->
+							<div class="interest-item-box">
+								<div class="interest-item-icon-wrap flex-center">
+									<iconify-icon icon="ph:hand-fist-fill"></iconify-icon>
+								</div>
+								<h4 class="interest-item-title"><?php esc_html_e( 'Taekwondo', 'bd-somani' ); ?></h4>
+								<p class="interest-item-desc"><?php esc_html_e( 'Through structured Taekwondo training, students develop strength, coordination and self-discipline. Each session builds focus, resilience and respect while giving students the confidence to challenge themselves and grow.', 'bd-somani' ); ?></p>
 							</div>
 						</div>
 					</div>
@@ -894,7 +910,7 @@ $sub_img_url  = $sub_img_id ? wp_get_attachment_image_url( $sub_img_id, 'full' )
 	<section class="purple-full-section relative overflow-hidden academics-cornerstones-section">
 		<!-- Background Wavy Cream Ribbon SVG -->
 		<svg class="experiential-ribbon-svg" viewBox="0 0 1060 878" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
-			<path class="experiential-ribbon-path" d="M1033.64 -46.2938C1057.75 0.461853 590.175 55.3294 730.36 293.577C870.545 531.825 456.118 1134.19 403.613 675.948C351.109 217.711 -143.78 1360.05 -249.45 674.754" stroke="#FFF5EE" stroke-width="50" stroke-linecap="round"/>
+			<path class="experiential-ribbon-path" d="M1033.64 -46.2938C1057.75 0.461853 590.175 55.3294 730.36 293.577C870.545 531.825 456.118 1134.19 403.613 675.948C351.109 217.711 -143.78 1360.05 -249.45 674.754" stroke="var(--clr-wavy-purple-light)" stroke-width="50" stroke-linecap="round"/>
 		</svg>
 
 		<div class="site-container relative z-2">

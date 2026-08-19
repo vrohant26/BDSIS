@@ -68,7 +68,7 @@ get_header();
 		<!-- Organic Background Wave Shape -->
 		<div class="programme-bg-wave" aria-hidden="true">
 			<svg width="542" height="301" viewBox="0 0 542 301" fill="none" xmlns="http://www.w3.org/2000/svg">
-				<path d="M-53.6729 145.556C186.687 -214.416 176.577 441.129 326.732 198.926C476.887 -43.2773 560.878 315.087 417.107 431.678C273.337 548.268 531.154 616.46 504.917 639.622" stroke="#FFEEE2" stroke-width="70"/>
+				<path d="M-53.6729 145.556C186.687 -214.416 176.577 441.129 326.732 198.926C476.887 -43.2773 560.878 315.087 417.107 431.678C273.337 548.268 531.154 616.46 504.917 639.622" stroke="var(--clr-wavy-purple-light)" stroke-width="70"/>
 			</svg>
 		</div>
 
@@ -249,7 +249,7 @@ get_header();
 			} else {
 				?>
 				<svg width="420" height="330" viewBox="0 0 420 330" fill="none" xmlns="http://www.w3.org/2000/svg">
-					<path d="M676.597 160.642C506.988 558.87 395.637 -87.2283 292.886 178.575C190.134 444.377 41.2902 107.74 161.008 -33.4378C280.725 -174.615 14.7423 -193.93 36.2412 -221.546" stroke="#FFEEE2" stroke-width="70"/>
+					<path d="M676.597 160.642C506.988 558.87 395.637 -87.2283 292.886 178.575C190.134 444.377 41.2902 107.74 161.008 -33.4378C280.725 -174.615 14.7423 -193.93 36.2412 -221.546" stroke="var(--clr-wavy-purple-light)" stroke-width="70"/>
 				</svg>
 				<?php
 			}

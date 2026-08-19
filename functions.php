@@ -597,7 +597,8 @@ function theme_academics_programme_metabox_callback( $post ) {
 }
 
 function theme_academics_approach_metabox_callback( $post ) {
-	$app_title = metadata_exists( 'post', $post->ID, '_bds_academics_app_title' ) ? get_post_meta( $post->ID, '_bds_academics_app_title', true ) : __( 'Our Approach', 'bd-somani' );
+	$app_eyebrow = metadata_exists( 'post', $post->ID, '_bds_academics_app_eyebrow' ) ? get_post_meta( $post->ID, '_bds_academics_app_eyebrow', true ) : __( 'EXPLORE OUR PROGRAMME', 'bd-somani' );
+	$app_title   = metadata_exists( 'post', $post->ID, '_bds_academics_app_title' ) ? get_post_meta( $post->ID, '_bds_academics_app_title', true ) : __( 'Our Approach', 'bd-somani' );
 
 	if ( metadata_exists( 'post', $post->ID, '_bds_academics_app_desc' ) ) {
 		$app_desc = get_post_meta( $post->ID, '_bds_academics_app_desc', true );
@@ -658,6 +659,11 @@ function theme_academics_approach_metabox_callback( $post ) {
 	?>
 	<div id="bds-academics-approach-metabox" style="display: flex; flex-direction: column; gap: 16px; margin-top: 10px;">
 		<p class="description"><?php esc_html_e( 'Configure the Sticky "Our Approach" / Cards section. Leave all fields empty if you wish to hide this section entirely from the frontend.', 'bd-somani' ); ?></p>
+
+		<div>
+			<label for="bds_academics_app_eyebrow" style="font-weight: 600; display: block; margin-bottom: 4px;"><?php esc_html_e( 'Section Eyebrow Label', 'bd-somani' ); ?></label>
+			<input type="text" id="bds_academics_app_eyebrow" name="bds_academics_app_eyebrow" value="<?php echo esc_attr( $app_eyebrow ); ?>" class="large-text" style="font-size: 14px; padding: 6px 10px;" placeholder="e.g. OUR APPROACH">
+		</div>
 
 		<div>
 			<label for="bds_academics_app_title" style="font-weight: 600; display: block; margin-bottom: 4px;"><?php esc_html_e( 'Main Heading / Section Title', 'bd-somani' ); ?></label>
@@ -1075,6 +1081,7 @@ function theme_save_academics_hero_meta( $post_id ) {
 		'bds_academics_overview_img_left'        => '_bds_academics_overview_img_left',
 		'bds_academics_overview_img_right'       => '_bds_academics_overview_img_right',
 		'bds_academics_overview_annotation_svg' => '_bds_academics_overview_annotation_svg',
+		'bds_academics_app_eyebrow'             => '_bds_academics_app_eyebrow',
 		'bds_academics_app_title'               => '_bds_academics_app_title',
 		'bds_academics_app_desc'                => '_bds_academics_app_desc',
 		'bds_academics_app_card1_title'         => '_bds_academics_app_card1_title',

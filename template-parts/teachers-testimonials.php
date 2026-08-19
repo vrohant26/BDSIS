@@ -31,7 +31,7 @@
 	<!-- Background Top Right Decorative Wavy SVG -->
 	<div class="teachers-wavy-decor-right" aria-hidden="true">
 		<svg width="423" height="422" viewBox="0 0 423 422" fill="none" xmlns="http://www.w3.org/2000/svg">
-			<path d="M570.301 276.242C357.749 622.86 346.638 33.6598 214.397 265.741C82.1555 497.822 -7.27757 184.524 122.951 65.7798C253.18 -52.9641 10.9655 -88.8132 34.6725 -112.174" stroke="var(--clr-accent-cream)" stroke-width="66" stroke-linecap="round"/>
+			<path d="M570.301 276.242C357.749 622.86 346.638 33.6598 214.397 265.741C82.1555 497.822 -7.27757 184.524 122.951 65.7798C253.18 -52.9641 10.9655 -88.8132 34.6725 -112.174" stroke="var(--clr-wavy-purple-light)" stroke-width="66" stroke-linecap="round"/>
 		</svg>
 	</div>
 
@@ -71,28 +71,7 @@
 						</div>
 					</div>
 
-					<!-- Slide 2: Mr. Rajesh Nair -->
-					<div class="swiper-slide teachers-slide-item">
-						<div class="teachers-card-group flex gap-md">
-							<!-- Portrait Box -->
-							<div class="teachers-portrait-box relative">
-								<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/Teacher Portrait 0282.webp' ); ?>" alt="Mr. Rajesh Nair" class="teachers-portrait-img" loading="lazy" decoding="async">
-							</div>
-							<!-- Quote Details Box -->
-							<div class="teachers-quote-box relative flex-column flex-between">
-								<div class="teachers-quote-content">
-									<h3 class="teachers-quote-heading">Fostering Innovation, Problem-Solving, And Hands-On Discovery.</h3>
-									<p class="teachers-quote-text">"In our Maker Labs and interactive classrooms, science comes alive. We encourage students to experiment, embrace trial and error, and think like innovators. The collaborative environment between teachers and students creates a truly dynamic learning culture."</p>
-								</div>
-								<div class="teachers-quote-author">
-									<h4 class="teachers-author-name">Mr. Rajesh Nair</h4>
-									<p class="teachers-author-info">Middle School Science & STEM Facilitator</p>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<!-- Slide 3: Ms. Sunita Sharma -->
+					<!-- Slide 2: Ms. Sunita Sharma -->
 					<div class="swiper-slide teachers-slide-item">
 						<div class="teachers-card-group flex gap-md">
 							<!-- Portrait Box -->
@@ -113,7 +92,7 @@
 						</div>
 					</div>
 
-					<!-- Slide 4: Mr. Vikramaditya Joshi -->
+					<!-- Slide 3: Mr. Vikramaditya Joshi -->
 					<div class="swiper-slide teachers-slide-item">
 						<div class="teachers-card-group flex gap-md">
 							<!-- Portrait Box -->
@@ -134,7 +113,7 @@
 						</div>
 					</div>
 
-					<!-- Slide 5: Ms. Priyanka Kulkarni -->
+					<!-- Slide 4: Ms. Priyanka Kulkarni -->
 					<div class="swiper-slide teachers-slide-item">
 						<div class="teachers-card-group flex gap-md">
 							<!-- Portrait Box -->
@@ -150,6 +129,27 @@
 								<div class="teachers-quote-author">
 									<h4 class="teachers-author-name">Ms. Priyanka Kulkarni</h4>
 									<p class="teachers-author-info">Language Arts & Humanities Mentor</p>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- Slide 5: Mr. Rajesh Nair -->
+					<div class="swiper-slide teachers-slide-item">
+						<div class="teachers-card-group flex gap-md">
+							<!-- Portrait Box -->
+							<div class="teachers-portrait-box relative">
+								<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/Teacher Portrait 0282.webp' ); ?>" alt="Mr. Rajesh Nair" class="teachers-portrait-img" loading="lazy" decoding="async">
+							</div>
+							<!-- Quote Details Box -->
+							<div class="teachers-quote-box relative flex-column flex-between">
+								<div class="teachers-quote-content">
+									<h3 class="teachers-quote-heading">Fostering Innovation, Problem-Solving, And Hands-On Discovery.</h3>
+									<p class="teachers-quote-text">"In our Maker Labs and interactive classrooms, science comes alive. We encourage students to experiment, embrace trial and error, and think like innovators. The collaborative environment between teachers and students creates a truly dynamic learning culture."</p>
+								</div>
+								<div class="teachers-quote-author">
+									<h4 class="teachers-author-name">Mr. Rajesh Nair</h4>
+									<p class="teachers-author-info">Middle School Science & STEM Facilitator</p>
 								</div>
 							</div>
 						</div>

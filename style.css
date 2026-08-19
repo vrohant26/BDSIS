@@ -21,6 +21,7 @@ Text Domain: bd-somani
     --clr-text-muted: #666666;
     --clr-border: #EAEAEA;
     --clr-accent-cream: #FFF5EE;
+    --clr-wavy-purple-light: #F0E6F0;
     --clr-bg-light: #FBFBFB;
 
     /* Uniform Layout Dimensions & Side Padding */
@@ -1559,16 +1560,16 @@ body.theme-purple-mode .timeline-progress-bar {
 .values-content-container {
     width: 100%;
     max-width: 1680px;
-    height: stretch;
     margin: 0 auto;
     padding-inline: 2rem;
-    padding-top: 8rem;
+    padding-top: clamp(4.5rem, 7.5vh, 7.5rem);
+    padding-bottom: clamp(1rem, 2.5vh, 2.5rem);
 }
 
 .values-pinned-sticky {
     width: 100%;
     min-height: 100svh;
-    padding-block: clamp(2rem, 3.5vw, 3.5rem);
+    padding-block: 0;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1598,12 +1599,12 @@ body.theme-purple-mode .timeline-progress-bar {
     justify-content: space-between;
     width: 100%;
     position: relative;
-    margin-block: 1.5rem;
-    min-height: 360px;
+    margin-block: clamp(1rem, 2.5vh, 1.75rem);
+    min-height: clamp(320px, 38vh, 380px);
 }
 
 .values-center-media {
-    flex: 0 0 clamp(340px, 38vw, 500px);
+    flex: 0 0 clamp(320px, 36vw, 500px);
     height: clamp(340px, 38vw, 480px);
     position: relative;
     display: flex;
@@ -1691,16 +1692,54 @@ body.theme-purple-mode .timeline-progress-bar {
 }
 
 .values-footer {
-    margin-top: 2.5rem;
+    margin-top: clamp(1rem, 2.5vh, 2.25rem);
 }
 
 .values-bottom-subtitle {
     font-family: var(--font-body);
-    font-size: clamp(1rem, 1.3vw, 1.25rem);
+    font-size: clamp(1rem, 1.25vw, 1.25rem);
     color: #E2D4E3;
     line-height: 1.6;
     max-width: 680px;
     margin-inline: auto;
+}
+
+/* Height-based breakpoint for shorter laptop screens & scaled displays ONLY */
+@media (min-width: 1025px) and (max-height: 840px) {
+    .values-content-container {
+        padding-top: clamp(3rem, 5vh, 4.25rem);
+    }
+
+    .values-main-title {
+        font-size: clamp(1.8rem, 2.8vw, 2.4rem);
+    }
+
+    .values-stage-container {
+        margin-block: 0.35rem;
+        min-height: 250px;
+    }
+
+    .values-center-media {
+        flex: 0 0 clamp(230px, 28vh, 340px);
+        height: clamp(230px, 28vh, 340px);
+    }
+
+    .value-card-box {
+        padding: 0.85rem 1.1rem;
+        width: clamp(260px, 24vw, 340px);
+    }
+
+    .value-card-desc {
+        font-size: 0.88rem;
+        line-height: 1.4;
+        margin-top: 0.3rem;
+    }
+
+    .values-footer {
+        margin-top: 0.4rem;
+    }
+
+
 }
 
 /* ==========================================================================
@@ -5230,17 +5269,16 @@ body.theme-purple-mode .timeline-progress-bar {
 .programme-container {
     position: relative;
     z-index: 2;
-    display: grid;
-    grid-template-columns: 240px 1fr 240px;
+    display: flex;
     align-items: center;
-    gap: clamp(1.5rem, 3vw, 3.5rem);
+    gap: clamp(1.5rem, 2.5vw, 3.5rem);
     width: 100%;
 }
 
 /* Center Content Column */
 .programme-center-content {
     text-align: center;
-
+    max-width: 1000px;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
@@ -5314,7 +5352,8 @@ body.theme-purple-mode .timeline-progress-bar {
 /* Floating Tilted Photo Cards */
 .programme-left-card,
 .programme-right-card {
-    width: 100%;
+    width: clamp(210px, 16vw, 300px);
+    position: absolute;
     aspect-ratio: 3 / 4;
     border-radius: 20px;
     border: 4px solid #FFFFFF;
@@ -5325,19 +5364,23 @@ body.theme-purple-mode .timeline-progress-bar {
 }
 
 .programme-left-card {
-    transform: rotate(-6deg);
+    transform: translateY(50px) rotate(-6deg);
+    left: clamp(1.5rem, 3.5vw, 5%);
+    top: -50%;
 }
 
 .programme-right-card {
-    transform: rotate(6deg);
+    transform: translateY(-50px) rotate(6deg);
+    right: clamp(1.5rem, 3.5vw, 5%);
+    top: -50%;
 }
 
 .programme-left-card:hover {
-    transform: rotate(-3deg) scale(1.03);
+    transform: translateY(45px) rotate(-3deg) scale(1.03);
 }
 
 .programme-right-card:hover {
-    transform: rotate(3deg) scale(1.03);
+    transform: translateY(-55px) rotate(3deg) scale(1.03);
 }
 
 .programme-tilted-img {
@@ -5387,38 +5430,20 @@ body.theme-purple-mode .timeline-progress-bar {
     font-weight: 500;
 }
 
-/* Responsive adjustments */
+/* Responsive adjustments for Programme Overview Section */
 @media (max-width: 1024px) {
-    .programme-container {
-        grid-template-columns: 180px 1fr 180px;
-        gap: 1.5rem;
-    }
-}
-
-@media (max-width: 820px) {
-    .programme-container {
-        grid-template-columns: 1fr;
-        gap: 3rem;
-    }
-
     .programme-left-card,
     .programme-right-card {
-        max-width: 280px;
-        margin: 0 auto;
-    }
-
-    .programme-left-card {
-        transform: rotate(-3deg);
-    }
-
-    .programme-right-card {
-        transform: rotate(3deg);
+        display: none !important;
     }
 
     .programme-annotation-wrap {
-        grid-column: 1 / -1;
+        position: relative;
+        bottom: auto;
+        right: auto;
+        margin-top: 1.5rem;
+        display: flex;
         justify-content: center;
-        padding-right: 0;
     }
 }
 
@@ -5444,15 +5469,29 @@ body.theme-purple-mode .timeline-progress-bar {
     position: sticky;
     top: clamp(100px, 8vw, 115px);
     align-self: start;
+    margin-top: 0;
+    padding-top: 0;
+}
+
+.academics-approach-eyebrow {
+    font-family: var(--font-heading);
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--clr-primary-purple);
+    margin-bottom: 0.4rem;
+    display: block;
 }
 
 .academics-approach-title {
     font-family: var(--font-heading);
     font-size: var(--fs-hero);
     font-weight: 800;
-    line-height: 1.15;
+    line-height: 1;
     color: #000000;
     letter-spacing: -0.03em;
+    margin-top: 0;
     margin-bottom: 0.6rem;
 }
 
@@ -5512,9 +5551,17 @@ body.theme-purple-mode .timeline-progress-bar {
 }
 
 .academics-book-stars-doodle {
-    margin-top: 2.5rem;
+    margin-top: 2rem;
     pointer-events: none;
-    opacity: 0.85;
+    opacity: 0.95;
+}
+
+.academics-book-stars-doodle svg {
+    width: clamp(160px, 13vw, 210px);
+    height: auto;
+    display: block;
+    rotate: -25deg;
+    opacity: 50%;
 }
 
 /* Right Column - Scrolling Cards List (50% Width) */
@@ -9167,4 +9214,21 @@ body.theme-purple-mode .timeline-progress-bar {
 .about-purpose-container {
     position: relative;
     z-index: 2 !important;
+}
+
+/* ==========================================================================
+   GLOBAL LIGHT PRIMARY PURPLE COLOR FOR ALL WAVY LINE DOODLE SVGS
+   ========================================================================== */
+.parents-wavy-decor-right svg path,
+.teachers-wavy-decor-right svg path,
+.gallery-wavy-decor svg path,
+.about-purpose-wavy-line svg path,
+.bg-wavy-line-svg svg path,
+.academics-wavy-decor svg path,
+.campus-safety-wavy-decor svg path,
+.spaces-bg-ribbon-top svg path,
+.experiential-ribbon-path,
+.programme-bg-wave svg path,
+.contact-hero-right .purple-card-bg-accent svg path {
+    stroke: var(--clr-wavy-purple-light) !important;
 }
