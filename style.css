@@ -5366,13 +5366,13 @@ body.theme-purple-mode .timeline-progress-bar {
 .programme-left-card {
     transform: translateY(50px) rotate(-6deg);
     left: clamp(1.5rem, 3.5vw, 5%);
-    top: -50%;
+
 }
 
 .programme-right-card {
     transform: translateY(-50px) rotate(6deg);
     right: clamp(1.5rem, 3.5vw, 5%);
-    top: -50%;
+
 }
 
 .programme-left-card:hover {
@@ -5432,6 +5432,7 @@ body.theme-purple-mode .timeline-progress-bar {
 
 /* Responsive adjustments for Programme Overview Section */
 @media (max-width: 1024px) {
+
     .programme-left-card,
     .programme-right-card {
         display: none !important;
