@@ -55,7 +55,7 @@ get_header();
 
 			<!-- Hero Title -->
 			<div class="gallery-hero-content text-center relative z-2">
-				<h1 class="gallery-hero-title">A Glimpse Into Our Community</h1>
+				<h1 class="gallery-hero-title">A Glimpse Into <br> Our Community and community</h1>
 			</div>
 
 		</section>

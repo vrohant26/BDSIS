@@ -489,7 +489,7 @@ get_header();
 				
 				<!-- Left Column: Content -->
 				<div class="about-potential-content">
-					<h2 class="about-potential-title">A Place to Discover Your Superpower</h2>
+					<h2 class="about-potential-title">Helping Every Child Find Their Strength</h2>
 					<p class="about-potential-lead">Every student brings unique strengths. Our campus gives them the opportunities to explore, develop, and let those strengths shine.</p>
 				</div>
 
@@ -555,7 +555,7 @@ get_header();
 										<span class="safety-card-category"><?php esc_html_e( 'Backup Power', 'bd-somani' ); ?></span>
 									</div>
 									<h3 class="safety-card-title"><?php esc_html_e( 'Power Continuity', 'bd-somani' ); ?></h3>
-									<p class="safety-card-desc"><?php esc_html_e( 'Backup power infrastructure helps keep essential school operations running during power interruptions.', 'bd-somani' ); ?></p>
+									<p class="safety-card-desc"><?php esc_html_e( 'Infrastructure designed to prioritise child safety, comfort, and well-being while keeping essential school operations running smoothly.', 'bd-somani' ); ?></p>
 								</div>
 							</div>
 						</div>

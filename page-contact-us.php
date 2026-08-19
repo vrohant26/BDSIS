@@ -34,13 +34,10 @@ get_header();
 		</div>
 
 			<!-- Right Background Organic Wave Shape Accent -->
-			<div class="contact-form-bg-wave" aria-hidden="true">
-				<?php
-				$contact_wave_svg = get_template_directory() . '/assets/svgs/contact form wave bg.svg';
-				if ( file_exists( $contact_wave_svg ) ) {
-					include $contact_wave_svg;
-				}
-				?>
+			<div class="contact-form-bg-wave admissions-hero-bg-wave" aria-hidden="true">
+				<svg width="754" height="730" viewBox="0 0 754 730" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<path d="M1120.96 436.549C502.356 1100.28 764.147 68.7049 371.322 510.497C-21.504 952.288 -59.421 425.445 274.248 183.162C607.916 -59.1211 111.644 -59.1878 173.23 -106.357" stroke="var(--clr-wavy-purple-light, #F3F1F3)" stroke-width="96"/>
+				</svg>
 			</div>
 
 			<div class="contact-hero-grid relative z-2">
