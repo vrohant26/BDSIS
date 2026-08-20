@@ -52,17 +52,17 @@ get_header();
 						<div class="swiper-wrapper">
 							<div class="swiper-slide">
 								<div class="campus-hero-slide-wrap">
-									<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/carousel swimming pool.webp' ); ?>" alt="<?php esc_attr_e( 'Swimming Pool', 'bd-somani' ); ?>" class="campus-hero-slide-img">
+									<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/carousel swimming pool.webp' ); ?>" alt="<?php esc_attr_e( 'Swimming Pool', 'bd-somani' ); ?>" class="campus-hero-slide-img" fetchpriority="high" decoding="async">
 								</div>
 							</div>
 							<div class="swiper-slide">
 								<div class="campus-hero-slide-wrap">
-									<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/carousel library.webp' ); ?>" alt="<?php esc_attr_e( 'Library', 'bd-somani' ); ?>" class="campus-hero-slide-img">
+									<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/carousel library.webp' ); ?>" alt="<?php esc_attr_e( 'Library', 'bd-somani' ); ?>" class="campus-hero-slide-img" loading="lazy" decoding="async">
 								</div>
 							</div>
 							<div class="swiper-slide">
 								<div class="campus-hero-slide-wrap">
-									<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/carousel cafeteria.webp' ); ?>" alt="<?php esc_attr_e( 'Cafeteria', 'bd-somani' ); ?>" class="campus-hero-slide-img">
+									<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/carousel cafeteria.webp' ); ?>" alt="<?php esc_attr_e( 'Cafeteria', 'bd-somani' ); ?>" class="campus-hero-slide-img" loading="lazy" decoding="async">
 								</div>
 							</div>
 						</div>
@@ -462,7 +462,7 @@ get_header();
 							</div>
 						</div>
 						<div class="spaces-card-media">
-							<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/outdoor spaces.webp' ); ?>" alt="<?php esc_attr_e( 'Outdoor Spaces', 'bd-somani' ); ?>" class="spaces-card-img">
+							<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/swimming pool 2.webp' ); ?>" alt="<?php esc_attr_e( 'Outdoor Spaces - Swimming Pool', 'bd-somani' ); ?>" class="spaces-card-img">
 						</div>
 					</div>
 				</div>

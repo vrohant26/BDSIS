@@ -210,82 +210,89 @@ get_header();
 		</div>
 	</section>
 
-		<!-- Section 3: Admissions Process Swiper Carousel -->
+		<!-- Section 3: Admissions Process Grid (No Carousel) -->
 		<section class="admissions-process-section relative overflow-hidden" id="process">
-			<!-- Swiper Navigation Buttons -->
-			<button type="button" class="carousel-nav-btn prev-btn process-prev-btn flex-center" aria-label="<?php esc_attr_e( 'Previous Step', 'bd-somani' ); ?>">
-				<svg width="24" height="18" viewBox="0 0 20 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-					<path d="M7 15L1 8M1 8L7 1M1 8H19" stroke="#2B182C" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-				</svg>
-			</button>
-			<button type="button" class="carousel-nav-btn next-btn process-next-btn flex-center" aria-label="<?php esc_attr_e( 'Next Step', 'bd-somani' ); ?>">
-				<svg width="24" height="18" viewBox="0 0 20 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-					<path d="M13 1L19 8M19 8L13 15M19 8H1" stroke="#2B182C" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-				</svg>
-			</button>
-
 			<div class="site-container">
-				<h2 class="admissions-process-title"><?php esc_html_e( 'Admissions Process', 'bd-somani' ); ?></h2>
+				<div class="admissions-process-header text-center">
+					<span class="admissions-process-eyebrow"><?php esc_html_e( 'YOUR JOURNEY WITH US', 'bd-somani' ); ?></span>
+					<h2 class="admissions-process-title"><?php esc_html_e( 'Admissions Process', 'bd-somani' ); ?></h2>
+					<p class="admissions-process-lead"><?php esc_html_e( 'We are here to support your family every step of the way, from your first conversation to your child\'s first day.', 'bd-somani' ); ?></p>
+				</div>
 
-				<!-- Swiper Carousel Container -->
-				<div class="swiper admissions-process-swiper">
-					<div class="swiper-wrapper">
-
+				<!-- 5-Step Connected Flow Grid -->
+				<div class="admissions-process-grid">
+					
+					<!-- Top Row: Steps 01, 02, 03 -->
+					<div class="process-grid-top">
+						
 						<!-- Step 01 -->
-						<div class="swiper-slide">
-							<div class="admissions-process-card">
-								<div class="admissions-process-number">01</div>
-								<h3 class="admissions-process-card-title"><?php esc_html_e( 'Submit an Enquiry', 'bd-somani' ); ?></h3>
-								<p class="admissions-process-card-desc"><?php esc_html_e( 'Explore our website to learn about B.D. Somani International School, Kharghar. Then, submit an online enquiry with your child\'s details and preferred academic year to begin the admissions process.', 'bd-somani' ); ?></p>
+						<div class="process-step-card warm-card">
+							<div class="process-card-header flex-between align-center">
+								<span class="process-step-badge">01</span>
+								<div class="process-step-icon flex-center">
+									<iconify-icon icon="ph:chat-circle-dots-bold"></iconify-icon>
+								</div>
 							</div>
+							<h3 class="process-card-title"><?php esc_html_e( 'Begin with a Conversation', 'bd-somani' ); ?></h3>
+							<p class="process-card-desc"><?php esc_html_e( 'Take the first step towards discovering B.D. Somani International School, Kharghar. Explore our website, get to know our approach to learning, and share a few details about your child and your preferred academic year through our online enquiry form.', 'bd-somani' ); ?></p>
 						</div>
 
 						<!-- Step 02 -->
-						<div class="swiper-slide">
-							<div class="admissions-process-card">
-								<div class="admissions-process-number">02</div>
-								<h3 class="admissions-process-card-title"><?php esc_html_e( 'Connect with Our Admissions Team', 'bd-somani' ); ?></h3>
-								<p class="admissions-process-card-desc"><?php esc_html_e( 'Our admissions team will connect with you to discuss programme availability, answer your questions, and guide you through the next steps.', 'bd-somani' ); ?></p>
+						<div class="process-step-card warm-card">
+							<div class="process-card-header flex-between align-center">
+								<span class="process-step-badge">02</span>
+								<div class="process-step-icon flex-center">
+									<iconify-icon icon="ph:users-three-bold"></iconify-icon>
+								</div>
 							</div>
+							<h3 class="process-card-title"><?php esc_html_e( 'Meet Our Admissions Team', 'bd-somani' ); ?></h3>
+							<p class="process-card-desc"><?php esc_html_e( 'Every family has different questions and aspirations. Our Admissions Team is here to understand yours, share what matters to you and help you explore the possibilities at our school.', 'bd-somani' ); ?></p>
 						</div>
 
 						<!-- Step 03 -->
-						<div class="swiper-slide">
-							<div class="admissions-process-card">
-								<div class="admissions-process-number">03</div>
-								<h3 class="admissions-process-card-title"><?php esc_html_e( 'Explore Our Campus', 'bd-somani' ); ?></h3>
-								<p class="admissions-process-card-desc"><?php esc_html_e( 'Our admissions team will arrange a personalised campus visit, giving you the opportunity to explore our learning spaces, meet our educators, and experience our school\'s culture.', 'bd-somani' ); ?></p>
+						<div class="process-step-card warm-card">
+							<div class="process-card-header flex-between align-center">
+								<span class="process-step-badge">03</span>
+								<div class="process-step-icon flex-center">
+									<iconify-icon icon="ph:compass-bold"></iconify-icon>
+								</div>
 							</div>
+							<h3 class="process-card-title"><?php esc_html_e( 'Experience the School', 'bd-somani' ); ?></h3>
+							<p class="process-card-desc"><?php esc_html_e( 'Come see the school for yourself. Walk through our campus, discover our learning spaces, meet our educators and experience the environment your child could soon call their own.', 'bd-somani' ); ?></p>
 						</div>
 
+					</div>
+
+					<!-- Bottom Row: Steps 04 & 05 -->
+					<div class="process-grid-bottom">
+						
 						<!-- Step 04 -->
-						<div class="swiper-slide">
-							<div class="admissions-process-card">
-								<div class="admissions-process-number">04</div>
-								<h3 class="admissions-process-card-title"><?php esc_html_e( 'Complete Your Application', 'bd-somani' ); ?></h3>
-								<p class="admissions-process-card-desc"><?php esc_html_e( 'Submit the application form along with the required documents. Our team will also guide you through the fee structure and the remaining admission requirements.', 'bd-somani' ); ?></p>
+						<div class="process-step-card warm-card">
+							<div class="process-card-header flex-between align-center">
+								<span class="process-step-badge">04</span>
+								<div class="process-step-icon flex-center">
+									<iconify-icon icon="ph:file-text-fill"></iconify-icon>
+								</div>
 							</div>
+							<h3 class="process-card-title"><?php esc_html_e( 'Take the Next Step', 'bd-somani' ); ?></h3>
+							<p class="process-card-desc"><?php esc_html_e( 'When you are ready to move forward, complete the application with the required documents. Our team will make the process clear and guide you through the details.', 'bd-somani' ); ?></p>
 						</div>
 
 						<!-- Step 05 -->
-						<div class="swiper-slide">
-							<div class="admissions-process-card">
-								<div class="admissions-process-number">05</div>
-								<h3 class="admissions-process-card-title"><?php esc_html_e( 'Admission Confirmation & Enrolment', 'bd-somani' ); ?></h3>
-								<p class="admissions-process-card-desc"><?php esc_html_e( 'Following a successful application review, you will receive your admission offer. Our team will guide you through the enrolment process and support your family\'s transition into the B.D. Somani International School community.', 'bd-somani' ); ?></p>
+						<div class="process-step-card warm-card">
+							<div class="process-card-header flex-between align-center">
+								<span class="process-step-badge">05</span>
+								<div class="process-step-icon flex-center">
+									<iconify-icon icon="ph:heart-bold"></iconify-icon>
+								</div>
 							</div>
+							<h3 class="process-card-title"><?php esc_html_e( 'Welcome to B.D. Somani Kharghar Community', 'bd-somani' ); ?></h3>
+							<p class="process-card-desc"><?php esc_html_e( 'Once your child’s admission is confirmed, the next chapter begins. We will guide your family through enrolment and help make the transition into the B.D. Somani, Kharghar community a warm and welcoming one.', 'bd-somani' ); ?></p>
 						</div>
 
 					</div>
-				</div>
 
-				<!-- Linear Progress Bar -->
-				<div class="experiences-progress-wrapper flex-center" style="margin-top: 3rem;">
-					<div class="experiences-progress-bar-track relative">
-						<div class="experiences-progress-bar-fill" id="admissionsProcessProgressBar"></div>
-					</div>
 				</div>
-
 			</div>
 		</section>
 

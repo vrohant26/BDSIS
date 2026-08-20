@@ -2318,6 +2318,26 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  /**
+   * Homepage News Popup Slide-In Card (Appears on every refresh)
+   */
+  function initNewsPopup() {
+    const popupCard = document.getElementById("newsPopupCard");
+    const closeBtn = document.getElementById("newsPopupCloseBtn");
+
+    if (!popupCard || !closeBtn) return;
+
+    // Slide in after a smooth delay on every page load/refresh
+    setTimeout(() => {
+      popupCard.classList.add("is-visible");
+    }, 1200);
+
+    closeBtn.addEventListener("click", () => {
+      popupCard.classList.remove("is-visible");
+    });
+  }
+
   initCampusHeroCarousel();
   initFormSubmissions();
+  initNewsPopup();
 });

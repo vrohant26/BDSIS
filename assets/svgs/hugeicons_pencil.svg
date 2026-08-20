@@ -1,11 +1,16 @@
-<svg width="189" height="189" viewBox="0 0 189 189" fill="none" xmlns="http://www.w3.org/2000/svg">
-<g clip-path="url(#clip0_851_1953)">
-<path d="M38.7241 139.142L56.33 91.411C59.6472 82.4176 61.3069 77.9181 64.1067 74.1329C66.9029 70.3398 70.6734 67.4806 78.2336 61.7627L102.293 43.5444C109.111 38.369 112.522 35.7948 115.596 36.9289C118.671 38.0629 119.591 42.2409 121.42 50.5929L127.884 80.0765C129.914 89.3321 130.925 93.9548 130.594 98.6572C130.265 103.354 128.608 107.848 125.288 116.847L107.683 164.578" stroke="#D8BFD3" stroke-width="9.1875" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M67.7899 78.0495C70.7371 81.2453 74.2841 86.7971 78.7723 88.6289C84.5602 90.9727 90.4109 87.2879 96.2322 89.4351C102.053 91.5823 104.11 98.1838 110.036 100.154C114.636 101.681 120.945 99.7647 125.255 99.2461M94.4029 94.3943L73.2064 151.86M97.7474 49.9293L120.734 58.4079" stroke="#D8BFD3" stroke-width="9.1875" stroke-linecap="round" stroke-linejoin="round"/>
-</g>
-<defs>
-<clipPath id="clip0_851_1953">
-<rect width="147" height="147" fill="white" transform="translate(50.875) rotate(20.2469)"/>
-</clipPath>
-</defs>
+<svg width="140" height="180" viewBox="0 0 140 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Full Hand-Drawn Pencil Doodle -->
+  <g transform="rotate(-25 70 90)">
+    <!-- Sharpened Pencil Tip -->
+    <path d="M70 12L42 55H98L70 12Z" stroke="var(--clr-wavy-purple-light, #D8BFD3)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+    <!-- Pencil Lead Point (Filled) -->
+    <path d="M70 12L58 31H82L70 12Z" fill="var(--clr-wavy-purple-light, #D8BFD3)"/>
+    <!-- Pencil Body Outline -->
+    <path d="M42 55V140H98V55" stroke="var(--clr-wavy-purple-light, #D8BFD3)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+    <!-- Body Internal Facet Lines -->
+    <path d="M60 55V140M80 55V140" stroke="var(--clr-wavy-purple-light, #D8BFD3)" stroke-width="5" stroke-linecap="round"/>
+    <!-- Metal Ferrule & Eraser Top -->
+    <path d="M42 140C42 162 98 162 98 140" stroke="var(--clr-wavy-purple-light, #D8BFD3)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M42 140H98" stroke="var(--clr-wavy-purple-light, #D8BFD3)" stroke-width="6" stroke-linecap="round"/>
+  </g>
 </svg>

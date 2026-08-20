@@ -241,7 +241,30 @@
 			</div>
 		</div>
 
-	</footer>
+<?php if ( is_front_page() || is_home() ) : ?>
+	<!-- Homepage News Popup Card (Right Side Slide-In) -->
+	<div class="news-popup-card" id="newsPopupCard" aria-live="polite" role="dialog" aria-label="Admissions Announcement">
+		<button type="button" class="news-popup-close-btn" id="newsPopupCloseBtn" aria-label="Close Announcement">
+			<svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+				<path d="M13 1L1 13M1 1L13 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+			</svg>
+		</button>
+		<div class="news-popup-badge-row">
+			<span class="news-popup-pulse-dot"></span>
+			<span class="news-popup-badge"><?php esc_html_e( 'ADMISSIONS OPEN 2027-28', 'bd-somani' ); ?></span>
+		</div>
+		<h3 class="news-popup-title"><?php esc_html_e( 'Admissions Open for Academic Year 2027-28', 'bd-somani' ); ?></h3>
+		<p class="news-popup-desc"><?php esc_html_e( 'From Playgroup to Grade 9 for ICSE & IGCSE', 'bd-somani' ); ?></p>
+		<div class="news-popup-actions">
+			<a href="<?php echo esc_url( home_url( '/admissions/' ) ); ?>" class="btn btn-yellow news-popup-btn radius-md flex-center">
+				<span><?php esc_html_e( 'APPLY NOW', 'bd-somani' ); ?></span>
+				<svg class="btn-arrow" width="16" height="14" viewBox="0 0 16 14" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-left: 8px;">
+					<path d="M9 1L15 7M15 7L9 13M15 7H1" stroke="#2B182C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+				</svg>
+			</a>
+		</div>
+	</div>
+<?php endif; ?>
 
 <?php wp_footer(); ?>
 </body>
