@@ -9426,12 +9426,15 @@ body.theme-purple-mode .timeline-progress-bar {
    HOMEPAGE NEWS POPUP CARD (RIGHT SIDE SLIDE-IN)
    ========================================================================== */
 .news-popup-card {
+
     position: fixed;
     right: clamp(1rem, 2.5vw, 2.25rem);
     bottom: clamp(6rem, 10vw, 8.5rem);
     z-index: 9999;
     width: clamp(310px, 24vw, 380px);
-    background: #FFFFFF;
+    background: rgb(0 0 0 / 60%);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
     border: 2px solid var(--clr-primary-purple, #49274A);
     border-radius: 20px;
     padding: clamp(1.4rem, 2vw, 1.75rem);
@@ -9455,7 +9458,6 @@ body.theme-purple-mode .timeline-progress-bar {
     width: 28px;
     height: 28px;
     border-radius: 50%;
-    background: rgba(73, 39, 74, 0.08);
     border: none;
     color: var(--clr-primary-purple, #49274A);
     display: flex;
@@ -9509,7 +9511,7 @@ body.theme-purple-mode .timeline-progress-bar {
     font-size: 0.72rem;
     font-weight: 800;
     letter-spacing: 0.08em;
-    color: var(--clr-primary-purple, #49274A);
+    color: white;
     text-transform: uppercase;
 }
 
@@ -9517,7 +9519,7 @@ body.theme-purple-mode .timeline-progress-bar {
     font-family: var(--font-heading);
     font-size: clamp(1.05rem, 1.25vw, 1.2rem);
     font-weight: 800;
-    color: var(--clr-primary-purple, #49274A);
+    color: white;
     line-height: 1.3;
     margin-bottom: 0.4rem;
     padding-right: 1.5rem;
@@ -9527,7 +9529,7 @@ body.theme-purple-mode .timeline-progress-bar {
     font-family: var(--font-body);
     font-size: clamp(0.85rem, 0.95vw, 0.92rem);
     line-height: 1.5;
-    color: #555555;
+    color: white;
     margin-bottom: 1.15rem;
 }
 

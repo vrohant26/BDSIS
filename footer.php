@@ -254,7 +254,7 @@
 			<span class="news-popup-badge"><?php esc_html_e( 'ADMISSIONS OPEN 2027-28', 'bd-somani' ); ?></span>
 		</div>
 		<h3 class="news-popup-title"><?php esc_html_e( 'Admissions Open for Academic Year 2027-28', 'bd-somani' ); ?></h3>
-		<p class="news-popup-desc"><?php esc_html_e( 'From Playgroup to Grade 9 for ICSE & IGCSE', 'bd-somani' ); ?></p>
+		<p class="news-popup-desc"><?php esc_html_e( 'From Playgroup to Grade 9', 'bd-somani' ); ?></p>
 		<div class="news-popup-actions">
 			<a href="<?php echo esc_url( home_url( '/admissions/' ) ); ?>" class="btn btn-yellow news-popup-btn radius-md flex-center">
 				<span><?php esc_html_e( 'APPLY NOW', 'bd-somani' ); ?></span>
