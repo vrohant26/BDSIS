@@ -5641,27 +5641,14 @@ body.theme-purple-mode .timeline-progress-bar {
    ACADEMICS STICKY APPROACH / CARDS SECTION STYLES
    ========================================================================== */
 .academics-approach-section {
-    padding-top: 0;
+    padding-top: clamp(4rem, 6vw, 6.5rem);
     padding-bottom: clamp(5rem, 8vw, 8.5rem);
     background-color: var(--clr-bg-light);
-    position: relative;
-    overflow: hidden;
-}
-
-/* Full-Viewport Sticky Background Overlay (bg.png) - Clipped to Section Bounds */
-.academics-approach-bg-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
     background-image: url('assets/images/bg.png');
     background-size: cover;
-    background-position: center top;
+    background-position: left top;
     background-repeat: no-repeat;
-    background-attachment: fixed;
-    pointer-events: none;
-    z-index: 1;
+    position: relative;
 }
 
 .academics-approach-grid {
@@ -5669,7 +5656,6 @@ body.theme-purple-mode .timeline-progress-bar {
     grid-template-columns: 1fr 1fr;
     gap: clamp(2.5rem, 4.5vw, 5rem);
     align-items: start;
-    padding-top: clamp(2rem, 4vw, 4rem);
 }
 
 /* Left Column - Fixed / Sticky on Scroll & Vertically Centered */
