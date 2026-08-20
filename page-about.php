@@ -232,11 +232,7 @@ get_header();
 							<div class="about-leader-card-back">
 								<div class="about-leader-message-content">
 									<div class="about-leader-quote-scroll" data-lenis-prevent>
-										<p class="about-leader-quote">We live in a world of constant change—beautiful, exciting and unpredictable. As parents and educators, our responsibility is to prepare children with the knowledge, skills and perspective to navigate this changing world.</p>
-										<p class="about-leader-quote">Since 1975, Somani Schools has remained committed to giving every child the opportunity to succeed. With immense pride, I welcome you to B.D. Somani International School, Kharghar.</p>
-										<p class="about-leader-quote">Though our new campus opened earlier this year, we already feel deeply connected to this vibrant community. Our mission extends beyond academics, bringing together **academics, arts, athletics and co-curricular activities** to create a truly well-rounded experience.</p>
-										<p class="about-leader-quote">We encourage students to think independently, discover their strengths and understand who they aspire to become, while nurturing discipline, responsibility and emotional and social growth.</p>
-										<p class="about-leader-quote">I invite you to explore B.D. Somani International School and discover our commitment to helping every student **learn, grow and thrive**, prepared for whatever the future holds.</p>
+										<p class="about-leader-quote">Education is one of the most enduring responsibilities we hold. Our greatest purpose lies in shaping individuals who contribute meaningfully to society and the generations that follow.</p>
 									</div>
 									<div class="about-leader-signature">
 										<span class="signature-name">- Ms. Aradhana Somani</span>
@@ -267,11 +263,7 @@ get_header();
 							<div class="about-leader-card-back">
 								<div class="about-leader-message-content">
 									<div class="about-leader-quote-scroll" data-lenis-prevent>
-										<p class="about-leader-quote">Earlier this year, B.D. Somani opened its doors with a vision to shape the educational landscape of Navi Mumbai, combining academic excellence with character building to prepare students for an ever-evolving world.</p>
-										<p class="about-leader-quote">Our foundation is built on the 3 Cs — **Curiosity, Collaboration and Courage** — fostering academic growth alongside emotional intelligence, social skills and civic responsibility.</p>
-										<p class="about-leader-quote">Our first months have been rewarding, as our academic and co-curricular programs take root across science, arts, athletics and beyond. Every classroom and playing field is becoming a space for laughter, discovery, friendship and possibility.</p>
-										<p class="about-leader-quote">As we continue this journey, we look forward to creating more stories of success, compassion and lifelong learning. I invite you to visit us and discover what makes B.D. Somani a growing and committed community, continually striving for excellence.</p>
-										<p class="about-leader-quote">**With gratitude for your support and enthusiasm,**</p>
+										<p class="about-leader-quote">What we are building is far more than a school. It is a community where every child is encouraged to learn deeply, grow confidently, and leave with stories that last a lifetime.</p>
 									</div>
 									<div class="about-leader-signature">
 										<span class="signature-name">- Mr. Dhananjay Somani</span>
@@ -302,12 +294,7 @@ get_header();
 							<div class="about-leader-card-back">
 								<div class="about-leader-message-content">
 									<div class="about-leader-quote-scroll" data-lenis-prevent>
-										<p class="about-leader-quote">At our school, we believe education is the foundation for excellence, character, and lifelong success. Our mission is to nurture young minds in an environment that inspires curiosity, confidence, and critical thinking.</p>
-										<p class="about-leader-quote">We are committed to providing a balanced education that blends academic rigour with values, innovation, and holistic development. Every child is encouraged to discover their unique potential and grow into a responsible, future-ready individual.</p>
-										<p class="about-leader-quote">With the dedicated partnership of our educators and parents, we strive to create a culture of excellence where learners are empowered to achieve their best and lead with purpose.</p>
-										<br>
-										<p class="about-leader-quote">“Education is not the filling of a pail, but the lighting of a fire.”</p>
-										<p class="about-leader-quote">— William Butler Yeats</p>
+										<p class="about-leader-quote">No two children learn in the same way, and that is precisely what makes education meaningful. Our classrooms celebrate every learner for who they are and who they can become.</p>
 									</div>
 									<div class="about-leader-signature">
 										<span class="signature-name">- Dr. Katherine James</span>

@@ -486,45 +486,81 @@ document.addEventListener("DOMContentLoaded", () => {
     goToSlide(0);
   }
 
-  // 4. 3D Coverflow Carousel (Swiper.js)
-  if (
-    typeof Swiper !== "undefined" &&
-    document.querySelector(".coverflow-swiper")
-  ) {
-    const coverflowSwiper = new Swiper(".coverflow-swiper", {
-      effect: "coverflow",
-      grabCursor: true,
-      centeredSlides: true,
-      slidesPerView: "auto",
-      initialSlide: 2, // Centered on main campus building (slide 3)
-      coverflowEffect: {
-        rotate: 0, // Facing front straight without 3D rotation/skewing
-        stretch: 100,
-        depth: 100,
-        modifier: 1,
-        slideShadows: false,
-      },
-      breakpoints: {
-        320: {
-          coverflowEffect: {
-            rotate: 0,
-            depth: 70,
-          },
-        },
-        768: {
-          coverflowEffect: {
-            rotate: 0,
-            depth: 100,
-          },
-        },
-      },
+  // 4. 3D Circular Coverflow Positional Slot Engine (5 Cards Infinite Rotation)
+  function init3DCoverflowEngine() {
+    const stage = document.querySelector(".coverflow-stage") || document.querySelector(".coverflow-carousel-wrapper");
+    if (!stage) return;
+
+    const slides = Array.from(stage.querySelectorAll(".coverflow-slide-item, .swiper-slide"));
+    if (slides.length < 5) return;
+
+    // Track position slots (0..4) assigned to each slide index:
+    // Initial assignment: Slide 0 -> Slot 0, Slide 1 -> Slot 1, Slide 2 -> Slot 2 (CENTER), Slide 3 -> Slot 3, Slide 4 -> Slot 4
+    let currentSlots = [0, 1, 2, 3, 4];
+    let autoPlayTimer = null;
+    const rotateInterval = 2800; // 2.8 seconds per step
+
+    function applySlots() {
+      slides.forEach((slide, idx) => {
+        const slot = currentSlots[idx];
+        slide.classList.remove("slot-0", "slot-1", "slot-2", "slot-3", "slot-4", "is-wrapping");
+        slide.classList.add(`slot-${slot}`);
+      });
+    }
+
+    function rotateLeft() {
+      // Positional order shift 1 step to the left:
+      // slot 0 -> 4 (wraps to far right)
+      // slot 1 -> 0
+      // slot 2 -> 1
+      // slot 3 -> 2 (becomes center!)
+      // slot 4 -> 3
+      slides.forEach((slide, idx) => {
+        if (currentSlots[idx] === 0) {
+          slide.classList.add("is-wrapping");
+        }
+      });
+
+      currentSlots = currentSlots.map((slot) => (slot - 1 + 5) % 5);
+      applySlots();
+    }
+
+    function startAutoPlay() {
+      stopAutoPlay();
+      autoPlayTimer = setInterval(rotateLeft, rotateInterval);
+    }
+
+    function stopAutoPlay() {
+      if (autoPlayTimer) {
+        clearInterval(autoPlayTimer);
+        autoPlayTimer = null;
+      }
+    }
+
+    // Interactive card click -> bring target card to center (Slot 2)
+    slides.forEach((slide, idx) => {
+      slide.addEventListener("click", () => {
+        const targetSlot = currentSlots[idx];
+        if (targetSlot === 2) return; // Already centered
+
+        // Rotate steps needed to reach center slot 2
+        const steps = (targetSlot - 2 + 5) % 5;
+        for (let i = 0; i < steps; i++) {
+          rotateLeft();
+        }
+        startAutoPlay();
+      });
     });
 
-    // Force Swiper to update coverflow transforms immediately
-    requestAnimationFrame(() => {
-      coverflowSwiper.update();
-    });
+    stage.addEventListener("mouseenter", stopAutoPlay);
+    stage.addEventListener("mouseleave", startAutoPlay);
+
+    // Initial setup
+    applySlots();
+    startAutoPlay();
   }
+
+  init3DCoverflowEngine();
 
   // 5. Mobile Navigation Slide-Down Card Toggle with GSAP Smooth Height Animation & Reversibility
   const mobileToggle = document.querySelector(".mobile-toggle");
@@ -659,10 +695,16 @@ document.addEventListener("DOMContentLoaded", () => {
     const curriculumSwiper = new Swiper(".curriculum-swiper", {
       slidesPerView: "auto",
       spaceBetween: 200,
-      speed: 800,
+      speed: 700,
       parallax: false,
       grabCursor: true,
       loop: true,
+      observer: true,
+      observeParents: true,
+      autoplay: {
+        delay: 2500,
+        disableOnInteraction: false,
+      },
       navigation: {
         nextEl: "#curriculumNextBtn",
         prevEl: "#curriculumPrevBtn",
@@ -681,12 +723,19 @@ document.addEventListener("DOMContentLoaded", () => {
       on: {
         init: function () {
           updateTimeline(this.realIndex !== undefined ? this.realIndex : this.activeIndex);
+          if (this.autoplay && typeof this.autoplay.start === "function") {
+            this.autoplay.start();
+          }
         },
         slideChange: function () {
           updateTimeline(this.realIndex !== undefined ? this.realIndex : this.activeIndex);
         },
       },
     });
+
+    if (curriculumSwiper && curriculumSwiper.autoplay && typeof curriculumSwiper.autoplay.start === "function") {
+      curriculumSwiper.autoplay.start();
+    }
 
     stepBtns.forEach((btn) => {
       btn.addEventListener("click", function (e) {
@@ -697,6 +746,9 @@ document.addEventListener("DOMContentLoaded", () => {
             curriculumSwiper.slideToLoop(stepIndex);
           } else {
             curriculumSwiper.slideTo(stepIndex);
+          }
+          if (curriculumSwiper.autoplay && typeof curriculumSwiper.autoplay.start === "function") {
+            curriculumSwiper.autoplay.start();
           }
         }
       });

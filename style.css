@@ -801,21 +801,106 @@ ol {
     z-index: 3;
 }
 
-/* Coverflow Swiper Carousel */
+/* 3D Circular Coverflow Stage (5-Card Positional Slot Engine) */
 .coverflow-carousel-wrapper {
     width: 100%;
-    padding-block: 1rem;
+    overflow: hidden;
+    padding-block: 2rem 3.5rem;
+    position: relative;
 }
 
-.coverflow-swiper {
+.coverflow-stage {
+    position: relative;
     width: 100%;
-    padding-block: 2rem 3rem;
+    max-width: 1280px;
+    height: clamp(340px, 32vw, 480px);
+    margin: 0 auto;
+    perspective: 1000px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.coverflow-swiper .swiper-slide {
-    width: clamp(240px, 22vw, 370px);
-    height: clamp(340px, 32vw, 480px);
-    transition: transform 0.3s ease, filter 0.3s ease;
+.coverflow-slide-item {
+    position: absolute;
+    width: clamp(230px, 21vw, 360px);
+    height: clamp(330px, 30vw, 460px);
+    top: 50%;
+    left: 50%;
+    margin-top: calc(-1 * clamp(330px, 30vw, 460px) / 2);
+    margin-left: calc(-1 * clamp(230px, 21vw, 360px) / 2);
+    transition: transform 0.85s cubic-bezier(0.25, 1, 0.35, 1), opacity 0.85s ease, filter 0.85s ease;
+    will-change: transform, opacity;
+    cursor: pointer;
+    user-select: none;
+}
+
+/* 5 Positional Slots: slot-0, slot-1, slot-2 (Center), slot-3, slot-4 */
+.coverflow-slide-item {
+    opacity: 1;
+}
+
+.coverflow-slide-item.slot-0 {
+    transform: translate3d(-175%, 0, -120px) scale(0.74);
+    opacity: 1;
+    z-index: 1;
+}
+
+.coverflow-slide-item.slot-1 {
+    transform: translate3d(-90%, 0, -50px) scale(0.86);
+    opacity: 1;
+    z-index: 2;
+}
+
+.coverflow-slide-item.slot-2 {
+    transform: translate3d(0%, 0, 0px) scale(1.06);
+    opacity: 1;
+    z-index: 5;
+}
+
+.coverflow-slide-item.slot-2 .coverflow-card {
+    box-shadow: 0 22px 50px rgba(0, 0, 0, 0.22);
+    border-color: #FFFFFF;
+}
+
+.coverflow-slide-item.slot-3 {
+    transform: translate3d(90%, 0, -50px) scale(0.86);
+    opacity: 1;
+    z-index: 2;
+}
+
+.coverflow-slide-item.slot-4 {
+    transform: translate3d(175%, 0, -120px) scale(0.74);
+    opacity: 1;
+    z-index: 1;
+}
+
+/* Slide wrapping helper to keep z-index low during 0 -> 4 transition */
+.coverflow-slide-item.is-wrapping {
+    z-index: 0 !important;
+}
+
+@media (max-width: 768px) {
+    .coverflow-slide-item.slot-0 {
+        transform: translate3d(-130%, 0, -100px) scale(0.68);
+        opacity: 1;
+    }
+    .coverflow-slide-item.slot-1 {
+        transform: translate3d(-68%, 0, -40px) scale(0.84);
+        opacity: 1;
+    }
+    .coverflow-slide-item.slot-2 {
+        transform: translate3d(0%, 0, 0px) scale(1.04);
+        opacity: 1;
+    }
+    .coverflow-slide-item.slot-3 {
+        transform: translate3d(68%, 0, -40px) scale(0.84);
+        opacity: 1;
+    }
+    .coverflow-slide-item.slot-4 {
+        transform: translate3d(130%, 0, -100px) scale(0.68);
+        opacity: 1;
+    }
 }
 
 .coverflow-card {
@@ -826,6 +911,7 @@ ol {
     box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
     border: 4px solid #FFFFFF;
     background-color: #F8F5F8;
+    transition: box-shadow 0.85s ease, border-color 0.85s ease;
 }
 
 .coverflow-card img {
@@ -4147,9 +4233,12 @@ body.theme-purple-mode .timeline-progress-bar {
 
 .about-leader-quote-scroll {
     flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     overflow-y: auto;
     padding-right: 8px;
-    margin-bottom: 1rem;
+    margin-bottom: 1.25rem;
 
     /* Subtle custom scrollbar */
     scrollbar-width: thin;
@@ -4167,10 +4256,10 @@ body.theme-purple-mode .timeline-progress-bar {
 
 .about-leader-quote {
     font-family: var(--font-body);
-    font-size: clamp(0.82rem, 0.92vw, 1.02rem);
-    line-height: 1.65;
-    margin: 0 0 0.85rem 0;
-    color: #FFFFFF;
+    font-size: clamp(1.05rem, 1.35vw, 1.45rem);
+    line-height: 1.72;
+    margin: 0;
+    color: rgba(255, 255, 255, 0.95);
 }
 
 .about-leader-quote:last-child {

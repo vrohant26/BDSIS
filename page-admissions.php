@@ -189,7 +189,7 @@ get_header();
 				
 				<!-- Left Column: Content -->
 				<div class="about-potential-content">
-					<h2 class="about-potential-title">Where Their <br> Journey Begins.</h2>
+					<h2 class="about-potential-title">Where <br> Possibilities Begin</h2>
 					<p class="about-potential-lead">Take the first step towards a learning experience that nurtures curiosity, builds confidence, and prepares children for what lies ahead.</p>
 				</div>
 
@@ -214,7 +214,7 @@ get_header();
 		<section class="admissions-process-section relative overflow-hidden" id="process">
 			<div class="site-container">
 				<div class="admissions-process-header text-center">
-					<span class="admissions-process-eyebrow"><?php esc_html_e( 'YOUR JOURNEY WITH US', 'bd-somani' ); ?></span>
+
 					<h2 class="admissions-process-title"><?php esc_html_e( 'Admissions Process', 'bd-somani' ); ?></h2>
 					<p class="admissions-process-lead"><?php esc_html_e( 'We are here to support your family every step of the way, from your first conversation to your child\'s first day.', 'bd-somani' ); ?></p>
 				</div>

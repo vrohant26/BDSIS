@@ -131,34 +131,32 @@ get_header();
 				<p class="section-subtitle">The world our children will grow into is changing faster than we can predict, so the real question isn't what they will study, but who they'll become.</p>
 			</div>
 
-			<!-- Swiper 3D Coverflow Carousel -->
+			<!-- 3D Circular Coverflow Carousel -->
 			<div class="coverflow-carousel-wrapper">
-				<div class="swiper coverflow-swiper">
-					<div class="swiper-wrapper">
-						<div class="swiper-slide">
-							<div class="coverflow-card">
-								<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/coverflow carousel 1.webp' ); ?>" alt="BD Somani Campus & Activities 1" loading="lazy">
-							</div>
+				<div class="coverflow-stage">
+					<div class="coverflow-slide-item">
+						<div class="coverflow-card">
+							<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/coverflow carousel 1.webp' ); ?>" alt="BD Somani Campus &amp; Activities 1" loading="lazy">
 						</div>
-						<div class="swiper-slide">
-							<div class="coverflow-card">
-								<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/coverflow carousel 2.webp' ); ?>" alt="BD Somani Campus & Activities 2" loading="lazy">
-							</div>
+					</div>
+					<div class="coverflow-slide-item">
+						<div class="coverflow-card">
+							<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/coverflow carousel 2.webp' ); ?>" alt="BD Somani Campus &amp; Activities 2" loading="lazy">
 						</div>
-						<div class="swiper-slide">
-							<div class="coverflow-card">
-								<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/coverflow carousel 3.webp' ); ?>" alt="BD Somani Campus Building" loading="lazy">
-							</div>
+					</div>
+					<div class="coverflow-slide-item">
+						<div class="coverflow-card">
+							<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/coverflow carousel 3.webp' ); ?>" alt="BD Somani Campus Building" loading="lazy">
 						</div>
-						<div class="swiper-slide">
-							<div class="coverflow-card">
-								<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/coverflow carousel 4.webp' ); ?>" alt="BD Somani Campus & Activities 4" loading="lazy">
-							</div>
+					</div>
+					<div class="coverflow-slide-item">
+						<div class="coverflow-card">
+							<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/coverflow carousel 4.webp' ); ?>" alt="BD Somani Campus &amp; Activities 4" loading="lazy">
 						</div>
-						<div class="swiper-slide">
-							<div class="coverflow-card">
-								<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/coverflow carousel 5.webp' ); ?>" alt="BD Somani Campus & Activities 5" loading="lazy">
-							</div>
+					</div>
+					<div class="coverflow-slide-item">
+						<div class="coverflow-card">
+							<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/coverflow carousel 5.webp' ); ?>" alt="BD Somani Campus &amp; Activities 5" loading="lazy">
 						</div>
 					</div>
 				</div>
