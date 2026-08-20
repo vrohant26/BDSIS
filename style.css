@@ -2466,7 +2466,8 @@ body.theme-purple-mode .timeline-progress-bar {
         max-width: 100%;
     }
 
-    .experiential-tabs-list {
+    .experiential-tabs-list,
+    .cornerstones-tabs-list {
         order: 3;
         width: 100%;
     }
