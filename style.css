@@ -885,18 +885,22 @@ ol {
         transform: translate3d(-130%, 0, -100px) scale(0.68);
         opacity: 1;
     }
+
     .coverflow-slide-item.slot-1 {
         transform: translate3d(-68%, 0, -40px) scale(0.84);
         opacity: 1;
     }
+
     .coverflow-slide-item.slot-2 {
         transform: translate3d(0%, 0, 0px) scale(1.04);
         opacity: 1;
     }
+
     .coverflow-slide-item.slot-3 {
         transform: translate3d(68%, 0, -40px) scale(0.84);
         opacity: 1;
     }
+
     .coverflow-slide-item.slot-4 {
         transform: translate3d(130%, 0, -100px) scale(0.68);
         opacity: 1;
@@ -1191,7 +1195,7 @@ ol {
 /* Carousel Slider Main Container & Halfway Screen-Edge Nav Buttons */
 .curriculum-carousel-container {
     width: 100%;
-    max-width: 1280px;
+
     margin-inline: auto;
     padding-top: clamp(2rem, 3.5vw, 3.5rem);
     position: relative;
@@ -2378,8 +2382,26 @@ body.theme-purple-mode .timeline-progress-bar {
         padding-block: clamp(3rem, 5vw, 4.5rem);
     }
 
+    /* Section 7 Values Mobile Layout & Ordering: Title -> Desc -> Silhouette -> Card */
+    .values-header {
+        order: 1;
+        margin-bottom: 0.5rem !important;
+    }
+
+    .values-footer {
+        order: 2;
+        margin-top: 0 !important;
+        margin-bottom: 1.25rem !important;
+    }
+
+    .values-bottom-subtitle {
+        font-size: clamp(0.92rem, 2.8vw, 1.05rem);
+        line-height: 1.55;
+    }
+
     /* Section 7 Values Mobile Layout & Shared Card Crossfade Slot */
     .values-stage-container {
+        order: 3;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -2433,10 +2455,6 @@ body.theme-purple-mode .timeline-progress-bar {
         font-size: clamp(0.95rem, 2.8vw, 1.05rem);
         line-height: 1.55;
         margin-top: 0.5rem;
-    }
-
-    .values-footer {
-        margin-top: 2.25rem;
     }
 
     .purple-full-section {
