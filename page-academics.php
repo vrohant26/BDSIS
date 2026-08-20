@@ -394,8 +394,11 @@ $sub_img_url  = $sub_img_id ? wp_get_attachment_image_url( $sub_img_id, 'full' )
 
 	<?php if ( $show_approach_section ) : ?>
 	<!-- Academics Sticky Approach / Cards Section -->
-	<section class="academics-approach-section">
-		<div class="site-container academics-approach-grid">
+	<section class="academics-approach-section relative overflow-hidden">
+		<!-- Full-Screen Sticky Background Overlay (bg.png) -->
+		<div class="academics-approach-bg-overlay" aria-hidden="true"></div>
+
+		<div class="site-container academics-approach-grid relative z-2">
 			
 			<!-- Left Column (Pinned / Fixed on Scroll) -->
 			<div class="academics-approach-left-sticky">

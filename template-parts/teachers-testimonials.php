@@ -50,7 +50,70 @@
 			<div class="swiper teachers-swiper">
 				<div class="swiper-wrapper">
 					
-					<!-- Slide 1: Ms. Ananya Deshmukh -->
+					<!-- Slide 1: Ms. Anjana Ramane -->
+					<div class="swiper-slide teachers-slide-item">
+						<div class="teachers-card-group flex gap-md">
+							<!-- Portrait Box -->
+							<div class="teachers-portrait-box relative">
+								<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/Teacher Portraits DSC02273.webp' ); ?>" alt="Ms. Anjana Ramane" class="teachers-portrait-img" loading="lazy" decoding="async">
+							</div>
+							<!-- Quote Details Box -->
+							<div class="teachers-quote-box relative flex-column flex-between">
+								<div class="teachers-quote-content">
+									<h3 class="teachers-quote-heading">Nurturing Young Minds With Warmth, Empathy, And Joyful Learning.</h3>
+									<p class="teachers-quote-text">"Every child’s first educational steps should feel warm, safe, and exciting. At B.D. Somani, we focus on emotional well-being, creative expression, and strong foundational values, giving young learners the perfect launchpad to flourish."</p>
+								</div>
+								<div class="teachers-quote-author">
+									<h4 class="teachers-author-name">Ms. Anjana Ramane</h4>
+									<p class="teachers-author-info">Middle School Coordinator - IGSE</p>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- Slide 2: Ms. Shraddha Sachdeva -->
+					<div class="swiper-slide teachers-slide-item">
+						<div class="teachers-card-group flex gap-md">
+							<!-- Portrait Box -->
+							<div class="teachers-portrait-box relative">
+								<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/Teacher Portraits DSC02285.webp' ); ?>" alt="Ms. Shraddha Sachdeva" class="teachers-portrait-img" loading="lazy" decoding="async">
+							</div>
+							<!-- Quote Details Box -->
+							<div class="teachers-quote-box relative flex-column flex-between">
+								<div class="teachers-quote-content">
+									<h3 class="teachers-quote-heading">Unlocking Creative Expression And Building Lifelong Confidence.</h3>
+									<p class="teachers-quote-text">"Arts and extracurriculars are not just additions to education—they are central to developing well-rounded, expressive individuals. Watching students discover their unique artistic voices and shine on stage is the greatest reward of my teaching journey."</p>
+								</div>
+								<div class="teachers-quote-author">
+									<h4 class="teachers-author-name">Ms. Shraddha Sachdeva</h4>
+									<p class="teachers-author-info">Pre-primary Coordinator</p>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- Slide 3: Ms. Puja Shukla -->
+					<div class="swiper-slide teachers-slide-item">
+						<div class="teachers-card-group flex gap-md">
+							<!-- Portrait Box -->
+							<div class="teachers-portrait-box relative">
+								<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/Teacher Portrait DSC02300.webp' ); ?>" alt="Ms. Puja Shukla" class="teachers-portrait-img" loading="lazy" decoding="async">
+							</div>
+							<!-- Quote Details Box -->
+							<div class="teachers-quote-box relative flex-column flex-between">
+								<div class="teachers-quote-content">
+									<h3 class="teachers-quote-heading">Empowering Effective Communication And Global Perspectives.</h3>
+									<p class="teachers-quote-text">"We guide students to articulate their thoughts clearly, appreciate diverse cultures, and develop strong analytical skills. The warm, inclusive atmosphere at B.D. Somani brings out the best in both educators and students alike."</p>
+								</div>
+								<div class="teachers-quote-author">
+									<h4 class="teachers-author-name">Ms. Puja Shukla</h4>
+									<p class="teachers-author-info">Middle School Coordinator - ICSE</p>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- Slide 4 (Second Last): Ms. Ananya Deshmukh -->
 					<div class="swiper-slide teachers-slide-item">
 						<div class="teachers-card-group flex gap-md">
 							<!-- Portrait Box (No Video Overlay) -->
@@ -71,75 +134,12 @@
 						</div>
 					</div>
 
-					<!-- Slide 2: Ms. Sunita Sharma -->
+					<!-- Slide 5 (Last): Ms. Jyotsna Dondapati -->
 					<div class="swiper-slide teachers-slide-item">
 						<div class="teachers-card-group flex gap-md">
 							<!-- Portrait Box -->
 							<div class="teachers-portrait-box relative">
-								<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/Teacher Portraits DSC02273.webp' ); ?>" alt="Ms. Sunita Sharma" class="teachers-portrait-img" loading="lazy" decoding="async">
-							</div>
-							<!-- Quote Details Box -->
-							<div class="teachers-quote-box relative flex-column flex-between">
-								<div class="teachers-quote-content">
-									<h3 class="teachers-quote-heading">Nurturing Young Minds With Warmth, Empathy, And Joyful Learning.</h3>
-									<p class="teachers-quote-text">"Every child’s first educational steps should feel warm, safe, and exciting. At B.D. Somani, we focus on emotional well-being, creative expression, and strong foundational values, giving young learners the perfect launchpad to flourish."</p>
-								</div>
-								<div class="teachers-quote-author">
-									<h4 class="teachers-author-name">Ms. Sunita Sharma</h4>
-									<p class="teachers-author-info">Early Childhood & Foundational Educator</p>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<!-- Slide 3: Mr. Vikramaditya Joshi -->
-					<div class="swiper-slide teachers-slide-item">
-						<div class="teachers-card-group flex gap-md">
-							<!-- Portrait Box -->
-							<div class="teachers-portrait-box relative">
-								<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/Teacher Portraits DSC02285.webp' ); ?>" alt="Mr. Vikramaditya Joshi" class="teachers-portrait-img" loading="lazy" decoding="async">
-							</div>
-							<!-- Quote Details Box -->
-							<div class="teachers-quote-box relative flex-column flex-between">
-								<div class="teachers-quote-content">
-									<h3 class="teachers-quote-heading">Unlocking Creative Expression And Building Lifelong Confidence.</h3>
-									<p class="teachers-quote-text">"Arts and extracurriculars are not just additions to education—they are central to developing well-rounded, expressive individuals. Watching students discover their unique artistic voices and shine on stage is the greatest reward of my teaching journey."</p>
-								</div>
-								<div class="teachers-quote-author">
-									<h4 class="teachers-author-name">Mr. Vikramaditya Joshi</h4>
-									<p class="teachers-author-info">Performing Arts & Co-Curricular Lead</p>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<!-- Slide 4: Ms. Priyanka Kulkarni -->
-					<div class="swiper-slide teachers-slide-item">
-						<div class="teachers-card-group flex gap-md">
-							<!-- Portrait Box -->
-							<div class="teachers-portrait-box relative">
-								<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/Teacher Portrait DSC02300.webp' ); ?>" alt="Ms. Priyanka Kulkarni" class="teachers-portrait-img" loading="lazy" decoding="async">
-							</div>
-							<!-- Quote Details Box -->
-							<div class="teachers-quote-box relative flex-column flex-between">
-								<div class="teachers-quote-content">
-									<h3 class="teachers-quote-heading">Empowering Effective Communication And Global Perspectives.</h3>
-									<p class="teachers-quote-text">"We guide students to articulate their thoughts clearly, appreciate diverse cultures, and develop strong analytical skills. The warm, inclusive atmosphere at B.D. Somani brings out the best in both educators and students alike."</p>
-								</div>
-								<div class="teachers-quote-author">
-									<h4 class="teachers-author-name">Ms. Priyanka Kulkarni</h4>
-									<p class="teachers-author-info">Language Arts & Humanities Mentor</p>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<!-- Slide 5: Mr. Rajesh Nair -->
-					<div class="swiper-slide teachers-slide-item">
-						<div class="teachers-card-group flex gap-md">
-							<!-- Portrait Box -->
-							<div class="teachers-portrait-box relative">
-								<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/Teacher Portrait 0282.webp' ); ?>" alt="Mr. Rajesh Nair" class="teachers-portrait-img" loading="lazy" decoding="async">
+								<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/Teacher Portrait 0282.webp' ); ?>" alt="Ms. Jyotsna Dondapati" class="teachers-portrait-img" loading="lazy" decoding="async">
 							</div>
 							<!-- Quote Details Box -->
 							<div class="teachers-quote-box relative flex-column flex-between">
@@ -148,8 +148,8 @@
 									<p class="teachers-quote-text">"In our Maker Labs and interactive classrooms, science comes alive. We encourage students to experiment, embrace trial and error, and think like innovators. The collaborative environment between teachers and students creates a truly dynamic learning culture."</p>
 								</div>
 								<div class="teachers-quote-author">
-									<h4 class="teachers-author-name">Mr. Rajesh Nair</h4>
-									<p class="teachers-author-info">Middle School Science & STEM Facilitator</p>
+									<h4 class="teachers-author-name">Ms. Jyotsna Dondapati</h4>
+									<p class="teachers-author-info">Primary School Coordinator</p>
 								</div>
 							</div>
 						</div>
