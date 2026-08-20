@@ -698,13 +698,11 @@ document.addEventListener("DOMContentLoaded", () => {
       speed: 700,
       parallax: false,
       grabCursor: true,
-      loop: true,
+      loop: false,
+      bounds: true,
+      watchOverflow: true,
       observer: true,
       observeParents: true,
-      autoplay: {
-        delay: 2500,
-        disableOnInteraction: false,
-      },
       navigation: {
         nextEl: "#curriculumNextBtn",
         prevEl: "#curriculumPrevBtn",
@@ -722,34 +720,20 @@ document.addEventListener("DOMContentLoaded", () => {
       },
       on: {
         init: function () {
-          updateTimeline(this.realIndex !== undefined ? this.realIndex : this.activeIndex);
-          if (this.autoplay && typeof this.autoplay.start === "function") {
-            this.autoplay.start();
-          }
+          updateTimeline(this.activeIndex);
         },
         slideChange: function () {
-          updateTimeline(this.realIndex !== undefined ? this.realIndex : this.activeIndex);
+          updateTimeline(this.activeIndex);
         },
       },
     });
-
-    if (curriculumSwiper && curriculumSwiper.autoplay && typeof curriculumSwiper.autoplay.start === "function") {
-      curriculumSwiper.autoplay.start();
-    }
 
     stepBtns.forEach((btn) => {
       btn.addEventListener("click", function (e) {
         e.preventDefault();
         const stepIndex = parseInt(this.getAttribute("data-step"), 10);
         if (!isNaN(stepIndex)) {
-          if (curriculumSwiper.params.loop) {
-            curriculumSwiper.slideToLoop(stepIndex);
-          } else {
-            curriculumSwiper.slideTo(stepIndex);
-          }
-          if (curriculumSwiper.autoplay && typeof curriculumSwiper.autoplay.start === "function") {
-            curriculumSwiper.autoplay.start();
-          }
+          curriculumSwiper.slideTo(stepIndex);
         }
       });
     });
