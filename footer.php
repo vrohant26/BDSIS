@@ -90,35 +90,35 @@
 					<!-- Column 1: Brand Info & Contact -->
 					<div class="footer-col footer-col-brand">
 						<a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="footer-logo">
-							<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/BD Somani Kharghar - White logo 1.webp' ); ?>" alt="B.D. Somani International School Logo">
+							<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/BD Somani Logo.png' ); ?>" alt="B.D. Somani International School Logo">
 						</a>
 						<p class="footer-tagline">Nurturing confident learners, compassionate individuals, and future-ready leaders through academic excellence, holistic development, and meaningful learning experiences.</p>
 						
 						<ul class="footer-contact-list flex-column gap-xs">
 							<li class="contact-item flex gap-xs align-center">
 								<svg class="contact-icon flex-shrink-0" width="18" height="20" viewBox="0 0 18 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-									<path d="M9 10.5C10.1046 10.5 11 9.60457 11 8.5C11 7.39543 10.1046 6.5 9 6.5C7.89543 6.5 7 7.39543 7 8.5C7 9.60457 7.89543 10.5 9 10.5Z" stroke="#FFFFFF" stroke-width="1.8"/>
-									<path d="M9 19C13 15 17 12.1176 17 8.5C17 4.08172 13.4183 0.5 9 0.5C4.58172 0.5 1 4.08172 1 8.5C1 12.1176 5 15 9 19Z" stroke="#FFFFFF" stroke-width="1.8"/>
+									<path d="M9 10.5C10.1046 10.5 11 9.60457 11 8.5C11 7.39543 10.1046 6.5 9 6.5C7.89543 6.5 7 7.39543 7 8.5C7 9.60457 7.89543 10.5 9 10.5Z" stroke="#49274A" stroke-width="1.8"/>
+									<path d="M9 19C13 15 17 12.1176 17 8.5C17 4.08172 13.4183 0.5 9 0.5C4.58172 0.5 1 4.08172 1 8.5C1 12.1176 5 15 9 19Z" stroke="#49274A" stroke-width="1.8"/>
 								</svg>
 								<span>Plot #92, Sector 27, Kharghar, Navi Mumbai 410210</span>
 							</li>
 							<li class="contact-item flex gap-xs align-center">
 								<svg class="contact-icon flex-shrink-0" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-									<path d="M3.62 7.79C5.06 10.62 7.38 12.93 10.21 14.38L12.41 12.18C12.68 11.91 13.08 11.82 13.43 11.94C14.55 12.31 15.76 12.51 17 12.51C17.55 12.51 18 12.96 18 13.51V17C18 17.55 17.55 18 17 18C7.61 18 0 10.39 0 1C0 0.45 0.45 0 1 0H4.5C5.05 0 5.5 0.45 5.5 1C5.5 2.25 5.7 3.45 6.07 4.57C6.18 4.92 6.1 5.31 5.82 5.59L3.62 7.79Z" fill="#FFFFFF"/>
+									<path d="M3.62 7.79C5.06 10.62 7.38 12.93 10.21 14.38L12.41 12.18C12.68 11.91 13.08 11.82 13.43 11.94C14.55 12.31 15.76 12.51 17 12.51C17.55 12.51 18 12.96 18 13.51V17C18 17.55 17.55 18 17 18C7.61 18 0 10.39 0 1C0 0.45 0.45 0 1 0H4.5C5.05 0 5.5 0.45 5.5 1C5.5 2.25 5.7 3.45 6.07 4.57C6.18 4.92 6.1 5.31 5.82 5.59L3.62 7.79Z" fill="#49274A"/>
 								</svg>
 								<a href="tel:+912268066697" style="color: inherit; text-decoration: none;">+91 22 68066697</a>
 							</li>
 							<li class="contact-item flex gap-xs align-center">
 								<svg class="contact-icon flex-shrink-0" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-									<path d="M9 17C13.4183 17 17 13.4183 17 9C17 4.58172 13.4183 1 9 1C4.58172 1 1 4.58172 1 9C1 13.4183 4.58172 17 9 17Z" stroke="#FFFFFF" stroke-width="1.8"/>
-									<path d="M9 4.5V9L12.5 11" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round"/>
+									<path d="M9 17C13.4183 17 17 13.4183 17 9C17 4.58172 13.4183 1 9 1C4.58172 1 1 4.58172 1 9C1 13.4183 4.58172 17 9 17Z" stroke="#49274A" stroke-width="1.8"/>
+									<path d="M9 4.5V9L12.5 11" stroke="#49274A" stroke-width="1.8" stroke-linecap="round"/>
 								</svg>
 								<span>Monday to Saturday | 8.00 AM to 5.00 PM</span>
 							</li>
 							<li class="contact-item flex gap-xs align-center">
 								<svg class="contact-icon flex-shrink-0" width="18" height="14" viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-									<path d="M2.5 1H15.5C16.325 1 17 1.675 17 2.5V11.5C17 12.325 16.325 13 15.5 13H2.5C1.675 13 1 12.325 1 11.5V2.5C1 1.675 1.675 1 2.5 1Z" stroke="#FFFFFF" stroke-width="1.8"/>
-									<path d="M17 2.5L9 8L1 2.5" stroke="#FFFFFF" stroke-width="1.8"/>
+									<path d="M2.5 1H15.5C16.325 1 17 1.675 17 2.5V11.5C17 12.325 16.325 13 15.5 13H2.5C1.675 13 1 12.325 1 11.5V2.5C1 1.675 1.675 1 2.5 1Z" stroke="#49274A" stroke-width="1.8"/>
+									<path d="M17 2.5L9 8L1 2.5" stroke="#49274A" stroke-width="1.8"/>
 								</svg>
 								<a href="mailto:info@bdsiskharghar.org">info@bdsiskharghar.org</a>
 							</li>

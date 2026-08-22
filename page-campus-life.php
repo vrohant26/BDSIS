@@ -142,7 +142,34 @@ get_header();
 			?>
 		</div>
 	</section>
-	<?php get_template_part( 'template-parts/brand-marquee' ); ?>
+
+		<!-- banner section -->
+	<section class="about-potential-section relative overflow-hidden">
+		<div class="site-container relative z-2">
+			<div class="about-potential-grid">
+				
+				<!-- Left Column: Content -->
+				<div class="about-potential-content">
+					<h2 class="about-potential-title">Helping Every Child Find Their Strength</h2>
+					<p class="about-potential-lead">Every student brings unique strengths. Our campus gives them the opportunities to explore, develop, and let those strengths shine.</p>
+				</div>
+
+				<!-- Right Column:  -->
+				<div class="about-potential-media flex-center">
+					<div class="about-potential-video-container relative">
+						<!-- Video Frame -->
+						<div class="about-potential-video-wrap">
+							<video autoplay loop muted playsinline>
+								<source src="<?php echo esc_url( get_template_directory_uri() . '/assets/video/A2.webm' ); ?>" type="video/mp4">
+								Your browser does not support the video tag.
+							</video>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</section>
 
 		<!-- SECTION 3: LIFE AT B.D. SOMANI CAROUSEL -->
 		<section class="academics-experiences-section campus-life-experiences-section relative overflow-hidden" id="student-life">
@@ -482,178 +509,9 @@ get_header();
 		</div>
 	</section>
 
-		<!-- banner section -->
-	<section class="about-potential-section relative overflow-hidden">
-		<div class="site-container relative z-2">
-			<div class="about-potential-grid">
-				
-				<!-- Left Column: Content -->
-				<div class="about-potential-content">
-					<h2 class="about-potential-title">Helping Every Child Find Their Strength</h2>
-					<p class="about-potential-lead">Every student brings unique strengths. Our campus gives them the opportunities to explore, develop, and let those strengths shine.</p>
-				</div>
 
-				<!-- Right Column:  -->
-				<div class="about-potential-media flex-center">
-					<div class="about-potential-video-container relative">
-						<!-- Video Frame -->
-						<div class="about-potential-video-wrap">
-							<video autoplay loop muted playsinline>
-								<source src="<?php echo esc_url( get_template_directory_uri() . '/assets/video/A2.webm' ); ?>" type="video/mp4">
-								Your browser does not support the video tag.
-							</video>
-						</div>
-					</div>
-				</div>
 
-			</div>
-		</div>
-	</section>
 
-	<!-- SECTION 5: SAFETY & WELL-BEING -->
-	<section class="campus-safety-section relative overflow-hidden" id="safety-wellbeing">
-		<div class="site-container relative z-2">
-			
-			<!-- Section Header -->
-			<div class="campus-safety-header text-center">
-				<span class="campus-safety-badge"><?php esc_html_e( 'SAFETY & WELL-BEING', 'bd-somani' ); ?></span>
-				<h2 class="campus-safety-title"><?php esc_html_e( 'The Care Behind Every School Day', 'bd-somani' ); ?></h2>
-				<p class="campus-safety-subtitle"><?php esc_html_e( 'A safe school is built through thoughtful systems, prepared spaces, and people who care. From campus monitoring and fire safety to healthcare and essential infrastructure, every measure supports a secure and supportive environment for our students.', 'bd-somani' ); ?></p>
-			</div>
-
-			<!-- Swiper Carousel Container -->
-			<div class="campus-safety-carousel-wrap relative">
-				<div class="swiper safety-swiper">
-					<div class="swiper-wrapper">
-
-						<!-- Card 01 -->
-						<div class="swiper-slide">
-							<div class="safety-card">
-								<div class="safety-card-image-wrap">
-									<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/security  and well being 1.webp' ); ?>" alt="<?php esc_attr_e( 'Reliable Systems', 'bd-somani' ); ?>" class="safety-card-img" loading="lazy" decoding="async">
-								</div>
-								<div class="safety-card-body">
-									<div class="safety-card-meta flex align-center gap-xs">
-										<span class="safety-card-num">01</span>
-										<span class="safety-card-category"><?php esc_html_e( 'Campus Infrastructure', 'bd-somani' ); ?></span>
-									</div>
-									<h3 class="safety-card-title"><?php esc_html_e( 'Reliable Systems', 'bd-somani' ); ?></h3>
-									<p class="safety-card-desc"><?php esc_html_e( 'Essential electrical systems are carefully managed to support the safe and reliable functioning of the campus.', 'bd-somani' ); ?></p>
-								</div>
-							</div>
-						</div>
-
-						<!-- Card 02 -->
-						<div class="swiper-slide">
-							<div class="safety-card">
-								<div class="safety-card-image-wrap">
-									<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/security  and well being 2.webp' ); ?>" alt="<?php esc_attr_e( 'Power Continuity', 'bd-somani' ); ?>" class="safety-card-img" loading="lazy" decoding="async">
-								</div>
-								<div class="safety-card-body">
-									<div class="safety-card-meta flex align-center gap-xs">
-										<span class="safety-card-num">02</span>
-										<span class="safety-card-category"><?php esc_html_e( 'Backup Power', 'bd-somani' ); ?></span>
-									</div>
-									<h3 class="safety-card-title"><?php esc_html_e( 'Power Continuity', 'bd-somani' ); ?></h3>
-									<p class="safety-card-desc"><?php esc_html_e( 'Infrastructure designed to prioritise child safety, comfort, and well-being while keeping essential school operations running smoothly.', 'bd-somani' ); ?></p>
-								</div>
-							</div>
-						</div>
-
-						<!-- Card 03 -->
-						<div class="swiper-slide">
-							<div class="safety-card">
-								<div class="safety-card-image-wrap">
-									<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/security  and well being 3.webp' ); ?>" alt="<?php esc_attr_e( 'Active Monitoring', 'bd-somani' ); ?>" class="safety-card-img" loading="lazy" decoding="async">
-								</div>
-								<div class="safety-card-body">
-									<div class="safety-card-meta flex align-center gap-xs">
-										<span class="safety-card-num">03</span>
-										<span class="safety-card-category"><?php esc_html_e( 'Campus Monitoring', 'bd-somani' ); ?></span>
-									</div>
-									<h3 class="safety-card-title"><?php esc_html_e( 'Active Monitoring', 'bd-somani' ); ?></h3>
-									<p class="safety-card-desc"><?php esc_html_e( 'Dedicated monitoring helps our team maintain awareness across key areas of the campus.', 'bd-somani' ); ?></p>
-								</div>
-							</div>
-						</div>
-
-						<!-- Card 04 -->
-						<div class="swiper-slide">
-							<div class="safety-card">
-								<div class="safety-card-image-wrap">
-									<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/security  and well being 4.webp' ); ?>" alt="<?php esc_attr_e( 'Comfortable Spaces', 'bd-somani' ); ?>" class="safety-card-img" loading="lazy" decoding="async">
-								</div>
-								<div class="safety-card-body">
-									<div class="safety-card-meta flex align-center gap-xs">
-										<span class="safety-card-num">04</span>
-										<span class="safety-card-category"><?php esc_html_e( 'Indoor Environment', 'bd-somani' ); ?></span>
-									</div>
-									<h3 class="safety-card-title"><?php esc_html_e( 'Comfortable Spaces', 'bd-somani' ); ?></h3>
-									<p class="safety-card-desc"><?php esc_html_e( 'Ventilation and climate-control systems support comfortable indoor environments throughout the school.', 'bd-somani' ); ?></p>
-								</div>
-							</div>
-						</div>
-
-						<!-- Card 05 -->
-						<div class="swiper-slide">
-							<div class="safety-card">
-								<div class="safety-card-image-wrap">
-									<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/security  and well being 5.webp' ); ?>" alt="<?php esc_attr_e( 'Fire Safety', 'bd-somani' ); ?>" class="safety-card-img" loading="lazy" decoding="async">
-								</div>
-								<div class="safety-card-body">
-									<div class="safety-card-meta flex align-center gap-xs">
-										<span class="safety-card-num">05</span>
-										<span class="safety-card-category"><?php esc_html_e( 'Emergency Preparedness', 'bd-somani' ); ?></span>
-									</div>
-									<h3 class="safety-card-title"><?php esc_html_e( 'Fire Safety', 'bd-somani' ); ?></h3>
-									<p class="safety-card-desc"><?php esc_html_e( 'Fire safety equipment and clearly designated emergency systems form an important part of campus preparedness.', 'bd-somani' ); ?></p>
-								</div>
-							</div>
-						</div>
-
-						<!-- Card 06 -->
-						<div class="swiper-slide">
-							<div class="safety-card">
-								<div class="safety-card-image-wrap">
-									<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/security  and well being 6.webp' ); ?>" alt="<?php esc_attr_e( 'On-Campus Infirmary', 'bd-somani' ); ?>" class="safety-card-img" loading="lazy" decoding="async">
-								</div>
-								<div class="safety-card-body">
-									<div class="safety-card-meta flex align-center gap-xs">
-										<span class="safety-card-num">06</span>
-										<span class="safety-card-category"><?php esc_html_e( 'Student Healthcare', 'bd-somani' ); ?></span>
-									</div>
-									<h3 class="safety-card-title"><?php esc_html_e( 'On-Campus Infirmary', 'bd-somani' ); ?></h3>
-									<p class="safety-card-desc"><?php esc_html_e( 'A dedicated infirmary provides a quiet, equipped space for students who need care or medical attention during the school day.', 'bd-somani' ); ?></p>
-								</div>
-							</div>
-						</div>
-
-					</div>
-				</div>
-
-				<!-- Carousel Navigation Controls & Progress Bar -->
-				<div class="safety-carousel-controls flex-between align-center">
-					<div class="safety-progress-track">
-						<div class="safety-progress-bar" id="safetyProgressBar"></div>
-					</div>
-					<div class="safety-nav-btns flex align-center gap-sm">
-						<button class="safety-nav-btn safety-prev-btn flex-center" aria-label="Previous Slide">
-							<svg width="18" height="14" viewBox="0 0 20 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-								<path d="M7 15L1 8M1 8L7 1M1 8H19" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-							</svg>
-						</button>
-						<button class="safety-nav-btn safety-next-btn flex-center" aria-label="Next Slide">
-							<svg width="18" height="14" viewBox="0 0 20 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-								<path d="M13 1L19 8M19 8L13 15M19 8H1" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-							</svg>
-						</button>
-					</div>
-				</div>
-
-			</div>
-
-		</div>
-	</section>
 
 	<!-- SECTION 6: COUNSELLORS / STUDENT WELL-BEING & GUIDANCE -->
 	<section class="campus-counselors-section relative overflow-hidden" id="counselors">

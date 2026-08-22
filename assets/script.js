@@ -851,34 +851,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   initTeachersCarousel();
 
-  /* ==========================================================================
-     Smooth Background & Text Color Switch to Purple Mode on Scroll
-     ========================================================================== */
   if (hasGsap()) {
-    const purpleSection = document.querySelector(".purple-full-section");
-    if (purpleSection) {
-      ScrollTrigger.create({
-        trigger: ".purple-full-section",
-        start: "top 65%",
-        end: "bottom 35%",
-        onEnter: () => {
-          document.body.classList.add("theme-purple-mode");
-          gsap.to("body, .site-wrapper", {
-            backgroundColor: "#49274A",
-            duration: 0.4,
-            ease: "power2.out",
-          });
-        },
-        onLeaveBack: () => {
-          document.body.classList.remove("theme-purple-mode");
-          gsap.to("body, .site-wrapper", {
-            backgroundColor: "#FFFFFF",
-            duration: 0.4,
-            ease: "power2.out",
-          });
-        },
-      });
-    }
 
     /* GSAP ScrollTrigger Path Draw Animation for Wavy Ribbon SVG (Top to Bottom Flow) */
     const ribbonPath = document.querySelector(".experiential-ribbon-path");
