@@ -201,26 +201,20 @@
 					<div class="footer-social-box flex-column gap-xs">
 						<span class="social-title">Connect with us</span>
 						<div class="social-icons flex align-center gap-sm">
-							<!-- Facebook -->
-							<a href="https://facebook.com" target="_blank" rel="noopener" aria-label="Facebook" class="social-icon-btn flex-center">
-								<svg width="12" height="20" viewBox="0 0 12 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-									<path d="M11 1H8C6.67392 1 5.40215 1.52678 4.46447 2.46447C3.52678 3.40215 3 4.67392 3 6V9H0V13H3V21H7V13H10L11 9H7V6C7 5.73478 7.10536 5.48043 7.29289 5.29289C7.48043 5.10536 7.73478 5 8 5H11V1Z" fill="#FFFFFF"/>
-								</svg>
-							</a>
 							<!-- LinkedIn -->
-							<a href="https://linkedin.com" target="_blank" rel="noopener" aria-label="LinkedIn" class="social-icon-btn flex-center">
+							<a href="https://www.linkedin.com/company/bdsis-kharghar/" target="_blank" rel="noopener" aria-label="LinkedIn" class="social-icon-btn flex-center">
 								<svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
 									<path d="M16 0H2C0.9 0 0 0.9 0 2V16C0 17.1 0.9 18 2 18H16C17.1 18 18 17.1 18 16V2C18 0.9 17.1 0 16 0ZM5.3 15.3H2.7V6.7H5.3V15.3ZM4 5.5C3.1 5.5 2.4 4.8 2.4 3.9C2.4 3 3.1 2.3 4 2.3C4.9 2.3 5.6 3 5.6 3.9C5.6 4.8 4.9 5.5 4 5.5ZM15.3 15.3H12.7V11.1C12.7 10.1 12.7 8.8 11.3 8.8C9.9 8.8 9.7 9.9 9.7 11V15.3H7.1V6.7H9.6V7.9H9.7C10 7.2 10.9 6.5 12.2 6.5C14.9 6.5 15.4 8.3 15.4 10.6V15.3H15.3Z" fill="#FFFFFF"/>
 								</svg>
 							</a>
 							<!-- Instagram -->
-							<a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram" class="social-icon-btn flex-center">
+							<a href="https://www.instagram.com/bdsis.kharghar?igsi=MXg4NmV3ZXZqMmw3Yg==" target="_blank" rel="noopener" aria-label="Instagram" class="social-icon-btn flex-center">
 								<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
 									<path d="M14.5 0H5.5C2.5 0 0 2.5 0 5.5V14.5C0 17.5 2.5 20 5.5 20H14.5C17.5 20 20 17.5 20 14.5V5.5C20 2.5 17.5 0 14.5 0ZM10 15C7.2 15 5 12.8 5 10C5 7.2 7.2 5 10 5C12.8 5 15 7.2 15 10C15 12.8 12.8 15 10 15ZM15.5 6C14.7 6 14 5.3 14 4.5C14 3.7 14.7 3 15.5 3C16.3 3 17 3.7 17 4.5C17 5.3 16.3 6 15.5 6Z" fill="#FFFFFF"/>
 								</svg>
 							</a>
 							<!-- YouTube -->
-							<a href="https://youtube.com" target="_blank" rel="noopener" aria-label="YouTube" class="social-icon-btn flex-center">
+							<a href="https://www.youtube.com/@bdsomanischoolkharghar" target="_blank" rel="noopener" aria-label="YouTube" class="social-icon-btn flex-center">
 								<svg width="22" height="16" viewBox="0 0 22 16" fill="none" xmlns="http://www.w3.org/2000/svg">
 									<path d="M21.2 2.4C20.9 1.4 20.1 0.6 19.1 0.4C17.4 0 11 0 11 0C11 0 4.6 0 2.9 0.4C1.9 0.6 1.1 1.4 0.8 2.4C0 4.1 0 8 0 8C0 8 0 11.9 0.8 13.6C1.1 14.6 1.9 15.4 2.9 15.6C4.6 16 11 16 11 16C11 16 17.4 16 19.1 15.6C20.1 15.4 20.9 14.6 21.2 13.6C22 11.9 22 8 22 8C22 8 22 4.1 21.2 2.4ZM8.8 11.4V4.6L14.7 8L8.8 11.4Z" fill="#FFFFFF"/>
 								</svg>

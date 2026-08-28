@@ -13,22 +13,24 @@ get_header();
 
 	<div class="site-container">
 		
-		<!-- Breadcrumb Navigation -->
-		<nav class="faq-breadcrumb" aria-label="Breadcrumb">
-			<a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="breadcrumb-home-link" aria-label="Home">
+		<!-- Breadcrumb Navigation (Consistent with Other Pages) -->
+		<nav class="faq-breadcrumb flex align-center gap-xs" aria-label="Breadcrumb">
+			<a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="breadcrumb-home-link flex align-center gap-xs" aria-label="Home">
 				<?php 
 				$home_svg_path = get_template_directory() . '/assets/svgs/home svg.svg';
 				if ( file_exists( $home_svg_path ) ) {
 					echo file_get_contents( $home_svg_path );
 				} else {
 					?>
-					<iconify-icon icon="lucide:home"></iconify-icon>
+					<svg width="16" height="18" viewBox="0 0 16 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<path d="M0 18V6L8 0L16 6V18H10V11H6V18H0Z" fill="#2B182C"/>
+					</svg>
 					<?php
 				}
 				?>
 			</a>
 			<span class="breadcrumb-separator">/</span>
-			<span class="breadcrumb-current">Frequently Asked Questions</span>
+			<span class="breadcrumb-current">FAQ</span>
 		</nav>
 
 		<!-- Hero Section -->

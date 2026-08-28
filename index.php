@@ -373,7 +373,7 @@ get_header();
 									<span class="value-card-title">COURAGE</span>
 									<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/svgs/courage.svg' ); ?>" class="value-card-icon" alt="Courage Icon">
 								</div>
-								<p class="value-card-desc">We inspire confident individuals who act with integrity, empathy and a strong sense of responsibility.</p>
+								<p class="value-card-desc">We nurture the confidence to question, the conviction to act, and the integrity to take responsibility.</p>
 							</div>
 						</div>
 
@@ -394,7 +394,7 @@ get_header();
 
 				<!-- Bottom Subtitle Paragraph -->
 				<div class="values-footer text-center width-100">
-					<p class="values-bottom-subtitle">Every stage of your child's journey is shaped by our core values of Curiosity, Collaboration, and Courage.</p>
+					<p class="values-bottom-subtitle">Every stage of your child's journey is shaped by our core values of <br> Curiosity, Collaboration, and Courage.</p>
 				</div>
 
 			</div>

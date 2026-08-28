@@ -151,7 +151,7 @@ get_header();
 				<!-- Left Column: Content -->
 				<div class="about-potential-content">
 					<h2 class="about-potential-title">Helping Every Child Find Their Strength</h2>
-					<p class="about-potential-lead">Every student brings unique strengths. Our campus gives them the opportunities to explore, develop, and let those strengths shine.</p>
+					<p class="about-potential-lead">Our campus creates opportunities for students to discover their strengths, develop their potential, and find the confidence to let them shine.</p>
 				</div>
 
 				<!-- Right Column:  -->
@@ -159,8 +159,8 @@ get_header();
 					<div class="about-potential-video-container relative">
 						<!-- Video Frame -->
 						<div class="about-potential-video-wrap">
-							<video autoplay loop muted playsinline>
-								<source src="<?php echo esc_url( get_template_directory_uri() . '/assets/video/A2.webm' ); ?>" type="video/mp4">
+							<video autoplay loop muted playsinline webkit-playsinline preload="auto" src="<?php echo esc_url( get_template_directory_uri() . '/assets/video/A2.webm' ); ?>">
+								<source src="<?php echo esc_url( get_template_directory_uri() . '/assets/video/A2.webm' ); ?>" type="video/webm">
 								Your browser does not support the video tag.
 							</video>
 						</div>
@@ -211,17 +211,17 @@ get_header();
 										</div>
 
 										<div class="academics-exp-main-card">
-											<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/life at bd somani big image 1.webp' ); ?>" alt="<?php esc_attr_e( 'Our role is to nurture lifelong learners', 'bd-somani' ); ?>" class="academics-exp-main-photo">
+											<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/life at bd somani big image 1.webp' ); ?>" alt="<?php esc_attr_e( 'We nurture lifelong learners', 'bd-somani' ); ?>" class="academics-exp-main-photo">
 										</div>
 
 										<div class="academics-exp-sub-card">
-											<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/life at bd somani sub image .webp' ); ?>" alt="<?php esc_attr_e( 'Our role is to nurture lifelong learners', 'bd-somani' ); ?>" class="academics-exp-sub-photo">
+											<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/life at bd somani sub image .webp' ); ?>" alt="<?php esc_attr_e( 'We nurture lifelong learners', 'bd-somani' ); ?>" class="academics-exp-sub-photo">
 										</div>
 									</div>
 
 									<div class="academics-exp-text-wrap relative">
-										<h3 class="academics-exp-sub-title"><?php esc_html_e( 'Our role is to nurture lifelong learners.', 'bd-somani' ); ?></h3>
-										<p class="academics-exp-sub-desc reveal-text"><?php esc_html_e( 'In this journey, their every doubt of "Will I be able to?" becomes "Why not?" through the experiences we create.', 'bd-somani' ); ?></p>
+										<h3 class="academics-exp-sub-title"><?php esc_html_e( 'We nurture lifelong learners.', 'bd-somani' ); ?></h3>
+										<p class="academics-exp-sub-desc reveal-text"><?php esc_html_e( 'In this journey, every doubt of “Will I be able to?” becomes a confident “I can” through the experiences we create.', 'bd-somani' ); ?></p>
 
 										<div class="academics-exp-chess-doodle" aria-hidden="true">
 											<?php

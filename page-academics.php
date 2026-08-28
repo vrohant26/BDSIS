@@ -280,9 +280,9 @@ $sub_img_url  = $sub_img_id ? wp_get_attachment_image_url( $sub_img_id, 'full' )
 				<div class="about-potential-media flex-center">
 					<div class="about-potential-video-container relative">
 						<div class="about-potential-video-wrap">
-							<video autoplay loop muted playsinline>
-								<source src="<?php echo esc_url( $potential_video ); ?>" type="video/mp4">
-								<source src="<?php echo esc_url( $potential_video ); ?>" type="video/webm">
+							<video autoplay loop muted playsinline webkit-playsinline>
+								<source src="<?php echo esc_url( get_template_directory_uri() . '/assets/video/about video.mp4' ); ?>" type="video/mp4">
+								<source src="<?php echo esc_url( get_template_directory_uri() . '/assets/video/A2.webm' ); ?>" type="video/webm">
 								<?php esc_html_e( 'Your browser does not support the video tag.', 'bd-somani' ); ?>
 							</video>
 						</div>
@@ -402,9 +402,44 @@ $sub_img_url  = $sub_img_id ? wp_get_attachment_image_url( $sub_img_id, 'full' )
 				<?php if ( ! empty( $app_eyebrow ) ) : ?>
 					<span class="academics-approach-eyebrow"><?php echo esc_html( $app_eyebrow ); ?></span>
 				<?php endif; ?>
-				<?php if ( ! empty( $app_title ) ) : ?>
-					<h2 class="academics-approach-title"><?php echo esc_html( $app_title ); ?></h2>
-				<?php endif; ?>
+				<div class="academics-approach-title-wrap flex align-center justify-between">
+					<?php if ( ! empty( $app_title ) ) : ?>
+						<h2 class="academics-approach-title"><?php echo esc_html( $app_title ); ?></h2>
+					<?php endif; ?>
+
+					<!-- Decorative Dotted Grid Style Doodle Beside Title -->
+					<div class="academics-title-dots-doodle" aria-hidden="true">
+						<svg width="70" height="46" viewBox="0 0 70 46" fill="none" xmlns="http://www.w3.org/2000/svg">
+							<circle cx="5" cy="5" r="2.5" fill="#C28FB6"/>
+							<circle cx="17" cy="5" r="2.5" fill="#C28FB6"/>
+							<circle cx="29" cy="5" r="2.5" fill="#C28FB6"/>
+							<circle cx="41" cy="5" r="2.5" fill="#C28FB6"/>
+							<circle cx="53" cy="5" r="2.5" fill="#C28FB6"/>
+							<circle cx="65" cy="5" r="2.5" fill="#C28FB6"/>
+
+							<circle cx="5" cy="17" r="2.5" fill="#C28FB6"/>
+							<circle cx="17" cy="17" r="2.5" fill="#C28FB6"/>
+							<circle cx="29" cy="17" r="2.5" fill="#C28FB6"/>
+							<circle cx="41" cy="17" r="2.5" fill="#C28FB6"/>
+							<circle cx="53" cy="17" r="2.5" fill="#C28FB6"/>
+							<circle cx="65" cy="17" r="2.5" fill="#C28FB6"/>
+
+							<circle cx="5" cy="29" r="2.5" fill="#C28FB6"/>
+							<circle cx="17" cy="29" r="2.5" fill="#C28FB6"/>
+							<circle cx="29" cy="29" r="2.5" fill="#C28FB6"/>
+							<circle cx="41" cy="29" r="2.5" fill="#C28FB6"/>
+							<circle cx="53" cy="29" r="2.5" fill="#C28FB6"/>
+							<circle cx="65" cy="29" r="2.5" fill="#C28FB6"/>
+
+							<circle cx="5" cy="41" r="2.5" fill="#C28FB6"/>
+							<circle cx="17" cy="41" r="2.5" fill="#C28FB6"/>
+							<circle cx="29" cy="41" r="2.5" fill="#C28FB6"/>
+							<circle cx="41" cy="41" r="2.5" fill="#C28FB6"/>
+							<circle cx="53" cy="41" r="2.5" fill="#C28FB6"/>
+							<circle cx="65" cy="41" r="2.5" fill="#C28FB6"/>
+						</svg>
+					</div>
+				</div>
 
 				<?php if ( ! empty( $app_desc ) ) : ?>
 					<div class="academics-approach-paragraphs academics-approach-p-wrap relative">
@@ -526,12 +561,12 @@ $sub_img_url  = $sub_img_id ? wp_get_attachment_image_url( $sub_img_id, 'full' )
 					</button>
 					<div class="interest-accordion-body">
 						<div class="interest-accordion-grid grid-3-cols">
-							<!-- Item 1: Gyansthan Chess -->
+							<!-- Item 1: Chess -->
 							<div class="interest-item-box">
 								<div class="interest-item-icon-wrap flex-center">
 									<iconify-icon icon="ph:horse-fill"></iconify-icon>
 								</div>
-								<h4 class="interest-item-title"><?php esc_html_e( 'Gyansthan Chess', 'bd-somani' ); ?></h4>
+								<h4 class="interest-item-title"><?php esc_html_e( 'Chess', 'bd-somani' ); ?></h4>
 								<p class="interest-item-desc"><?php esc_html_e( 'Every move strengthens strategic thinking, decision-making, and problem-solving. Students are guided through expert coaching, practice sessions, and tournaments to continually refine their game.', 'bd-somani' ); ?></p>
 							</div>
 

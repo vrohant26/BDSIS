@@ -50,12 +50,12 @@
 			<div class="swiper teachers-swiper">
 				<div class="swiper-wrapper">
 					
-					<!-- Slide 1: Ms. Anjana Ramane -->
+					<!-- Slide 1: Ms. Anjana Rajmane -->
 					<div class="swiper-slide teachers-slide-item">
 						<div class="teachers-card-group flex gap-md">
 							<!-- Portrait Box -->
 							<div class="teachers-portrait-box relative">
-								<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/Teacher Portraits DSC02273.webp' ); ?>" alt="Ms. Anjana Ramane" class="teachers-portrait-img" loading="lazy" decoding="async">
+								<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/Teacher Portraits DSC02273.webp' ); ?>" alt="Ms. Anjana Rajmane" class="teachers-portrait-img" loading="lazy" decoding="async">
 							</div>
 							<!-- Quote Details Box -->
 							<div class="teachers-quote-box relative flex-column flex-between">
@@ -64,7 +64,7 @@
 									<p class="teachers-quote-text">"Every child’s first educational steps should feel warm, safe, and exciting. At B.D. Somani, we focus on emotional well-being, creative expression, and strong foundational values, giving young learners the perfect launchpad to flourish."</p>
 								</div>
 								<div class="teachers-quote-author">
-									<h4 class="teachers-author-name">Ms. Anjana Ramane</h4>
+									<h4 class="teachers-author-name">Ms. Anjana Rajmane</h4>
 									<p class="teachers-author-info">Middle School Coordinator - IGSE</p>
 								</div>
 							</div>
@@ -92,12 +92,12 @@
 						</div>
 					</div>
 
-					<!-- Slide 3: Ms. Puja Shukla -->
+					<!-- Slide 3: Ms. Pooja Shukla -->
 					<div class="swiper-slide teachers-slide-item">
 						<div class="teachers-card-group flex gap-md">
 							<!-- Portrait Box -->
 							<div class="teachers-portrait-box relative">
-								<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/Teacher Portrait DSC02300.webp' ); ?>" alt="Ms. Puja Shukla" class="teachers-portrait-img" loading="lazy" decoding="async">
+								<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/Teacher Portrait DSC02300.webp' ); ?>" alt="Ms. Pooja Shukla" class="teachers-portrait-img" loading="lazy" decoding="async">
 							</div>
 							<!-- Quote Details Box -->
 							<div class="teachers-quote-box relative flex-column flex-between">
@@ -106,35 +106,14 @@
 									<p class="teachers-quote-text">"We guide students to articulate their thoughts clearly, appreciate diverse cultures, and develop strong analytical skills. The warm, inclusive atmosphere at B.D. Somani brings out the best in both educators and students alike."</p>
 								</div>
 								<div class="teachers-quote-author">
-									<h4 class="teachers-author-name">Ms. Puja Shukla</h4>
+									<h4 class="teachers-author-name">Ms. Pooja Shukla</h4>
 									<p class="teachers-author-info">Middle School Coordinator - ICSE</p>
 								</div>
 							</div>
 						</div>
 					</div>
 
-					<!-- Slide 4 (Second Last): Ms. Ananya Deshmukh -->
-					<div class="swiper-slide teachers-slide-item">
-						<div class="teachers-card-group flex gap-md">
-							<!-- Portrait Box (No Video Overlay) -->
-							<div class="teachers-portrait-box relative">
-								<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/Teacher Portrait 02265.webp' ); ?>" alt="Ms. Ananya Deshmukh" class="teachers-portrait-img" loading="lazy" decoding="async">
-							</div>
-							<!-- Quote Details Box -->
-							<div class="teachers-quote-box relative flex-column flex-between">
-								<div class="teachers-quote-content">
-									<h3 class="teachers-quote-heading">Inspiring Curiosity And Critical Thinking In Every Young Learner.</h3>
-									<p class="teachers-quote-text">"Teaching at B.D. Somani is a deeply fulfilling experience. Our inquiry-driven curriculum empowers students to question, explore, and connect classroom lessons to the real world. Seeing children develop confidence in their own ideas every day is what makes our community so special."</p>
-								</div>
-								<div class="teachers-quote-author">
-									<h4 class="teachers-author-name">Ms. Ananya Deshmukh</h4>
-									<p class="teachers-author-info">Primary Years Educator & Inquiry Coordinator</p>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<!-- Slide 5 (Last): Ms. Jyotsna Dondapati -->
+					<!-- Slide 4 (Last): Ms. Jyotsna Dondapati -->
 					<div class="swiper-slide teachers-slide-item">
 						<div class="teachers-card-group flex gap-md">
 							<!-- Portrait Box -->

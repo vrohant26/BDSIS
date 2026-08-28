@@ -428,9 +428,6 @@ function theme_academics_hero_metabox_callback( $post ) {
 		$cta_url = '#';
 	}
 
-	$top_marquee_vis    = metadata_exists( 'post', $post->ID, '_bds_academics_top_marquee_visibility' ) ? get_post_meta( $post->ID, '_bds_academics_top_marquee_visibility', true ) : 'show';
-	$bottom_marquee_vis = metadata_exists( 'post', $post->ID, '_bds_academics_bottom_marquee_visibility' ) ? get_post_meta( $post->ID, '_bds_academics_bottom_marquee_visibility', true ) : 'show';
-
 	$main_thumb = $main_img_id ? wp_get_attachment_image_url( $main_img_id, 'medium' ) : '';
 	$sub_thumb  = $sub_img_id ? wp_get_attachment_image_url( $sub_img_id, 'thumbnail' ) : '';
 	?>
@@ -1160,9 +1157,6 @@ function theme_save_academics_hero_meta( $post_id ) {
 	$fields['bds_academics_interest_title']      = '_bds_academics_interest_title';
 	$fields['bds_academics_interest_sub']        = '_bds_academics_interest_sub';
 	$textarea_keys[]                             = 'bds_academics_interest_sub';
-
-	$fields['bds_academics_top_marquee_visibility']    = '_bds_academics_top_marquee_visibility';
-	$fields['bds_academics_bottom_marquee_visibility'] = '_bds_academics_bottom_marquee_visibility';
 
 	$url_keys = array( 'bds_academics_cta_url', 'bds_academics_overview_pdf_url' );
 

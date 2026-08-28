@@ -384,74 +384,203 @@ get_header();
 
 		</div>
 	</section>
-		<!-- section 6 : the values we nurture -->
-	<section class="values-pinned-section relative overflow-hidden" id="our-values">
-		<div class="values-pinned-sticky flex-center">
-			<div class="values-content-container relative z-2 width-100 flex-column flex-between align-center">
+
+		<!-- banner section -->
+	<section class="about-potential-section relative overflow-hidden">
+		<div class="site-container relative z-2">
+			<div class="about-potential-grid">
 				
-				<!-- Top Header & Floating Doodle -->
-				<div class="values-header text-center relative margin-bottom-xs">
-					<h2 class="values-main-title">The Values We Nurture</h2>
-					<!-- Decorative Top-Left Book Doodle -->
-					<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/svgs/book.svg' ); ?>" class="values-doodle-book floating-doodle" alt="Book Doodle">
+				<!-- Left Column: Content -->
+				<div class="about-potential-content">
+					<h2 class="about-potential-title">Learning That Shapes Who We Become</h2>
+					<p class="about-potential-lead">At B.D. Somani, learning goes beyond what happens in the classroom. We nurture curious, confident and thoughtful individuals who are ready to explore the world and make a meaningful difference.</p>
 				</div>
 
-				<!-- Middle Stage Container -->
-				<div class="values-stage-container relative width-100 flex-between align-center">
-					
-					<!-- Left Side: Collaboration Card -->
-					<div class="value-card-wrapper card-left value-card-collaboration" id="valueCardCollaboration">
-						<div class="value-card-box relative">
-							<div class="value-card-header flex-between align-center">
-								<span class="value-card-title">COLLABORATION</span>
-								<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/svgs/collaboration.svg' ); ?>" class="value-card-icon" alt="Collaboration Icon">
-							</div>
-							<p class="value-card-desc">We cultivate respectful communicators who value teamwork, diverse thinking and shared success.</p>
+				<!-- Right Column: Circular Video Frame -->
+				<div class="about-potential-media flex-center">
+					<div class="about-potential-video-container relative">
+						<!-- Video Frame -->
+						<div class="about-potential-video-wrap">
+							<video autoplay loop muted playsinline webkit-playsinline preload="auto" src="<?php echo esc_url( get_template_directory_uri() . '/assets/video/4th Animation WEBM.webm' ); ?>">
+								<source src="<?php echo esc_url( get_template_directory_uri() . '/assets/video/4th Animation WEBM.webm' ); ?>" type="video/webm">
+								Your browser does not support the video tag.
+							</video>
 						</div>
 					</div>
-
-					<!-- Center Graphic Illustration Container -->
-					<div class="values-center-media relative flex-center">
-						<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/svgs/curious svg.svg' ); ?>" class="values-svg-graphic graphic-curious" id="graphicCurious" alt="Curiosity Illustration">
-						<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/svgs/collaborative svg.svg' ); ?>" class="values-svg-graphic graphic-collaborative" id="graphicCollaborative" alt="Collaboration Illustration">
-						<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/svgs/courage svg.svg' ); ?>" class="values-svg-graphic graphic-courage" id="graphicCourage" alt="Courage Illustration">
-					</div>
-
-					<!-- Right Side: Courage & Curiosity Cards Container -->
-					<div class="values-right-cards flex-column gap-md">
-						
-						<!-- Courage Card (Top Right) -->
-						<div class="value-card-wrapper card-right value-card-courage" id="valueCardCourage">
-							<div class="value-card-box relative">
-								<div class="value-card-header flex-between align-center">
-									<span class="value-card-title">COURAGE</span>
-									<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/svgs/courage.svg' ); ?>" class="value-card-icon" alt="Courage Icon">
-								</div>
-								<p class="value-card-desc">We inspire confident individuals who act with integrity, empathy and a strong sense of responsibility.</p>
-							</div>
-						</div>
-
-						<!-- Curiosity Card (Bottom Right) -->
-						<div class="value-card-wrapper card-right value-card-curiosity" id="valueCardCuriosity">
-							<div class="value-card-box relative">
-								<div class="value-card-header flex-between align-center">
-									<span class="value-card-title">CURIOSITY</span>
-									<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/svgs/curiosity.svg' ); ?>" class="value-card-icon" alt="Curiosity Icon">
-								</div>
-								<p class="value-card-desc">We nurture inquisitive minds that explore ideas, embrace perspectives and seek meaningful answers.</p>
-							</div>
-						</div>
-
-					</div>
-
-				</div>
-
-				<!-- Bottom Subtitle Paragraph -->
-				<div class="values-footer text-center width-100">
-					<p class="values-bottom-subtitle">Every stage of your child's journey is shaped by our core values of Curiosity, Collaboration, and Courage.</p>
 				</div>
 
 			</div>
+		</div>
+	</section>
+
+	<!-- section 6 : the values we nurture + 3 C's -->
+	<section class="values-nurture-section relative overflow-hidden" id="our-values">
+		<div class="site-container relative z-2">
+			
+			<!-- Section Header -->
+			<div class="values-nurture-header text-center flex-column align-center gap-xs">
+				<h2 class="section-title values-nurture-title">The Values We Nurture</h2>
+				<p class="section-subtitle values-nurture-subtitle">Curiosity to explore, Collaboration to connect, and Courage to lead.</p>
+			</div>
+
+			<!-- Creative Showcase Grid -->
+			<div class="values-showcase-container flex-column gap-xl">
+				
+				<!-- Value 1: Curious -->
+				<div class="value-showcase-card value-curious-card" id="value-curious">
+					<div class="value-watermark">01</div>
+					<div class="value-showcase-grid">
+						
+						<!-- Left: Text Content -->
+						<div class="value-info-wrap">
+							<div class="value-header-flex flex-between align-center">
+								<div class="value-title-wrap">
+									<span class="value-tag">FOUNDATIONAL VALUE</span>
+									<h3 class="value-main-heading">Curious</h3>
+								</div>
+								<div class="value-badge-icon badge-curious flex-center">
+									<?php 
+									$curious_icon = get_template_directory() . '/assets/svgs/curiosity.svg';
+									if ( file_exists( $curious_icon ) ) {
+										echo file_get_contents( $curious_icon );
+									}
+									?>
+								</div>
+							</div>
+
+							<div class="value-body-paragraphs">
+								<p class="value-lead-p">Curiosity begins with the willingness to ask why. We encourage students to look beyond the first answer, investigate ideas and remain open to where a question might lead. Through inquiry, experiments, research, projects and hands-on experiences, they learn to observe closely, make connections and find meaning in what they discover.</p>
+								<p class="value-sub-p">Whether exploring a new idea in the library, engaging with a visiting author or investigating a question through experience, students learn that understanding often begins with asking better questions.</p>
+							</div>
+
+							<div class="value-quote-pill">
+								<iconify-icon icon="ph:quotes-fill" class="quote-icon"></iconify-icon>
+								<span>Understanding often begins with asking better questions.</span>
+							</div>
+						</div>
+
+						<!-- Right: Visual Artwork Showcase Frame -->
+						<div class="value-visual-wrap flex-center">
+							<div class="visual-frame-container relative flex-center">
+								<div class="visual-aura-bg"></div>
+								<div class="visual-photo-card flex-center relative">
+									<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/svgs/curious svg.svg' ); ?>" alt="Curious Illustration" class="visual-silhouette-img" loading="lazy">
+								</div>
+								<!-- Floating Accent Badge -->
+								<div class="floating-accent-tag flex-center gap-xs">
+									<iconify-icon icon="ph:lightbulb-bold"></iconify-icon>
+									<span>Inquiry &amp; Discovery</span>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+
+				<!-- Value 2: Collaborative (Reversed Layout) -->
+				<div class="value-showcase-card value-collaborative-card card-reversed" id="value-collaborative">
+					<div class="value-watermark">02</div>
+					<div class="value-showcase-grid">
+						
+						<!-- Left: Visual Artwork Showcase Frame -->
+						<div class="value-visual-wrap flex-center">
+							<div class="visual-frame-container relative flex-center">
+								<div class="visual-aura-bg"></div>
+								<div class="visual-photo-card flex-center relative">
+									<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/svgs/collaborative svg.svg' ); ?>" alt="Collaborative Illustration" class="visual-silhouette-img" loading="lazy">
+								</div>
+								<!-- Floating Accent Badge -->
+								<div class="floating-accent-tag flex-center gap-xs">
+									<iconify-icon icon="ph:users-three-bold"></iconify-icon>
+									<span>Teamwork &amp; Empathy</span>
+								</div>
+							</div>
+						</div>
+
+						<!-- Right: Text Content -->
+						<div class="value-info-wrap">
+							<div class="value-header-flex flex-between align-center">
+								<div class="value-title-wrap">
+									<span class="value-tag">SOCIAL VALUE</span>
+									<h3 class="value-main-heading">Collaborative</h3>
+								</div>
+								<div class="value-badge-icon badge-collaborative flex-center">
+									<?php 
+									$collab_icon = get_template_directory() . '/assets/svgs/collaboration.svg';
+									if ( file_exists( $collab_icon ) ) {
+										echo file_get_contents( $collab_icon );
+									}
+									?>
+								</div>
+							</div>
+
+							<div class="value-body-paragraphs">
+								<p class="value-lead-p">We believe some of the most meaningful learning happens with others. Through classroom activities, sports, projects, interdisciplinary learning, team-based experiences and school-wide events, students learn to listen, contribute and create together. They encounter different perspectives, recognise the value each person brings and understand that working together requires more than participation.</p>
+								<p class="value-sub-p">It calls for respect, communication and a willingness to make space for others. In time, students begin to see collaboration not simply as a way of working, but as a way of learning and growing.</p>
+							</div>
+
+							<div class="value-quote-pill">
+								<iconify-icon icon="ph:quotes-fill" class="quote-icon"></iconify-icon>
+								<span>Collaboration is not simply a way of working, but a way of learning and growing.</span>
+							</div>
+						</div>
+
+					</div>
+				</div>
+
+				<!-- Value 3: Courageous -->
+				<div class="value-showcase-card value-courageous-card" id="value-courageous">
+					<div class="value-watermark">03</div>
+					<div class="value-showcase-grid">
+						
+						<!-- Left: Text Content -->
+						<div class="value-info-wrap">
+							<div class="value-header-flex flex-between align-center">
+								<div class="value-title-wrap">
+									<span class="value-tag">CHARACTER VALUE</span>
+									<h3 class="value-main-heading">Courageous</h3>
+								</div>
+								<div class="value-badge-icon badge-courageous flex-center">
+									<?php 
+									$courage_icon = get_template_directory() . '/assets/svgs/courage.svg';
+									if ( file_exists( $courage_icon ) ) {
+										echo file_get_contents( $courage_icon );
+									}
+									?>
+								</div>
+							</div>
+
+							<div class="value-body-paragraphs">
+								<p class="value-lead-p">Courage grows when students are given the opportunity to step forward. We encourage them to take on challenges, try something unfamiliar, and stand behind their ideas with confidence.</p>
+								<p class="value-sub-p">Whether taking the lead in a school initiative, performing before an audience, participating in a competition, or taking responsibility through the Student Council, students learn to act with conviction while remaining open to learning. They discover that courage is not about always getting it right. It is about being willing to try, adapt, take responsibility, and move forward.</p>
+							</div>
+
+							<div class="value-quote-pill">
+								<iconify-icon icon="ph:quotes-fill" class="quote-icon"></iconify-icon>
+								<span>Courage is being willing to try, adapt, take responsibility, and move forward.</span>
+							</div>
+						</div>
+
+						<!-- Right: Visual Artwork Showcase Frame -->
+						<div class="value-visual-wrap flex-center">
+							<div class="visual-frame-container relative flex-center">
+								<div class="visual-aura-bg"></div>
+								<div class="visual-photo-card flex-center relative">
+									<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/svgs/courage svg.svg' ); ?>" alt="Courageous Illustration" class="visual-silhouette-img" loading="lazy">
+								</div>
+								<!-- Floating Accent Badge -->
+								<div class="floating-accent-tag flex-center gap-xs">
+									<iconify-icon icon="ph:shield-check-bold"></iconify-icon>
+									<span>Conviction &amp; Resilience</span>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+
+			</div>
+
 		</div>
 	</section>
 

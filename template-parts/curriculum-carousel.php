@@ -40,21 +40,27 @@
 			<div class="timeline-stepper-track">
 				<div class="timeline-progress-bar" id="timelineProgressBar"></div>
 				<div class="timeline-steps flex-between">
-					<button class="timeline-step-btn active" data-step="0">
+					<!-- Day Care (Hidden for now)
+					<button class="timeline-step-btn" data-step="0">
 						<span class="timeline-step-dot"></span>
 						<span class="timeline-step-label">Day Care</span>
 					</button>
-					<button class="timeline-step-btn" data-step="1">
+					-->
+					<button class="timeline-step-btn active" data-step="0">
 						<span class="timeline-step-dot"></span>
 						<span class="timeline-step-label">Pre-Primary School</span>
 					</button>
-					<button class="timeline-step-btn" data-step="2">
+					<button class="timeline-step-btn" data-step="1">
 						<span class="timeline-step-dot"></span>
 						<span class="timeline-step-label">Primary School</span>
 					</button>
-					<button class="timeline-step-btn" data-step="3">
+					<button class="timeline-step-btn" data-step="2">
 						<span class="timeline-step-dot"></span>
 						<span class="timeline-step-label">Middle School</span>
+					</button>
+					<button class="timeline-step-btn" data-step="3">
+						<span class="timeline-step-dot"></span>
+						<span class="timeline-step-label">Post-School Activities</span>
 					</button>
 				</div>
 			</div>
@@ -66,10 +72,9 @@
 			<div class="swiper curriculum-swiper">
 				<div class="swiper-wrapper">
 
-					<!-- Slide 1: Daycare -->
+					<!-- Slide 1: Daycare (Hidden for now)
 					<div class="swiper-slide curriculum-slide" data-slide-index="0">
 						<div class="curriculum-slide-inner flex align-center gap-lg">
-							<!-- Left Overlapping Images Box -->
 							<div class="curriculum-media-box relative">
 								<div class="main-photo-card placeholder-card">
 									<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/daycare1.webp' ); ?>" alt="Daycare Outdoor Play Area" loading="lazy">
@@ -79,9 +84,7 @@
 								</div>
 							</div>
 
-							<!-- Right Topic Details Box -->
 							<div class="curriculum-info-box flex-column gap-sm relative">
-								<!-- Background Iconify Doodle Icons (Light Solid Color Fill) -->
 								<iconify-icon icon="ph:sun-fill" class="curriculum-doodle-icon doodle-pos-1" style="color: rgba(241, 200, 34, 0.28);"></iconify-icon>
 								<iconify-icon icon="ph:balloon-fill" class="curriculum-doodle-icon doodle-pos-3" style="color: rgba(248, 214, 179, 0.35);"></iconify-icon>
 
@@ -101,9 +104,10 @@
 							</div>
 						</div>
 					</div>
+					-->
 
-					<!-- Slide 2: Pre-Primary School -->
-					<div class="swiper-slide curriculum-slide" data-slide-index="1">
+					<!-- Slide 1: Pre-Primary School -->
+					<div class="swiper-slide curriculum-slide" data-slide-index="0">
 						<div class="curriculum-slide-inner flex align-center gap-lg">
 							<!-- Left Overlapping Images Box -->
 							<div class="curriculum-media-box relative">
@@ -135,8 +139,8 @@
 						</div>
 					</div>
 
-					<!-- Slide 3: Primary School -->
-					<div class="swiper-slide curriculum-slide" data-slide-index="2">
+					<!-- Slide 2: Primary School -->
+					<div class="swiper-slide curriculum-slide" data-slide-index="1">
 						<div class="curriculum-slide-inner flex align-center gap-lg">
 							<!-- Left Overlapping Images Box -->
 							<div class="curriculum-media-box relative">
@@ -168,8 +172,8 @@
 						</div>
 					</div>
 
-					<!-- Slide 4: Middle School -->
-					<div class="swiper-slide curriculum-slide" data-slide-index="3">
+					<!-- Slide 3: Middle School -->
+					<div class="swiper-slide curriculum-slide" data-slide-index="2">
 						<div class="curriculum-slide-inner flex align-center gap-lg">
 							<!-- Left Overlapping Images Box -->
 							<div class="curriculum-media-box relative">
@@ -192,6 +196,39 @@
 								<div class="curriculum-cta-wrapper">
 									<a href="<?php echo esc_url( home_url( '/academics/middle-school/' ) ); ?>" class="btn btn-yellow">
 										<span>EXPLORE MIDDLE SCHOOL</span>
+										<svg class="btn-arrow" width="18" height="14" viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+											<path d="M11 1L17 7M17 7L11 13M17 7H1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+										</svg>
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- Slide 4: Post-School Activities -->
+					<div class="swiper-slide curriculum-slide" data-slide-index="3">
+						<div class="curriculum-slide-inner flex align-center gap-lg">
+							<!-- Left Overlapping Images Box -->
+							<div class="curriculum-media-box relative">
+								<div class="main-photo-card placeholder-card">
+									<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/clubs and activities.webp' ); ?>" alt="Clubs and Post-School Activities" loading="lazy">
+								</div>
+								<div class="secondary-photo-card placeholder-card">
+									<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/indoor and outdoor sports.webp' ); ?>" alt="Indoor and Outdoor Sports" loading="lazy">
+								</div>
+								<!-- Background Iconify Doodle Icons -->
+								<iconify-icon icon="ph:trophy-fill" class="curriculum-doodle-icon media-doodle-1" style="color: rgba(73, 39, 74, 0.22);"></iconify-icon>
+								<iconify-icon icon="ph:basketball-fill" class="curriculum-doodle-icon media-doodle-2" style="color: rgba(241, 200, 34, 0.28);"></iconify-icon>
+							</div>
+
+							<!-- Right Topic Details Box -->
+							<div class="curriculum-info-box flex-column gap-sm relative">
+								<h3 class="curriculum-topic-title">Post School Activities</h3>
+								<p class="curriculum-topic-desc">Our Post-School Programme helps students explore sports, arts, performance, and more while building confidence, creativity, skills, and connections.</p>
+
+								<div class="curriculum-cta-wrapper">
+									<a href="<?php echo esc_url( home_url( '/academics/post-school-activities/' ) ); ?>" class="btn btn-yellow">
+										<span>EXPLORE POST SCHOOL ACTIVITIES</span>
 										<svg class="btn-arrow" width="18" height="14" viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg">
 											<path d="M11 1L17 7M17 7L11 13M17 7H1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 										</svg>

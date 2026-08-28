@@ -2,7 +2,11 @@
 <html <?php language_attributes(); ?>>
 <head>
 	<meta charset="<?php bloginfo( 'charset' ); ?>">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+	<!-- Mobile Notch & Status Bar Theme Color (Brand Deep Purple #49274A) -->
+	<meta name="theme-color" content="#49274A">
+	<meta name="msapplication-navbutton-color" content="#49274A">
+	<meta name="apple-mobile-web-app-status-bar-style" content="default">
 	<?php wp_head(); ?>
 </head>
 <body <?php body_class(); ?>>
@@ -80,7 +84,7 @@
 						<li class="nav-item"><a href="<?php echo $home_url; ?>" class="nav-link <?php echo $is_home ? 'active' : ''; ?>">HOME</a></li>
 						<li class="nav-item"><a href="<?php echo $about_url; ?>" class="nav-link <?php echo $is_about ? 'active' : ''; ?>">ABOUT</a></li>
 						<li class="nav-item dropdown">
-							<a href="<?php echo $home_prefix; ?>#academics" class="nav-link <?php echo ( $is_approach || $is_academics_sub ) ? 'active' : ''; ?>">
+							<a href="#academics" class="nav-link dropdown-toggle-link <?php echo ( $is_approach || $is_academics_sub ) ? 'active' : ''; ?>">
 								ACADEMICS
 								<svg class="dropdown-icon" width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
 									<path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -90,11 +94,11 @@
 								<span class="dropdown-header-title">ACADEMICS</span>
 								<ul class="dropdown-list">
 									<li><a href="<?php echo $approach_url; ?>" class="<?php echo $is_approach ? 'active' : ''; ?>">OUR APPROACH</a></li>
-									<li><a href="<?php echo $daycare_url; ?>" class="<?php echo $is_daycare ? 'active' : ''; ?>">DAYCARE</a></li>
 									<li><a href="<?php echo $pre_primary_url; ?>" class="<?php echo $is_pre_primary ? 'active' : ''; ?>">PRE-PRIMARY SCHOOL</a></li>
 									<li><a href="<?php echo $primary_url; ?>" class="<?php echo $is_primary ? 'active' : ''; ?>">PRIMARY SCHOOL</a></li>
 									<li><a href="<?php echo $middle_url; ?>" class="<?php echo $is_middle ? 'active' : ''; ?>">MIDDLE SCHOOL</a></li>
 									<li><a href="<?php echo $post_school_act_url; ?>" class="<?php echo $is_post_school_act ? 'active' : ''; ?>">POST-SCHOOL ACTIVITIES</a></li>
+									<li><a href="<?php echo $daycare_url; ?>" class="<?php echo $is_daycare ? 'active' : ''; ?>">DAYCARE</a></li>
 								</ul>
 							</div>
 						</li>
@@ -127,20 +131,20 @@
 						<li class="mobile-nav-item"><a href="<?php echo $about_url; ?>" class="mobile-link <?php echo $is_about ? 'active' : ''; ?>">ABOUT US</a></li>
 						<li class="mobile-nav-item mobile-dropdown-item">
 							<div class="mobile-dropdown-header flex-between align-center">
-								<a href="<?php echo $home_prefix; ?>#academics" class="mobile-link <?php echo ( $is_approach || $is_academics_sub ) ? 'active' : ''; ?>">ACADEMICS</a>
-								<button class="mobile-dropdown-toggle" aria-label="Toggle Academics submenu">
+								<a href="#academics" class="mobile-link mobile-dropdown-toggle <?php echo ( $is_approach || $is_academics_sub ) ? 'active' : ''; ?>">
+									<span>ACADEMICS</span>
 									<svg class="mobile-dropdown-arrow" width="12" height="8" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
 										<path d="M1 1L5 5L9 1" stroke="#9C5E91" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 									</svg>
-								</button>
+								</a>
 							</div>
 							<ul class="mobile-submenu">
 								<li><a href="<?php echo $approach_url; ?>" class="<?php echo $is_approach ? 'active' : ''; ?>">OUR APPROACH</a></li>
-								<li><a href="<?php echo $daycare_url; ?>" class="<?php echo $is_daycare ? 'active' : ''; ?>">DAYCARE</a></li>
 								<li><a href="<?php echo $pre_primary_url; ?>" class="<?php echo $is_pre_primary ? 'active' : ''; ?>">PRE-PRIMARY SCHOOL</a></li>
 								<li><a href="<?php echo $primary_url; ?>" class="<?php echo $is_primary ? 'active' : ''; ?>">PRIMARY SCHOOL</a></li>
 								<li><a href="<?php echo $middle_url; ?>" class="<?php echo $is_middle ? 'active' : ''; ?>">MIDDLE SCHOOL</a></li>
 								<li><a href="<?php echo $post_school_act_url; ?>" class="<?php echo $is_post_school_act ? 'active' : ''; ?>">POST-SCHOOL ACTIVITIES</a></li>
+								<li><a href="<?php echo $daycare_url; ?>" class="<?php echo $is_daycare ? 'active' : ''; ?>">DAYCARE</a></li>
 							</ul>
 						</li>
 						<li class="mobile-nav-item"><a href="<?php echo $campus_life_url; ?>" class="mobile-link <?php echo $is_campus_life ? 'active' : ''; ?>">CAMPUS LIFE</a></li>

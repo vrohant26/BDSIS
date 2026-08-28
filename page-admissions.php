@@ -13,7 +13,7 @@ get_header();
 	<div class="site-container">
 
 		<!-- Breadcrumb -->
-		<div class="contact-breadcrumb">
+		<div class="contact-breadcrumb relative z-10">
 			<a href="<?php echo esc_url( home_url( '/' ) ); ?>" aria-label="<?php esc_attr_e( 'Home', 'bd-somani' ); ?>">
 				<?php
 				$home_svg_path = get_template_directory() . '/assets/svgs/home svg.svg';
@@ -47,7 +47,7 @@ get_header();
 					</h1>
 
 					<p class="contact-hero-subtitle admissions-lead">
-						<?php esc_html_e( 'Thank you for choosing the B.D. Somani International School, Kharghar. We\'re delighted to welcome families who share our belief in meaningful learning and holistic growth.', 'bd-somani' ); ?>
+						<?php esc_html_e( 'Thank you for choosing the B.D. Somani International School, Kharghar. We are delighted to welcome families who share our belief in meaningful learning and holistic growth.', 'bd-somani' ); ?>
 					</p>
 
 					<p class="contact-hero-subtitle admissions-lead">

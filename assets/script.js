@@ -95,6 +95,7 @@ document.addEventListener("DOMContentLoaded", () => {
       "h1:not(.no-reveal)",
       "h2:not(.no-reveal)",
       ".about-hero-desc",
+      ".approach-hero-subtitle",
       ".about-approach-lead",
       ".about-approach-footer-text",
       ".experiential-desc",
@@ -110,6 +111,16 @@ document.addEventListener("DOMContentLoaded", () => {
       ".programme-desc",
       ".academics-approach-p",
       ".academics-exp-sub-desc",
+      ".contact-hero-subtitle",
+      ".faq-hero-subtitle",
+      ".legal-hero-subtitle",
+      ".campus-counselors-subtitle",
+      ".spaces-main-subtitle",
+      ".admissions-process-lead",
+      ".admissions-lead",
+      ".campus-banner-desc",
+      ".academics-care-subtitle",
+      ".academics-interest-subtitle",
     ].join(", ");
 
     const textElements = document.querySelectorAll(revealSelectors);
@@ -644,8 +655,8 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     }
 
-    // Auto-close menu when clicking links inside card
-    const mobileNavLinks = mobileNavWrapper.querySelectorAll("a");
+    // Auto-close menu when clicking page links inside card (exclude dropdown toggles)
+    const mobileNavLinks = mobileNavWrapper.querySelectorAll("a:not([href='#academics'])");
     mobileNavLinks.forEach((link) => {
       link.addEventListener("click", () => {
         closeMobileMenu();
@@ -720,10 +731,18 @@ document.addEventListener("DOMContentLoaded", () => {
       },
       on: {
         init: function () {
-          updateTimeline(this.activeIndex);
+          const idx = this.isEnd ? stepBtns.length - 1 : this.activeIndex;
+          updateTimeline(idx);
         },
         slideChange: function () {
-          updateTimeline(this.activeIndex);
+          const idx = this.isEnd ? stepBtns.length - 1 : this.activeIndex;
+          updateTimeline(idx);
+        },
+        reachEnd: function () {
+          updateTimeline(stepBtns.length - 1);
+        },
+        reachBeginning: function () {
+          updateTimeline(0);
         },
       },
     });
@@ -758,8 +777,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     const parentsSwiper = new Swiper(".parents-swiper", {
-      slidesPerView: 1.35,
-      spaceBetween: 24,
+      slidesPerView: 1.22,
+      spaceBetween: 26,
       speed: 700,
       grabCursor: true,
       loop: false,
@@ -775,12 +794,12 @@ document.addEventListener("DOMContentLoaded", () => {
           spaceBetween: 14,
         },
         768: {
-          slidesPerView: 1.2,
+          slidesPerView: 1.15,
           spaceBetween: 20,
         },
         1024: {
-          slidesPerView: 1.35,
-          spaceBetween: 24,
+          slidesPerView: 1.22,
+          spaceBetween: 26,
         },
       },
       on: {
@@ -813,8 +832,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     new Swiper(".teachers-swiper", {
-      slidesPerView: 1.35,
-      spaceBetween: 24,
+      slidesPerView: 1.22,
+      spaceBetween: 26,
       speed: 700,
       grabCursor: true,
       loop: false,
@@ -830,12 +849,12 @@ document.addEventListener("DOMContentLoaded", () => {
           spaceBetween: 14,
         },
         768: {
-          slidesPerView: 1.2,
+          slidesPerView: 1.15,
           spaceBetween: 20,
         },
         1024: {
-          slidesPerView: 1.35,
-          spaceBetween: 24,
+          slidesPerView: 1.22,
+          spaceBetween: 26,
         },
       },
       on: {
@@ -980,6 +999,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const cardCourage = document.getElementById("valueCardCourage");
 
     const isMobile = window.innerWidth <= 1024;
+
+    gsap.set([graphicCurious, graphicCollaborative, graphicCourage], {
+      xPercent: 0,
+      x: 0,
+    });
 
     const timeline = gsap.timeline({
       scrollTrigger: {
@@ -1358,6 +1382,57 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   initGalleryPageInteractive();
+
+  // Bouncy Scale-In Animation for About Page Hero Illustration & Legacy Badge
+  function initAboutHeroAnimation() {
+    if (!hasGsap()) return;
+    const heroSection = document.querySelector(".about-hero-section");
+    if (!heroSection) return;
+
+    const heroMedia = heroSection.querySelector(".about-hero-media");
+    const badge = heroSection.querySelector(".about-hero-absolute-badge");
+    if (!heroMedia) return;
+
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: heroSection,
+        start: "top 90%",
+        toggleActions: "play none none none",
+      },
+    });
+
+    tl.fromTo(
+      heroMedia,
+      { scale: 0, opacity: 0, y: 60 },
+      {
+        scale: 1,
+        opacity: 1,
+        y: 0,
+        duration: 1.15,
+        ease: "back.out(1.8)",
+        transformOrigin: "center center",
+      },
+      0.15
+    );
+
+    if (badge) {
+      tl.fromTo(
+        badge,
+        { scale: 0, opacity: 0, y: 25 },
+        {
+          scale: 1,
+          opacity: 1,
+          y: 0,
+          duration: 0.95,
+          ease: "back.out(1.8)",
+          transformOrigin: "center center",
+        },
+        0.5
+      );
+    }
+  }
+
+  initAboutHeroAnimation();
 
   // Bouncy Scale-In Animation for About Page Merits Cards
   function initAboutMeritsAnimation() {
@@ -1849,112 +1924,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   initExperiencesSwiper();
 
-  // Swiper Carousel for Admissions Process Section
-  function initAdmissionsProcessSwiper() {
-    const swiperEl = document.querySelector(".admissions-process-swiper");
-    if (!swiperEl || typeof Swiper === "undefined") return;
-
-    const progressBar = document.getElementById("admissionsProcessProgressBar");
-
-    function updateProcessProgressBar(swiper) {
-      if (!progressBar) return;
-      const maxIndex = swiper.snapGrid ? swiper.snapGrid.length - 1 : (swiper.slides ? swiper.slides.length - 1 : 1);
-      const activeIdx = swiper.activeIndex || 0;
-      const pct = maxIndex > 0 ? (activeIdx / maxIndex) * 100 : 100;
-      const fillPct = Math.min(100, Math.max(20, pct));
-      progressBar.style.width = fillPct + "%";
-    }
-
-    new Swiper(swiperEl, {
-      slidesPerView: 4,
-      spaceBetween: 20,
-      grabCursor: true,
-      breakpoints: {
-        320: {
-          slidesPerView: 1.15,
-          spaceBetween: 16,
-        },
-        640: {
-          slidesPerView: 2.1,
-          spaceBetween: 18,
-        },
-        992: {
-          slidesPerView: 3.1,
-          spaceBetween: 20,
-        },
-        1200: {
-          slidesPerView: 4,
-          spaceBetween: 20,
-        },
-      },
-      navigation: {
-        nextEl: ".process-next-btn",
-        prevEl: ".process-prev-btn",
-      },
-      on: {
-        init: function () {
-          updateProcessProgressBar(this);
-        },
-        slideChange: function () {
-          updateProcessProgressBar(this);
-        },
-      },
-    });
-  }
-
-  initAdmissionsProcessSwiper();
-
-  // Swiper Carousel for Safety & Well-Being Section (Campus Life)
-  function initSafetySwiper() {
-    const swiperEl = document.querySelector(".safety-swiper");
-    if (!swiperEl || typeof Swiper === "undefined") return;
-
-    const progressBar = document.getElementById("safetyProgressBar");
-
-    function updateSafetyProgressBar(swiper) {
-      if (!progressBar) return;
-      const maxIndex = swiper.snapGrid ? swiper.snapGrid.length - 1 : (swiper.slides ? swiper.slides.length - 1 : 1);
-      const activeIdx = swiper.activeIndex || 0;
-      const pct = maxIndex > 0 ? (activeIdx / maxIndex) * 100 : 100;
-      const fillPct = Math.min(100, Math.max(25, pct));
-      progressBar.style.width = fillPct + "%";
-    }
-
-    new Swiper(swiperEl, {
-      slidesPerView: 3,
-      spaceBetween: 28,
-      grabCursor: true,
-      navigation: {
-        nextEl: ".safety-next-btn",
-        prevEl: ".safety-prev-btn",
-      },
-      breakpoints: {
-        320: {
-          slidesPerView: 1.15,
-          spaceBetween: 16,
-        },
-        640: {
-          slidesPerView: 2.1,
-          spaceBetween: 20,
-        },
-        1024: {
-          slidesPerView: 3,
-          spaceBetween: 28,
-        },
-      },
-      on: {
-        init: function () {
-          updateSafetyProgressBar(this);
-        },
-        slideChange: function () {
-          updateSafetyProgressBar(this);
-        },
-      },
-    });
-  }
-
-  initSafetySwiper();
-
   // Academics Cornerstones Interactive Accordion & Image Crossfade with Auto-Loop on Scroll
   function initCornerstonesTabs() {
     const section = document.querySelector(".academics-cornerstones-section");
@@ -2349,4 +2318,49 @@ document.addEventListener("DOMContentLoaded", () => {
   initCampusHeroCarousel();
   initFormSubmissions();
   initNewsPopup();
+  // Safari & Mobile Autoplay Fix for HTML5 Videos
+  const allAutoplayVideos = document.querySelectorAll("video[autoplay]");
+  allAutoplayVideos.forEach((video) => {
+    video.muted = true;
+    video.playsInline = true;
+    const playPromise = video.play();
+    if (playPromise !== undefined) {
+      playPromise.catch(() => {
+        document.addEventListener("touchstart", () => { video.play(); }, { once: true });
+      });
+    }
+  });
+
+  // Values We Nurture Tab Smooth Scroll & Active Toggle
+  function initValuesTabs() {
+    const tabBtns = document.querySelectorAll(".values-tab-btn");
+    const showcaseCards = document.querySelectorAll(".value-showcase-card");
+    if (!tabBtns.length) return;
+
+    tabBtns.forEach((btn) => {
+      btn.addEventListener("click", (e) => {
+        e.preventDefault();
+        const targetId = btn.getAttribute("data-target");
+        const targetElement = document.getElementById(targetId);
+
+        tabBtns.forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
+
+        if (targetElement) {
+          targetElement.classList.add("highlight-pulse");
+          setTimeout(() => targetElement.classList.remove("highlight-pulse"), 1200);
+
+          const headerOffset = 135;
+          const elementPosition = targetElement.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: "smooth"
+          });
+        }
+      });
+    });
+  }
+  initValuesTabs();
 });
