@@ -1,6 +1,6 @@
 	<!-- CTA Banner Section -->
 	<section class="cta-banner-section relative" id="cta-banner">
-		<div class="site-container">
+
 			<!-- Main Rounded CTA Card Container -->
 			<div class="cta-card-wrapper relative overflow-hidden">
 				<!-- Background Campus Image -->
@@ -8,6 +8,8 @@
 				
 				<!-- Dark Gradient Overlay for optimal contrast -->
 				<div class="cta-overlay-gradient"></div>
+
+				<div class="site-container">
 
 				<!-- Left Glassmorphism Content Box -->
 				<div class="cta-glass-box relative z-2 flex-column">
@@ -31,6 +33,7 @@
 					</div>
 				</div>
 			</div>
+
 		</div>
 	</section>
 
