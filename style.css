@@ -4830,15 +4830,14 @@ body.theme-purple-mode .timeline-progress-bar {
 .approach-page-main .about-potential-section {
     padding-top: 2rem;
     color: var(--clr-text-light);
-    background-color: var(--clr-primary-purple);
+    background-color: #542C54 !important;
     position: relative;
     overflow: hidden;
-
 }
 
 .about-potential-section {
     color: var(--clr-text-light);
-    background-color: var(--clr-primary-purple, #49274A);
+    background-color: #542C54 !important;
 }
 
 /* Grid & Content Layout */
@@ -4885,7 +4884,7 @@ body.theme-purple-mode .timeline-progress-bar {
     max-width: 800px;
     aspect-ratio: 16 / 9;
     overflow: hidden;
-    background-color: var(--clr-primary-purple, #49274A);
+    background-color: #542C54 !important;
 }
 
 .about-potential-video-wrap {
@@ -4894,7 +4893,7 @@ body.theme-purple-mode .timeline-progress-bar {
     width: 100%;
     height: 100%;
     overflow: hidden;
-    background-color: var(--clr-primary-purple, #49274A);
+    background-color: #542C54 !important;
 }
 
 .about-potential-video-wrap video {
@@ -4902,11 +4901,19 @@ body.theme-purple-mode .timeline-progress-bar {
     height: 100%;
     object-fit: contain;
     display: block;
-    background-color: var(--clr-primary-purple, #49274A);
+    background-color: #542C54 !important;
 }
 
 /* Responsive Potential Section Breakpoints */
 @media (max-width: 992px) {
+
+    .about-potential-section,
+    .approach-page-main .about-potential-section,
+    .about-potential-video-container,
+    .about-potential-video-wrap,
+    .about-potential-video-wrap video {
+        background-color: #4A264A !important;
+    }
 
     .about-potential-section {
         padding-top: 4rem;
@@ -4935,7 +4942,6 @@ body.theme-purple-mode .timeline-progress-bar {
 
     .about-potential-video-container {
         max-width: 500px;
-
     }
 }
 
