@@ -254,9 +254,18 @@ $sub_img_url  = $sub_img_id ? wp_get_attachment_image_url( $sub_img_id, 'full' )
 	$potential_desc  = metadata_exists( 'post', $post_id, '_bds_academics_potential_desc' ) ? get_post_meta( $post_id, '_bds_academics_potential_desc', true ) : __( 'Every student brings unique strengths. Our campus gives them the opportunities to explore, develop, and let those strengths shine.', 'bd-somani' );
 	$potential_video = get_post_meta( $post_id, '_bds_academics_potential_video', true );
 
-	if ( empty( $potential_video ) ) {
-		$potential_video = get_template_directory_uri() . '/assets/video/A2.webm';
+	if ( is_numeric( $potential_video ) ) {
+		$potential_video_url = wp_get_attachment_url( $potential_video );
+	} else {
+		$potential_video_url = $potential_video;
 	}
+
+	if ( empty( $potential_video_url ) ) {
+		$potential_video_url = get_template_directory_uri() . '/assets/video/A2.webm';
+	}
+
+	$is_mp4  = ( false !== strpos( strtolower( $potential_video_url ), '.mp4' ) );
+	$is_webm = ( false !== strpos( strtolower( $potential_video_url ), '.webm' ) );
 	?>
 
 	<?php if ( $show_potential_sec ) : ?>
@@ -280,7 +289,14 @@ $sub_img_url  = $sub_img_id ? wp_get_attachment_image_url( $sub_img_id, 'full' )
 				<div class="about-potential-media flex-center">
 					<div class="about-potential-video-container relative">
 						<div class="about-potential-video-wrap">
-							<video autoplay loop muted playsinline webkit-playsinline>
+							<video autoplay loop muted playsinline webkit-playsinline preload="auto" src="<?php echo esc_url( $potential_video_url ); ?>">
+								<?php if ( $is_mp4 ) : ?>
+									<source src="<?php echo esc_url( $potential_video_url ); ?>" type="video/mp4">
+								<?php elseif ( $is_webm ) : ?>
+									<source src="<?php echo esc_url( $potential_video_url ); ?>" type="video/webm">
+								<?php else : ?>
+									<source src="<?php echo esc_url( $potential_video_url ); ?>">
+								<?php endif; ?>
 								<source src="<?php echo esc_url( get_template_directory_uri() . '/assets/video/about video.mp4' ); ?>" type="video/mp4">
 								<source src="<?php echo esc_url( get_template_directory_uri() . '/assets/video/A2.webm' ); ?>" type="video/webm">
 								<?php esc_html_e( 'Your browser does not support the video tag.', 'bd-somani' ); ?>
