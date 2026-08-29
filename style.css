@@ -5786,8 +5786,9 @@ body.theme-purple-mode .timeline-progress-bar {
     width: 100%;
     max-width: 640px;
     margin-left: auto;
-    padding-bottom: 40px;
-    padding-left: 20px;
+    padding-bottom: clamp(35px, 5vw, 55px);
+    padding-left: clamp(45px, 8vw, 95px);
+    overflow: visible !important;
 }
 
 /* Campus Life Hero Single Carousel Media Overrides */
@@ -5795,6 +5796,7 @@ body.theme-purple-mode .timeline-progress-bar {
     padding-bottom: 0 !important;
     padding-left: 0 !important;
     max-width: 660px;
+    overflow: hidden !important;
 }
 
 .campus-hero-swiper {
@@ -5896,8 +5898,8 @@ body.theme-purple-mode .timeline-progress-bar {
 /* Secondary Overlapping Sub Image Wrapper */
 .academics-sub-image-wrap {
     position: absolute;
-    bottom: -50px;
-    left: -100px;
+    bottom: -25px;
+    left: clamp(-55px, -5vw, -25px);
     width: 52%;
     aspect-ratio: 4 / 3;
     border-radius: 20px;
@@ -6001,7 +6003,15 @@ body.theme-purple-mode .timeline-progress-bar {
         max-width: 100% !important;
     }
 
-    .academics-hero-media,
+    .academics-hero-media {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 auto !important;
+        padding-left: clamp(35px, 6vw, 75px) !important;
+        padding-bottom: clamp(25px, 4vw, 45px) !important;
+        overflow: visible !important;
+    }
+
     .campus-hero-carousel-media {
         width: 100% !important;
         max-width: 100% !important;
@@ -6018,11 +6028,11 @@ body.theme-purple-mode .timeline-progress-bar {
 
 @media (max-width: 576px) {
     .academics-sub-image-wrap {
-        width: 60%;
-        bottom: -15px;
-        left: -10px;
-        border-width: 3px;
-        border-radius: 14px;
+        width: 50% !important;
+        bottom: -18px !important;
+        left: -20px !important;
+        border-width: 3px !important;
+        border-radius: 14px !important;
     }
 
     .academics-main-image-wrap {
