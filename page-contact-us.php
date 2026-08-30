@@ -287,6 +287,102 @@ get_header();
 
 		</div>
 	</section>
+
+	<!-- Section: Why We Chose Kharghar (Alternative Blueprint Split Layout Below Map) -->
+	<section class="contact-kharghar-section relative overflow-hidden" id="why-kharghar">
+		<!-- Background Organic Wavy Doodle Shapes (Top Right & Bottom Left) -->
+		<div class="about-approach-bg-doodle about-approach-bg-doodle-top" aria-hidden="true">
+			<svg width="420" height="320" viewBox="0 0 323 232" fill="none" xmlns="http://www.w3.org/2000/svg">
+				<path d="M447.115 109.822C237.579 390.965 283.711 -51.9314 151.802 135.363C19.8932 322.658 -25.1132 95.0059 94.4674 -6.70432C214.048 -108.415 15.7675 -112.658 37.7 -132.488" stroke="var(--clr-wavy-purple-light)" stroke-width="50"/>
+			</svg>
+		</div>
+		<div class="about-approach-bg-doodle about-approach-bg-doodle-bottom" aria-hidden="true">
+			<svg width="420" height="320" viewBox="0 0 310 312" fill="none" xmlns="http://www.w3.org/2000/svg">
+				<path d="M-137.143 122.166C72.3938 -158.977 26.2613 283.92 158.17 96.6249C290.079 -90.6699 335.086 136.982 215.505 238.693C95.9247 340.403 294.205 344.646 272.273 364.476" stroke="var(--clr-wavy-purple-light)" stroke-width="50"/>
+			</svg>
+		</div>
+
+		<div class="site-container relative z-2">
+			<div class="contact-kharghar-split-grid">
+				
+				<!-- Left Column: Vision & Architecture Lead -->
+				<div class="contact-kharghar-left-vision flex-column">
+					<div class="vision-badge-tag flex-align-center gap-xs">
+						<iconify-icon icon="ph:compass-rose-bold" class="vision-icon-accent"></iconify-icon>
+						<span>WHY WE CHOSE KHARGHAR</span>
+					</div>
+					
+					<h2 class="vision-main-title">A Location that Reflects Our Vision</h2>
+
+					<div class="vision-blueprint-card">
+						<div class="blueprint-tag flex-align-center gap-xs">
+							<iconify-icon icon="ph:architecture-bold"></iconify-icon>
+							<span>PRITZKER LAUREATE MASTER-PLAN</span>
+						</div>
+						<p class="vision-lead-highlight">Our choice of Kharghar is rooted in its rare convergence of design, knowledge and landscape.</p>
+						<p class="vision-lead-desc">Master-planned with the vision of celebrated architect and Pritzker laureate <strong>Balkrishna V. Doshi</strong>, the township was conceived around its natural contours, generous open spaces and considered movement between neighbourhoods.</p>
+						<p class="vision-lead-tagline">Today, that original vision has evolved into one of Navi Mumbai’s most distinguished addresses.</p>
+					</div>
+				</div>
+
+				<!-- Right Column: 4 Pillars Showcase Cards Grid -->
+				<div class="contact-kharghar-right-pillars">
+					<div class="pillars-cards-grid">
+						
+						<!-- Pillar 1 -->
+						<div class="pillar-card-item">
+							<div class="pillar-card-top flex-between align-center">
+								<span class="pillar-num">01</span>
+								<div class="pillar-icon-badge icon-badge-yellow">
+									<iconify-icon icon="ph:graduation-cap-duotone"></iconify-icon>
+								</div>
+							</div>
+							<h3 class="pillar-title">A Knowledge Corridor</h3>
+							<p class="pillar-desc">With institutions such as NMIMS, NIFT and Bharati Vidyapeeth, Kharghar has grown into a distinguished academic ecosystem, bringing diverse streams of learning into close proximity.</p>
+						</div>
+
+						<!-- Pillar 2 -->
+						<div class="pillar-card-item">
+							<div class="pillar-card-top flex-between align-center">
+								<span class="pillar-num">02</span>
+								<div class="pillar-icon-badge icon-badge-purple">
+									<iconify-icon icon="ph:buildings-duotone"></iconify-icon>
+								</div>
+							</div>
+							<h3 class="pillar-title">A Considered Urban Setting</h3>
+							<p class="pillar-desc">Broad avenues, thoughtfully structured sectors, pedestrian-friendly spaces and interconnected green corridors give Kharghar an urban character defined by openness and ease.</p>
+						</div>
+
+						<!-- Pillar 3 -->
+						<div class="pillar-card-item">
+							<div class="pillar-card-top flex-between align-center">
+								<span class="pillar-num">03</span>
+								<div class="pillar-icon-badge icon-badge-green">
+									<iconify-icon icon="ph:tree-structure-duotone"></iconify-icon>
+								</div>
+							</div>
+							<h3 class="pillar-title">Closer to Nature</h3>
+							<p class="pillar-desc">The Kharghar Hills, Central Park and Valley Golf Course create an exceptional balance of landscape, recreation and open space, offering a setting designed for a fuller quality of life.</p>
+						</div>
+
+						<!-- Pillar 4 -->
+						<div class="pillar-card-item">
+							<div class="pillar-card-top flex-between align-center">
+								<span class="pillar-num">04</span>
+								<div class="pillar-icon-badge icon-badge-peach">
+									<iconify-icon icon="ph:path-duotone"></iconify-icon>
+								</div>
+							</div>
+							<h3 class="pillar-title">Strategically Connected</h3>
+							<p class="pillar-desc">With the Navi Mumbai International Airport, Atal Setu and an expanding network of roads and metro connections strengthening access across Mumbai and Navi Mumbai, Kharghar is increasingly positioned for the region’s next chapter.</p>
+						</div>
+
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</section>
 </main>
 
 <?php

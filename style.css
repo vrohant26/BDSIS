@@ -2539,22 +2539,27 @@ body.theme-purple-mode .timeline-progress-bar {
     transform: scale(1.05);
 }
 
-/* Main Brand Cream (#F4DECB) Compact Footer Body */
+/* Main Brand Cream (#F4DECB) Footer Body with Custom Illustrated Background */
 .footer-main-body {
     position: relative;
     z-index: 10;
     /* Higher than card default (z-index 1) so background hides lower 50% of cards */
-    background-color: var(--clr-bg-light);
+    background-image: url('assets/images/footer bg.jpeg');
+    background-size: cover;
+    background-position: center bottom;
+    background-repeat: no-repeat;
+    background-color: #F8F1EB;
     color: #332235;
-    padding-top: clamp(2rem, 3vw, 2.75rem);
+    padding-top: clamp(2.5rem, 4vw, 3.5rem);
     padding-bottom: 1.5rem;
     border-top: 1px solid rgba(73, 39, 74, 0.1);
 }
 
 .footer-grid {
     display: grid;
-    grid-template-columns: 2.2fr 1fr 1fr 1fr;
-    gap: clamp(1.5rem, 3vw, 3rem);
+    grid-template-columns: 2.4fr 1.1fr 1.1fr;
+    max-width: 68%;
+    gap: clamp(1.5rem, 3vw, 3.5rem);
     margin-bottom: 1.25rem;
 }
 
@@ -2655,54 +2660,65 @@ body.theme-purple-mode .timeline-progress-bar {
 }
 
 .social-icon-btn {
-    width: 38px;
-    height: 38px;
+    width: clamp(38px, 2.5vw, 42px);
+    height: clamp(38px, 2.5vw, 42px);
     border-radius: 50%;
-    background: rgba(73, 39, 74, 0.12);
-    transition: background 0.25s ease, transform 0.25s ease;
+    background: var(--clr-primary-purple, #49274A);
+    box-shadow: 0 4px 14px rgba(73, 39, 74, 0.25);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 .social-icon-btn svg {
-    width: 16px;
-    height: 16px;
+    width: 17px;
+    height: 17px;
 }
 
 .social-icon-btn svg path {
-    fill: #49274A;
+    fill: #FFFFFF;
     transition: fill 0.25s ease;
 }
 
 .social-icon-btn:hover {
-    background: var(--clr-primary-purple, #49274A);
-    transform: translateY(-2px);
+    background: var(--clr-primary-yellow, #F1C822);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(241, 200, 34, 0.4);
 }
 
 .social-icon-btn:hover svg path {
-    fill: #FFFFFF;
+    fill: #3D213E;
 }
 
 /* Copyright Bottom Bar */
 .footer-bottom-bar {
-    margin-top: 1.25rem;
-    padding-top: 1rem;
-    border-top: 1px solid rgba(73, 39, 74, 0.16);
+    margin-top: 2rem;
+    padding: 0.9rem 1.5rem;
+    background-color: rgba(55, 29, 56, 0.85);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-radius: 14px;
     font-family: var(--font-body);
     font-size: clamp(0.82rem, 0.88vw, 0.9rem);
-    color: #4A3A4C;
+    color: #FFFFFF;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.copyright-text {
+    color: #FFFFFF !important;
+    font-weight: 500;
 }
 
 .legal-links a {
-    color: #4A3A4C;
+    color: #FFFFFF !important;
+    font-weight: 500;
+    text-decoration: none;
     transition: color 0.2s ease;
 }
 
 .legal-links a:hover {
-    color: var(--clr-primary-purple, #49274A);
-    font-weight: 700;
-}
-
-.legal-links a:hover {
-    color: var(--clr-primary-yellow);
+    color: var(--clr-primary-yellow, #F1C822) !important;
 }
 
 /* ==========================================================================
@@ -3313,11 +3329,16 @@ body.theme-purple-mode .timeline-progress-bar {
     }
 
     .footer-main-body {
+        background-image: url('assets/images/footer mobile.webp') !important;
+        background-size: cover !important;
+        background-position: center bottom !important;
+        background-repeat: no-repeat !important;
         padding-top: clamp(3rem, 6vw, 4.5rem) !important;
     }
 
     .footer-grid {
         grid-template-columns: 1fr 1fr;
+        max-width: 100% !important;
         gap: 2rem;
     }
 
@@ -10106,4 +10127,289 @@ body.theme-purple-mode .timeline-progress-bar {
 .academics-exp-text-wrap * {
     opacity: 1 !important;
     visibility: visible !important;
+}
+
+/* ==========================================================================
+   CONTACT PAGE: WHY WE CHOSE KHARGHAR SECTION (LIGHT BLUEPRINT LAYOUT)
+   ========================================================================== */
+.contact-kharghar-section {
+    padding-block: clamp(4.5rem, 7vw, 7rem);
+    background: linear-gradient(180deg, #FFFFFF 0%, #FAF5F9 100%);
+    color: #2B182C;
+    position: relative;
+}
+
+.contact-kharghar-split-grid {
+    display: grid;
+    grid-template-columns: 1.15fr 1fr;
+    gap: clamp(2.5rem, 5vw, 5rem);
+    align-items: start;
+}
+
+/* Left Column: Vision & Blueprint Card (Sticky on Scroll) */
+.contact-kharghar-left-vision {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 120px;
+    align-self: start;
+    z-index: 5;
+}
+
+.vision-badge-tag {
+    font-family: var(--font-heading);
+    font-size: 0.85rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--clr-primary-purple, #49274A);
+    margin-bottom: 0.75rem;
+}
+
+.vision-icon-accent {
+    font-size: 1.25rem;
+    color: var(--clr-primary-yellow, #F1C822);
+}
+
+.vision-main-title {
+    font-family: var(--font-heading);
+    font-size: clamp(2.1rem, 3.8vw, 3.4rem);
+    font-weight: 800;
+    line-height: 1.18;
+    color: #2B182C;
+    letter-spacing: -0.02em;
+    margin-bottom: 2rem;
+}
+
+.vision-blueprint-card {
+    background: #FFFFFF;
+    border-radius: 24px;
+    padding: clamp(2rem, 3.5vw, 3rem);
+    border: 2px solid #F0E6F0;
+    box-shadow: 0 16px 45px rgba(73, 39, 74, 0.07);
+    background-image: radial-gradient(circle at 95% 10%, rgba(241, 200, 34, 0.08) 0%, transparent 60%);
+}
+
+.blueprint-tag {
+    display: inline-flex;
+    padding: 0.4rem 0.9rem;
+    background: var(--clr-primary-purple, #49274A);
+    color: #FFFFFF;
+    border-radius: 50px;
+    font-family: var(--font-heading);
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    margin-bottom: 1.5rem;
+}
+
+.vision-lead-highlight {
+    font-family: var(--font-body);
+    font-size: clamp(1.15rem, 1.3vw, 1.35rem);
+    font-weight: 600;
+    color: var(--clr-primary-purple, #49274A);
+    line-height: 1.6;
+    margin-bottom: 1.1rem;
+}
+
+.vision-lead-desc {
+    font-family: var(--font-body);
+    font-size: clamp(0.98rem, 1.05vw, 1.1rem);
+    line-height: 1.75;
+    color: #444444;
+    margin-bottom: 1.1rem;
+}
+
+.vision-lead-desc strong {
+    color: #222222;
+}
+
+.vision-lead-tagline {
+    font-family: var(--font-body);
+    font-size: clamp(1rem, 1.1vw, 1.12rem);
+    font-weight: 700;
+    color: #222222;
+    margin: 0;
+}
+
+/* Right Column: 4 Pillars Cards Grid */
+.pillars-cards-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+}
+
+.pillar-card-item {
+    background: #FFFFFF;
+    border-radius: 20px;
+    padding: clamp(1.5rem, 2.5vw, 2.2rem);
+    border: 1px solid #EFE6EF;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+    transition: all 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.pillar-card-item:hover {
+    background: #FFFFFF;
+    transform: translateX(8px);
+    border-color: var(--clr-primary-purple, #49274A);
+    box-shadow: 0 20px 45px rgba(73, 39, 74, 0.12);
+}
+
+.pillar-card-top {
+    margin-bottom: 0.85rem;
+}
+
+.pillar-num {
+    font-family: var(--font-heading);
+    font-size: 1.35rem;
+    font-weight: 800;
+    color: rgba(73, 39, 74, 0.25);
+    letter-spacing: -0.02em;
+}
+
+.pillar-icon-badge {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    font-size: 1.4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.icon-badge-yellow {
+    background-color: #FFF9E6;
+    color: #C29600;
+}
+
+.icon-badge-purple {
+    background-color: #FAF2F9;
+    color: var(--clr-primary-purple);
+}
+
+.icon-badge-green {
+    background-color: #EEF8F3;
+    color: #2D8A65;
+}
+
+.icon-badge-peach {
+    background-color: #FFF2EB;
+    color: #E87248;
+}
+
+.pillar-title {
+    font-family: var(--font-heading);
+    font-size: clamp(1.2rem, 1.35vw, 1.4rem);
+    font-weight: 800;
+    color: #2B182C;
+    margin-bottom: 0.6rem;
+    letter-spacing: -0.01em;
+}
+
+.pillar-desc {
+    font-family: var(--font-body);
+    font-size: clamp(0.92rem, 0.98vw, 1.02rem);
+    line-height: 1.65;
+    color: #444444;
+    margin: 0;
+}
+
+@media (max-width: 992px) {
+    .contact-kharghar-split-grid {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+    }
+
+    .contact-kharghar-left-vision {
+        position: relative !important;
+        top: 0 !important;
+    }
+
+    .pillar-card-item:hover {
+        transform: translateY(-6px);
+    }
+}
+
+/* ==========================================================================
+   ACADEMICS SUBNAV BAR & ACTIVE PURPLE DOT PREFIX
+   ========================================================================== */
+.academics-subnav-bar {
+    margin-top: 0.75rem;
+    margin-bottom: 1.5rem;
+    padding: 0.4rem 0.6rem;
+    background: #FFFFFF;
+    border-radius: 50px;
+    border: 1px solid rgba(73, 39, 74, 0.12);
+    box-shadow: 0 4px 18px rgba(73, 39, 74, 0.05);
+    display: inline-block;
+    max-width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.academics-subnav-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    white-space: nowrap;
+}
+
+.subnav-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.45rem 1rem;
+    border-radius: 50px;
+    font-family: var(--font-heading);
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: #444444;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    text-decoration: none;
+    transition: all 0.25s ease;
+}
+
+.subnav-item:hover {
+    color: var(--clr-primary-purple, #49274A);
+    background-color: rgba(73, 39, 74, 0.05);
+}
+
+.subnav-item.active {
+    color: var(--clr-primary-purple, #49274A) !important;
+    background-color: rgba(73, 39, 74, 0.08);
+    font-weight: 800 !important;
+}
+
+/* Glowing Purple Dot Prefix */
+.subnav-active-dot {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    background-color: var(--clr-primary-purple, #49274A);
+    border-radius: 50%;
+    flex-shrink: 0;
+    box-shadow: 0 0 0 3px rgba(73, 39, 74, 0.22);
+}
+
+/* Active Dropdown & Mobile Submenu Purple Dot Prefix */
+.dropdown-list a.active,
+.mobile-submenu a.active {
+    color: var(--clr-primary-purple, #49274A) !important;
+    font-weight: 800 !important;
+    position: relative;
+    padding-left: 1.25rem !important;
+}
+
+.dropdown-list a.active::before,
+.mobile-submenu a.active::before {
+    content: '';
+    position: absolute;
+    left: 0.15rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 7px;
+    height: 7px;
+    background-color: var(--clr-primary-purple, #49274A);
+    border-radius: 50%;
+    box-shadow: 0 0 0 3px rgba(73, 39, 74, 0.2);
 }

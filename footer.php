@@ -158,42 +158,27 @@
 
 						$f_prefix = $f_is_home ? '' : $f_home_url;
 					?>
-					<!-- Column 2: Admissions -->
+					<!-- Column 2: Quick Links -->
 					<div class="footer-col">
-						<h3 class="footer-col-title">Admissions</h3>
+						<h3 class="footer-col-title">Quick Links</h3>
 						<ul class="footer-links">
 							<li><a href="<?php echo $f_admissions_url; ?>#enquire">Apply Now</a></li>
-							<li><a href="<?php echo $f_admissions_url; ?>" class="<?php echo $f_is_admissions ? 'active' : ''; ?>">Overview & Process</a></li>
-							<li><a href="<?php echo $f_faq_url; ?>" class="<?php echo $f_is_faq ? 'active' : ''; ?>">Faq</a></li>
-							<li><a href="<?php echo $f_campus_life_url; ?>" class="<?php echo $f_is_campus_life ? 'active' : ''; ?>">Campus</a></li>
-						</ul>
-					</div>
-
-					<!-- Column 3: Links -->
-					<div class="footer-col">
-						<h3 class="footer-col-title">Links</h3>
-						<ul class="footer-links">
-							<li><a href="<?php echo $f_home_url; ?>" class="<?php echo $f_is_home ? 'active' : ''; ?>">Home</a></li>
-							<li><a href="<?php echo $f_about_url; ?>" class="<?php echo $f_is_about ? 'active' : ''; ?>">About us</a></li>
 							<li><a href="<?php echo $f_admissions_url; ?>" class="<?php echo $f_is_admissions ? 'active' : ''; ?>">Admissions</a></li>
 							<li><a href="<?php echo $f_approach_url; ?>" class="<?php echo $f_is_approach ? 'active' : ''; ?>">Our Approach</a></li>
 							<li><a href="<?php echo $f_campus_life_url; ?>" class="<?php echo $f_is_campus_life ? 'active' : ''; ?>">Campus Life</a></li>
-							<li><a href="<?php echo $f_prefix; ?>#academics">Academics</a></li>
 							<li><a href="<?php echo $f_careers_url; ?>" class="<?php echo $f_is_careers ? 'active' : ''; ?>">Careers</a></li>
-							<li><a href="<?php echo $f_contact_url; ?>" class="<?php echo $f_is_contact ? 'active' : ''; ?>">Contact us</a></li>
-							<li><a href="<?php echo $f_terms_url; ?>" class="<?php echo $f_is_terms ? 'active' : ''; ?>">Terms & Conditions</a></li>
+							<li><a href="<?php echo $f_contact_url; ?>" class="<?php echo $f_is_contact ? 'active' : ''; ?>">Contact Us</a></li>
 						</ul>
 					</div>
 
-					<!-- Column 4: Academics -->
+					<!-- Column 3: Information & Legal -->
 					<div class="footer-col">
-						<h3 class="footer-col-title">Academics</h3>
+						<h3 class="footer-col-title">Information</h3>
 						<ul class="footer-links">
-							<li><a href="<?php echo $f_daycare_url; ?>">Daycare</a></li>
-							<li><a href="<?php echo $f_pre_primary_url; ?>">Pre-Primary School</a></li>
-							<li><a href="<?php echo $f_primary_url; ?>">Primary School</a></li>
-							<li><a href="<?php echo $f_middle_url; ?>">Middle School</a></li>
-							<li><a href="<?php echo $f_post_school_act_url; ?>">Post-School Activities</a></li>
+							<li><a href="<?php echo $f_faq_url; ?>" class="<?php echo $f_is_faq ? 'active' : ''; ?>">FAQ</a></li>
+							<li><a href="<?php echo esc_url( home_url( '/gallery/' ) ); ?>">Gallery</a></li>
+							<li><a href="<?php echo $f_terms_url; ?>" class="<?php echo $f_is_terms ? 'active' : ''; ?>">Terms & Conditions</a></li>
+							<li><a href="<?php echo $f_privacy_url; ?>" class="<?php echo $f_is_privacy ? 'active' : ''; ?>">Privacy Policy</a></li>
 						</ul>
 					</div>
 
