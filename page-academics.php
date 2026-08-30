@@ -410,17 +410,17 @@ $sub_img_url  = $sub_img_id ? wp_get_attachment_image_url( $sub_img_id, 'full' )
 
 	<?php if ( $show_approach_section ) : ?>
 	<!-- Academics Sticky Approach / Cards Section -->
-	<section class="academics-approach-section">
+	<section class="academics-approach-section no-reveal">
 		<div class="site-container academics-approach-grid">
 			
 			<!-- Left Column (Pinned / Fixed on Scroll) -->
-			<div class="academics-approach-left-sticky">
+			<div class="academics-approach-left-sticky no-reveal">
 				<?php if ( ! empty( $app_eyebrow ) ) : ?>
-					<span class="academics-approach-eyebrow"><?php echo esc_html( $app_eyebrow ); ?></span>
+					<span class="academics-approach-eyebrow no-reveal"><?php echo esc_html( $app_eyebrow ); ?></span>
 				<?php endif; ?>
 				<div class="academics-approach-title-wrap flex align-center justify-between">
 					<?php if ( ! empty( $app_title ) ) : ?>
-						<h2 class="academics-approach-title"><?php echo esc_html( $app_title ); ?></h2>
+						<h2 class="academics-approach-title no-reveal"><?php echo esc_html( $app_title ); ?></h2>
 					<?php endif; ?>
 
 					<!-- Decorative Dotted Grid Style Doodle Beside Title -->
@@ -459,7 +459,7 @@ $sub_img_url  = $sub_img_id ? wp_get_attachment_image_url( $sub_img_id, 'full' )
 
 				<?php if ( ! empty( $app_desc ) ) : ?>
 					<div class="academics-approach-paragraphs academics-approach-p-wrap relative">
-						<div class="academics-approach-p reveal-text">
+						<div class="academics-approach-p no-reveal">
 							<?php echo wpautop( wp_kses_post( $app_desc ) ); ?>
 						</div>
 						
@@ -703,6 +703,14 @@ $sub_img_url  = $sub_img_id ? wp_get_attachment_image_url( $sub_img_id, 'full' )
 		$exp_main_title = __( 'Experiences that Enrich Classroom Learning', 'bd-somani' );
 	}
 
+	if ( empty( trim( $exp_sub_title ) ) ) {
+		$exp_sub_title = __( 'Learning Through Experience & Discovery', 'bd-somani' );
+	}
+
+	if ( empty( trim( $exp_sub_desc ) ) ) {
+		$exp_sub_desc = __( 'In this journey, every doubt of "Will I be able to?" becomes a confident "I can" through the experiences we create.', 'bd-somani' );
+	}
+
 	$exp_main_img_id = get_post_meta( $post_id, '_bds_academics_exp_main_img', true );
 	$exp_sub_img_id  = get_post_meta( $post_id, '_bds_academics_exp_sub_img', true );
 
@@ -776,7 +784,7 @@ $sub_img_url  = $sub_img_id ? wp_get_attachment_image_url( $sub_img_id, 'full' )
 			<!-- Centered Main Section Title with Peach Star Accent -->
 			<div class="academics-exp-header text-center relative">
 				<?php if ( ! empty( $exp_main_title ) ) : ?>
-					<h2 class="academics-exp-main-title"><?php echo esc_html( $exp_main_title ); ?></h2>
+					<h2 class="academics-exp-main-title no-reveal"><?php echo esc_html( $exp_main_title ); ?></h2>
 				<?php endif; ?>
 
 				<!-- Peach Star Doodle -->
@@ -828,13 +836,13 @@ $sub_img_url  = $sub_img_id ? wp_get_attachment_image_url( $sub_img_id, 'full' )
 									</div>
 
 									<!-- Left Text Content Area -->
-									<div class="academics-exp-text-wrap relative">
+									<div class="academics-exp-text-wrap relative no-reveal">
 										<?php if ( ! empty( $exp_sub_title ) ) : ?>
-											<h3 class="academics-exp-sub-title"><?php echo esc_html( $exp_sub_title ); ?></h3>
+											<h3 class="academics-exp-sub-title no-reveal"><?php echo esc_html( $exp_sub_title ); ?></h3>
 										<?php endif; ?>
 
 										<?php if ( ! empty( $exp_sub_desc ) ) : ?>
-											<p class="academics-exp-sub-desc reveal-text"><?php echo esc_html( $exp_sub_desc ); ?></p>
+											<p class="academics-exp-sub-desc no-reveal"><?php echo esc_html( $exp_sub_desc ); ?></p>
 										<?php endif; ?>
 
 										<div class="academics-exp-cta-wrap" style="margin-top: 1.5rem; position: relative; z-index: 2;">

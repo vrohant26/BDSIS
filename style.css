@@ -1811,19 +1811,17 @@ body.theme-purple-mode .timeline-progress-bar {
     margin-block: 1.5rem;
 }
 
-.value-lead-p {
-    font-family: var(--font-body);
-    font-size: clamp(1rem, 1.1vw, 1.1rem);
-    color: #333333;
-    line-height: 1.7;
-    margin-bottom: 0.85rem;
-}
-
+.value-lead-p,
 .value-sub-p {
     font-family: var(--font-body);
-    font-size: clamp(0.95rem, 1vw, 1.02rem);
-    color: #666666;
-    line-height: 1.65;
+    font-size: clamp(1rem, 1.1vw, 1.1rem);
+    font-weight: 400;
+    color: #333333;
+    line-height: 1.7;
+}
+
+.value-lead-p {
+    margin-bottom: 0.85rem;
 }
 
 .value-quote-pill {
@@ -5154,7 +5152,7 @@ body.theme-purple-mode .timeline-progress-bar {
 .approach-hero-section {
     padding-top: clamp(130px, 11vw, 165px);
     padding-bottom: clamp(2.5rem, 5vw, 4.5rem);
-    background-color: var(--clr-primary-purple);
+    background-color: #542C54 !important;
     color: #FFFFFF;
     position: relative;
     z-index: 5;
@@ -5223,7 +5221,7 @@ body.theme-purple-mode .timeline-progress-bar {
 /* Interactive Diagram Section with Angled White Canvas */
 .approach-diagram-section {
     position: relative;
-    background-color: var(--clr-primary-purple);
+    background-color: #542C54 !important;
     padding: clamp(3rem, 6vw, 6rem) 0 clamp(4rem, 8vw, 8rem);
     min-height: 780px;
 }
@@ -6307,18 +6305,19 @@ body.theme-purple-mode .timeline-progress-bar {
     align-items: start;
 }
 
-/* Left Column - Fixed / Sticky on Scroll & Vertically Centered */
+/* Left Column - Fixed / Sticky on Scroll */
 .academics-approach-left-sticky {
+    position: -webkit-sticky;
     position: sticky;
-    top: 50%;
-    transform: translateY(-50%);
+    top: clamp(105px, 10vw, 125px);
     align-self: start;
     margin-top: 0;
     padding: 0;
     background: transparent;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
+    z-index: 5;
 }
 
 .academics-approach-eyebrow {
@@ -6375,6 +6374,8 @@ body.theme-purple-mode .timeline-progress-bar {
     font-size: var(--fs-base);
     line-height: 1.7;
     color: #555555;
+    opacity: 1 !important;
+    visibility: visible !important;
 }
 
 .academics-approach-p p {
@@ -6383,6 +6384,8 @@ body.theme-purple-mode .timeline-progress-bar {
     line-height: 1.7;
     color: #555555;
     margin-bottom: 1.25rem;
+    opacity: 1 !important;
+    visibility: visible !important;
 }
 
 .academics-approach-p p:first-child {
@@ -10090,4 +10093,17 @@ body.theme-purple-mode .timeline-progress-bar {
     padding: 0.7rem 1.2rem;
     font-size: 0.82rem;
     font-weight: 800;
+}
+
+/* Force Permanent Visibility for Pinned Sticky Sections */
+.no-reveal,
+.no-reveal *,
+.academics-approach-section,
+.academics-approach-section *,
+.academics-approach-left-sticky,
+.academics-approach-left-sticky *,
+.academics-exp-text-wrap,
+.academics-exp-text-wrap * {
+    opacity: 1 !important;
+    visibility: visible !important;
 }

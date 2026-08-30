@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Native Word & Line Splitter for 100% Reliable Overflow-Hidden Reveal
   function splitTextForReveal(element) {
-    if (!element || element.dataset.splitDone === "true") return;
+    if (!element || element.dataset.splitDone === "true" || element.closest(".no-reveal") || element.classList.contains("no-reveal")) return;
     element.dataset.splitDone = "true";
 
     const childNodes = Array.from(element.childNodes);
@@ -109,8 +109,6 @@ document.addEventListener("DOMContentLoaded", () => {
       ".academics-hero-subtitle",
       ".programme-tagline",
       ".programme-desc",
-      ".academics-approach-p",
-      ".academics-exp-sub-desc",
       ".contact-hero-subtitle",
       ".faq-hero-subtitle",
       ".legal-hero-subtitle",
@@ -126,7 +124,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const textElements = document.querySelectorAll(revealSelectors);
 
     textElements.forEach((el) => {
-      // Avoid re-revealing if already processed or inside philosophy section (which has its own timeline)
+      // Avoid re-revealing if already processed, no-reveal, or inside philosophy section
+      if (el.closest(".no-reveal") || el.classList.contains("no-reveal")) return;
       if (el.dataset.globalRevealDone === "true") return;
       el.dataset.globalRevealDone = "true";
 
@@ -1832,8 +1831,8 @@ document.addEventListener("DOMContentLoaded", () => {
         ScrollTrigger.create({
           trigger: grid,
           pin: stickyCol,
-          start: "top 115px",
-          end: () => "+=" + (cardsCol.offsetHeight - stickyCol.offsetHeight),
+          start: "top 120px",
+          end: () => "+=" + Math.max(0, cardsCol.offsetHeight - stickyCol.offsetHeight),
           pinSpacing: false,
           invalidateOnRefresh: true,
         });

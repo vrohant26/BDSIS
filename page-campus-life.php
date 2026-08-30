@@ -221,7 +221,7 @@ get_header();
 
 									<div class="academics-exp-text-wrap relative">
 										<h3 class="academics-exp-sub-title"><?php esc_html_e( 'We nurture lifelong learners.', 'bd-somani' ); ?></h3>
-										<p class="academics-exp-sub-desc reveal-text"><?php esc_html_e( 'In this journey, every doubt of “Will I be able to?” becomes a confident “I can” through the experiences we create.', 'bd-somani' ); ?></p>
+										<p class="academics-exp-sub-desc"><?php esc_html_e( 'In this journey, every doubt of “Will I be able to?” becomes a confident “I can” through the experiences we create.', 'bd-somani' ); ?></p>
 
 										<div class="academics-exp-chess-doodle" aria-hidden="true">
 											<?php
