@@ -6685,16 +6685,23 @@ body.theme-purple-mode .timeline-progress-bar {
 
 .academics-exp-chess-doodle {
     position: absolute;
-    bottom: -50px;
-    right: 5px;
+    bottom: -25px;
+    right: 10px;
+    width: clamp(45px, 5vw, 65px) !important;
+    height: clamp(45px, 5vw, 65px) !important;
     pointer-events: none;
+    z-index: 1;
+    opacity: 0.85;
 }
 
 .academics-exp-chess-doodle svg,
 .academics-exp-chess-doodle img {
-    width: clamp(100px, 12vw, 155px);
-    height: auto;
-    display: block;
+    width: 100% !important;
+    height: 100% !important;
+    max-width: 100% !important;
+    max-height: 100% !important;
+    object-fit: contain !important;
+    display: block !important;
 }
 
 .academics-exp-main-card {
@@ -6764,12 +6771,7 @@ body.theme-purple-mode .timeline-progress-bar {
     color: #555555;
 }
 
-.academics-exp-chess-doodle {
-    position: absolute;
-    bottom: -200px;
-    right: 100px;
-    pointer-events: none;
-}
+
 
 /* Purple Card Slides */
 .experiences-card-slide {
