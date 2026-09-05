@@ -580,7 +580,7 @@ $sub_img_url  = $sub_img_id ? wp_get_attachment_image_url( $sub_img_id, 'full' )
 							<!-- Item 1: Chess -->
 							<div class="interest-item-box">
 								<div class="interest-item-icon-wrap flex-center">
-									<iconify-icon icon="ph:horse-fill"></iconify-icon>
+									<?php echo bds_get_new_icon( 'puzzle piece' ); ?>
 								</div>
 								<h4 class="interest-item-title"><?php esc_html_e( 'Chess', 'bd-somani' ); ?></h4>
 								<p class="interest-item-desc"><?php esc_html_e( 'Every move strengthens strategic thinking, decision-making, and problem-solving. Students are guided through expert coaching, practice sessions, and tournaments to continually refine their game.', 'bd-somani' ); ?></p>
@@ -589,7 +589,7 @@ $sub_img_url  = $sub_img_id ? wp_get_attachment_image_url( $sub_img_id, 'full' )
 							<!-- Item 2: Young Rembrandts' Art -->
 							<div class="interest-item-box">
 								<div class="interest-item-icon-wrap flex-center">
-									<iconify-icon icon="ph:palette-fill"></iconify-icon>
+									<?php echo bds_get_new_icon( 'paint brush' ); ?>
 								</div>
 								<h4 class="interest-item-title"><?php esc_html_e( 'Young Rembrandts\' Art', 'bd-somani' ); ?></h4>
 								<p class="interest-item-desc"><?php esc_html_e( 'A vibrant art programme where imagination comes to life through drawing, painting and sculpting. Every session inspires creative expression while sharpening students’ focus, observation and coordination.', 'bd-somani' ); ?></p>
@@ -598,7 +598,7 @@ $sub_img_url  = $sub_img_id ? wp_get_attachment_image_url( $sub_img_id, 'full' )
 							<!-- Item 3: Sanskar Varg -->
 							<div class="interest-item-box">
 								<div class="interest-item-icon-wrap flex-center">
-									<iconify-icon icon="ph:flower-lotus-fill"></iconify-icon>
+									<?php echo bds_get_new_icon( 'sun' ); ?>
 								</div>
 								<h4 class="interest-item-title"><?php esc_html_e( 'Sanskar Varg', 'bd-somani' ); ?></h4>
 								<p class="interest-item-desc"><?php esc_html_e( 'Rooted in Indian traditions, Sanskar Varg introduces students to Sanskrit mantras and cultural practices in an engaging way. Every session supports speech, breathing, and holistic well-being.', 'bd-somani' ); ?></p>
@@ -618,7 +618,7 @@ $sub_img_url  = $sub_img_id ? wp_get_attachment_image_url( $sub_img_id, 'full' )
 							<!-- Item 1: Musical Bonding -->
 							<div class="interest-item-box">
 								<div class="interest-item-icon-wrap flex-center">
-									<iconify-icon icon="ph:music-notes-fill"></iconify-icon>
+									<?php echo bds_get_new_icon( 'notebook' ); ?>
 								</div>
 								<h4 class="interest-item-title"><?php esc_html_e( 'Musical Bonding', 'bd-somani' ); ?></h4>
 								<p class="interest-item-desc"><?php esc_html_e( 'Designed for parents and young learners, Musical Bonding transforms music and movement into joyful shared experiences. Every session nurtures rhythm, interaction, and meaningful connections through play.', 'bd-somani' ); ?></p>
@@ -627,7 +627,7 @@ $sub_img_url  = $sub_img_id ? wp_get_attachment_image_url( $sub_img_id, 'full' )
 							<!-- Item 2: Pyjama Drama -->
 							<div class="interest-item-box">
 								<div class="interest-item-icon-wrap flex-center">
-									<iconify-icon icon="ph:mask-happy-fill"></iconify-icon>
+									<?php echo bds_get_new_icon( 'scissor' ); ?>
 								</div>
 								<h4 class="interest-item-title"><?php esc_html_e( 'Pyjama Drama', 'bd-somani' ); ?></h4>
 								<p class="interest-item-desc"><?php esc_html_e( 'An internationally acclaimed drama programme that brings stories to life through music, movement and imaginative play. Students learn to collaborate and communicate while building social connections.', 'bd-somani' ); ?></p>
@@ -636,7 +636,7 @@ $sub_img_url  = $sub_img_id ? wp_get_attachment_image_url( $sub_img_id, 'full' )
 							<!-- Item 3: Speech & Drama -->
 							<div class="interest-item-box">
 								<div class="interest-item-icon-wrap flex-center">
-									<iconify-icon icon="ph:microphone-stage-fill"></iconify-icon>
+									<?php echo bds_get_new_icon( 'school bag' ); ?>
 								</div>
 								<h4 class="interest-item-title"><?php esc_html_e( 'Speech & Drama', 'bd-somani' ); ?></h4>
 								<p class="interest-item-desc"><?php esc_html_e( 'From voice and performance to scriptwriting and stagecraft, students learn to express themselves and captivate an audience. Such collaborative performances encourage teamwork, creativity, and storytelling.', 'bd-somani' ); ?></p>
@@ -656,7 +656,7 @@ $sub_img_url  = $sub_img_id ? wp_get_attachment_image_url( $sub_img_id, 'full' )
 							<!-- Item 1: Football -->
 							<div class="interest-item-box">
 								<div class="interest-item-icon-wrap flex-center">
-									<iconify-icon icon="ph:soccer-ball-fill"></iconify-icon>
+									<?php echo bds_get_new_icon( 'basket ball' ); ?>
 								</div>
 								<h4 class="interest-item-title"><?php esc_html_e( 'Football', 'bd-somani' ); ?></h4>
 								<p class="interest-item-desc"><?php esc_html_e( 'Delivered in partnership with LaLiga Academy, students build technique, game awareness and teamwork through structured coaching and match play. Every challenge on the field instils resilience, discipline and the confidence to keep pushing further.', 'bd-somani' ); ?></p>
@@ -665,7 +665,7 @@ $sub_img_url  = $sub_img_id ? wp_get_attachment_image_url( $sub_img_id, 'full' )
 							<!-- Item 2: Basketball -->
 							<div class="interest-item-box">
 								<div class="interest-item-icon-wrap flex-center">
-									<iconify-icon icon="ph:basketball-fill"></iconify-icon>
+									<?php echo bds_get_new_icon( 'basket ball' ); ?>
 								</div>
 								<h4 class="interest-item-title"><?php esc_html_e( 'Basketball', 'bd-somani' ); ?></h4>
 								<p class="interest-item-desc"><?php esc_html_e( 'Powered by NBA Basketball School, students hone their technical skills, coordination and teamwork through structured training and gameplay. Every game reinforces quick decision-making, perseverance and the confidence to perform under pressure.', 'bd-somani' ); ?></p>
@@ -674,7 +674,7 @@ $sub_img_url  = $sub_img_id ? wp_get_attachment_image_url( $sub_img_id, 'full' )
 							<!-- Item 3: Taekwondo -->
 							<div class="interest-item-box">
 								<div class="interest-item-icon-wrap flex-center">
-									<iconify-icon icon="ph:hand-fist-fill"></iconify-icon>
+									<?php echo bds_get_new_icon( 'rocket' ); ?>
 								</div>
 								<h4 class="interest-item-title"><?php esc_html_e( 'Taekwondo', 'bd-somani' ); ?></h4>
 								<p class="interest-item-desc"><?php esc_html_e( 'Through structured Taekwondo training, students develop strength, coordination and self-discipline. Each session builds focus, resilience and respect while giving students the confidence to challenge themselves and grow.', 'bd-somani' ); ?></p>

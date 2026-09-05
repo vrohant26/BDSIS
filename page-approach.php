@@ -236,8 +236,8 @@ get_header();
 						<div class="secondary-photo-card">
 							<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/pre-primary 2.webp' ); ?>" alt="Pre-Primary Play Group" loading="lazy">
 						</div>
-						<iconify-icon icon="ph:puzzle-piece-fill" class="curriculum-doodle-icon media-doodle-1" style="color: rgba(73, 39, 74, 0.22);"></iconify-icon>
-						<iconify-icon icon="ph:palette-fill" class="curriculum-doodle-icon media-doodle-2" style="color: rgba(241, 200, 34, 0.28);"></iconify-icon>
+						<div class="curriculum-doodle-icon media-doodle-1" style="color: rgba(73, 39, 74, 0.22);"><?php echo bds_get_new_icon( 'puzzle piece' ); ?></div>
+						<div class="curriculum-doodle-icon media-doodle-2" style="color: rgba(241, 200, 34, 0.28);"><?php echo bds_get_new_icon( 'paint brush' ); ?></div>
 					</div>
 					<div class="approach-info-box">
 						<h3 class="approach-stage-title">Pre-Primary</h3>
@@ -262,8 +262,8 @@ get_header();
 						<div class="secondary-photo-card">
 							<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/primary school 2.webp' ); ?>" alt="Primary School Classroom Learning" loading="lazy">
 						</div>
-						<iconify-icon icon="ph:pencil-fill" class="curriculum-doodle-icon media-doodle-1" style="color: rgba(73, 39, 74, 0.22);"></iconify-icon>
-						<iconify-icon icon="ph:atom-fill" class="curriculum-doodle-icon media-doodle-2" style="color: rgba(241, 200, 34, 0.28);"></iconify-icon>
+						<div class="curriculum-doodle-icon media-doodle-1" style="color: rgba(73, 39, 74, 0.22);"><?php echo bds_get_new_icon( 'notebook' ); ?></div>
+						<div class="curriculum-doodle-icon media-doodle-2" style="color: rgba(241, 200, 34, 0.28);"><?php echo bds_get_new_icon( 'dna' ); ?></div>
 					</div>
 					<div class="approach-info-box">
 						<h3 class="approach-stage-title">Primary School</h3>
@@ -288,8 +288,8 @@ get_header();
 						<div class="secondary-photo-card">
 							<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/middle school 2.webp' ); ?>" alt="Middle School Outdoor Field & Activities" loading="lazy">
 						</div>
-						<iconify-icon icon="ph:compass-fill" class="curriculum-doodle-icon media-doodle-1" style="color: rgba(241, 200, 34, 0.28);"></iconify-icon>
-						<iconify-icon icon="ph:graduation-cap-fill" class="curriculum-doodle-icon media-doodle-2" style="color: rgba(73, 39, 74, 0.22);"></iconify-icon>
+						<div class="curriculum-doodle-icon media-doodle-1" style="color: rgba(241, 200, 34, 0.28);"><?php echo bds_get_new_icon( 'microscope' ); ?></div>
+						<div class="curriculum-doodle-icon media-doodle-2" style="color: rgba(73, 39, 74, 0.22);"><?php echo bds_get_new_icon( 'e=mc2' ); ?></div>
 					</div>
 					<div class="approach-info-box">
 						<h3 class="approach-stage-title">Middle School</h3>
@@ -314,8 +314,8 @@ get_header();
 						<div class="secondary-photo-card">
 							<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/indoor and outdoor sports.webp' ); ?>" alt="Indoor and Outdoor Sports" loading="lazy">
 						</div>
-						<iconify-icon icon="ph:trophy-fill" class="curriculum-doodle-icon media-doodle-1" style="color: rgba(73, 39, 74, 0.22);"></iconify-icon>
-						<iconify-icon icon="ph:basketball-fill" class="curriculum-doodle-icon media-doodle-2" style="color: rgba(241, 200, 34, 0.28);"></iconify-icon>
+						<div class="curriculum-doodle-icon media-doodle-1" style="color: rgba(73, 39, 74, 0.22);"><?php echo bds_get_new_icon( 'basket ball' ); ?></div>
+						<div class="curriculum-doodle-icon media-doodle-2" style="color: rgba(241, 200, 34, 0.28);"><?php echo bds_get_new_icon( 'rocket' ); ?></div>
 					</div>
 					<div class="approach-info-box">
 						<h3 class="approach-stage-title">Post School Activities</h3>

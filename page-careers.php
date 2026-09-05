@@ -144,7 +144,7 @@ if ( empty( $location ) ) {
 						<tr>
 							<td class="col-position">
 								<div class="position-title-wrap">
-									<iconify-icon icon="ph:baby-fill" class="position-icon"></iconify-icon>
+									<div class="position-icon flex-center" style="width: 24px; height: 24px; color: var(--clr-primary-purple);"><?php echo bds_get_new_icon( 'school bag' ); ?></div>
 									<span class="position-name"><?php esc_html_e( 'Pre-School Teachers', 'bd-somani' ); ?></span>
 								</div>
 							</td>
@@ -157,7 +157,7 @@ if ( empty( $location ) ) {
 						<tr>
 							<td class="col-position">
 								<div class="position-title-wrap">
-									<iconify-icon icon="ph:book-open-text-fill" class="position-icon"></iconify-icon>
+									<div class="position-icon flex-center" style="width: 24px; height: 24px; color: var(--clr-primary-purple);"><?php echo bds_get_new_icon( 'notebook' ); ?></div>
 									<span class="position-name"><?php esc_html_e( 'Primary Teachers', 'bd-somani' ); ?></span>
 								</div>
 							</td>
@@ -170,7 +170,7 @@ if ( empty( $location ) ) {
 						<tr>
 							<td class="col-position">
 								<div class="position-title-wrap">
-									<iconify-icon icon="ph:chalkboard-teacher-fill" class="position-icon"></iconify-icon>
+									<div class="position-icon flex-center" style="width: 24px; height: 24px; color: var(--clr-primary-purple);"><?php echo bds_get_new_icon( 'calculator' ); ?></div>
 									<span class="position-name"><?php esc_html_e( 'Middle School Teachers (ICSE)', 'bd-somani' ); ?></span>
 								</div>
 							</td>
@@ -183,7 +183,7 @@ if ( empty( $location ) ) {
 						<tr>
 							<td class="col-position">
 								<div class="position-title-wrap">
-									<iconify-icon icon="ph:globe-hemisphere-west-fill" class="position-icon"></iconify-icon>
+									<div class="position-icon flex-center" style="width: 24px; height: 24px; color: var(--clr-primary-purple);"><?php echo bds_get_new_icon( 'earth' ); ?></div>
 									<span class="position-name"><?php esc_html_e( 'Middle School Teachers (IGCSE)', 'bd-somani' ); ?></span>
 								</div>
 							</td>
@@ -196,7 +196,7 @@ if ( empty( $location ) ) {
 						<tr>
 							<td class="col-position">
 								<div class="position-title-wrap">
-									<iconify-icon icon="ph:certificate-fill" class="position-icon"></iconify-icon>
+									<div class="position-icon flex-center" style="width: 24px; height: 24px; color: var(--clr-primary-purple);"><?php echo bds_get_new_icon( 'bulb' ); ?></div>
 									<span class="position-name"><?php esc_html_e( 'IGCSE Co-ordinator', 'bd-somani' ); ?></span>
 								</div>
 							</td>
@@ -209,7 +209,7 @@ if ( empty( $location ) ) {
 						<tr>
 							<td class="col-position">
 								<div class="position-title-wrap">
-									<iconify-icon icon="ph:heartbeat-fill" class="position-icon"></iconify-icon>
+									<div class="position-icon flex-center" style="width: 24px; height: 24px; color: var(--clr-primary-purple);"><?php echo bds_get_new_icon( 'sun' ); ?></div>
 									<span class="position-name"><?php esc_html_e( 'Special Educator', 'bd-somani' ); ?></span>
 								</div>
 							</td>

@@ -288,27 +288,27 @@ get_header();
 					<!-- Bullet Points Carousel Tabs -->
 					<div class="experiential-tabs-list flex-column gap-sm relative">
 						<button class="experiential-tab-item active" data-tab-index="0">
-							<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/svgs/indoor outdoor sports.svg' ); ?>" class="experiential-tab-icon" alt="Indoor &amp; Outdoor Sports">
+							<div class="experiential-tab-icon flex-center"><?php echo bds_get_new_icon( 'basket ball' ); ?></div>
 							<span class="experiential-tab-text">Indoor &amp; Outdoor Sports</span>
 						</button>
 
 						<button class="experiential-tab-item" data-tab-index="1">
-							<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/svgs/performing arts.svg' ); ?>" class="experiential-tab-icon" alt="Performing Arts">
+							<div class="experiential-tab-icon flex-center"><?php echo bds_get_new_icon( 'paint brush' ); ?></div>
 							<span class="experiential-tab-text">Performing Arts</span>
 						</button>
 
 						<button class="experiential-tab-item" data-tab-index="2">
-							<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/svgs/clubs and activities.svg' ); ?>" class="experiential-tab-icon" alt="Clubs &amp; Activities">
+							<div class="experiential-tab-icon flex-center"><?php echo bds_get_new_icon( 'puzzle piece' ); ?></div>
 							<span class="experiential-tab-text">Clubs &amp; Activities</span>
 						</button>
 
 						<button class="experiential-tab-item" data-tab-index="3">
-							<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/svgs/reading and literary.svg' ); ?>" class="experiential-tab-icon" alt="Reading &amp; Literary Clubs">
+							<div class="experiential-tab-icon flex-center"><?php echo bds_get_new_icon( 'notebook' ); ?></div>
 							<span class="experiential-tab-text">Reading &amp; Literary Clubs</span>
 						</button>
 
 						<button class="experiential-tab-item" data-tab-index="4">
-							<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/svgs/innovation and design workshop.svg' ); ?>" class="experiential-tab-icon" alt="Innovation &amp; Design Workshops">
+							<div class="experiential-tab-icon flex-center"><?php echo bds_get_new_icon( 'microscope' ); ?></div>
 							<span class="experiential-tab-text">Innovation &amp; Design Workshops</span>
 						</button>
 
@@ -332,14 +332,24 @@ get_header();
 
 	<!-- Section 7: The Values We Nurture (Pinned Scroll-Based Section) -->
 	<section class="values-pinned-section relative overflow-hidden" id="our-values">
+		<!-- Background Organic Wavy Doodle Shapes (Top Right & Bottom Left) -->
+		<div class="values-bg-wavy-top" aria-hidden="true">
+			<svg width="450" height="350" viewBox="0 0 323 232" fill="none" xmlns="http://www.w3.org/2000/svg">
+				<path d="M447.115 109.822C237.579 390.965 283.711 -51.9314 151.802 135.363C19.8932 322.658 -25.1132 95.0059 94.4674 -6.70432C214.048 -108.415 15.7675 -112.658 37.7 -132.488" stroke="var(--clr-wavy-purple-light)" stroke-width="50"/>
+			</svg>
+		</div>
+		<div class="values-bg-wavy-bottom" aria-hidden="true">
+			<svg width="450" height="350" viewBox="0 0 310 312" fill="none" xmlns="http://www.w3.org/2000/svg">
+				<path d="M-137.143 122.166C72.3938 -158.977 26.2613 283.92 158.17 96.6249C290.079 -90.6699 335.086 136.982 215.505 238.693C95.9247 340.403 294.205 344.646 272.273 364.476" stroke="var(--clr-wavy-purple-light)" stroke-width="50"/>
+			</svg>
+		</div>
+
 		<div class="values-pinned-sticky flex-center">
 			<div class="values-content-container relative z-2 width-100 flex-column flex-between align-center">
 				
-				<!-- Top Header & Floating Doodle -->
+				<!-- Top Header -->
 				<div class="values-header text-center relative margin-bottom-xs">
 					<h2 class="values-main-title">The Values We Nurture</h2>
-					<!-- Decorative Top-Left Book Doodle -->
-					<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/svgs/book.svg' ); ?>" class="values-doodle-book floating-doodle" alt="Book Doodle">
 				</div>
 
 				<!-- Middle Stage Container -->
@@ -350,7 +360,7 @@ get_header();
 						<div class="value-card-box relative">
 							<div class="value-card-header flex-between align-center">
 								<span class="value-card-title">COLLABORATION</span>
-								<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/svgs/collaboration.svg' ); ?>" class="value-card-icon" alt="Collaboration Icon">
+								<div class="value-card-icon flex-center"><?php echo bds_get_new_icon( 'puzzle piece' ); ?></div>
 							</div>
 							<p class="value-card-desc">We cultivate respectful communicators who value teamwork, diverse thinking and shared success.</p>
 						</div>
@@ -371,7 +381,7 @@ get_header();
 							<div class="value-card-box relative">
 								<div class="value-card-header flex-between align-center">
 									<span class="value-card-title">COURAGE</span>
-									<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/svgs/courage.svg' ); ?>" class="value-card-icon" alt="Courage Icon">
+									<div class="value-card-icon flex-center"><?php echo bds_get_new_icon( 'rocket' ); ?></div>
 								</div>
 								<p class="value-card-desc">We nurture the confidence to question, the conviction to act, and the integrity to take responsibility.</p>
 							</div>
@@ -382,7 +392,7 @@ get_header();
 							<div class="value-card-box relative">
 								<div class="value-card-header flex-between align-center">
 									<span class="value-card-title">CURIOSITY</span>
-									<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/svgs/curiosity.svg' ); ?>" class="value-card-icon" alt="Curiosity Icon">
+									<div class="value-card-icon flex-center"><?php echo bds_get_new_icon( 'bulb' ); ?></div>
 								</div>
 								<p class="value-card-desc">We nurture inquisitive minds that explore ideas, embrace perspectives and seek meaningful answers.</p>
 							</div>

@@ -230,7 +230,7 @@ get_header();
 							<div class="process-card-header flex-between align-center">
 								<span class="process-step-badge">01</span>
 								<div class="process-step-icon flex-center">
-									<iconify-icon icon="ph:chat-circle-dots-bold"></iconify-icon>
+									<?php echo bds_get_new_icon( 'notebook' ); ?>
 								</div>
 							</div>
 							<h3 class="process-card-title"><?php esc_html_e( 'Begin with a Conversation', 'bd-somani' ); ?></h3>
@@ -242,7 +242,7 @@ get_header();
 							<div class="process-card-header flex-between align-center">
 								<span class="process-step-badge">02</span>
 								<div class="process-step-icon flex-center">
-									<iconify-icon icon="ph:users-three-bold"></iconify-icon>
+									<?php echo bds_get_new_icon( 'puzzle piece' ); ?>
 								</div>
 							</div>
 							<h3 class="process-card-title"><?php esc_html_e( 'Meet Our Admissions Team', 'bd-somani' ); ?></h3>
@@ -254,7 +254,7 @@ get_header();
 							<div class="process-card-header flex-between align-center">
 								<span class="process-step-badge">03</span>
 								<div class="process-step-icon flex-center">
-									<iconify-icon icon="ph:compass-bold"></iconify-icon>
+									<?php echo bds_get_new_icon( 'school bag' ); ?>
 								</div>
 							</div>
 							<h3 class="process-card-title"><?php esc_html_e( 'Experience the School', 'bd-somani' ); ?></h3>
@@ -271,7 +271,7 @@ get_header();
 							<div class="process-card-header flex-between align-center">
 								<span class="process-step-badge">04</span>
 								<div class="process-step-icon flex-center">
-									<iconify-icon icon="ph:file-text-fill"></iconify-icon>
+									<?php echo bds_get_new_icon( 'calculator' ); ?>
 								</div>
 							</div>
 							<h3 class="process-card-title"><?php esc_html_e( 'Take the Next Step', 'bd-somani' ); ?></h3>
@@ -283,7 +283,7 @@ get_header();
 							<div class="process-card-header flex-between align-center">
 								<span class="process-step-badge">05</span>
 								<div class="process-step-icon flex-center">
-									<iconify-icon icon="ph:heart-bold"></iconify-icon>
+									<?php echo bds_get_new_icon( 'rocket' ); ?>
 								</div>
 							</div>
 							<h3 class="process-card-title"><?php esc_html_e( 'Welcome to B.D. Somani Kharghar Community', 'bd-somani' ); ?></h3>

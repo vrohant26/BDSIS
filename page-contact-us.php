@@ -333,8 +333,8 @@ get_header();
 						<div class="pillar-card-item">
 							<div class="pillar-card-top flex-between align-center">
 								<span class="pillar-num">01</span>
-								<div class="pillar-icon-badge icon-badge-yellow">
-									<iconify-icon icon="ph:graduation-cap-duotone"></iconify-icon>
+								<div class="pillar-icon-badge icon-badge-yellow flex-center">
+									<?php echo bds_get_new_icon( 'notebook' ); ?>
 								</div>
 							</div>
 							<h3 class="pillar-title">A Knowledge Corridor</h3>
@@ -345,8 +345,8 @@ get_header();
 						<div class="pillar-card-item">
 							<div class="pillar-card-top flex-between align-center">
 								<span class="pillar-num">02</span>
-								<div class="pillar-icon-badge icon-badge-purple">
-									<iconify-icon icon="ph:buildings-duotone"></iconify-icon>
+								<div class="pillar-icon-badge icon-badge-purple flex-center">
+									<?php echo bds_get_new_icon( 'puzzle piece' ); ?>
 								</div>
 							</div>
 							<h3 class="pillar-title">A Considered Urban Setting</h3>
@@ -357,8 +357,8 @@ get_header();
 						<div class="pillar-card-item">
 							<div class="pillar-card-top flex-between align-center">
 								<span class="pillar-num">03</span>
-								<div class="pillar-icon-badge icon-badge-green">
-									<iconify-icon icon="ph:tree-structure-duotone"></iconify-icon>
+								<div class="pillar-icon-badge icon-badge-green flex-center">
+									<?php echo bds_get_new_icon( 'earth' ); ?>
 								</div>
 							</div>
 							<h3 class="pillar-title">Closer to Nature</h3>
@@ -369,8 +369,8 @@ get_header();
 						<div class="pillar-card-item">
 							<div class="pillar-card-top flex-between align-center">
 								<span class="pillar-num">04</span>
-								<div class="pillar-icon-badge icon-badge-peach">
-									<iconify-icon icon="ph:path-duotone"></iconify-icon>
+								<div class="pillar-icon-badge icon-badge-peach flex-center">
+									<?php echo bds_get_new_icon( 'plane' ); ?>
 								</div>
 							</div>
 							<h3 class="pillar-title">Strategically Connected</h3>

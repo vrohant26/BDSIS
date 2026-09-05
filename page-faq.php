@@ -38,7 +38,10 @@ get_header();
 			<div class="faq-hero-inner flex-between align-center">
 				
 				<!-- Hero Text Content -->
-				<div class="faq-hero-text text-center">
+				<div class="faq-hero-text text-center relative">
+					<div class="faq-hero-icon-accent" style="width: 50px; height: 50px; margin: 0 auto 0.5rem auto;">
+						<?php echo bds_get_new_icon( 'bulb' ); ?>
+					</div>
 					<h1 class="faq-hero-title">Have a question?</h1>
 					<p class="faq-hero-subtitle">Everything you need to know about admissions, academics, school life and more all in one place.</p>
 				</div>

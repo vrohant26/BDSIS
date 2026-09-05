@@ -1362,45 +1362,52 @@ ol {
 .curriculum-doodle-icon {
     position: absolute;
     pointer-events: none;
-    z-index: 1;
+    z-index: 3;
     opacity: 0.85;
-    font-size: clamp(85px, 7vw, 125px) !important;
+    width: clamp(45px, 4vw, 65px) !important;
+    height: clamp(45px, 4vw, 65px) !important;
     transition: transform 0.3s ease;
 }
 
+.curriculum-doodle-icon svg {
+    width: 100% !important;
+    height: 100% !important;
+    max-width: 100% !important;
+    max-height: 100% !important;
+    object-fit: contain !important;
+}
+
 .doodle-pos-1 {
-    top: -113px;
-    right: -125px;
+    top: -25px;
+    right: -20px;
     transform: rotate(12deg);
 }
 
 .doodle-pos-2 {
-    bottom: -45px;
+    bottom: -20px;
     right: 20px;
     transform: rotate(-14deg);
 }
 
 .doodle-pos-3 {
-    top: 122%;
-    left: -30px;
+    top: 50%;
+    left: -20px;
     transform: translateY(-50%) rotate(-10deg);
 }
 
 .media-doodle-1 {
     position: absolute;
-
-    top: -45px;
-
-    right: -130%;
-    z-index: 0;
+    top: -25px;
+    right: -15px;
+    z-index: 4;
     transform: rotate(-12deg);
 }
 
 .media-doodle-2 {
     position: absolute;
-    bottom: -40px;
-    right: -120px;
-    z-index: 3;
+    bottom: -20px;
+    right: 15px;
+    z-index: 4;
     transform: rotate(14deg);
 }
 
@@ -1416,6 +1423,7 @@ ol {
     display: flex;
     align-items: center;
     justify-content: center;
+    overflow: hidden;
 }
 
 .experiential-ribbon-svg {
@@ -2072,6 +2080,52 @@ body.theme-purple-mode .timeline-progress-bar {
     width: clamp(300px, 28vw, 380px);
     box-shadow: 0 16px 45px rgba(73, 39, 74, 0.08);
     color: #2B182C;
+}
+
+.values-bg-wavy-top {
+    position: absolute;
+    top: -50px;
+    right: -40px;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.85;
+}
+
+.values-bg-wavy-bottom {
+    position: absolute;
+    bottom: -50px;
+    left: -40px;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.85;
+}
+
+.values-floating-icon {
+    position: absolute;
+    pointer-events: none;
+    z-index: 3;
+    opacity: 0.8;
+    animation: floatGlobe 4s ease-in-out infinite;
+    width: clamp(38px, 3.2vw, 52px);
+    height: clamp(38px, 3.2vw, 52px);
+}
+
+.values-icon-top-right {
+    top: 6%;
+    right: 8%;
+    animation-delay: 0.5s;
+}
+
+.values-icon-bottom-left {
+    bottom: 6%;
+    left: 6%;
+    animation-delay: 1.2s;
+}
+
+.values-icon-bottom-right {
+    bottom: 8%;
+    right: 7%;
+    animation-delay: 2s;
 }
 
 .value-card-title {
@@ -10412,4 +10466,85 @@ body.theme-purple-mode .timeline-progress-bar {
     background-color: var(--clr-primary-purple, #49274A);
     border-radius: 50%;
     box-shadow: 0 0 0 3px rgba(73, 39, 74, 0.2);
+}
+
+/* ==========================================================================
+   UNIVERSAL COLOR CONTROL FOR NEW ILLUSTRATED HAND-DRAWN ICON SET
+   ========================================================================== */
+.bds-new-icon,
+svg.bds-new-icon,
+.about-merit-icon-wrap svg,
+.pillar-icon-badge svg,
+.highlight-icon-circle svg,
+.value-badge-icon svg,
+.curriculum-card-icon svg,
+.experience-icon-wrap svg,
+.facility-icon-wrap svg,
+.experiential-tab-icon svg {
+    width: 100% !important;
+    height: 100% !important;
+    max-width: 100% !important;
+    max-height: 100% !important;
+    object-fit: contain !important;
+    display: block !important;
+}
+
+.about-merit-icon-wrap,
+.pillar-icon-badge,
+.highlight-icon-circle,
+.value-badge-icon {
+    padding: 6px !important;
+}
+
+/* Brand Purple (#49274A) color for all icons across light sections */
+.bds-new-icon path,
+svg.bds-new-icon path,
+.about-merit-icon-wrap svg path,
+.pillar-icon-badge svg path,
+.highlight-icon-circle svg path,
+.value-badge-icon svg path,
+.curriculum-card-icon svg path,
+.process-step-icon svg path,
+.position-icon svg path,
+.interest-item-icon-wrap svg path,
+.curriculum-doodle-icon svg path {
+    fill: var(--clr-primary-purple, #49274A) !important;
+}
+
+/* White icons for the dark purple section (Learning Enriched by Experience) */
+.purple-full-section .experiential-tab-icon svg path,
+.purple-full-section .bds-new-icon path {
+    fill: #FFFFFF !important;
+}
+
+.purple-full-section .experiential-tab-item:not(.active) .experiential-tab-icon svg path {
+    fill: rgba(255, 255, 255, 0.75) !important;
+}
+
+/* Value Showcase Cards Specific Icon Color Themes */
+.value-curious-card .value-badge-icon svg path,
+.badge-curious svg path,
+.value-curious-card .floating-accent-tag svg path,
+.value-curious-card .floating-accent-tag iconify-icon,
+.value-curious-card .quote-icon {
+    fill: #C29600 !important;
+    color: #C29600 !important;
+}
+
+.value-collaborative-card .value-badge-icon svg path,
+.badge-collaborative svg path,
+.value-collaborative-card .floating-accent-tag svg path,
+.value-collaborative-card .floating-accent-tag iconify-icon,
+.value-collaborative-card .quote-icon {
+    fill: #9C5E91 !important;
+    color: #9C5E91 !important;
+}
+
+.value-courageous-card .value-badge-icon svg path,
+.badge-courageous svg path,
+.value-courageous-card .floating-accent-tag svg path,
+.value-courageous-card .floating-accent-tag iconify-icon,
+.value-courageous-card .quote-icon {
+    fill: #E87248 !important;
+    color: #E87248 !important;
 }

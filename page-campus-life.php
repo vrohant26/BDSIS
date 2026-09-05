@@ -224,12 +224,7 @@ get_header();
 										<p class="academics-exp-sub-desc"><?php esc_html_e( 'In this journey, every doubt of “Will I be able to?” becomes a confident “I can” through the experiences we create.', 'bd-somani' ); ?></p>
 
 										<div class="academics-exp-chess-doodle" aria-hidden="true">
-											<?php
-											$chess_svg_path = get_template_directory() . '/assets/svgs/chess.svg';
-											if ( file_exists( $chess_svg_path ) ) {
-												include $chess_svg_path;
-											}
-											?>
+											<?php echo bds_get_new_icon( 'puzzle piece' ); ?>
 										</div>
 									</div>
 								</div>

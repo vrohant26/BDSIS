@@ -439,12 +439,7 @@ get_header();
 									<h3 class="value-main-heading">Curious</h3>
 								</div>
 								<div class="value-badge-icon badge-curious flex-center">
-									<?php 
-									$curious_icon = get_template_directory() . '/assets/svgs/curiosity.svg';
-									if ( file_exists( $curious_icon ) ) {
-										echo file_get_contents( $curious_icon );
-									}
-									?>
+									<?php echo bds_get_new_icon( 'bulb' ); ?>
 								</div>
 							</div>
 
@@ -505,12 +500,7 @@ get_header();
 									<h3 class="value-main-heading">Collaborative</h3>
 								</div>
 								<div class="value-badge-icon badge-collaborative flex-center">
-									<?php 
-									$collab_icon = get_template_directory() . '/assets/svgs/collaboration.svg';
-									if ( file_exists( $collab_icon ) ) {
-										echo file_get_contents( $collab_icon );
-									}
-									?>
+									<?php echo bds_get_new_icon( 'puzzle piece' ); ?>
 								</div>
 							</div>
 
@@ -541,12 +531,7 @@ get_header();
 									<h3 class="value-main-heading">Courageous</h3>
 								</div>
 								<div class="value-badge-icon badge-courageous flex-center">
-									<?php 
-									$courage_icon = get_template_directory() . '/assets/svgs/courage.svg';
-									if ( file_exists( $courage_icon ) ) {
-										echo file_get_contents( $courage_icon );
-									}
-									?>
+									<?php echo bds_get_new_icon( 'rocket' ); ?>
 								</div>
 							</div>
 
@@ -611,7 +596,7 @@ get_header();
 			<div class="about-merits-grid swiper">
 				<div class="swiper-wrapper">
 					
-					<!-- Card 1: Global Competence -->
+					<!-- Card 1: Student-Centric Guidance -->
 					<div class="about-merit-card swiper-slide flex-column align-center">
 						<div class="about-merit-icon-wrap flex-center">
 							<?php 
@@ -624,7 +609,7 @@ get_header();
 						<h3 class="about-merit-title">Student-Centric Guidance</h3>
 					</div>
 
-					<!-- Card 2: Future-Ready -->
+					<!-- Card 2: Subject-matter Experts -->
 					<div class="about-merit-card swiper-slide flex-column align-center">
 						<div class="about-merit-icon-wrap flex-center">
 							<?php 
@@ -637,7 +622,7 @@ get_header();
 						<h3 class="about-merit-title">Subject-matter Experts</h3>
 					</div>
 
-					<!-- Card 3: Adaptable -->
+					<!-- Card 3: Evolving Pedagogy -->
 					<div class="about-merit-card swiper-slide flex-column align-center">
 						<div class="about-merit-icon-wrap flex-center">
 							<?php 
@@ -650,7 +635,7 @@ get_header();
 						<h3 class="about-merit-title">Evolving Pedagogy</h3>
 					</div>
 
-					<!-- Card 4: Progressive Education -->
+					<!-- Card 4: Globally Informed Teaching -->
 					<div class="about-merit-card swiper-slide flex-column align-center">
 						<div class="about-merit-icon-wrap flex-center">
 							<?php 
