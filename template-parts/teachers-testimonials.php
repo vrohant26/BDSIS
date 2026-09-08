@@ -81,8 +81,8 @@
 							<!-- Quote Details Box -->
 							<div class="teachers-quote-box relative flex-column flex-between">
 								<div class="teachers-quote-content">
-									<h3 class="teachers-quote-heading">Unlocking Creative Expression And Building Lifelong Confidence.</h3>
-									<p class="teachers-quote-text">"Arts and extracurriculars are not just additions to education—they are central to developing well-rounded, expressive individuals. Watching students discover their unique artistic voices and shine on stage is the greatest reward of my teaching journey."</p>
+									<h3 class="teachers-quote-heading">Planting The Seeds For A Sustainable, Compassionate Future.</h3>
+									<p class="teachers-quote-text">"As a pre-primary coordinator, my vision is built on a simple truth: it takes a whole village to raise a child. I believe in establishing a close, collaborative partnership between students, teachers, and parents. By working hand in hand, we create a nurturing ecosystem where our youngest learners can truly thrive.<br><br>Our collective goal is to prepare students to become dynamic, global, honest, and disciplined individuals. Education at this foundational stage goes beyond traditional academics; it is about character building and fostering deep empathy. We guide our children to coexist peacefully not only with the people around them but also with plants, animals, and the entire environment. Together, we are planting the seeds for a sustainable, compassionate, and harmonious future."</p>
 								</div>
 								<div class="teachers-quote-author">
 									<h4 class="teachers-author-name">Ms. Shraddha Sachdeva</h4>
@@ -123,8 +123,8 @@
 							<!-- Quote Details Box -->
 							<div class="teachers-quote-box relative flex-column flex-between">
 								<div class="teachers-quote-content">
-									<h3 class="teachers-quote-heading">Fostering Innovation, Problem-Solving, And Hands-On Discovery.</h3>
-									<p class="teachers-quote-text">"In our Maker Labs and interactive classrooms, science comes alive. We encourage students to experiment, embrace trial and error, and think like innovators. The collaborative environment between teachers and students creates a truly dynamic learning culture."</p>
+									<h3 class="teachers-quote-heading">Learning, Leading and Growing Together</h3>
+									<p class="teachers-quote-text">"My journey at B.D. Somani International School, Kharghar, has been one of continuous learning, reflection, and growth. As a Coordinator, I have had the privilege of working alongside students, teachers, and parents in a community that values curiosity, courage, and collaboration.<br><br>What I find most rewarding is being part of an environment where learning is not confined to the classroom. Students are encouraged to question, explore, take risks, and learn from their experiences, while educators are equally encouraged to evolve and reimagine their practice.<br><br>The role has strengthened my leadership and collaboration skills and, more importantly, has taught me to remain open, adaptable, and future-focused. In a world where we cannot predict what lies ahead, I believe our responsibility is to nurture learners who are confident to navigate the unknown—and it is a privilege to contribute to that journey."</p>
 								</div>
 								<div class="teachers-quote-author">
 									<h4 class="teachers-author-name">Ms. Jyotsna Dondapati</h4>
