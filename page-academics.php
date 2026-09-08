@@ -656,7 +656,7 @@ $sub_img_url  = $sub_img_id ? wp_get_attachment_image_url( $sub_img_id, 'full' )
 							<!-- Item 1: Football -->
 							<div class="interest-item-box">
 								<div class="interest-item-icon-wrap flex-center">
-									<?php echo bds_get_new_icon( 'basket ball' ); ?>
+									<?php echo bds_get_new_icon( 'football' ); ?>
 								</div>
 								<h4 class="interest-item-title"><?php esc_html_e( 'Football', 'bd-somani' ); ?></h4>
 								<p class="interest-item-desc"><?php esc_html_e( 'Delivered in partnership with LaLiga Academy, students build technique, game awareness and teamwork through structured coaching and match play. Every challenge on the field instils resilience, discipline and the confidence to keep pushing further.', 'bd-somani' ); ?></p>

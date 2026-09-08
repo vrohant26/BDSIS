@@ -53,7 +53,7 @@ get_header();
 						<h1 class="hero-title">Creating Minds That Think. Hearts That Grow.</h1>
 						<p class="hero-subtitle">Beyond academics, every experience nurtures creativity, adaptability, problem-solving, and the confidence to thrive in an ever-changing world.</p>
 						<div class="hero-actions">
-							<a href="#apply" class="btn btn-yellow hero-btn">
+							<a href="<?php echo esc_url( home_url( '/admissions/' ) ); ?>" class="btn btn-yellow hero-btn">
 								<span>BEGIN YOUR CHILD'S NEXT CHAPTER</span>
 								<svg class="btn-arrow" width="18" height="14" viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg">
 									<path d="M11 1L17 7M17 7L11 13M17 7H1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -72,7 +72,7 @@ get_header();
 						<h1 class="hero-title">Every Experience. A Step Towards New Horizons.</h1>
 						<p class="hero-subtitle">Beyond academics, students discover the confidence, perspective, and life skills that prepare them for a world of possibilities.</p>
 						<div class="hero-actions">
-							<a href="#admissions" class="btn btn-yellow hero-btn">
+							<a href="<?php echo esc_url( home_url( '/admissions/' ) ); ?>" class="btn btn-yellow hero-btn">
 								<span>TAKE THE NEXT STEP</span>
 								<svg class="btn-arrow" width="18" height="14" viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg">
 									<path d="M11 1L17 7M17 7L11 13M17 7H1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>

@@ -8,7 +8,7 @@
 $items = isset( $args['items'] ) && is_array( $args['items'] ) && ! empty( $args['items'] )
 	? $args['items']
 	: array(
-		__( 'STUDENT-CENTRED LEARNING', 'bd-somani' ),
+		__( 'STUDENT-CENTERED LEARNING', 'bd-somani' ),
 		__( 'GLOBAL OUTLOOK', 'bd-somani' ),
 		__( 'NURTURING ENVIRONMENT', 'bd-somani' ),
 		__( 'COLLABORATIVE CULTURE', 'bd-somani' ),

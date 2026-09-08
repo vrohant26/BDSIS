@@ -1554,11 +1554,11 @@ ol {
 .experiential-tab-item.active {
     color: #FFFFFF;
     font-weight: 700;
-    transform: scale(1.15);
+    transform: translateX(6px);
 }
 
 .experiential-tab-item.active .experiential-tab-icon {
-    transform: scale(1.15);
+    transform: scale(1.18);
     opacity: 1;
 }
 
@@ -2945,6 +2945,15 @@ body.theme-purple-mode .timeline-progress-bar {
     .cornerstones-tabs-list {
         order: 3;
         width: 100%;
+    }
+
+    .experiential-tab-item {
+        font-size: clamp(1rem, 3.5vw, 1.25rem);
+        gap: 0.8rem;
+    }
+
+    .experiential-tab-item.active {
+        transform: translateX(4px);
     }
 
     .experiential-cta-wrapper {
@@ -5790,18 +5799,18 @@ body.theme-purple-mode .timeline-progress-bar {
     overflow-wrap: break-word;
 }
 
-/* Wavy Arrow SVG Positioned to the Right of Title */
+/* Wavy Arrow SVG Positioned Below Title */
 .academics-hero-doodle-arrow {
     position: absolute;
-    top: 150%;
-    right: clamp(-30px, -2vw, 10px);
-    transform: translateY(-50%);
+    top: 100%;
+    right: clamp(10px, 3vw, 50px);
+    transform: translateY(-20%);
     pointer-events: none;
-    z-index: 5;
+    z-index: 2;
 }
 
 .academics-hero-doodle-arrow svg {
-    width: clamp(80px, 8vw, 125px);
+    width: clamp(60px, 6vw, 95px);
     height: auto;
 }
 
@@ -6046,6 +6055,12 @@ body.theme-purple-mode .timeline-progress-bar {
 }
 
 /* Responsive Adjustments for Academics & Campus Life Hero */
+@media (max-width: 1280px) {
+    .academics-hero-doodle-arrow {
+        display: none !important;
+    }
+}
+
 @media (max-width: 1024px) {
     .academics-hero-grid {
         grid-template-columns: 1fr !important;
@@ -6315,14 +6330,14 @@ body.theme-purple-mode .timeline-progress-bar {
 /* Bottom Right Annotation Graphic & Handwritten Note */
 .programme-annotation-wrap {
     position: absolute;
-    bottom: clamp(2rem, 7vw, 7rem);
-    right: clamp(2rem, 4vw, 5rem);
+    bottom: clamp(1rem, 3.5vw, 3.5rem);
+    right: clamp(4rem, 8.5vw, 10rem);
     z-index: 5;
     pointer-events: none;
 }
 
 .programme-annotation-img {
-    width: clamp(240px, 30vw, 350px);
+    width: clamp(160px, 18vw, 230px);
     max-width: 100%;
     height: auto;
     display: block;
@@ -7709,15 +7724,15 @@ body.theme-purple-mode .timeline-progress-bar {
 
 .spaces-annotation-doodle {
     position: absolute;
-    top: 10px;
-    left: -40%;
+    top: -35px;
+    left: clamp(-40px, -4vw, 0px);
     pointer-events: none;
     z-index: 3;
 }
 
 .spaces-annotation-doodle svg,
 .spaces-annotation-doodle img {
-    width: clamp(180px, 16vw, 260px);
+    width: clamp(180px, 16vw, 250px);
     height: auto;
     display: block;
 }
@@ -10005,7 +10020,7 @@ body.theme-purple-mode .timeline-progress-bar {
 .news-popup-card {
     position: fixed;
     right: clamp(1rem, 2.5vw, 2.25rem);
-    bottom: clamp(6rem, 10vw, 8.5rem);
+    top: clamp(6rem, 10vw, 8.5rem);
     z-index: 9999;
     width: clamp(310px, 24vw, 380px);
     background: rgb(0 0 0 / 60%);

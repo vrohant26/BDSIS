@@ -371,11 +371,11 @@ get_header();
 							<div class="spaces-highlights-wrap">
 								<h3 class="spaces-highlights-heading"><?php esc_html_e( 'Highlights', 'bd-somani' ); ?></h3>
 								<ul class="spaces-highlights-list">
-									<li><?php esc_html_e( 'Inquiry-led lessons that encourage students to question, analyse, and think independently', 'bd-somani' ); ?></li>
+									<li><?php esc_html_e( 'Inquiry-led lessons that encourage students to question, analyse, and think independently.', 'bd-somani' ); ?></li>
 									<li><?php esc_html_e( 'Interactive lessons supported by modern learning technologies.', 'bd-somani' ); ?></li>
-									<li><?php esc_html_e( 'Collaborative discussions that value every perspective and every voice', 'bd-somani' ); ?></li>
-									<li><?php esc_html_e( 'Personalised guidance tailored to individual learning needs', 'bd-somani' ); ?></li>
-									<li><?php esc_html_e( 'Real-world experiences that strengthen understanding beyond textbooks', 'bd-somani' ); ?></li>
+									<li><?php esc_html_e( 'Collaborative discussions that value every perspective and every voice.', 'bd-somani' ); ?></li>
+									<li><?php esc_html_e( 'Personalised guidance tailored to individual learning needs.', 'bd-somani' ); ?></li>
+									<li><?php esc_html_e( 'Real-world experiences that strengthen understanding beyond textbooks.', 'bd-somani' ); ?></li>
 								</ul>
 							</div>
 						</div>
@@ -392,11 +392,11 @@ get_header();
 							<div class="spaces-highlights-wrap">
 								<h3 class="spaces-highlights-heading"><?php esc_html_e( 'Highlights', 'bd-somani' ); ?></h3>
 								<ul class="spaces-highlights-list">
-									<li><?php esc_html_e( 'A thoughtfully curated collection that encourages reading across genres and interests', 'bd-somani' ); ?></li>
-									<li><?php esc_html_e( 'Dedicated spaces for reading, storytelling, and independent study', 'bd-somani' ); ?></li>
-									<li><?php esc_html_e( 'Resources that strengthen information literacy and research skills', 'bd-somani' ); ?></li>
-									<li><?php esc_html_e( 'Reading experiences that broaden perspectives and develop lifelong learning habits', 'bd-somani' ); ?></li>
-									<li><?php esc_html_e( 'A quiet environment that inspires curiosity and a love for books', 'bd-somani' ); ?></li>
+									<li><?php esc_html_e( 'A thoughtfully curated collection that encourages reading across genres and interests.', 'bd-somani' ); ?></li>
+									<li><?php esc_html_e( 'Dedicated spaces for reading, storytelling, and independent study.', 'bd-somani' ); ?></li>
+									<li><?php esc_html_e( 'Resources that strengthen information literacy and research skills.', 'bd-somani' ); ?></li>
+									<li><?php esc_html_e( 'Reading experiences that broaden perspectives and develop lifelong learning habits.', 'bd-somani' ); ?></li>
+									<li><?php esc_html_e( 'A quiet environment that inspires curiosity and a love for books.', 'bd-somani' ); ?></li>
 								</ul>
 							</div>
 						</div>
@@ -413,11 +413,11 @@ get_header();
 							<div class="spaces-highlights-wrap">
 								<h3 class="spaces-highlights-heading"><?php esc_html_e( 'Highlights', 'bd-somani' ); ?></h3>
 								<ul class="spaces-highlights-list">
-									<li><?php esc_html_e( 'Subject-specific Physics, Chemistry, and Biology laboratories for practical learning', 'bd-somani' ); ?></li>
-									<li><?php esc_html_e( 'Hands-on experiments that reinforce scientific concepts through application', 'bd-somani' ); ?></li>
-									<li><?php esc_html_e( 'Safe, well-equipped spaces that encourage exploration with precision and responsibility', 'bd-somani' ); ?></li>
-									<li><?php esc_html_e( 'Opportunities to investigate, analyse, and draw evidence-based conclusions', 'bd-somani' ); ?></li>
-									<li><?php esc_html_e( 'Practical experiences that instill scientific temper and analytical thinking', 'bd-somani' ); ?></li>
+									<li><?php esc_html_e( 'Subject-specific Physics, Chemistry, and Biology laboratories for practical learning.', 'bd-somani' ); ?></li>
+									<li><?php esc_html_e( 'Hands-on experiments that reinforce scientific concepts through application.', 'bd-somani' ); ?></li>
+									<li><?php esc_html_e( 'Safe, well-equipped spaces that encourage exploration with precision and responsibility.', 'bd-somani' ); ?></li>
+									<li><?php esc_html_e( 'Opportunities to investigate, analyse, and draw evidence-based conclusions.', 'bd-somani' ); ?></li>
+									<li><?php esc_html_e( 'Practical experiences that instill scientific temper and analytical thinking.', 'bd-somani' ); ?></li>
 								</ul>
 							</div>
 						</div>
@@ -434,11 +434,11 @@ get_header();
 							<div class="spaces-highlights-wrap">
 								<h3 class="spaces-highlights-heading"><?php esc_html_e( 'Highlights', 'bd-somani' ); ?></h3>
 								<ul class="spaces-highlights-list">
-									<li><?php esc_html_e( 'A well-rounded sports programme across indoor and outdoor disciplines', 'bd-somani' ); ?></li>
-									<li><?php esc_html_e( 'Coaching across cricket, football, basketball, chess, taekwondo, and more', 'bd-somani' ); ?></li>
-									<li><?php esc_html_e( 'Regular training that builds discipline, perseverance, and team spirit', 'bd-somani' ); ?></li>
-									<li><?php esc_html_e( 'Competitive opportunities that inspire resilience and sportsmanship', 'bd-somani' ); ?></li>
-									<li><?php esc_html_e( 'Physical activity that promotes fitness, confidence, and overall well-being', 'bd-somani' ); ?></li>
+									<li><?php esc_html_e( 'A well-rounded sports programme across indoor and outdoor disciplines.', 'bd-somani' ); ?></li>
+									<li><?php esc_html_e( 'Coaching across cricket, football, basketball, chess, taekwondo, and more.', 'bd-somani' ); ?></li>
+									<li><?php esc_html_e( 'Regular training that builds discipline, perseverance, and team spirit.', 'bd-somani' ); ?></li>
+									<li><?php esc_html_e( 'Competitive opportunities that inspire resilience and sportsmanship.', 'bd-somani' ); ?></li>
+									<li><?php esc_html_e( 'Physical activity that promotes fitness, confidence, and overall well-being.', 'bd-somani' ); ?></li>
 								</ul>
 							</div>
 						</div>
@@ -476,7 +476,7 @@ get_header();
 							<div class="spaces-highlights-wrap">
 								<h3 class="spaces-highlights-heading"><?php esc_html_e( 'Highlights', 'bd-somani' ); ?></h3>
 								<ul class="spaces-highlights-list">
-									<li><?php esc_html_e( 'Open corridors, a light-filled atrium, and lush green views create a calm learning environment', 'bd-somani' ); ?></li>
+									<li><?php esc_html_e( 'Open corridors, a light-filled atrium, and lush green views create a calm learning environment.', 'bd-somani' ); ?></li>
 									<li><?php esc_html_e( 'Outdoor spaces on every floor encourage students to step out, interact, and learn in the open.', 'bd-somani' ); ?></li>
 									<li><?php esc_html_e( 'Hydroponics and nature-based activities encourage students to connect with the environment.', 'bd-somani' ); ?></li>
 									<li><?php esc_html_e( 'Field trips and outdoor activities make learning more immersive.', 'bd-somani' ); ?></li>

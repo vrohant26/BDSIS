@@ -387,7 +387,7 @@ get_header();
 
 						<div class="campus-banner-right flex-shrink-0">
 							<a href="<?php echo esc_url( home_url( '/campus-life/' ) ); ?>" class="btn-outline-purple-dark flex-center">
-								<span><?php esc_html_e( 'EXPLORE CAMPUS', 'bd-somani' ); ?></span>
+								<span style="text-align : center;"><?php esc_html_e( 'EXPLORE CAMPUS', 'bd-somani' ); ?></span>
 							</a>
 						</div>
 					</div>
