@@ -65,7 +65,7 @@
 								</div>
 								<div class="teachers-quote-author">
 									<h4 class="teachers-author-name">Ms. Anjana Rajmane</h4>
-									<p class="teachers-author-info">Middle School Coordinator - IGSE</p>
+									<p class="teachers-author-info">Middle School Coordinator – IGCSE</p>
 								</div>
 							</div>
 						</div>

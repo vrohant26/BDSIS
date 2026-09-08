@@ -87,7 +87,7 @@ get_header();
 							</div>
 							<div class="contact-detail-text">
 								<strong><?php esc_html_e( 'Admission Desk Hours:', 'bd-somani' ); ?></strong><br>
-								<?php esc_html_e( 'Monday to Saturday, 8:00 AM – 5:00 PM', 'bd-somani' ); ?>
+								<?php esc_html_e( 'Monday to Saturday, 8:00 AM – 4:00 PM', 'bd-somani' ); ?>
 							</div>
 						</li>
 					</ul>
