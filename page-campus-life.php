@@ -233,7 +233,7 @@ get_header();
 							<div class="swiper-slide experiences-card-slide">
 								<div class="experiences-purple-card" style="transform: rotate(-2.5deg);">
 									<div class="experiences-card-img-wrap">
-										<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/Carousel 4.webp' ); ?>" alt="<?php esc_attr_e( 'Find their Voice', 'bd-somani' ); ?>" class="experiences-card-photo" style="width:100%; height:100%; object-fit:cover; display:block;">
+										<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/find their voice.webp' ); ?>" alt="<?php esc_attr_e( 'Find their Voice', 'bd-somani' ); ?>" class="experiences-card-photo" style="width:100%; height:100%; object-fit:cover; display:block;">
 									</div>
 									<div class="experiences-card-content">
 										<h4 class="experiences-card-title"><?php esc_html_e( 'Find their Voice', 'bd-somani' ); ?></h4>
