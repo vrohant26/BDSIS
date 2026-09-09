@@ -95,7 +95,7 @@
 						<a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="footer-logo">
 							<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/BD Somani Logo.png' ); ?>" alt="B.D. Somani International School Logo">
 						</a>
-						<p class="footer-tagline">Nurturing confident learners, compassionate individuals, and future-ready leaders through academic excellence, holistic development, and meaningful learning experiences.</p>
+						<p class="footer-tagline">Curious | Collaborative | Courageous</p>
 						
 						<ul class="footer-contact-list flex-column gap-xs">
 							<li class="contact-item flex gap-xs align-center">
@@ -133,7 +133,6 @@
 						$f_about_url           = esc_url( home_url( '/about/' ) );
 						$f_faq_url             = esc_url( home_url( '/faq/' ) );
 						$f_approach_url        = esc_url( home_url( '/approach/' ) );
-						$f_daycare_url         = esc_url( home_url( '/academics/daycare/' ) );
 						$f_pre_primary_url     = esc_url( home_url( '/academics/pre-primary-school/' ) );
 						$f_primary_url         = esc_url( home_url( '/academics/primary-school/' ) );
 						$f_middle_url          = esc_url( home_url( '/academics/middle-school/' ) );
@@ -175,7 +174,6 @@
 					<div class="footer-col">
 						<h3 class="footer-col-title">Information</h3>
 						<ul class="footer-links">
-							<li><a href="<?php echo $f_faq_url; ?>" class="<?php echo $f_is_faq ? 'active' : ''; ?>">FAQ</a></li>
 							<li><a href="<?php echo esc_url( home_url( '/gallery/' ) ); ?>">Gallery</a></li>
 							<li><a href="<?php echo $f_terms_url; ?>" class="<?php echo $f_is_terms ? 'active' : ''; ?>">Terms & Conditions</a></li>
 							<li><a href="<?php echo $f_privacy_url; ?>" class="<?php echo $f_is_privacy ? 'active' : ''; ?>">Privacy Policy</a></li>

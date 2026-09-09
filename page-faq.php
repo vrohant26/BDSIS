@@ -329,21 +329,6 @@ get_header();
 						</div>
 					</div>
 
-					<div class="faq-card-item">
-						<button class="faq-card-header" aria-expanded="false" aria-controls="ans-camp-6" id="q-camp-6">
-							<span class="faq-card-question">Does the school provide a daycare facility?</span>
-							<span class="faq-card-toggle-icon" aria-hidden="true">
-								<iconify-icon icon="lucide:minus" class="icon-minus" style="display:none;"></iconify-icon>
-								<iconify-icon icon="lucide:plus" class="icon-plus"></iconify-icon>
-							</span>
-						</button>
-						<div id="ans-camp-6" class="faq-card-body" role="region" aria-labelledby="q-camp-6">
-							<div class="faq-card-content">
-								<p>Yes, an extended daycare facility with supervised play, learning, and rest areas is available to support working parents.</p>
-							</div>
-						</div>
-					</div>
-
 				</div>
 			</section>
 

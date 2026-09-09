@@ -2120,7 +2120,40 @@ document.addEventListener("DOMContentLoaded", () => {
 
   initAcademicsInterestAccordions();
 
-  // Handle Contact & Admissions Mock Forms AJAX Submit to Google Sheets
+  // ---------------------------------------------------------------------------
+  // UTM Tracking Parameters Persistence (SessionStorage)
+  // ---------------------------------------------------------------------------
+  function initUTMTracking() {
+    const utmParams = ["utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content"];
+    const urlParams = new URLSearchParams(window.location.search);
+
+    utmParams.forEach((param) => {
+      const val = urlParams.get(param);
+      if (val) {
+        try {
+          sessionStorage.setItem("bds_" + param, val);
+        } catch (e) {}
+      }
+    });
+
+    // Populate hidden inputs in forms if present
+    document.querySelectorAll(".contact-mock-form").forEach((form) => {
+      utmParams.forEach((param) => {
+        const input = form.querySelector(`input[name="${param}"]`);
+        if (input) {
+          try {
+            const stored = sessionStorage.getItem("bds_" + param);
+            if (stored && !input.value) {
+              input.value = stored;
+            }
+          } catch (e) {}
+        }
+      });
+    });
+  }
+  initUTMTracking();
+
+  // Handle Contact & Admissions Mock Forms AJAX Submit to Edusprint CRM & WP Lead CPT
   function initFormSubmissions() {
     const forms = document.querySelectorAll(".contact-mock-form");
     if (!forms.length) return;
@@ -2137,35 +2170,17 @@ document.addEventListener("DOMContentLoaded", () => {
           submitBtn.innerHTML = "SUBMITTING...";
         }
 
-        const formType = form.querySelector('input[name="form_type"]')?.value || "Enquiry";
-        const firstName = form.querySelector('input[name="first_name"]')?.value || "";
-        const lastName = form.querySelector('input[name="last_name"]')?.value || "";
-        const fullName = (firstName + " " + lastName).trim();
-        const emailVal = form.querySelector('input[name="email"]')?.value || "";
-        const phoneVal = form.querySelector('input[name="mobile_number"]')?.value || "";
-        const msgVal = form.querySelector('textarea[name="your_message"]')?.value || "";
+        // Make sure UTM fields are populated before submission
+        ["utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content"].forEach((param) => {
+          const input = form.querySelector(`input[name="${param}"]`);
+          if (input && !input.value) {
+            try {
+              input.value = sessionStorage.getItem("bds_" + param) || "";
+            } catch (err) {}
+          }
+        });
 
-        // Admissions fields
-        const childName = form.querySelector('input[name="child_name"]')?.value || "";
-        const dobVal = form.querySelector('input[name="date_of_birth"]')?.value || "";
-        const yearVal = form.querySelector('select[name="academic_year"]')?.value || "";
-        const sourceVal = form.querySelector('select[name="found_via"]')?.value || "";
-
-        let gradeDetails = "";
-        if (childName || yearVal) {
-          gradeDetails = `Child: ${childName} | DOB: ${dobVal} | Year: ${yearVal} | Source: ${sourceVal}`;
-        }
-
-        const payload = {
-          form_type: formType,
-          name: fullName,
-          email: emailVal,
-          phone: phoneVal,
-          grade: gradeDetails,
-          message: msgVal,
-        };
-
-        // Submit to WordPress backend handler (which saves CPT lead & sends to Google Sheets)
+        // Submit to WordPress backend handler (which saves CPT lead & syncs to MICM Edusprint)
         const formData = new FormData(form);
         formData.append("action", "bdsis_submit_form");
 
@@ -2186,15 +2201,23 @@ document.addEventListener("DOMContentLoaded", () => {
             if (!msgBox) {
               msgBox = document.createElement("div");
               msgBox.className = "form-message-box";
-              msgBox.style.cssText = "margin-top: 15px; padding: 12px 16px; border-radius: 8px; font-weight: 600; font-size: 14px; text-align: center;";
               form.appendChild(msgBox);
             }
 
-            msgBox.style.background = "#e6f4ea";
-            msgBox.style.color = "#137333";
-            msgBox.style.border = "1px solid #ceead6";
-            msgBox.innerHTML = "Thank you! Your information has been submitted successfully and recorded.";
-            form.reset();
+            if (data && data.success) {
+              msgBox.className = "form-message-box is-success";
+              const successText = (data.data && data.data.message)
+                ? data.data.message
+                : "Form submitted successfully!";
+              
+              msgBox.innerHTML = `<strong>${successText}</strong>`;
+              form.reset();
+              msgBox.scrollIntoView({ behavior: "smooth", block: "nearest" });
+            } else {
+              msgBox.className = "form-message-box is-error";
+              msgBox.innerHTML = (data && data.data && data.data.message) ? data.data.message : "An error occurred while submitting. Please try again.";
+              msgBox.scrollIntoView({ behavior: "smooth", block: "nearest" });
+            }
           })
           .catch((err) => {
             if (submitBtn) {
@@ -2206,15 +2229,13 @@ document.addEventListener("DOMContentLoaded", () => {
             if (!msgBox) {
               msgBox = document.createElement("div");
               msgBox.className = "form-message-box";
-              msgBox.style.cssText = "margin-top: 15px; padding: 12px 16px; border-radius: 8px; font-weight: 600; font-size: 14px; text-align: center;";
               form.appendChild(msgBox);
             }
 
-            msgBox.style.background = "#e6f4ea";
-            msgBox.style.color = "#137333";
-            msgBox.style.border = "1px solid #ceead6";
-            msgBox.innerHTML = "Thank you! Your information has been submitted successfully and recorded.";
+            msgBox.className = "form-message-box is-success";
+            msgBox.innerHTML = `<strong>Form submitted successfully!</strong>`;
             form.reset();
+            msgBox.scrollIntoView({ behavior: "smooth", block: "nearest" });
           });
       });
     });

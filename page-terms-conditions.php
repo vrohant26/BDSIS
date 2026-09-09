@@ -45,7 +45,7 @@ get_header();
 				<div class="legal-block">
 					<div class="legal-block-header flex align-center gap-xs">
 						<iconify-icon icon="ph:currency-inr-bold" class="legal-icon"></iconify-icon>
-						<h2 class="legal-block-title"><?php esc_html_e( 'Academic Fees for the Year 2024-25', 'bd-somani' ); ?></h2>
+						<h2 class="legal-block-title"><?php esc_html_e( 'Academic Fees for the Year 2027-28', 'bd-somani' ); ?></h2>
 					</div>
 					<div class="legal-table-wrapper" style="overflow-x: auto; margin-top: 1.25rem;">
 						<table class="legal-table" style="width: 100%; border-collapse: collapse; text-align: left;">
@@ -54,7 +54,7 @@ get_header();
 									<th style="padding: 14px 18px; font-family: var(--font-heading); font-weight: 700; border-top-left-radius: 12px;"><?php esc_html_e( 'Grade', 'bd-somani' ); ?></th>
 									<th style="padding: 14px 18px; font-family: var(--font-heading); font-weight: 700;"><?php esc_html_e( 'One-time Registration Fees', 'bd-somani' ); ?></th>
 									<th style="padding: 14px 18px; font-family: var(--font-heading); font-weight: 700;"><?php esc_html_e( 'One-time Admission Fees', 'bd-somani' ); ?></th>
-									<th style="padding: 14px 18px; font-family: var(--font-heading); font-weight: 700; border-top-right-radius: 12px;"><?php esc_html_e( 'Academic Fees (AY 2024-25)', 'bd-somani' ); ?></th>
+									<th style="padding: 14px 18px; font-family: var(--font-heading); font-weight: 700; border-top-right-radius: 12px;"><?php esc_html_e( 'Academic Fees (AY 2027-28)', 'bd-somani' ); ?></th>
 								</tr>
 							</thead>
 							<tbody style="background-color: #FFFFFF; font-family: var(--font-body); font-size: 0.98rem; color: #333333;">
@@ -160,8 +160,8 @@ get_header();
 							<li>If a refund is approved, the following terms apply:
 								<ul>
 									<li>The <strong>admission fee is non-refundable</strong>.</li>
-									<li>Withdrawal applications must be submitted <strong>by March 15, 2025</strong>. Applications received after this date will not be eligible for a refund.</li>
-									<li>If the withdrawal is approved before <strong>March 15, 2025</strong>, the <strong>full first installment</strong> will be refunded.</li>
+									<li>Withdrawal applications must be submitted <strong>by March 15, 2027</strong>. Applications received after this date will not be eligible for a refund.</li>
+									<li>If the withdrawal is approved before <strong>March 15, 2027</strong>, the <strong>full first installment</strong> will be refunded.</li>
 									<li>The refund process requires a <strong>minimum of 45 days</strong> for completion.</li>
 								</ul>
 							</li>

@@ -98,6 +98,18 @@ get_header();
 								<form action="#" method="post" class="contact-mock-form admissions-mock-form">
 									<input type="hidden" name="form_type" value="Admissions">
 									
+									<!-- Anti-spam Honeypot (hidden from human users) -->
+									<div style="display:none !important;" aria-hidden="true">
+										<input type="text" name="bds_hp_check" tabindex="-1" autocomplete="off" />
+									</div>
+
+									<!-- Hidden UTM Tracking Fields (dynamically populated via script.js) -->
+									<input type="hidden" name="utm_source" id="adm_utm_source" value="" />
+									<input type="hidden" name="utm_medium" id="adm_utm_medium" value="" />
+									<input type="hidden" name="utm_campaign" id="adm_utm_campaign" value="" />
+									<input type="hidden" name="utm_term" id="adm_utm_term" value="" />
+									<input type="hidden" name="utm_content" id="adm_utm_content" value="" />
+
 									<!-- Row 1: First Name & Last Name -->
 									<div class="form-row">
 										<div class="form-group">
@@ -130,21 +142,48 @@ get_header();
 										</div>
 										<div class="form-group">
 											<label for="adm_dob"><?php esc_html_e( 'Date of birth *', 'bd-somani' ); ?></label>
-											<input type="text" id="adm_dob" name="date_of_birth" placeholder="<?php esc_attr_e( '26th April 2015', 'bd-somani' ); ?>" required />
+											<input type="date" id="adm_dob" name="date_of_birth" placeholder="YYYY-MM-DD" required />
 										</div>
 									</div>
 
-									<!-- Row 4: Academic Year Dropdown -->
-									<div class="form-group">
-										<label for="adm_academic_year"><?php esc_html_e( 'Academic Year*', 'bd-somani' ); ?></label>
-										<div class="select-wrap relative">
-											<select id="adm_academic_year" name="academic_year" required>
-												<option value="" disabled selected><?php esc_html_e( 'Choose academic year', 'bd-somani' ); ?></option>
-												<option value="2025-2026">2025 - 2026</option>
-												<option value="2026-2027">2026 - 2027</option>
-												<option value="2027-2028">2027 - 2028</option>
-											</select>
-											<iconify-icon icon="lucide:chevron-down" class="select-arrow-icon"></iconify-icon>
+									<!-- Row 4: Grade Applying For & Academic Year Dropdowns -->
+									<div class="form-row">
+										<div class="form-group">
+											<label for="adm_grade"><?php esc_html_e( 'Grade Applying For *', 'bd-somani' ); ?></label>
+											<div class="select-wrap relative">
+												<select id="adm_grade" name="class_master_id" required>
+													<option value="" disabled selected><?php esc_html_e( 'Choose Grade', 'bd-somani' ); ?></option>
+													<option value="34">Play Group</option>
+													<option value="35">Nursery</option>
+													<option value="36">Jr. KG</option>
+													<option value="37">Sr. KG</option>
+													<option value="38">Grade 1</option>
+													<option value="39">Grade 2</option>
+													<option value="40">Grade 3</option>
+													<option value="41">Grade 4</option>
+													<option value="42">Grade 5</option>
+													<option value="43">Grade 6</option>
+													<option value="44">Grade 7</option>
+													<option value="55">Grade 8</option>
+													<option value="57">Grade 6 - IGCSE</option>
+													<option value="58">Grade 7 - IGCSE</option>
+													<option value="59">Grade 8 - IGCSE</option>
+												</select>
+												<iconify-icon icon="lucide:chevron-down" class="select-arrow-icon"></iconify-icon>
+											</div>
+										</div>
+
+										<div class="form-group">
+											<label for="adm_academic_year"><?php esc_html_e( 'Academic Year *', 'bd-somani' ); ?></label>
+											<div class="select-wrap relative">
+												<select id="adm_academic_year" name="academic_year" required>
+													<option value="" disabled><?php esc_html_e( 'Choose academic year', 'bd-somani' ); ?></option>
+													<option value="2025-2026">2025 - 2026</option>
+													<option value="2026-2027" selected>2026 - 2027</option>
+													<option value="2027-2028">2027 - 2028</option>
+												</select>
+												<iconify-icon icon="lucide:chevron-down" class="select-arrow-icon"></iconify-icon>
+											</div>
 										</div>
 									</div>
 
@@ -397,50 +436,7 @@ get_header();
 
 		</section>
 
-		<!-- Section 5: Need More Information? FAQ CTA Section -->
-		<section class="admissions-faq-cta-section relative overflow-hidden" id="faq-cta">
-			
-			<!-- Floating Left Photo Card (Cricket) -->
-			<div class="faq-floating-photo photo-left relative" aria-hidden="true">
-				<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/cricket.webp' ); ?>" alt="<?php esc_attr_e( 'Students playing cricket', 'bd-somani' ); ?>" loading="lazy" decoding="async">
-			</div>
 
-			<!-- Floating Right Photo Card (Recess) -->
-			<div class="faq-floating-photo photo-right relative" aria-hidden="true">
-				<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/recess.webp' ); ?>" alt="<?php esc_attr_e( 'Students having lunch during recess', 'bd-somani' ); ?>" loading="lazy" decoding="async">
-			</div>
-
-			<div class="site-container relative z-3">
-				<div class="admissions-faq-content text-center">
-					
-					<h2 class="admissions-faq-title"><?php esc_html_e( 'Need More Information?', 'bd-somani' ); ?></h2>
-					
-					<p class="admissions-faq-subtitle"><?php esc_html_e( 'Find answers to the questions parents ask most about admissions, academics, transport, school timings, and campus life all in one convenient place.', 'bd-somani' ); ?></p>
-					
-					<!-- CTA Button & Annotation Doodle -->
-					<div class="admissions-faq-btn-wrap relative inline-block">
-						<a href="<?php echo esc_url( home_url( '/faq/' ) ); ?>" class="btn btn-yellow radius-md flex-center">
-							<span><?php esc_html_e( 'BROWSE FAQS', 'bd-somani' ); ?></span>
-							<svg class="btn-arrow" width="16" height="14" viewBox="0 0 16 14" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-left: 8px;">
-								<path d="M9 1L15 7M15 7L9 13M15 7H1" stroke="#2B182C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-							</svg>
-						</a>
-
-						<!-- FAQ Annotation Doodle (Find Answers Here + Arrow) -->
-						<div class="admissions-faq-annotation" aria-hidden="true">
-							<?php
-							$faq_doodle_svg = get_template_directory() . '/assets/svgs/faq annotation.svg';
-							if ( file_exists( $faq_doodle_svg ) ) {
-								include $faq_doodle_svg;
-							}
-							?>
-						</div>
-					</div>
-
-				</div>
-			</div>
-
-		</section>
 
 			<?php get_template_part( 'template-parts/brand-marquee' ); ?>
 

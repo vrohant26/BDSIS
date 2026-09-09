@@ -318,11 +318,11 @@ get_header();
 						<div class="curriculum-doodle-icon media-doodle-2" style="color: rgba(241, 200, 34, 0.28);"><?php echo bds_get_new_icon( 'rocket' ); ?></div>
 					</div>
 					<div class="approach-info-box">
-						<h3 class="approach-stage-title">Post School Activities</h3>
+						<h3 class="approach-stage-title">Post-School Activities</h3>
 						<p class="approach-stage-desc">Our Post-School Programme helps students explore sports, arts, performance, and more while building confidence, creativity, skills, and connections.</p>
 						<div class="approach-cta-wrapper">
 							<a href="<?php echo esc_url( home_url( '/academics/post-school-activities/' ) ); ?>" class="btn btn-yellow">
-								<span>EXPLORE POST SCHOOL ACTIVITIES</span>
+								<span>EXPLORE POST-SCHOOL ACTIVITIES</span>
 								<svg class="btn-arrow" width="18" height="14" viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg">
 									<path d="M11 1L17 7M17 7L11 13M17 7H1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 								</svg>

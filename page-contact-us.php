@@ -248,7 +248,7 @@ get_header();
 									<iconify-icon icon="lucide:flag"></iconify-icon>
 								</div>
 								<div class="highlight-content">
-									<h3 class="highlight-item-title"><?php esc_html_e( 'Kharghar Valley Golf Cource', 'bd-somani' ); ?></h3>
+									<h3 class="highlight-item-title"><?php esc_html_e( 'Kharghar Valley Golf Course', 'bd-somani' ); ?></h3>
 									<p class="highlight-item-desc"><?php esc_html_e( 'Green Spaces and recreation', 'bd-somani' ); ?></p>
 								</div>
 							</div>

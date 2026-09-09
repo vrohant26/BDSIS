@@ -67,8 +67,8 @@
 							<!-- Quote Details Box -->
 							<div class="parents-quote-box relative flex-column flex-between">
 								<div class="parents-quote-content">
-									<h3 class="parents-quote-heading">The school's focus on happiness, holistic development, and critical thinking is what truly sets it apart.</h3>
-									<p class="parents-quote-text">"As a parent, my biggest priority is that my child is happy at school, and that's exactly what I see every day. The school balances academics with extracurricular activities while encouraging critical thinking beyond textbooks. I'm very happy with my son's overall development, and I believe this holistic approach truly sets the school apart."</p>
+									<h3 class="parents-quote-heading">A School Where Happiness, Curiosity, And Holistic Learning Come Together.</h3>
+									<p class="parents-quote-text">"As a parent, my priority is that my child is happy coming to school, and he truly loves being here. I appreciate the balance between academics and extracurricular activities, along with the school’s approach to encouraging children to think beyond textbooks. Every subject goes beyond simple question-and-answer learning, helping children think, explore, and connect what they learn to life. I’m very happy with his overall development, and I believe this is what truly sets the school apart."</p>
 								</div>
 								<div class="parents-quote-author">
 									<h4 class="parents-author-name">Ms. Zahabia Khairullah</h4>
@@ -95,8 +95,8 @@
 							<!-- Quote Details Box -->
 							<div class="parents-quote-box relative flex-column flex-between">
 								<div class="parents-quote-content">
-									<h3 class="parents-quote-heading">The school's focus on happiness, holistic development, and critical thinking is what truly sets it apart.</h3>
-									<p class="parents-quote-text">"As a parent, my biggest priority is that my child is happy at school, and that's exactly what I see every day. The school balances academics with extracurricular activities while encouraging critical thinking beyond textbooks. I'm very happy with my son's overall development, and I believe this holistic approach truly sets the school apart."</p>
+									<h3 class="parents-quote-heading">A School That Builds Confidence, Creativity, And Skills For The Future.</h3>
+									<p class="parents-quote-text">"Since joining B.D. Somani, I have seen a remarkable change in my daughter. She has become more confident, adaptable, and emotionally balanced, while continuing to excel academically. I especially appreciate how every child is given equal opportunities to participate in extracurricular activities. The unique initiatives like the Makers Lab and Radio Station provide children with a wonderful platform to explore their interests, build new skills, and prepare for the future. The balance between academics and extracurricular learning is truly what sets the school apart."</p>
 								</div>
 								<div class="parents-quote-author">
 									<h4 class="parents-author-name">Ms. Jasmita Kaur Kohli</h4>

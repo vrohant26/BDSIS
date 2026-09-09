@@ -72,40 +72,6 @@
 			<div class="swiper curriculum-swiper">
 				<div class="swiper-wrapper">
 
-					<!-- Slide 1: Daycare (Hidden for now)
-					<div class="swiper-slide curriculum-slide" data-slide-index="0">
-						<div class="curriculum-slide-inner flex align-center gap-lg">
-							<div class="curriculum-media-box relative">
-								<div class="main-photo-card placeholder-card">
-									<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/daycare1.webp' ); ?>" alt="Daycare Outdoor Play Area" loading="lazy">
-								</div>
-								<div class="secondary-photo-card placeholder-card">
-									<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/daycare2.webp' ); ?>" alt="Daycare Activity Corner" loading="lazy">
-								</div>
-							</div>
-
-							<div class="curriculum-info-box flex-column gap-sm relative">
-								<iconify-icon icon="ph:sun-fill" class="curriculum-doodle-icon doodle-pos-1" style="color: rgba(241, 200, 34, 0.28);"></iconify-icon>
-								<iconify-icon icon="ph:balloon-fill" class="curriculum-doodle-icon doodle-pos-3" style="color: rgba(248, 214, 179, 0.35);"></iconify-icon>
-
-								<h3 class="curriculum-topic-title">Daycare</h3>
-								<p class="curriculum-topic-desc">Designed for working parents, our Day Care Facilities offer children a safe and engaging environment with meaningful after-school activities.</p>
-
-								<div class="curriculum-cta-wrapper">
-									<a href="<?php echo esc_url( home_url( '/academics/daycare/' ) ); ?>" class="btn btn-yellow">
-										<span>KNOW MORE ABOUT DAY CARE PROGRAM</span>
-										<svg class="btn-arrow" width="18" height="14" viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-											<path d="M11 1L17 7M17 7L11 13M17 7H1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-										</svg>
-									</a>
-								</div>
-
-								<iconify-icon icon="ph:teddy-bear-fill" class="curriculum-doodle-icon doodle-pos-2" style="color: rgba(73, 39, 74, 0.22);"></iconify-icon>
-							</div>
-						</div>
-					</div>
-					-->
-
 					<!-- Slide 1: Pre-Primary School -->
 					<div class="swiper-slide curriculum-slide" data-slide-index="0">
 						<div class="curriculum-slide-inner flex align-center gap-lg">
@@ -223,12 +189,12 @@
 
 							<!-- Right Topic Details Box -->
 							<div class="curriculum-info-box flex-column gap-sm relative">
-								<h3 class="curriculum-topic-title">Post School Activities</h3>
+								<h3 class="curriculum-topic-title">Post-School Activities</h3>
 								<p class="curriculum-topic-desc">Our Post-School Programme helps students explore sports, arts, performance, and more while building confidence, creativity, skills, and connections.</p>
 
 								<div class="curriculum-cta-wrapper">
 									<a href="<?php echo esc_url( home_url( '/academics/post-school-activities/' ) ); ?>" class="btn btn-yellow">
-										<span>EXPLORE POST SCHOOL ACTIVITIES</span>
+										<span>EXPLORE POST-SCHOOL ACTIVITIES</span>
 										<svg class="btn-arrow" width="18" height="14" viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg">
 											<path d="M11 1L17 7M17 7L11 13M17 7H1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 										</svg>

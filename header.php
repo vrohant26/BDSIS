@@ -52,7 +52,6 @@
 					$gallery_url     = esc_url( home_url( '/gallery/' ) );
 
 					$approach_url        = esc_url( home_url( '/approach/' ) );
-					$daycare_url         = esc_url( home_url( '/academics/daycare/' ) );
 					$pre_primary_url     = esc_url( home_url( '/academics/pre-primary-school/' ) );
 					$primary_url         = esc_url( home_url( '/academics/primary-school/' ) );
 					$middle_url          = esc_url( home_url( '/academics/middle-school/' ) );
@@ -65,12 +64,11 @@
 					$is_about           = is_page_template( 'page-about.php' ) || is_page( 'about' ) || is_page( 'about-us' );
 					$is_gallery         = is_page_template( 'page-gallery.php' ) || is_page( 'gallery' ) || is_post_type_archive( 'gallery' );
 					$is_approach        = is_page_template( 'page-approach.php' ) || is_page( 'approach' ) || is_page( 'our-approach' );
-					$is_daycare         = is_page( 'daycare' );
 					$is_pre_primary     = is_page( 'pre-primary-school' ) || is_page( 'pre-primary' );
 					$is_primary         = is_page( 'primary-school' ) || is_page( 'primary' );
 					$is_middle          = is_page( 'middle-school' ) || is_page( 'middle' );
 					$is_post_school_act = is_page( 'post-school-activities' ) || is_page( 'after-school' );
-					$is_academics_sub   = is_page_template( 'page-academics.php' ) || $is_daycare || $is_pre_primary || $is_primary || $is_middle || $is_post_school_act;
+					$is_academics_sub   = is_page_template( 'page-academics.php' ) || $is_pre_primary || $is_primary || $is_middle || $is_post_school_act;
 					$is_campus_life     = is_page_template( 'page-campus-life.php' ) || is_page( 'campus-life' );
 					$is_admissions      = is_page_template( 'page-admissions.php' ) || is_page( 'admissions' );
 					$is_contact         = is_page_template( 'page-contact-us.php' ) || is_page( 'contact-us' ) || is_page( 'contact' );
@@ -98,14 +96,12 @@
 									<li><a href="<?php echo $primary_url; ?>" class="<?php echo $is_primary ? 'active' : ''; ?>">PRIMARY SCHOOL</a></li>
 									<li><a href="<?php echo $middle_url; ?>" class="<?php echo $is_middle ? 'active' : ''; ?>">MIDDLE SCHOOL</a></li>
 									<li><a href="<?php echo $post_school_act_url; ?>" class="<?php echo $is_post_school_act ? 'active' : ''; ?>">POST-SCHOOL ACTIVITIES</a></li>
-									<li><a href="<?php echo $daycare_url; ?>" class="<?php echo $is_daycare ? 'active' : ''; ?>">DAYCARE</a></li>
 								</ul>
 							</div>
 						</li>
 						<li class="nav-item"><a href="<?php echo $campus_life_url; ?>" class="nav-link <?php echo $is_campus_life ? 'active' : ''; ?>">CAMPUS LIFE</a></li>
 						<li class="nav-item"><a href="<?php echo $admissions_url; ?>" class="nav-link <?php echo $is_admissions ? 'active' : ''; ?>">ADMISSIONS</a></li>
 						<li class="nav-item"><a href="<?php echo $gallery_url; ?>" class="nav-link <?php echo $is_gallery ? 'active' : ''; ?>">GALLERY</a></li>
-						<li class="nav-item"><a href="<?php echo $faq_url; ?>" class="nav-link <?php echo $is_faq ? 'active' : ''; ?>">FAQ</a></li>
 						<li class="nav-item"><a href="<?php echo $contact_url; ?>" class="nav-link <?php echo $is_contact ? 'active' : ''; ?>">CONTACT US</a></li>
 					</ul>
 				</nav>
@@ -144,13 +140,11 @@
 								<li><a href="<?php echo $primary_url; ?>" class="<?php echo $is_primary ? 'active' : ''; ?>">PRIMARY SCHOOL</a></li>
 								<li><a href="<?php echo $middle_url; ?>" class="<?php echo $is_middle ? 'active' : ''; ?>">MIDDLE SCHOOL</a></li>
 								<li><a href="<?php echo $post_school_act_url; ?>" class="<?php echo $is_post_school_act ? 'active' : ''; ?>">POST-SCHOOL ACTIVITIES</a></li>
-								<li><a href="<?php echo $daycare_url; ?>" class="<?php echo $is_daycare ? 'active' : ''; ?>">DAYCARE</a></li>
 							</ul>
 						</li>
 						<li class="mobile-nav-item"><a href="<?php echo $campus_life_url; ?>" class="mobile-link <?php echo $is_campus_life ? 'active' : ''; ?>">CAMPUS LIFE</a></li>
 						<li class="mobile-nav-item"><a href="<?php echo $admissions_url; ?>" class="mobile-link <?php echo $is_admissions ? 'active' : ''; ?>">ADMISSIONS</a></li>
 						<li class="mobile-nav-item"><a href="<?php echo $gallery_url; ?>" class="mobile-link <?php echo $is_gallery ? 'active' : ''; ?>">GALLERY</a></li>
-						<li class="mobile-nav-item"><a href="<?php echo $faq_url; ?>" class="mobile-link <?php echo $is_faq ? 'active' : ''; ?>">FAQ</a></li>
 						<li class="mobile-nav-item"><a href="<?php echo $contact_url; ?>" class="mobile-link <?php echo $is_contact ? 'active' : ''; ?>">CONTACT US</a></li>
 					</ul>
 					<div class="mobile-cta-box">

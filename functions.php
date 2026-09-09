@@ -1755,6 +1755,7 @@ function bds_leads_cpt_columns( $columns ) {
 		'form_type' => __( 'Form Type', 'bd-somani' ),
 		'email'     => __( 'Email', 'bd-somani' ),
 		'phone'     => __( 'Phone', 'bd-somani' ),
+		'crm'       => __( 'Edusprint CRM', 'bd-somani' ),
 		'details'   => __( 'Details / Message', 'bd-somani' ),
 		'date'      => __( 'Date Submitted', 'bd-somani' ),
 	);
@@ -1776,6 +1777,16 @@ function bds_leads_cpt_custom_column( $column, $post_id ) {
 			$phone = get_post_meta( $post_id, '_lead_phone', true );
 			echo $phone ? '<a href="tel:' . esc_attr( preg_replace( '/[^0-9+]/', '', $phone ) ) . '">' . esc_html( $phone ) . '</a>' : '—';
 			break;
+		case 'crm':
+			$crm_status = get_post_meta( $post_id, '_edusprint_status', true );
+			if ( 'Synced' === $crm_status ) {
+				echo '<span style="display:inline-block; padding:3px 8px; background:#e6f4ea; color:#137333; border-radius:4px; font-size:11px; font-weight:700;">✓ Synced</span>';
+			} elseif ( 'Failed' === $crm_status ) {
+				echo '<span style="display:inline-block; padding:3px 8px; background:#fce8e6; color:#c5221f; border-radius:4px; font-size:11px; font-weight:700;">✕ Failed</span>';
+			} else {
+				echo '<span style="color:#888;">—</span>';
+			}
+			break;
 		case 'details':
 			$grade = get_post_meta( $post_id, '_lead_grade', true );
 			$msg   = get_post_meta( $post_id, '_lead_message', true );
@@ -1793,8 +1804,134 @@ function bds_leads_cpt_custom_column( $column, $post_id ) {
 }
 add_action( 'manage_bds_lead_posts_custom_column', 'bds_leads_cpt_custom_column', 10, 2 );
 
-// AJAX Handler for Contact & Admissions Forms -> Google Sheets & WP CPT Integration
+/**
+ * ============================================================================
+ * MICM EDUSPRINT CRM INTEGRATION
+ * ============================================================================
+ */
+
+/**
+ * Retrieve or generate Bearer AuthToken for MICM Edusprint API
+ *
+ * @return string|false AuthToken string on success, false on failure.
+ */
+function bdsis_get_edusprint_token() {
+	$cached_token = get_transient( 'bdsis_edusprint_token' );
+	if ( ! empty( $cached_token ) ) {
+		return $cached_token;
+	}
+
+	$token_url   = 'https://sgs.edusprint.in/api/EduSprint/GetTokenByCredential';
+	$credentials = array(
+		'UserName' => 'SGSWebsiteAPI',
+		'Password' => 'web$!Te_$gS',
+	);
+
+	$response = wp_remote_post(
+		$token_url,
+		array(
+			'method'  => 'POST',
+			'timeout' => 15,
+			'headers' => array(
+				'Content-Type' => 'application/json; charset=utf-8',
+			),
+			'body'    => wp_json_encode( $credentials ),
+		)
+	);
+
+	if ( is_wp_error( $response ) ) {
+		error_log( 'MICM Edusprint Token Error: ' . $response->get_error_message() );
+		return false;
+	}
+
+	$body_raw = wp_remote_retrieve_body( $response );
+	$body     = json_decode( $body_raw, true );
+
+	if ( ! empty( $body['ResponseData'] ) ) {
+		$token = sanitize_text_field( $body['ResponseData'] );
+		// Cache token in transient for 55 minutes
+		set_transient( 'bdsis_edusprint_token', $token, 55 * MINUTE_IN_SECONDS );
+		return $token;
+	}
+
+	error_log( 'MICM Edusprint Token Auth Failed: ' . $body_raw );
+	return false;
+}
+
+/**
+ * Send Student Enquiry to MICM Edusprint CRM
+ *
+ * @param array $enquiry_data Formatted enquiry data.
+ * @return array Result array with success flag, status code, and response details.
+ */
+function bdsis_send_edusprint_enquiry( $enquiry_data ) {
+	$token = bdsis_get_edusprint_token();
+	if ( ! $token ) {
+		return array(
+			'success' => false,
+			'error'   => 'Authentication with Edusprint CRM failed.',
+		);
+	}
+
+	$api_url = 'https://sgs.edusprint.in/api/EduSprint/CreateStudentEnquiry';
+
+	$payload = array(
+		'RequestCriteria'       => 'insert',
+		'RequestJsonDataObject' => $enquiry_data,
+	);
+
+	$response = wp_remote_post(
+		$api_url,
+		array(
+			'method'  => 'POST',
+			'timeout' => 20,
+			'headers' => array(
+				'Content-Type' => 'application/json; charset=utf-8',
+				'AuthToken'    => $token,
+			),
+			'body'    => wp_json_encode( $payload ),
+		)
+	);
+
+	if ( is_wp_error( $response ) ) {
+		error_log( 'MICM Edusprint Create Enquiry HTTP Error: ' . $response->get_error_message() );
+		return array(
+			'success' => false,
+			'error'   => $response->get_error_message(),
+		);
+	}
+
+	$status_code = wp_remote_retrieve_response_code( $response );
+	$body_raw    = wp_remote_retrieve_body( $response );
+	$body        = json_decode( $body_raw, true );
+
+	$is_success = ( $status_code >= 200 && $status_code < 300 );
+
+	return array(
+		'success'     => $is_success,
+		'status_code' => $status_code,
+		'response'    => $body,
+		'raw'         => $body_raw,
+	);
+}
+
+// AJAX Handler for Contact & Admissions Forms -> MICM Edusprint CRM & WP CPT Integration
 function bdsis_handle_form_submission() {
+	// 1. Anti-spam Honeypot Check
+	if ( ! empty( $_POST['bds_hp_check'] ) ) {
+		// Silently return success to discard spambots without processing
+		wp_send_json_success( array( 'message' => __( 'Thank you! Your information has been submitted successfully.', 'bd-somani' ) ) );
+	}
+
+	// 2. IP Throttling / Duplicate Prevention (1 submission per 10s per IP)
+	$ip_address     = isset( $_SERVER['REMOTE_ADDR'] ) ? sanitize_text_field( wp_unslash( $_SERVER['REMOTE_ADDR'] ) ) : '127.0.0.1';
+	$rate_limit_key = 'bds_rate_' . md5( $ip_address );
+	if ( get_transient( $rate_limit_key ) ) {
+		wp_send_json_error( array( 'message' => __( 'Please wait a few seconds before submitting another enquiry.', 'bd-somani' ) ) );
+	}
+	set_transient( $rate_limit_key, 1, 10 );
+
+	// 3. Sanitize Submitted Fields
 	$form_type    = isset( $_POST['form_type'] ) ? sanitize_text_field( wp_unslash( $_POST['form_type'] ) ) : 'Enquiry';
 	$first_name   = isset( $_POST['first_name'] ) ? sanitize_text_field( wp_unslash( $_POST['first_name'] ) ) : '';
 	$last_name    = isset( $_POST['last_name'] ) ? sanitize_text_field( wp_unslash( $_POST['last_name'] ) ) : '';
@@ -1805,17 +1942,82 @@ function bdsis_handle_form_submission() {
 
 	// Admissions specific fields
 	$child_name    = isset( $_POST['child_name'] ) ? sanitize_text_field( wp_unslash( $_POST['child_name'] ) ) : '';
-	$date_of_birth = isset( $_POST['date_of_birth'] ) ? sanitize_text_field( wp_unslash( $_POST['date_of_birth'] ) ) : '';
-	$academic_year = isset( $_POST['academic_year'] ) ? sanitize_text_field( wp_unslash( $_POST['academic_year'] ) ) : '';
+	$dob_raw       = isset( $_POST['date_of_birth'] ) ? sanitize_text_field( wp_unslash( $_POST['date_of_birth'] ) ) : '';
+	$academic_year = isset( $_POST['academic_year'] ) ? sanitize_text_field( wp_unslash( $_POST['academic_year'] ) ) : '2026-2027';
+	$class_id      = isset( $_POST['class_master_id'] ) ? absint( $_POST['class_master_id'] ) : 0;
 	$found_via     = isset( $_POST['found_via'] ) ? sanitize_text_field( wp_unslash( $_POST['found_via'] ) ) : '';
 
-	$grade_field = '';
-	if ( ! empty( $child_name ) || ! empty( $academic_year ) ) {
-		$grade_field = "Child: {$child_name} | DOB: {$date_of_birth} | Year: {$academic_year} | Source: {$found_via}";
+	// UTM campaign attribution
+	$utm_source   = isset( $_POST['utm_source'] ) ? sanitize_text_field( wp_unslash( $_POST['utm_source'] ) ) : '';
+	$utm_medium   = isset( $_POST['utm_medium'] ) ? sanitize_text_field( wp_unslash( $_POST['utm_medium'] ) ) : '';
+	$utm_campaign = isset( $_POST['utm_campaign'] ) ? sanitize_text_field( wp_unslash( $_POST['utm_campaign'] ) ) : '';
+	$utm_term     = isset( $_POST['utm_term'] ) ? sanitize_text_field( wp_unslash( $_POST['utm_term'] ) ) : '';
+	$utm_content  = isset( $_POST['utm_content'] ) ? sanitize_text_field( wp_unslash( $_POST['utm_content'] ) ) : '';
+
+	// If no UTM source was passed, fallback to referrer / website or found_via
+	if ( empty( $utm_source ) ) {
+		$utm_source = ! empty( $found_via ) ? $found_via : 'Website';
 	}
 
-	// 1. Save Lead Record in WordPress Custom Post Type (Form Leads)
-	$lead_title = sprintf( '%s Lead - %s (%s)', $form_type, $full_name ? $full_name : 'Anonymous', date_i18n( 'd M Y, h:i A' ) );
+	// Format DOB: must be 'yyyy-mm-dd hh:mm:ss' (Default: 1994-07-17 00:00:00 per Edusprint specification)
+	$formatted_dob = '1994-07-17 00:00:00';
+	if ( ! empty( $dob_raw ) ) {
+		$parsed_time = strtotime( $dob_raw );
+		if ( $parsed_time ) {
+			$formatted_dob = date( 'Y-m-d 00:00:00', $parsed_time );
+		}
+	}
+
+	// Split Child Name into First Name & Last Name (Pass "-" if last name is not captured)
+	$child_parts = array_values( array_filter( explode( ' ', trim( $child_name ) ) ) );
+	$child_first = ! empty( $child_parts[0] ) ? $child_parts[0] : ( $first_name ? $first_name : 'Applicant' );
+	if ( count( $child_parts ) > 1 ) {
+		array_shift( $child_parts );
+		$child_last = implode( ' ', $child_parts );
+	} else {
+		$child_last = ! empty( $last_name ) ? $last_name : '-';
+	}
+	$child_print = trim( $child_first . ' ' . ( '-' !== $child_last ? $child_last : '' ) );
+
+	// Determine School ShortName and EnquiryChannelID based on selected class
+	// B. D. Somani International School - Kharghar:
+	// General Grades (34 to 44, 55): ShortName 'bdsk', OnlineChannelID 35
+	// IGCSE Grades (57, 58, 59): ShortName 'bdskig', OnlineChannelID 81
+	$igcse_grade_ids = array( 57, 58, 59 );
+	if ( in_array( $class_id, $igcse_grade_ids, true ) ) {
+		$school_shortname = 'bdskig';
+		$enquiry_channel  = 81;
+	} else {
+		$school_shortname = 'bdsk';
+		$enquiry_channel  = 35;
+	}
+
+	$grade_labels = array(
+		34 => 'Play Group',
+		35 => 'Nursery',
+		36 => 'Jr. KG',
+		37 => 'Sr. KG',
+		38 => 'Grade 1',
+		39 => 'Grade 2',
+		40 => 'Grade 3',
+		41 => 'Grade 4',
+		42 => 'Grade 5',
+		43 => 'Grade 6',
+		44 => 'Grade 7',
+		55 => 'Grade 8',
+		57 => 'Grade 6 - IGCSE',
+		58 => 'Grade 7 - IGCSE',
+		59 => 'Grade 8 - IGCSE',
+	);
+	$grade_name = isset( $grade_labels[ $class_id ] ) ? $grade_labels[ $class_id ] : ( $class_id ? "Class #{$class_id}" : 'Unspecified' );
+
+	$grade_details = '';
+	if ( ! empty( $child_name ) || $class_id || ! empty( $academic_year ) ) {
+		$grade_details = sprintf( 'Child: %s | Grade: %s | DOB: %s | Year: %s | Source: %s', $child_name, $grade_name, $dob_raw ? $dob_raw : $formatted_dob, $academic_year, $found_via );
+	}
+
+	// 4. Save Lead Record in WordPress Custom Post Type (bds_lead)
+	$lead_title = sprintf( '%s Lead - %s (%s)', $form_type, $full_name ? $full_name : $child_first, date_i18n( 'd M Y, h:i A' ) );
 	$lead_id    = wp_insert_post(
 		array(
 			'post_title'  => $lead_title,
@@ -1829,38 +2031,57 @@ function bdsis_handle_form_submission() {
 		update_post_meta( $lead_id, '_lead_name', $full_name );
 		update_post_meta( $lead_id, '_lead_email', $email );
 		update_post_meta( $lead_id, '_lead_phone', $phone );
-		update_post_meta( $lead_id, '_lead_grade', $grade_field );
+		update_post_meta( $lead_id, '_lead_grade', $grade_details );
 		update_post_meta( $lead_id, '_lead_message', $message );
+		update_post_meta( $lead_id, '_lead_utm_source', $utm_source );
+		update_post_meta( $lead_id, '_lead_utm_campaign', $utm_campaign );
 	}
 
-	// 2. Post to Deployed Google Apps Script Web App Endpoint URL
-	$payload = array(
-		'form_type' => $form_type,
-		'name'      => $full_name,
-		'email'     => $email,
-		'phone'     => $phone,
-		'grade'     => $grade_field,
-		'message'   => $message,
-	);
+	// 5. Connect & Push to MICM Edusprint CRM (for Admissions enquiries)
+	$edusprint_status   = 'Not Applicable';
+	$edusprint_response = '';
 
-	$webhook_url = 'https://script.google.com/macros/s/AKfycbzzFaKiy4yuvtV-zpmAe3KSBOwoBFv3i-BC3XsoMVQf57vYe2XCBXjDpwW1nL1Z0Hx1/exec';
+	if ( 'Admissions' === $form_type ) {
+		$edusprint_payload = array(
+			'ShortName'          => $school_shortname,
+			'Description'        => $academic_year,
+			'ChildFirstName'     => $child_first,
+			'ChildMiddleName'    => '',
+			'ChildLastName'      => $child_last,
+			'ChildPrintName'     => $child_print,
+			'ContactEmailID'     => $email,
+			'ContactMobileNo'    => $phone,
+			'DOB'                => $formatted_dob,
+			'ClassMasterID'      => (string) ( $class_id ? $class_id : 34 ),
+			'EnquiryChannelID'   => (string) $enquiry_channel,
+			'GenderID'           => 3, // Not Specified
+			'UtmSource'          => $utm_source,
+			'UtmMedium'          => $utm_medium,
+			'UtmCampaign'        => $utm_campaign,
+			'UtmTerm'            => $utm_term,
+			'UtmContent'         => $utm_content,
+			'ResidentialAddress' => '',
+		);
 
-	$response = wp_remote_post(
-		$webhook_url,
-		array(
-			'method'      => 'POST',
-			'timeout'     => 15,
-			'redirection' => 5,
-			'httpversion' => '1.0',
-			'blocking'    => true,
-			'headers'     => array(
-				'Content-Type' => 'application/json; charset=utf-8',
-			),
-			'body'        => wp_json_encode( $payload ),
-		)
-	);
+		$crm_result = bdsis_send_edusprint_enquiry( $edusprint_payload );
 
-	wp_send_json_success( array( 'message' => __( 'Thank you! Your information has been submitted successfully and recorded in our system.', 'bd-somani' ) ) );
+		if ( ! empty( $crm_result['success'] ) ) {
+			$edusprint_status   = 'Synced';
+			$edusprint_response = isset( $crm_result['raw'] ) ? $crm_result['raw'] : 'Success';
+		} else {
+			$edusprint_status   = 'Failed';
+			$edusprint_response = isset( $crm_result['error'] ) ? $crm_result['error'] : ( isset( $crm_result['raw'] ) ? $crm_result['raw'] : 'Error' );
+		}
+
+		if ( $lead_id && ! is_wp_error( $lead_id ) ) {
+			update_post_meta( $lead_id, '_edusprint_status', $edusprint_status );
+			update_post_meta( $lead_id, '_edusprint_response', $edusprint_response );
+		}
+	}
+
+	$success_msg = __( 'Form submitted successfully!', 'bd-somani' );
+
+	wp_send_json_success( array( 'message' => $success_msg ) );
 }
 add_action( 'wp_ajax_bdsis_submit_form', 'bdsis_handle_form_submission' );
 add_action( 'wp_ajax_nopriv_bdsis_submit_form', 'bdsis_handle_form_submission' );

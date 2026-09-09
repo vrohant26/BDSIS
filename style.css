@@ -6749,10 +6749,10 @@ body.theme-purple-mode .timeline-progress-bar {
 
 .academics-exp-chess-doodle {
     position: absolute;
-    bottom: -25px;
-    right: 10px;
-    width: clamp(45px, 5vw, 65px) !important;
-    height: clamp(45px, 5vw, 65px) !important;
+    bottom: -50px;
+    right: -20px;
+    width: clamp(45px, 5vw, 60px) !important;
+    height: clamp(45px, 5vw, 60px) !important;
     pointer-events: none;
     z-index: 1;
     opacity: 0.85;
@@ -7439,10 +7439,12 @@ body.theme-purple-mode .timeline-progress-bar {
 .contact-mock-form input[type="text"],
 .contact-mock-form input[type="email"],
 .contact-mock-form input[type="tel"],
+.contact-mock-form input[type="date"],
 .contact-mock-form textarea,
 .gform_wrapper input[type="text"],
 .gform_wrapper input[type="email"],
 .gform_wrapper input[type="tel"],
+.gform_wrapper input[type="date"],
 .gform_wrapper textarea {
     width: 100%;
     background-color: rgba(255, 255, 255, 0.12);
@@ -7454,6 +7456,19 @@ body.theme-purple-mode .timeline-progress-bar {
     font-size: 0.95rem;
     outline: none;
     transition: border-color 0.2s ease, background-color 0.2s ease;
+    color-scheme: dark;
+    box-sizing: border-box;
+}
+
+.contact-mock-form input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+    opacity: 0.7;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+}
+
+.contact-mock-form input[type="date"]::-webkit-calendar-picker-indicator:hover {
+    opacity: 1;
 }
 
 .contact-mock-form input:focus,
@@ -7493,6 +7508,44 @@ body.theme-purple-mode .timeline-progress-bar {
     background-color: var(--clr-yellow-hover) !important;
     transform: translateY(-2px);
     box-shadow: 0 6px 16px rgba(241, 200, 34, 0.4);
+}
+
+/* Form Feedback Messages */
+.form-message-box {
+    margin-top: 1.25rem;
+    padding: 1.1rem 1.35rem;
+    border-radius: 10px;
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    line-height: 1.55;
+    text-align: center;
+    box-sizing: border-box;
+    animation: fadeInMessage 0.3s ease;
+}
+
+.form-message-box.is-success {
+    background-color: #E6F4EA !important;
+    color: #137333 !important;
+    border: 1px solid #CEEAD6 !important;
+    box-shadow: 0 4px 14px rgba(19, 115, 51, 0.1);
+}
+
+.form-message-box.is-error {
+    background-color: #FCE8E6 !important;
+    color: #C5221F !important;
+    border: 1px solid #FAD2CF !important;
+    box-shadow: 0 4px 14px rgba(197, 34, 31, 0.1);
+}
+
+@keyframes fadeInMessage {
+    from {
+        opacity: 0;
+        transform: translateY(-6px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /* Map Section with Floating Highlights Card */
