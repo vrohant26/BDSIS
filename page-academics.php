@@ -35,6 +35,8 @@ if ( empty( $cta_url ) ) {
 	$cta_url = '#';
 }
 
+$cta_text = str_ireplace( 'AFTER SCHOOL', 'POST SCHOOL', $cta_text );
+
 $main_img_url = $main_img_id ? wp_get_attachment_image_url( $main_img_id, 'full' ) : '';
 $sub_img_url  = $sub_img_id ? wp_get_attachment_image_url( $sub_img_id, 'full' ) : '';
 ?>
@@ -531,12 +533,13 @@ $sub_img_url  = $sub_img_id ? wp_get_attachment_image_url( $sub_img_id, 'full' )
 		$interest_title = __( 'Taking Every Interest Further', 'bd-somani' );
 	}
 	if ( empty( $interest_sub ) && ! metadata_exists( 'post', $post_id, '_bds_academics_interest_sub' ) ) {
-		$interest_sub = __( 'Our commitment to nurturing curious, courageous, and collaborative learners continues beyond the classroom through enriching after-school experiences that help students discover new interests and grow with confidence.', 'bd-somani' );
+		$interest_sub = __( 'Our commitment to nurturing curious, courageous, and collaborative learners continues beyond the classroom through enriching post-school experiences that help students discover new interests and grow with confidence.', 'bd-somani' );
 	}
+	$interest_sub = str_ireplace( 'after-school', 'post-school', $interest_sub );
 	?>
 
 	<?php if ( $show_interest_section ) : ?>
-	<!-- Academics After-School / Co-Curricular Section (Taking Every Interest Further) -->
+	<!-- Academics Post-School / Co-Curricular Section (Taking Every Interest Further) -->
 	<section class="academics-interest-section relative overflow-hidden">
 		<div class="site-container relative">
 
@@ -580,7 +583,7 @@ $sub_img_url  = $sub_img_id ? wp_get_attachment_image_url( $sub_img_id, 'full' )
 							<!-- Item 1: Chess -->
 							<div class="interest-item-box">
 								<div class="interest-item-icon-wrap flex-center">
-									<?php echo bds_get_new_icon( 'puzzle piece' ); ?>
+									<?php echo bds_get_new_icon( 'chess' ); ?>
 								</div>
 								<h4 class="interest-item-title"><?php esc_html_e( 'Chess', 'bd-somani' ); ?></h4>
 								<p class="interest-item-desc"><?php esc_html_e( 'Every move strengthens strategic thinking, decision-making, and problem-solving. Students are guided through expert coaching, practice sessions, and tournaments to continually refine their game.', 'bd-somani' ); ?></p>
@@ -618,7 +621,7 @@ $sub_img_url  = $sub_img_id ? wp_get_attachment_image_url( $sub_img_id, 'full' )
 							<!-- Item 1: Musical Bonding -->
 							<div class="interest-item-box">
 								<div class="interest-item-icon-wrap flex-center">
-									<?php echo bds_get_new_icon( 'notebook' ); ?>
+									<?php echo bds_get_new_icon( 'music icon' ); ?>
 								</div>
 								<h4 class="interest-item-title"><?php esc_html_e( 'Musical Bonding', 'bd-somani' ); ?></h4>
 								<p class="interest-item-desc"><?php esc_html_e( 'Designed for parents and young learners, Musical Bonding transforms music and movement into joyful shared experiences. Every session nurtures rhythm, interaction, and meaningful connections through play.', 'bd-somani' ); ?></p>
@@ -627,7 +630,7 @@ $sub_img_url  = $sub_img_id ? wp_get_attachment_image_url( $sub_img_id, 'full' )
 							<!-- Item 2: Pyjama Drama -->
 							<div class="interest-item-box">
 								<div class="interest-item-icon-wrap flex-center">
-									<?php echo bds_get_new_icon( 'scissor' ); ?>
+									<?php echo bds_get_new_icon( 'performing arts' ); ?>
 								</div>
 								<h4 class="interest-item-title"><?php esc_html_e( 'Pyjama Drama', 'bd-somani' ); ?></h4>
 								<p class="interest-item-desc"><?php esc_html_e( 'An internationally acclaimed drama programme that brings stories to life through music, movement and imaginative play. Students learn to collaborate and communicate while building social connections.', 'bd-somani' ); ?></p>
@@ -636,7 +639,7 @@ $sub_img_url  = $sub_img_id ? wp_get_attachment_image_url( $sub_img_id, 'full' )
 							<!-- Item 3: Speech & Drama -->
 							<div class="interest-item-box">
 								<div class="interest-item-icon-wrap flex-center">
-									<?php echo bds_get_new_icon( 'school bag' ); ?>
+									<?php echo bds_get_new_icon( 'reading and literary' ); ?>
 								</div>
 								<h4 class="interest-item-title"><?php esc_html_e( 'Speech & Drama', 'bd-somani' ); ?></h4>
 								<p class="interest-item-desc"><?php esc_html_e( 'From voice and performance to scriptwriting and stagecraft, students learn to express themselves and captivate an audience. Such collaborative performances encourage teamwork, creativity, and storytelling.', 'bd-somani' ); ?></p>
@@ -674,7 +677,7 @@ $sub_img_url  = $sub_img_id ? wp_get_attachment_image_url( $sub_img_id, 'full' )
 							<!-- Item 3: Taekwondo -->
 							<div class="interest-item-box">
 								<div class="interest-item-icon-wrap flex-center">
-									<?php echo bds_get_new_icon( 'rocket' ); ?>
+									<?php echo bds_get_new_icon( 'taekwondo' ); ?>
 								</div>
 								<h4 class="interest-item-title"><?php esc_html_e( 'Taekwondo', 'bd-somani' ); ?></h4>
 								<p class="interest-item-desc"><?php esc_html_e( 'Through structured Taekwondo training, students develop strength, coordination and self-discipline. Each session builds focus, resilience and respect while giving students the confidence to challenge themselves and grow.', 'bd-somani' ); ?></p>

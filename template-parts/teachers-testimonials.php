@@ -60,8 +60,10 @@
 							<!-- Quote Details Box -->
 							<div class="teachers-quote-box relative flex-column flex-between">
 								<div class="teachers-quote-content">
-									<h3 class="teachers-quote-heading">Nurturing Young Minds With Warmth, Empathy, And Joyful Learning.</h3>
-									<p class="teachers-quote-text">"Every child’s first educational steps should feel warm, safe, and exciting. At B.D. Somani, we focus on emotional well-being, creative expression, and strong foundational values, giving young learners the perfect launchpad to flourish."</p>
+									<h3 class="teachers-quote-heading">Nurturing Independent, Confident, And Lifelong Learners.</h3>
+									<p class="teachers-quote-text">"At B.D. Somani International School, Kharghar, we nurture independent, confident, and lifelong learners who are encouraged to make meaningful connections with the world around them.</p>
+									<p class="teachers-quote-text" style="margin-top: 0.75rem;">We believe in empowering students to take ownership of their learning and become agents of positive change. By connecting learning with real-world experiences and purposeful action, we inspire our learners to engage deeply, think independently, and make a meaningful contribution to society.</p>
+									<p class="teachers-quote-text" style="margin-top: 0.75rem;">Our high-quality infrastructure provides a stimulating learning environment that supports curiosity, creativity, collaboration, and critical thinking. We equip our learners with the knowledge, skills, and mindset required to transition confidently into higher education and the workplace."</p>
 								</div>
 								<div class="teachers-quote-author">
 									<h4 class="teachers-author-name">Ms. Anjana Rajmane</h4>

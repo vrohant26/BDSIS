@@ -95,7 +95,7 @@
 
 								<div class="curriculum-cta-wrapper">
 									<a href="<?php echo esc_url( home_url( '/academics/pre-primary-school/' ) ); ?>" class="btn btn-yellow">
-										<span>EXPLORE OUR PRE-PRIMARY SCHOOL</span>
+										<span>EXPLORE PRE-PRIMARY SCHOOL</span>
 										<svg class="btn-arrow" width="18" height="14" viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg">
 											<path d="M11 1L17 7M17 7L11 13M17 7H1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 										</svg>
@@ -128,7 +128,7 @@
 
 								<div class="curriculum-cta-wrapper">
 									<a href="<?php echo esc_url( home_url( '/academics/primary-school/' ) ); ?>" class="btn btn-yellow">
-										<span>CHECK OUR PRIMARY SCHOOL</span>
+										<span>EXPLORE PRIMARY SCHOOL</span>
 										<svg class="btn-arrow" width="18" height="14" viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg">
 											<path d="M11 1L17 7M17 7L11 13M17 7H1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 										</svg>

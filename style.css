@@ -3394,15 +3394,19 @@ body.theme-purple-mode .timeline-progress-bar {
         padding-block: 1.5rem 2rem !important;
     }
 
+    .cta-banner-section .site-container {
+        padding: 0 !important;
+    }
+
     .cta-card-wrapper {
         min-height: auto !important;
-        padding: 0.85rem 0.75rem !important;
+        padding: 2rem 1.5rem !important;
         border-radius: 20px !important;
     }
 
     .cta-glass-box {
         max-width: 100% !important;
-        padding: 1.25rem 1rem !important;
+
         border-radius: 16px !important;
         border-width: 2px !important;
     }
@@ -5038,11 +5042,6 @@ body.theme-purple-mode .timeline-progress-bar {
 @media (max-width: 992px) {
 
 
-    .about-potential-video-container,
-    .about-potential-video-wrap,
-    .about-potential-video-wrap video {
-        background-color: #4A264A !important;
-    }
 
     .about-potential-section {
         padding-top: 4rem;
@@ -7542,6 +7541,7 @@ body.theme-purple-mode .timeline-progress-bar {
         opacity: 0;
         transform: translateY(-6px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -8852,7 +8852,7 @@ body.theme-purple-mode .timeline-progress-bar {
 }
 
 /* ==========================================================================
-   Academics Sub-Page: After-School Co-Curricular (Taking Every Interest Further)
+   Academics Sub-Page: Post-School Co-Curricular (Taking Every Interest Further)
    ========================================================================== */
 .academics-interest-section {
     background-color: var(--clr-primary-purple);
@@ -9970,13 +9970,13 @@ body.theme-purple-mode .timeline-progress-bar {
 
 .teachers-portrait-box {
     flex: 0 0 clamp(320px, 32vw, 400px);
-    aspect-ratio: 4 / 5;
+    height: 100%;
+    min-height: 100%;
     border-radius: 22px;
     overflow: hidden;
     background: #140A16;
     box-shadow: 0 12px 35px rgba(0, 0, 0, 0.08);
     display: block;
-    align-self: flex-start;
     position: relative;
 }
 

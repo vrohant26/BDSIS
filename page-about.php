@@ -232,10 +232,10 @@ get_header();
 							<div class="about-leader-card-back">
 								<div class="about-leader-message-content">
 									<div class="about-leader-quote-scroll" data-lenis-prevent>
-										<p class="about-leader-quote">Education is one of the most enduring responsibilities we hold. Our greatest purpose lies in shaping individuals who contribute meaningfully to society and the generations that follow.</p>
+										<p class="about-leader-quote">"Education is one of the most enduring responsibilities we hold. Our greatest purpose lies in shaping individuals who contribute meaningfully to society and the generations that follow."</p>
 									</div>
 									<div class="about-leader-signature">
-										<span class="signature-name">- Ms. Aradhana Somani</span>
+										<span class="signature-name">Ms. Aradhana Somani</span>
 										<span class="signature-role">Managing Trustee</span>
 									</div>
 								</div>
@@ -263,10 +263,10 @@ get_header();
 							<div class="about-leader-card-back">
 								<div class="about-leader-message-content">
 									<div class="about-leader-quote-scroll" data-lenis-prevent>
-										<p class="about-leader-quote">What we are building is far more than a school. It is a community where every child is encouraged to learn deeply, grow confidently, and leave with stories that last a lifetime.</p>
+										<p class="about-leader-quote">"What we are building is far more than a school. It is a community where every child is encouraged to learn deeply, grow confidently, and leave with stories that last a lifetime."</p>
 									</div>
 									<div class="about-leader-signature">
-										<span class="signature-name">- Mr. Dhananjay Somani</span>
+										<span class="signature-name">Mr. Dhananjay Somani</span>
 										<span class="signature-role">Founding Director</span>
 									</div>
 								</div>
@@ -294,10 +294,10 @@ get_header();
 							<div class="about-leader-card-back">
 								<div class="about-leader-message-content">
 									<div class="about-leader-quote-scroll" data-lenis-prevent>
-										<p class="about-leader-quote">No two children learn in the same way, and that is precisely what makes education meaningful. Our classrooms celebrate every learner for who they are and who they can become.</p>
+										<p class="about-leader-quote">"No two children learn in the same way, and that is precisely what makes education meaningful. Our classrooms celebrate every learner for who they are and who they can become."</p>
 									</div>
 									<div class="about-leader-signature">
-										<span class="signature-name">- Dr. Katherine James</span>
+										<span class="signature-name">Dr. Katherine James</span>
 										<span class="signature-role">School Principal</span>
 									</div>
 								</div>

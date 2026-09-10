@@ -252,7 +252,7 @@ function theme_add_academics_metaboxes( $post_type, $post = null ) {
 
 	add_meta_box(
 		'bds_academics_interest_mb',
-		__( 'Academics After-School / Co-Curricular Section Settings', 'bd-somani' ),
+		__( 'Academics Post-School / Co-Curricular Section Settings', 'bd-somani' ),
 		'theme_academics_interest_metabox_callback',
 		'page',
 		'normal',
@@ -1039,17 +1039,17 @@ function theme_academics_care_metabox_callback( $post ) {
 function theme_academics_interest_metabox_callback( $post ) {
 	$visibility = metadata_exists( 'post', $post->ID, '_bds_academics_interest_visibility' ) ? get_post_meta( $post->ID, '_bds_academics_interest_visibility', true ) : 'show';
 	$title      = metadata_exists( 'post', $post->ID, '_bds_academics_interest_title' ) ? get_post_meta( $post->ID, '_bds_academics_interest_title', true ) : __( 'Taking Every Interest Further', 'bd-somani' );
-	$sub        = metadata_exists( 'post', $post->ID, '_bds_academics_interest_sub' ) ? get_post_meta( $post->ID, '_bds_academics_interest_sub', true ) : __( 'Our commitment to nurturing curious, courageous, and collaborative learners continues beyond the classroom through enriching after-school experiences that help students discover new interests and grow with confidence.', 'bd-somani' );
+	$sub        = metadata_exists( 'post', $post->ID, '_bds_academics_interest_sub' ) ? get_post_meta( $post->ID, '_bds_academics_interest_sub', true ) : __( 'Our commitment to nurturing curious, courageous, and collaborative learners continues beyond the classroom through enriching post-school experiences that help students discover new interests and grow with confidence.', 'bd-somani' );
 	?>
 	<div id="bds-academics-interest-metabox" style="display: flex; flex-direction: column; gap: 16px; margin-top: 10px;">
-		<p class="description"><?php esc_html_e( 'Configure the "Taking Every Interest Further" After-School Co-Curricular section. Toggle section visibility to show or hide this section on this page.', 'bd-somani' ); ?></p>
+		<p class="description"><?php esc_html_e( 'Configure the "Taking Every Interest Further" Post-School Co-Curricular section. Toggle section visibility to show or hide this section on this page.', 'bd-somani' ); ?></p>
 
 		<!-- Show / Hide Section Toggle -->
 		<div style="background: #fff8e5; padding: 12px 16px; border: 1px solid #f1c822; border-radius: 8px; display: flex; align-items: center; justify-content: space-between;">
 			<label for="bds_academics_interest_visibility" style="font-weight: 700; font-size: 14px; color: #3d213e;"><?php esc_html_e( 'Section Visibility:', 'bd-somani' ); ?></label>
 			<select id="bds_academics_interest_visibility" name="bds_academics_interest_visibility" style="font-weight: 600; padding: 4px 12px; font-size: 14px;">
-				<option value="show" <?php selected( $visibility, 'show' ); ?>><?php esc_html_e( 'Show After-School Co-Curricular Section', 'bd-somani' ); ?></option>
-				<option value="hide" <?php selected( $visibility, 'hide' ); ?>><?php esc_html_e( 'Hide After-School Co-Curricular Section', 'bd-somani' ); ?></option>
+				<option value="show" <?php selected( $visibility, 'show' ); ?>><?php esc_html_e( 'Show Post-School Co-Curricular Section', 'bd-somani' ); ?></option>
+				<option value="hide" <?php selected( $visibility, 'hide' ); ?>><?php esc_html_e( 'Hide Post-School Co-Curricular Section', 'bd-somani' ); ?></option>
 			</select>
 		</div>
 

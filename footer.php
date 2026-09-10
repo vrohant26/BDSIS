@@ -76,7 +76,7 @@
 				<!-- Card 5 -->
 				<div class="footer-card-item card-rotate-left-md">
 					<div class="footer-card-inner">
-						<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/footer images/Day 1 Card 5 DSC00899 1.webp' ); ?>" alt="Happy Students Learning" loading="lazy" decoding="async">
+						<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/footer image last.webp' ); ?>" alt="Happy Students Learning" loading="lazy" decoding="async">
 					</div>
 				</div>
 

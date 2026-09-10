@@ -224,7 +224,7 @@ get_header();
 										<p class="academics-exp-sub-desc"><?php esc_html_e( 'In this journey, every doubt of “Will I be able to?” becomes a confident “I can” through the experiences we create.', 'bd-somani' ); ?></p>
 
 										<div class="academics-exp-chess-doodle" aria-hidden="true">
-											<?php echo bds_get_new_icon( 'puzzle piece' ); ?>
+											<?php echo bds_get_new_icon( 'chess' ); ?>
 										</div>
 									</div>
 								</div>
@@ -484,7 +484,7 @@ get_header();
 							</div>
 						</div>
 						<div class="spaces-card-media">
-							<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/swimming pool 2.webp' ); ?>" alt="<?php esc_attr_e( 'Outdoor Spaces - Swimming Pool', 'bd-somani' ); ?>" class="spaces-card-img">
+							<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/outdoor spaces 1.webp' ); ?>" alt="<?php esc_attr_e( 'Outdoor Spaces', 'bd-somani' ); ?>" class="spaces-card-img">
 						</div>
 					</div>
 				</div>

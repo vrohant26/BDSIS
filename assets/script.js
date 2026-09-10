@@ -2058,7 +2058,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   initCampusSpacesTabs();
 
-  // Academics Sub-Page: After-School Co-Curricular Accordions ("Taking Every Interest Further")
+  // Academics Sub-Page: Post-School Co-Curricular Accordions ("Taking Every Interest Further")
   function initAcademicsInterestAccordions() {
     const cards = document.querySelectorAll(".academics-interest-card");
     if (!cards.length) return;
