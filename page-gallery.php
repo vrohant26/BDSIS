@@ -209,66 +209,61 @@ get_header();
 				}
 
 				if ( ! $has_cpt_images ) {
-					// Fallback Curated Gallery Set matching screenshots & categories
+					// Fallback Curated Gallery Set (Displayed under "ALL" only)
 					$fallback_items = array(
 						array(
 							'title'    => 'Campus Grounds & Sports Turf',
-							'category' => 'campus sports',
+							'category' => '',
 							'img'      => get_template_directory_uri() . '/assets/images/BD Somani International School Building.webp',
 						),
 						array(
 							'title'    => 'Acoustic Indoor Auditorium',
-							'category' => 'campus arts',
+							'category' => '',
 							'img'      => get_template_directory_uri() . '/assets/images/performing arts.webp',
 						),
 						array(
 							'title'    => 'Main Academic Block Aerial View',
-							'category' => 'campus',
+							'category' => '',
 							'img'      => get_template_directory_uri() . '/assets/images/middle school 1.webp',
 						),
 						array(
 							'title'    => 'Multi-Purpose Athletic Field',
-							'category' => 'sports campus',
+							'category' => '',
 							'img'      => get_template_directory_uri() . '/assets/images/indoor and outdoor sports.webp',
 						),
 						array(
-							'title'    => 'Outdoor Play Area & Turf',
-							'category' => 'campus extras',
-							'img'      => get_template_directory_uri() . '/assets/images/daycare1.webp',
-						),
-						array(
 							'title'    => 'Basketball & Athletics Court',
-							'category' => 'sports',
+							'category' => '',
 							'img'      => get_template_directory_uri() . '/assets/images/primary school 1.webp',
 						),
 						array(
 							'title'    => 'Temperature Regulated Swimming Pool',
-							'category' => 'campus sports',
+							'category' => '',
 							'img'      => get_template_directory_uri() . '/assets/images/middle school 2.webp',
 						),
 						array(
 							'title'    => 'Kharghar School Entrance & Turf',
-							'category' => 'campus',
+							'category' => '',
 							'img'      => get_template_directory_uri() . '/assets/images/primary school 2.webp',
 						),
 						array(
 							'title'    => 'Science Laboratory Experiment',
-							'category' => 'academics',
+							'category' => '',
 							'img'      => get_template_directory_uri() . '/assets/images/footer images/Exported Photo DSC1318 1.webp',
 						),
 						array(
 							'title'    => 'Library & Reading Room',
-							'category' => 'academics arts',
+							'category' => '',
 							'img'      => get_template_directory_uri() . '/assets/images/reading and literature club.webp',
 						),
 						array(
 							'title'    => 'Annual Cultural Event',
-							'category' => 'events arts',
+							'category' => '',
 							'img'      => get_template_directory_uri() . '/assets/images/clubs and activities.webp',
 						),
 						array(
 							'title'    => 'Field Trips & Outings',
-							'category' => 'field-trips extras',
+							'category' => '',
 							'img'      => get_template_directory_uri() . '/assets/images/innovation and design workshop.webp',
 						),
 					);
