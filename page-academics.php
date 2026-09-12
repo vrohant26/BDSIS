@@ -197,22 +197,6 @@ $sub_img_url  = $sub_img_id ? wp_get_attachment_image_url( $sub_img_id, 'full' )
 				<?php if ( ! empty( $ov_desc ) ) : ?>
 					<p class="programme-desc"><?php echo esc_html( $ov_desc ); ?></p>
 				<?php endif; ?>
-
-				<?php if ( ! empty( $ov_pdf_label ) && ! empty( $ov_pdf_url ) ) : ?>
-					<div class="programme-pdf-wrap">
-						<a href="<?php echo esc_url( $ov_pdf_url ); ?>" class="programme-pdf-btn" download>
-							<span><?php echo esc_html( $ov_pdf_label ); ?></span>
-							<?php
-							$pdf_svg_path = get_template_directory() . '/assets/svgs/pdf download.svg';
-							if ( file_exists( $pdf_svg_path ) ) {
-								include $pdf_svg_path;
-							} else {
-								echo '<iconify-icon icon="lucide:download"></iconify-icon>';
-							}
-							?>
-						</a>
-					</div>
-				<?php endif; ?>
 			</div>
 
 			<!-- Right Floating Tilted Photo -->

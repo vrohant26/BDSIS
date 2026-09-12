@@ -246,6 +246,50 @@
 	</div>
 <?php endif; ?>
 
+	<!-- Custom Tidio Mascot Chatbot Launcher -->
+	<div class="bds-tidio-mascot-wrapper" id="bdsBeeMascotWrapper">
+		<div class="bds-mascot-speech-bubble" id="bdsMascotSpeechBubble">
+			<div class="bds-mascot-bubble-shape" aria-hidden="true">
+				<svg viewBox="0 0 549 154" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+					<g filter="url(#bds_chatbot_bubble_filter)">
+						<path d="M3 16C3 7.16345 10.1634 0 19 0H513.377C521.229 0 527.92 5.69711 529.173 13.4481L548.105 130.63C550.581 145.956 531.973 155.473 520.996 144.496L512.186 135.686C509.186 132.686 505.116 131 500.873 131H19C10.1634 131 3 123.837 3 115V16Z" fill="white"/>
+						<path d="M19 1.5H513.378C520.493 1.50021 526.557 6.66328 527.691 13.6875L546.624 130.869C548.868 144.758 532.005 153.383 522.057 143.435L513.247 134.626C509.965 131.344 505.514 129.5 500.873 129.5H19C10.9919 129.5 4.5 123.008 4.5 115V16C4.5 7.99187 10.9919 1.5 19 1.5Z" stroke="#49274A" stroke-width="3"/>
+					</g>
+					<defs>
+						<filter id="bds_chatbot_bubble_filter" x="-5" y="-2" width="560" height="160" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+							<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+							<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+							<feOffset dx="-3" dy="4"/>
+							<feComposite in2="hardAlpha" operator="out"/>
+							<feColorMatrix type="matrix" values="0 0 0 0 0.945098 0 0 0 0 0.784314 0 0 0 0 0.133333 0 0 0 1 0"/>
+							<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow"/>
+							<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape"/>
+						</filter>
+					</defs>
+				</svg>
+			</div>
+			<div class="bds-mascot-bubble-content">
+				<span class="bds-mascot-online-dot"></span>
+				<span class="bds-mascot-bubble-text"><?php esc_html_e( 'Need help? Chat with us!', 'bd-somani' ); ?></span>
+				<button type="button" class="bds-mascot-bubble-close" id="bdsMascotBubbleClose" aria-label="<?php esc_attr_e( 'Close message', 'bd-somani' ); ?>">
+					<svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<path d="M1 1L9 9M9 1L1 9" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+					</svg>
+				</button>
+			</div>
+		</div>
+		<div class="bds-mascot-trigger-wrap">
+			<button type="button" class="bds-tidio-mascot-btn" id="bdsTidioMascotBtn" aria-label="<?php esc_attr_e( 'Chat with us', 'bd-somani' ); ?>">
+				<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/bee mascot.webp' ); ?>" alt="<?php esc_attr_e( 'B.D. Somani Mascot', 'bd-somani' ); ?>" class="bds-tidio-mascot-img" width="85" height="94">
+			</button>
+			<button type="button" class="bds-mascot-red-close-btn" id="bdsMascotRedCloseBtn" aria-label="<?php esc_attr_e( 'Close chat', 'bd-somani' ); ?>" title="<?php esc_attr_e( 'Close chat', 'bd-somani' ); ?>">
+				<svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<path d="M1.5 1.5L10.5 10.5M10.5 1.5L1.5 10.5" stroke="white" stroke-width="2.2" stroke-linecap="round"/>
+				</svg>
+			</button>
+		</div>
+	</div>
+
 <?php wp_footer(); ?>
 </body>
 </html>

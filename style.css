@@ -2,7 +2,7 @@
 Theme Name: BD Somani International School Theme
 Author: Rohan Villarosa
 Description: A custom WordPress theme for BD Somani International School.
-Version: 1.0.2
+Version: 1.0.3
 Text Domain: bd-somani
 */
 
@@ -4559,10 +4559,13 @@ body.theme-purple-mode .timeline-progress-bar {
 
 .about-merit-card {
     background-color: #FFFFFF;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' fill='%23ffffff'/%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.08'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 160px 160px;
     border: 2px solid #3F1D38;
     border-radius: 12px;
     box-shadow: -5px 5px 0px var(--clr-primary-yellow);
-    padding: clamp(1.5rem, 3.5vw, 3.8rem) clamp(1rem, 2vw, 2.2rem);
+    padding: clamp(1rem, 2vw, 2.2rem) clamp(0.75rem, 1.4vw, 1.5rem);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -4572,6 +4575,8 @@ body.theme-purple-mode .timeline-progress-bar {
     text-align: center;
     transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
     cursor: default;
+    position: relative;
+    overflow: hidden;
 }
 
 .about-merit-card:hover {
@@ -4580,12 +4585,12 @@ body.theme-purple-mode .timeline-progress-bar {
 }
 
 .about-merit-icon-wrap {
-    width: 42%;
+    width: clamp(88px, 60%, 136px);
     aspect-ratio: 1 / 1;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: clamp(1.25rem, 2.5vw, 2.8rem);
+    margin-bottom: clamp(0.6rem, 1.2vw, 1.1rem);
 }
 
 .about-merit-icon-wrap svg,
@@ -4604,10 +4609,10 @@ body.theme-purple-mode .timeline-progress-bar {
 
 .about-merit-title {
     font-family: var(--font-body);
-    font-size: clamp(1.05rem, 1.35vw, 1.45rem);
+    font-size: clamp(1rem, 1.25vw, 1.35rem);
     font-weight: 700;
     color: var(--clr-primary-purple);
-    line-height: 1.4;
+    line-height: 1.35;
     margin: 0;
 }
 
@@ -4943,14 +4948,7 @@ body.theme-purple-mode .timeline-progress-bar {
     }
 }
 
-@media (max-width: 900px) {
-    .about-leaders-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 1.75rem;
-    }
-}
-
-@media (max-width: 600px) {
+@media (max-width: 768px) {
     .about-leaders-grid {
         grid-template-columns: 1fr;
         max-width: 380px;
@@ -9956,8 +9954,14 @@ body.theme-purple-mode .timeline-progress-bar {
     border-radius: 24px;
 }
 
+.teachers-swiper .swiper-wrapper {
+    display: flex;
+    align-items: stretch;
+}
+
 .teachers-slide-item {
-    height: auto;
+    height: auto !important;
+    display: flex;
     flex-shrink: 0;
 }
 
@@ -9966,25 +9970,30 @@ body.theme-purple-mode .timeline-progress-bar {
     gap: clamp(1.25rem, 2vw, 1.75rem);
     align-items: stretch;
     width: 100%;
+    height: 100%;
 }
 
 .teachers-portrait-box {
-    flex: 0 0 clamp(320px, 32vw, 400px);
+    flex: 0 0 clamp(300px, 30vw, 380px);
+    width: clamp(300px, 30vw, 380px);
     height: 100%;
     min-height: 100%;
     border-radius: 22px;
     overflow: hidden;
     background: #140A16;
     box-shadow: 0 12px 35px rgba(0, 0, 0, 0.08);
-    display: block;
     position: relative;
+    display: block;
 }
 
 .teachers-portrait-img {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center center !important;
+    object-position: center 20% !important;
     display: block;
     transition: transform 0.5s ease;
 }
@@ -10001,6 +10010,7 @@ body.theme-purple-mode .timeline-progress-bar {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    height: 100%;
     min-height: clamp(380px, 38vw, 460px);
 }
 
@@ -10063,14 +10073,25 @@ body.theme-purple-mode .timeline-progress-bar {
 }
 
 @media (max-width: 992px) {
+    .teachers-slide-item {
+        height: auto;
+    }
+
     .teachers-card-group {
         flex-direction: column;
+        height: 100%;
     }
 
     .teachers-portrait-box {
+        flex: 0 0 auto;
         width: 100%;
-        height: clamp(300px, 60vw, 420px);
-        aspect-ratio: auto;
+        height: clamp(280px, 55vw, 380px);
+        min-height: clamp(280px, 55vw, 380px);
+    }
+
+    .teachers-quote-box {
+        flex: 1 1 auto;
+        min-height: auto;
     }
 }
 
@@ -10617,7 +10638,11 @@ svg.bds-new-icon,
     display: block !important;
 }
 
-.about-merit-icon-wrap,
+.about-merit-icon-wrap {
+    padding: 0 !important;
+    box-sizing: border-box !important;
+}
+
 .pillar-icon-badge,
 .highlight-icon-circle,
 .value-badge-icon,
@@ -10677,4 +10702,385 @@ svg.bds-new-icon path,
 .value-courageous-card .quote-icon {
     fill: #E87248 !important;
     color: #E87248 !important;
+}
+
+/* ==========================================================================
+   CUSTOM TIDIO MASCOT CHATBOT LAUNCHER
+   ========================================================================== */
+/* Keep Tidio native launcher button hidden at all times */
+#tidio-chat iframe[id*="launcher" i],
+#tidio-chat iframe[title*="launcher" i],
+iframe[id*="tidio" i][title*="launcher" i] {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+}
+
+/* When chat is open, elevate the Tidio chat card cleanly above the mascot with exactly 24px gap */
+body.tidio-chat-is-open #tidio-chat,
+body.tidio-chat-is-open #tidio-chat iframe:not([title*="launcher" i]):not([id*="launcher" i]),
+body.tidio-chat-is-open iframe#tidio-chat-iframe,
+body.tidio-chat-is-open iframe#tidio-chat-code {
+    top: auto !important;
+    bottom: 82px !important;
+    max-height: calc(100vh - 105px) !important;
+}
+
+@media (max-width: 768px) {
+
+    body.tidio-chat-is-open #tidio-chat,
+    body.tidio-chat-is-open #tidio-chat iframe:not([title*="launcher" i]):not([id*="launcher" i]),
+    body.tidio-chat-is-open iframe#tidio-chat-iframe,
+    body.tidio-chat-is-open iframe#tidio-chat-code {
+        bottom: 68px !important;
+        max-height: calc(100vh - 90px) !important;
+    }
+}
+
+.bds-tidio-mascot-wrapper {
+    position: fixed !important;
+    bottom: 20px !important;
+    right: 20px !important;
+    top: auto !important;
+    left: auto !important;
+    width: auto !important;
+    height: auto !important;
+    max-height: none !important;
+    z-index: 2147483647 !important;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 8px;
+    pointer-events: auto;
+    transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease;
+}
+
+/* Chat is open: keep mascot at bottom-right, reveal red close button, hide speech bubble */
+.bds-tidio-mascot-wrapper.chat-is-open {
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+    transform: none !important;
+    bottom: 20px !important;
+    right: 20px !important;
+    top: auto !important;
+    left: auto !important;
+    width: auto !important;
+    height: auto !important;
+}
+
+.bds-tidio-mascot-wrapper.chat-is-open .bds-mascot-speech-bubble {
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+    display: none !important;
+}
+
+/* Floating animation for the bee mascot */
+@keyframes bdsBeeFloat {
+
+    0%,
+    100% {
+        transform: translateY(0) rotate(0deg);
+    }
+
+    25% {
+        transform: translateY(-5px) rotate(-2deg);
+    }
+
+    75% {
+        transform: translateY(-8px) rotate(2deg);
+    }
+}
+
+.bds-tidio-mascot-btn {
+    background: transparent;
+    border: none;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+    outline: none;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: bdsBeeFloat 4s ease-in-out infinite;
+    transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    -webkit-tap-highlight-color: transparent;
+}
+
+.bds-tidio-mascot-btn:hover {
+    animation-play-state: paused;
+    transform: scale(1.08) translateY(-3px);
+}
+
+.bds-tidio-mascot-btn:active {
+    transform: scale(0.95);
+}
+
+.bds-tidio-mascot-img {
+    width: clamp(70px, 6vw, 85px);
+    height: auto;
+    display: block;
+    position: relative;
+    z-index: 1;
+    filter: drop-shadow(0 8px 18px rgba(73, 39, 74, 0.35)) drop-shadow(0 2px 6px rgba(0, 0, 0, 0.2));
+    user-select: none;
+    -webkit-user-drag: none;
+    transition: filter 0.25s ease;
+}
+
+.bds-tidio-mascot-btn:hover .bds-tidio-mascot-img {
+    filter: drop-shadow(0 12px 24px rgba(73, 39, 74, 0.45)) drop-shadow(0 4px 8px rgba(0, 0, 0, 0.25));
+}
+
+/* Mascot trigger wrap & small red close button */
+.bds-mascot-trigger-wrap {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+/* Guarantee no background disc or circle element behind the mascot */
+.bds-mascot-trigger-wrap::before,
+.bds-mascot-trigger-wrap::after,
+.bds-tidio-mascot-btn::before,
+.bds-tidio-mascot-btn::after,
+.bds-tidio-mascot-wrapper::before,
+.bds-tidio-mascot-wrapper::after {
+    display: none !important;
+    content: none !important;
+}
+
+.bds-mascot-red-close-btn {
+    position: absolute;
+    top: 2px;
+    right: 0px;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background-color: #E74C3C;
+    border: 2px solid #FFFFFF;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    margin: 0;
+    z-index: 10;
+    opacity: 0;
+    visibility: hidden;
+    transform: scale(0.5);
+    transition: opacity 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), background-color 0.2s ease;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.bds-mascot-red-close-btn svg {
+    display: block;
+    width: 10px;
+    height: 10px;
+    pointer-events: none;
+}
+
+.bds-mascot-red-close-btn:hover {
+    background-color: #C0392B;
+    transform: scale(1.15);
+}
+
+.bds-mascot-red-close-btn:active {
+    transform: scale(0.95);
+}
+
+
+/* Chat is open: reveal red close button, pause float animation so close button is steady to click */
+.bds-tidio-mascot-wrapper.chat-is-open .bds-mascot-red-close-btn {
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1);
+}
+
+.bds-tidio-mascot-wrapper.chat-is-open .bds-mascot-red-close-btn:hover {
+    transform: scale(1.15);
+}
+
+.bds-tidio-mascot-wrapper.chat-is-open .bds-tidio-mascot-btn {
+    animation-play-state: paused;
+}
+
+/* Speech bubble with custom brand SVG shape */
+.bds-mascot-speech-bubble {
+    position: relative;
+    display: inline-block;
+    background: transparent !important;
+    border: none !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    margin-right: 18px;
+    cursor: pointer;
+    animation: bdsBubbleEntrance 0.6s 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.bds-mascot-speech-bubble:hover {
+    transform: translateY(-2px);
+}
+
+.bds-mascot-speech-bubble.is-closed {
+    opacity: 0;
+    pointer-events: none;
+    transform: scale(0.8);
+    display: none;
+}
+
+/* Background SVG layer */
+.bds-mascot-bubble-shape {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.bds-mascot-bubble-shape svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+}
+
+/* Content layout on top of SVG */
+.bds-mascot-bubble-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 13px 30px 21px 18px;
+    white-space: nowrap;
+}
+
+@keyframes bdsBubbleEntrance {
+    from {
+        opacity: 0;
+        transform: translateY(10px) scale(0.9);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.bds-mascot-online-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background-color: #2ECC71;
+    display: inline-block;
+    flex-shrink: 0;
+    box-shadow: 0 0 0 2px rgba(46, 204, 113, 0.25);
+    animation: bdsPulseDot 2s infinite;
+}
+
+@keyframes bdsPulseDot {
+
+    0%,
+    100% {
+        box-shadow: 0 0 0 2px rgba(46, 204, 113, 0.25);
+    }
+
+    50% {
+        box-shadow: 0 0 0 5px rgba(46, 204, 113, 0);
+    }
+}
+
+.bds-mascot-bubble-text {
+    font-family: var(--font-body, 'Merriweather', Georgia, serif);
+    font-size: 0.92rem;
+    font-weight: 400;
+    color: var(--clr-primary-purple, #49274A);
+    line-height: 1.2;
+    letter-spacing: -0.1px;
+}
+
+.bds-mascot-bubble-close {
+    background: transparent;
+    border: none;
+    color: #8C7B8D;
+    padding: 2px 2px 2px 4px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.15s ease, transform 0.15s ease;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.bds-mascot-bubble-close svg {
+    display: block;
+    width: 10px;
+    height: 10px;
+    pointer-events: none;
+}
+
+.bds-mascot-bubble-close:hover {
+    color: var(--clr-primary-purple, #49274A);
+    transform: scale(1.2);
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+    .bds-tidio-mascot-wrapper {
+        bottom: 16px;
+        right: 16px;
+    }
+
+    .bds-tidio-mascot-img {
+        width: 62px;
+    }
+
+    .bds-mascot-speech-bubble {
+        margin-right: 8px;
+    }
+
+    .bds-mascot-bubble-content {
+        padding: 10px 24px 17px 14px;
+        gap: 7px;
+    }
+
+    .bds-mascot-bubble-text {
+        font-size: 0.78rem;
+    }
+
+    .bds-mascot-online-dot {
+        width: 7px;
+        height: 7px;
+    }
+
+    .bds-mascot-bubble-close svg {
+        width: 9px;
+        height: 9px;
+    }
+
+    .bds-mascot-red-close-btn {
+        width: 20px;
+        height: 20px;
+        top: 0;
+        right: -2px;
+    }
+
+    .bds-mascot-red-close-btn svg {
+        width: 8px;
+        height: 8px;
+    }
 }

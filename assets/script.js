@@ -2212,6 +2212,12 @@ document.addEventListener("DOMContentLoaded", () => {
               
               msgBox.innerHTML = `<strong>${successText}</strong>`;
               form.reset();
+
+              // Track Meta Lead conversion event
+              if (typeof window.fbq === "function") {
+                window.fbq("track", "Lead");
+              }
+
               msgBox.scrollIntoView({ behavior: "smooth", block: "nearest" });
             } else {
               msgBox.className = "form-message-box is-error";
@@ -2383,4 +2389,212 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
   initValuesTabs();
+
+  // ---------------------------------------------------------------------------
+  // Tidio Chatbot Mascot Launcher (Using Official window.tidioChatApi)
+  // ---------------------------------------------------------------------------
+  function initTidioMascot() {
+    const mascotWrap = document.getElementById("bdsBeeMascotWrapper") || document.getElementById("bdsTidioMascotWrapper");
+    const mascotBtn = document.getElementById("bdsTidioMascotBtn");
+    const redCloseBtn = document.getElementById("bdsMascotRedCloseBtn");
+    const speechBubble = document.getElementById("bdsMascotSpeechBubble");
+    const bubbleClose = document.getElementById("bdsMascotBubbleClose");
+    if (!mascotWrap || !mascotBtn) return;
+
+    // Ensure wrapper is at the end of body so it always sits above injected iframes
+    if (mascotWrap.parentNode !== document.body || mascotWrap !== document.body.lastElementChild) {
+      document.body.appendChild(mascotWrap);
+    }
+
+    let isChatOpen = false;
+    let openRequested = false;
+
+    function applyTidioPositioning() {
+      const isMobile = window.innerWidth <= 768;
+      const bottomOffset = isMobile ? "68px" : "82px";
+      const maxHeightVal = isMobile ? "calc(100vh - 90px)" : "calc(100vh - 105px)";
+
+      // 1. Position Tidio chat container strictly (never generic wildcards)
+      const tidioContainer = document.getElementById("tidio-chat");
+      if (tidioContainer) {
+        if (isChatOpen) {
+          tidioContainer.style.setProperty("top", "auto", "important");
+          tidioContainer.style.setProperty("bottom", bottomOffset, "important");
+          tidioContainer.style.setProperty("max-height", maxHeightVal, "important");
+        } else {
+          tidioContainer.style.removeProperty("top");
+          tidioContainer.style.removeProperty("bottom");
+          tidioContainer.style.removeProperty("max-height");
+        }
+      }
+
+      // 2. Handle Tidio iframes
+      const chatIframes = document.querySelectorAll(
+        '#tidio-chat iframe, iframe#tidio-chat-iframe, iframe#tidio-chat-code'
+      );
+
+      chatIframes.forEach((iframe) => {
+        const rect = iframe.getBoundingClientRect();
+        // Keep small launcher iframe hidden
+        if (rect.width > 0 && rect.width < 120 && rect.height < 120) {
+          iframe.style.setProperty("display", "none", "important");
+          iframe.style.setProperty("visibility", "hidden", "important");
+          iframe.style.setProperty("opacity", "0", "important");
+          iframe.style.setProperty("pointer-events", "none", "important");
+        } else if (isChatOpen) {
+          iframe.style.setProperty("top", "auto", "important");
+          iframe.style.setProperty("bottom", bottomOffset, "important");
+          iframe.style.setProperty("max-height", maxHeightVal, "important");
+        } else {
+          iframe.style.removeProperty("top");
+          iframe.style.removeProperty("bottom");
+          iframe.style.removeProperty("max-height");
+        }
+      });
+
+      // 3. Official Tidio SDK adjustStyles (keep native button hidden)
+      if (window.tidioChatApi && typeof window.tidioChatApi.adjustStyles === "function") {
+        try {
+          window.tidioChatApi.adjustStyles('#button { display: none !important; }');
+        } catch (e) {}
+        try {
+          window.tidioChatApi.adjustStyles('.chat-button { display: none !important; }');
+        } catch (e) {}
+      }
+    }
+
+    function hideTidioNativeLauncher() {
+      if (window.tidioChatApi && typeof window.tidioChatApi.hide === "function" && !isChatOpen) {
+        window.tidioChatApi.hide();
+      }
+      applyTidioPositioning();
+    }
+
+    // Keep iframes positioned as Tidio injects / updates elements
+    const observer = new MutationObserver(() => {
+      applyTidioPositioning();
+    });
+    observer.observe(document.body, { childList: true, subtree: true });
+
+    window.addEventListener("resize", applyTidioPositioning);
+
+    function initTidioApiListeners() {
+      hideTidioNativeLauncher();
+
+      if (openRequested) {
+        openTidioChat();
+        openRequested = false;
+      }
+
+      if (window.tidioChatApi && typeof window.tidioChatApi.on === "function") {
+        window.tidioChatApi.on("open", () => {
+          isChatOpen = true;
+          document.body.classList.add("tidio-chat-is-open");
+          mascotWrap.classList.add("chat-is-open");
+          mascotBtn.setAttribute("aria-label", "Close chat");
+          document.body.appendChild(mascotWrap);
+          applyTidioPositioning();
+          setTimeout(applyTidioPositioning, 200);
+          setTimeout(applyTidioPositioning, 600);
+        });
+
+        window.tidioChatApi.on("close", () => {
+          isChatOpen = false;
+          document.body.classList.remove("tidio-chat-is-open");
+          mascotWrap.classList.remove("chat-is-open");
+          mascotBtn.setAttribute("aria-label", "Chat with us");
+          hideTidioNativeLauncher();
+        });
+      }
+    }
+
+    if (window.tidioChatApi) {
+      if (typeof window.tidioChatApi.on === "function") {
+        window.tidioChatApi.on("ready", initTidioApiListeners);
+      } else {
+        initTidioApiListeners();
+      }
+    } else {
+      document.addEventListener("tidioChat-ready", initTidioApiListeners);
+    }
+
+    // Safety check in case Tidio loads without triggering the ready event
+    const checkTidioInterval = setInterval(() => {
+      if (window.tidioChatApi) {
+        hideTidioNativeLauncher();
+        clearInterval(checkTidioInterval);
+      }
+    }, 500);
+    setTimeout(() => clearInterval(checkTidioInterval), 10000);
+
+    function openTidioChat() {
+      if (window.tidioChatApi && typeof window.tidioChatApi.open === "function") {
+        if (typeof window.tidioChatApi.show === "function") {
+          window.tidioChatApi.show();
+        }
+        window.tidioChatApi.open();
+        isChatOpen = true;
+        document.body.classList.add("tidio-chat-is-open");
+        mascotWrap.classList.add("chat-is-open");
+        mascotBtn.setAttribute("aria-label", "Close chat");
+        document.body.appendChild(mascotWrap);
+        applyTidioPositioning();
+        setTimeout(applyTidioPositioning, 200);
+        setTimeout(applyTidioPositioning, 600);
+      } else {
+        openRequested = true;
+      }
+    }
+
+    function closeTidioChat() {
+      if (window.tidioChatApi && typeof window.tidioChatApi.close === "function") {
+        window.tidioChatApi.close();
+        isChatOpen = false;
+        document.body.classList.remove("tidio-chat-is-open");
+        mascotWrap.classList.remove("chat-is-open");
+        mascotBtn.setAttribute("aria-label", "Chat with us");
+        hideTidioNativeLauncher();
+      }
+    }
+
+    function toggleTidioChat() {
+      if (isChatOpen) {
+        closeTidioChat();
+      } else {
+        openTidioChat();
+      }
+    }
+
+    mascotBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      toggleTidioChat();
+    });
+
+    if (redCloseBtn) {
+      redCloseBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        closeTidioChat();
+      });
+    }
+
+    if (speechBubble) {
+      speechBubble.addEventListener("click", (e) => {
+        if (e.target === bubbleClose || (bubbleClose && bubbleClose.contains(e.target))) {
+          e.stopPropagation();
+          speechBubble.classList.add("is-closed");
+          return;
+        }
+        openTidioChat();
+      });
+    }
+
+    if (bubbleClose) {
+      bubbleClose.addEventListener("click", (e) => {
+        e.stopPropagation();
+        speechBubble.classList.add("is-closed");
+      });
+    }
+  }
+  initTidioMascot();
 });

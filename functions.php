@@ -545,17 +545,6 @@ function theme_academics_programme_metabox_callback( $post ) {
 			<textarea id="bds_academics_overview_desc" name="bds_academics_overview_desc" rows="3" class="large-text"><?php echo esc_textarea( $desc ); ?></textarea>
 		</div>
 
-		<div style="display: flex; gap: 20px; flex-wrap: wrap;">
-			<div style="flex: 1; min-width: 250px;">
-				<label for="bds_academics_overview_pdf_label" style="font-weight: 600; display: block; margin-bottom: 4px;"><?php esc_html_e( 'PDF Button Label', 'bd-somani' ); ?></label>
-				<input type="text" id="bds_academics_overview_pdf_label" name="bds_academics_overview_pdf_label" value="<?php echo esc_attr( $pdf_label ); ?>" class="regular-text">
-			</div>
-			<div style="flex: 1; min-width: 250px;">
-				<label for="bds_academics_overview_pdf_url" style="font-weight: 600; display: block; margin-bottom: 4px;"><?php esc_html_e( 'PDF Download File URL / Link', 'bd-somani' ); ?></label>
-				<input type="text" id="bds_academics_overview_pdf_url" name="bds_academics_overview_pdf_url" value="<?php echo esc_attr( $pdf_url ); ?>" class="regular-text" placeholder="https://example.com/file.pdf">
-			</div>
-		</div>
-
 		<hr style="border: 0; border-top: 1px solid #ccc; margin-block: 10px;">
 
 		<div style="display: flex; gap: 20px; flex-wrap: wrap;">
@@ -2085,5 +2074,33 @@ function bdsis_handle_form_submission() {
 }
 add_action( 'wp_ajax_bdsis_submit_form', 'bdsis_handle_form_submission' );
 add_action( 'wp_ajax_nopriv_bdsis_submit_form', 'bdsis_handle_form_submission' );
+
+/**
+ * 16. Meta (Facebook) Pixel Integration
+ */
+function bdsis_enqueue_meta_pixel() {
+	?>
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window,document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '4397700063823698');
+fbq('track', 'PageView');
+</script>
+<noscript>
+<img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=4397700063823698&ev=PageView&noscript=1"/>
+</noscript>
+<!-- End Meta Pixel Code -->
+	<?php
+}
+add_action( 'wp_head', 'bdsis_enqueue_meta_pixel', 1 );
+
 
 
