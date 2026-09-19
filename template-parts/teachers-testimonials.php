@@ -55,7 +55,7 @@
 						<div class="teachers-card-group flex gap-md">
 							<!-- Portrait Box -->
 							<div class="teachers-portrait-box relative">
-								<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/Teacher Portraits DSC02273.webp' ); ?>" alt="Ms. Anjana Rajmane" class="teachers-portrait-img" loading="lazy" decoding="async">
+								<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/Ms Ajana Rajmane.webp' ); ?>" alt="Ms. Anjana Rajmane" class="teachers-portrait-img" loading="lazy" decoding="async">
 							</div>
 							<!-- Quote Details Box -->
 							<div class="teachers-quote-box relative flex-column flex-between">
@@ -84,11 +84,11 @@
 							<div class="teachers-quote-box relative flex-column flex-between">
 								<div class="teachers-quote-content">
 									<h3 class="teachers-quote-heading">Planting The Seeds For A Sustainable, Compassionate Future.</h3>
-									<p class="teachers-quote-text">"As a pre-primary coordinator, my vision is built on a simple truth: it takes a whole village to raise a child. I believe in establishing a close, collaborative partnership between students, teachers, and parents. By working hand in hand, we create a nurturing ecosystem where our youngest learners can truly thrive.<br><br>Our collective goal is to prepare students to become dynamic, global, honest, and disciplined individuals. Education at this foundational stage goes beyond traditional academics; it is about character building and fostering deep empathy. We guide our children to coexist peacefully not only with the people around them but also with plants, animals, and the entire environment. Together, we are planting the seeds for a sustainable, compassionate, and harmonious future."</p>
+									<p class="teachers-quote-text">"As a Pre-Primary Coordinator, my vision is built on a simple truth: it takes a whole village to raise a child. I believe in establishing a close, collaborative partnership between students, teachers, and parents. By working hand in hand, we create a nurturing ecosystem where our youngest learners can truly thrive.<br><br>Our collective goal is to prepare students to become dynamic, global, honest, and disciplined individuals. Education at this foundational stage goes beyond traditional academics; it is about character building and fostering deep empathy. We guide our children to coexist peacefully not only with the people around them but also with plants, animals, and the entire environment. Together, we are planting the seeds for a sustainable, compassionate, and harmonious future."</p>
 								</div>
 								<div class="teachers-quote-author">
 									<h4 class="teachers-author-name">Ms. Shraddha Sachdeva</h4>
-									<p class="teachers-author-info">Pre-primary Coordinator</p>
+									<p class="teachers-author-info">Pre-Primary Coordinator</p>
 								</div>
 							</div>
 						</div>

@@ -100,7 +100,7 @@ get_header();
 						</div>
 						<div class="extra-link-item">
 							<span><?php esc_html_e( 'For Career Opportunities', 'bd-somani' ); ?></span>
-							<a href="mailto:careers.kharghar@bdsomani.org" class="yellow-click-pill"><?php esc_html_e( 'CLICK HERE', 'bd-somani' ); ?></a>
+							<a href="<?php echo esc_url( home_url( '/careers/' ) ); ?>" class="yellow-click-pill"><?php esc_html_e( 'CLICK HERE', 'bd-somani' ); ?></a>
 						</div>
 					</div>
 

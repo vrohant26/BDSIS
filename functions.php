@@ -5,6 +5,26 @@
  * @package BD_Somani
  */
 
+/**
+ * Maintenance Mode Toggle
+ * Set to true to activate maintenance mode for public visitors.
+ * Set to false to disable maintenance mode and resume normal site operation.
+ */
+define( 'BDS_MAINTENANCE_MODE', true );
+
+function bds_check_maintenance_mode() {
+	if ( defined( 'BDS_MAINTENANCE_MODE' ) && BDS_MAINTENANCE_MODE ) {
+		// Allow logged-in administrators and editors to preview and manage the site
+		if ( ! is_user_logged_in() && ! current_user_can( 'edit_posts' ) ) {
+			status_header( 503 );
+			header( 'Retry-After: 3600' );
+			include get_template_directory() . '/maintenance.php';
+			exit();
+		}
+	}
+}
+add_action( 'template_redirect', 'bds_check_maintenance_mode' );
+
 // 1. Theme Setup & Supports
 function theme_setup_features() {
 	add_theme_support( 'title-tag' );
