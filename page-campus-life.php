@@ -312,10 +312,7 @@ get_header();
 		</div>
 
 		<div class="site-container relative z-2">
-
-			<!-- Section Header & Top Left Doodle Accent -->
-			<div class="campus-spaces-header text-center relative">
-				<!-- Annotation Doodle SVG (Top Left) -->
+			<!-- Annotation Doodle SVG (Top Left) -->
 				<div class="spaces-annotation-doodle" aria-hidden="true">
 					<?php
 					$curious_svg_path = get_template_directory() . '/assets/svgs/designed for curios minds.svg';
@@ -324,6 +321,11 @@ get_header();
 					}
 					?>
 				</div>
+
+			<!-- Section Header & Top Left Doodle Accent -->
+			<div class="campus-spaces-header text-center relative">
+				
+			
 
 				<h2 class="spaces-main-title"><?php esc_html_e( 'A Learning Space Designed for Every Learner', 'bd-somani' ); ?></h2>
 				<p class="spaces-main-subtitle"><?php esc_html_e( 'Our campus is more than a place to learn. It is where curiosity is sparked, ideas take shape, and every experience prepares students for life beyond school.', 'bd-somani' ); ?></p>
@@ -510,6 +512,21 @@ get_header();
 
 	<!-- SECTION 6: COUNSELLORS / STUDENT WELL-BEING & GUIDANCE -->
 	<section class="campus-counselors-section relative overflow-hidden" id="counselors">
+		
+		<!-- Background Organic Wavy Ribbon Accent (Top Right) -->
+		<div class="counselors-bg-wave-top" aria-hidden="true">
+			<svg width="460" height="380" viewBox="0 0 420 330" fill="none" xmlns="http://www.w3.org/2000/svg">
+				<path d="M676.597 160.642C506.988 558.87 395.637 -87.2283 292.886 178.575C190.134 444.377 41.2902 107.74 161.008 -33.4378C280.725 -174.615 14.7423 -193.93 36.2412 -221.546" stroke="var(--clr-wavy-purple-light)" stroke-width="70" stroke-linecap="round"/>
+			</svg>
+		</div>
+
+		<!-- Background Organic Wavy Ribbon Accent (Bottom Left) -->
+		<div class="counselors-bg-wave-bottom" aria-hidden="true">
+			<svg width="540" height="320" viewBox="0 0 542 301" fill="none" xmlns="http://www.w3.org/2000/svg">
+				<path d="M-53.6729 145.556C186.687 -214.416 176.577 441.129 326.732 198.926C476.887 -43.2773 560.878 315.087 417.107 431.678C273.337 548.268 531.154 616.46 504.917 639.622" stroke="var(--clr-wavy-purple-light)" stroke-width="70" stroke-linecap="round"/>
+			</svg>
+		</div>
+
 		<div class="site-container relative z-2">
 			
 			<!-- Section Header -->

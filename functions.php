@@ -10,7 +10,7 @@
  * Set to true to activate maintenance mode for public visitors.
  * Set to false to disable maintenance mode and resume normal site operation.
  */
-define( 'BDS_MAINTENANCE_MODE', true );
+define( 'BDS_MAINTENANCE_MODE', false );
 
 function bds_check_maintenance_mode() {
 	if ( defined( 'BDS_MAINTENANCE_MODE' ) && BDS_MAINTENANCE_MODE ) {

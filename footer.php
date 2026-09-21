@@ -270,7 +270,7 @@
 			</div>
 			<div class="bds-mascot-bubble-content">
 				<span class="bds-mascot-online-dot"></span>
-				<span class="bds-mascot-bubble-text"><?php esc_html_e( 'Need help? Chat with us!', 'bd-somani' ); ?></span>
+				<span class="bds-mascot-bubble-text"><?php esc_html_e( 'School questions? I’ve got you.', 'bd-somani' ); ?></span>
 				<button type="button" class="bds-mascot-bubble-close" id="bdsMascotBubbleClose" aria-label="<?php esc_attr_e( 'Close message', 'bd-somani' ); ?>">
 					<svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
 						<path d="M1 1L9 9M9 1L1 9" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
