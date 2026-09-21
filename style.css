@@ -6212,12 +6212,13 @@ body.theme-purple-mode .timeline-progress-bar {
    ACADEMICS PROGRAMME / OVERVIEW SECTION STYLES
    ========================================================================== */
 .academics-programme-section {
-    min-height: 900px;
+    min-height: clamp(760px, 85svh, 920px);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 4rem 0;
+    padding-top: clamp(4rem, 6vw, 6rem);
+    padding-bottom: clamp(6rem, 8vw, 8.5rem);
     background-color: #FFFFFF;
     position: relative;
     overflow: hidden;
@@ -6374,7 +6375,7 @@ body.theme-purple-mode .timeline-progress-bar {
 
     .programme-left-card,
     .programme-right-card {
-        width: clamp(320px, 20vw, 380px);
+        width: clamp(280px, 18vw, 340px);
         border-radius: 26px;
         border-width: 6px;
     }
@@ -6396,7 +6397,7 @@ body.theme-purple-mode .timeline-progress-bar {
 
     .programme-left-card,
     .programme-right-card {
-        width: clamp(380px, 20vw, 440px);
+        width: clamp(330px, 18vw, 380px);
         border-radius: 28px;
         border-width: 7px;
     }

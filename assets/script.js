@@ -1769,49 +1769,51 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // ---------------------------------------------------------------------------
   // Our Approach Page Dropdown / Accordion Interactivity
-  // Subtle Scroll Parallax for Programme Section Floating Images
+  // Subtle Scroll Parallax for Programme Section Floating Images (Zero Delay, Minimal Motion)
   function initAcademicsProgrammeParallax() {
     if (!hasGsap()) return;
 
-    const section = document.querySelector(".academics-programme-section");
-    if (!section) return;
+    const sections = document.querySelectorAll(".academics-programme-section");
+    if (!sections.length) return;
 
-    const leftCard = section.querySelector(".programme-left-card");
-    const rightCard = section.querySelector(".programme-right-card");
+    sections.forEach((section) => {
+      const leftCard = section.querySelector(".programme-left-card");
+      const rightCard = section.querySelector(".programme-right-card");
 
-    if (leftCard) {
-      gsap.fromTo(
-        leftCard,
-        { y: 110 },
-        {
-          y: -110,
-          ease: "none",
-          scrollTrigger: {
-            trigger: section,
-            start: "top bottom",
-            end: "bottom top",
-            scrub: 1,
+      if (leftCard) {
+        gsap.fromTo(
+          leftCard,
+          { y: 20 },
+          {
+            y: -20,
+            ease: "none",
+            scrollTrigger: {
+              trigger: section,
+              start: "top bottom",
+              end: "bottom top",
+              scrub: true,
+            },
           },
-        },
-      );
-    }
+        );
+      }
 
-    if (rightCard) {
-      gsap.fromTo(
-        rightCard,
-        { y: 140 },
-        {
-          y: -130,
-          ease: "none",
-          scrollTrigger: {
-            trigger: section,
-            start: "top bottom",
-            end: "bottom top",
-            scrub: 1.2,
+      if (rightCard) {
+        gsap.fromTo(
+          rightCard,
+          { y: 25 },
+          {
+            y: -25,
+            ease: "none",
+            scrollTrigger: {
+              trigger: section,
+              start: "top bottom",
+              end: "bottom top",
+              scrub: true,
+            },
           },
-        },
-      );
-    }
+        );
+      }
+    });
   }
 
   initAcademicsProgrammeParallax();
