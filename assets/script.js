@@ -1308,7 +1308,6 @@ document.addEventListener("DOMContentLoaded", () => {
       activeIndex = index;
       const targetCard = currentVisibleCards[index];
       const imgEl = targetCard.querySelector(".gallery-img");
-      const titleEl = targetCard.querySelector(".gallery-card-title");
 
       if (imgEl && lightboxImg) {
         lightboxImg.src = imgEl.src;

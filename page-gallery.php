@@ -196,7 +196,6 @@ get_header();
 									<div class="gallery-card-inner">
 										<img src="<?php echo esc_url( $img_item['url'] ); ?>" alt="<?php echo esc_attr( $img_item['title'] ); ?>" class="gallery-img" loading="lazy" decoding="async">
 										<div class="gallery-card-overlay">
-											<span class="gallery-card-title"><?php echo esc_html( $img_item['title'] ); ?></span>
 											<iconify-icon icon="lucide:zoom-in" class="zoom-icon"></iconify-icon>
 										</div>
 									</div>
@@ -274,7 +273,6 @@ get_header();
 							<div class="gallery-card-inner">
 								<img src="<?php echo esc_url( $item['img'] ); ?>" alt="<?php echo esc_attr( $item['title'] ); ?>" class="gallery-img" loading="lazy" decoding="async">
 								<div class="gallery-card-overlay">
-									<span class="gallery-card-title"><?php echo esc_html( $item['title'] ); ?></span>
 									<iconify-icon icon="lucide:zoom-in" class="zoom-icon"></iconify-icon>
 								</div>
 							</div>
