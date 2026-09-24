@@ -42,7 +42,7 @@ get_header();
 			<div class="legal-card">
 
 				<!-- Academic Fees Table Block -->
-				<div class="legal-block">
+				<!-- <div class="legal-block">
 					<div class="legal-block-header flex align-center gap-xs">
 						<iconify-icon icon="ph:currency-inr-bold" class="legal-icon"></iconify-icon>
 						<h2 class="legal-block-title"><?php esc_html_e( 'Academic Fees for the Year 2027-28', 'bd-somani' ); ?></h2>
@@ -85,7 +85,7 @@ get_header();
 							</tbody>
 						</table>
 					</div>
-				</div>
+				</div> -->
 
 				<!-- Fee Structure & Slabs -->
 				<div class="legal-block">
