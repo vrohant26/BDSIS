@@ -1315,10 +1315,6 @@ document.addEventListener("DOMContentLoaded", () => {
         lightboxImg.alt = imgEl.alt || "Gallery Image";
       }
 
-      if (titleEl && lightboxCaption) {
-        lightboxCaption.textContent = titleEl.textContent;
-      }
-
       lightboxModal.classList.add("is-open");
       lightboxModal.setAttribute("aria-hidden", "false");
       document.body.style.overflow = "hidden";

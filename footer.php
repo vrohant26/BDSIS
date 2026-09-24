@@ -116,7 +116,7 @@
 									<path d="M9 17C13.4183 17 17 13.4183 17 9C17 4.58172 13.4183 1 9 1C4.58172 1 1 4.58172 1 9C1 13.4183 4.58172 17 9 17Z" stroke="#49274A" stroke-width="1.8"/>
 									<path d="M9 4.5V9L12.5 11" stroke="#49274A" stroke-width="1.8" stroke-linecap="round"/>
 								</svg>
-								<span>Monday to Saturday | 8.00 AM to 5.00 PM</span>
+								<span>Monday to Saturday | 8.00 AM to 4.00 PM</span>
 							</li>
 							<li class="contact-item flex gap-xs align-center">
 								<svg class="contact-icon flex-shrink-0" width="18" height="14" viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg">

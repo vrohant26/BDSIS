@@ -303,7 +303,6 @@ get_header();
 		</button>
 		<div class="lightbox-content-box">
 			<img src="" alt="" class="lightbox-active-img" id="lightboxActiveImg">
-			<div class="lightbox-caption" id="lightboxCaption"></div>
 		</div>
 	</div>
 
