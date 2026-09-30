@@ -4,9 +4,12 @@
 	<meta charset="<?php bloginfo( 'charset' ); ?>">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 	<!-- Mobile Notch & Status Bar Theme Color (Brand Deep Purple #49274A) -->
+	<meta name="theme-color" content="#49274A" media="(prefers-color-scheme: light)">
+	<meta name="theme-color" content="#49274A" media="(prefers-color-scheme: dark)">
 	<meta name="theme-color" content="#49274A">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 	<meta name="msapplication-navbutton-color" content="#49274A">
-	<meta name="apple-mobile-web-app-status-bar-style" content="default">
 	<?php wp_head(); ?>
 </head>
 <body <?php body_class(); ?>>
@@ -102,6 +105,7 @@
 						<li class="nav-item"><a href="<?php echo $campus_life_url; ?>" class="nav-link <?php echo $is_campus_life ? 'active' : ''; ?>">CAMPUS LIFE</a></li>
 						<li class="nav-item"><a href="<?php echo $admissions_url; ?>" class="nav-link <?php echo $is_admissions ? 'active' : ''; ?>">ADMISSIONS</a></li>
 						<li class="nav-item"><a href="<?php echo $gallery_url; ?>" class="nav-link <?php echo $is_gallery ? 'active' : ''; ?>">GALLERY</a></li>
+						<li class="nav-item"><a href="<?php echo $faq_url; ?>" class="nav-link <?php echo $is_faq ? 'active' : ''; ?>">FAQ</a></li>
 						<li class="nav-item"><a href="<?php echo $contact_url; ?>" class="nav-link <?php echo $is_contact ? 'active' : ''; ?>">CONTACT US</a></li>
 					</ul>
 				</nav>
@@ -145,6 +149,7 @@
 						<li class="mobile-nav-item"><a href="<?php echo $campus_life_url; ?>" class="mobile-link <?php echo $is_campus_life ? 'active' : ''; ?>">CAMPUS LIFE</a></li>
 						<li class="mobile-nav-item"><a href="<?php echo $admissions_url; ?>" class="mobile-link <?php echo $is_admissions ? 'active' : ''; ?>">ADMISSIONS</a></li>
 						<li class="mobile-nav-item"><a href="<?php echo $gallery_url; ?>" class="mobile-link <?php echo $is_gallery ? 'active' : ''; ?>">GALLERY</a></li>
+						<li class="mobile-nav-item"><a href="<?php echo $faq_url; ?>" class="mobile-link <?php echo $is_faq ? 'active' : ''; ?>">FAQ</a></li>
 						<li class="mobile-nav-item"><a href="<?php echo $contact_url; ?>" class="mobile-link <?php echo $is_contact ? 'active' : ''; ?>">CONTACT US</a></li>
 					</ul>
 					<div class="mobile-cta-box">

@@ -115,11 +115,10 @@ if ( empty( $location ) ) {
 			</div>
 		</section>
 
-		<!-- Brand Marquee Scrolling Banner -->
-		<?php get_template_part( 'template-parts/brand-marquee' ); ?>
+	
 
 		<!-- WE ARE HIRING / Positions Section -->
-		<section id="openings" class="careers-openings-section relative">
+		<!-- <section id="openings" class="careers-openings-section relative">
 			<div class="careers-section-header text-center">
 				<div class="hiring-tag-banner flex-center">
 					<iconify-icon icon="ph:megaphone-simple-fill" class="hiring-megaphone"></iconify-icon>
@@ -128,10 +127,10 @@ if ( empty( $location ) ) {
 				</div>
 				<h2 class="careers-section-title"><?php esc_html_e( 'Current Open Positions', 'bd-somani' ); ?></h2>
 				<p class="careers-section-subtitle"><?php esc_html_e( 'BDSISK is seeking passionate individuals committed to imparting quality education for the academic year 2026-27. Explore our open roles below:', 'bd-somani' ); ?></p>
-			</div>
+			</div> -->
 
 			<!-- Open Positions Table -->
-			<div class="careers-table-wrapper overflow-hidden">
+			<!-- <div class="careers-table-wrapper overflow-hidden">
 				<table class="careers-positions-table">
 					<thead>
 						<tr>
@@ -239,7 +238,7 @@ if ( empty( $location ) ) {
 					</tbody>
 				</table>
 			</div>
-		</section>
+		</section> -->
 
 		<!-- How to Apply & HR Contact Section -->
 		<section class="careers-apply-section relative overflow-hidden">

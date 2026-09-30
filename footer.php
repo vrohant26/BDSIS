@@ -175,6 +175,7 @@
 						<h3 class="footer-col-title">Information</h3>
 						<ul class="footer-links">
 							<li><a href="<?php echo esc_url( home_url( '/gallery/' ) ); ?>">Gallery</a></li>
+							<li><a href="<?php echo $f_faq_url; ?>" class="<?php echo $f_is_faq ? 'active' : ''; ?>">FAQs</a></li>
 							<li><a href="<?php echo $f_terms_url; ?>" class="<?php echo $f_is_terms ? 'active' : ''; ?>">Terms & Conditions</a></li>
 							<li><a href="<?php echo $f_privacy_url; ?>" class="<?php echo $f_is_privacy ? 'active' : ''; ?>">Privacy Policy</a></li>
 						</ul>
@@ -290,6 +291,14 @@
 		</div>
 	</div>
 
+	<!-- Back To Top Button -->
+	<button type="button" class="back-to-top-btn" id="backToTopBtn" aria-label="<?php esc_attr_e( 'Back to top', 'bd-somani' ); ?>" title="<?php esc_attr_e( 'Back to top', 'bd-somani' ); ?>">
+		<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+			<path d="M18 15l-6-6-6 6"/>
+		</svg>
+	</button>
+
 <?php wp_footer(); ?>
 </body>
 </html>
+

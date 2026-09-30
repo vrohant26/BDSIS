@@ -1187,8 +1187,17 @@ document.addEventListener("DOMContentLoaded", () => {
     );
 
     // 2. Smooth Scroll on Tab Clicks
+    let hasDragged = false;
+
     categoryTabs.forEach((tab) => {
       tab.addEventListener("click", (e) => {
+        // If mouse was dragged horizontally, prevent section jump
+        if (hasDragged) {
+          e.preventDefault();
+          e.stopImmediatePropagation();
+          return;
+        }
+
         e.preventDefault();
         const targetId = tab.getAttribute("data-target");
         const targetSection = document.getElementById(targetId);
@@ -1202,6 +1211,9 @@ document.addEventListener("DOMContentLoaded", () => {
         tab.classList.add("active");
         tab.setAttribute("aria-selected", "true");
 
+        // Keep clicked tab in view inside the draggable navbar
+        tab.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
+
         const offsetTop =
           targetSection.getBoundingClientRect().top + window.scrollY - 220;
         if (typeof lenis !== "undefined" && lenis) {
@@ -1212,7 +1224,76 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
 
-    // 3. ScrollSpy: Highlight active tab as user scrolls down with rAF throttle
+    // 3. Draggable Horizontal Navigation & Arrows
+    const nav = faqContainer.querySelector(".faq-category-nav");
+    const navWrapper = faqContainer.querySelector(".faq-nav-bar-wrapper");
+    const prevArrow = document.getElementById("faqNavPrev");
+    const nextArrow = document.getElementById("faqNavNext");
+
+    function updateNavScrollIndicators() {
+      if (!nav || !navWrapper) return;
+      const maxScroll = nav.scrollWidth - nav.clientWidth;
+      const canScrollLeft = nav.scrollLeft > 10;
+      const canScrollRight = nav.scrollLeft < maxScroll - 10;
+      navWrapper.classList.toggle("can-scroll-left", canScrollLeft);
+      navWrapper.classList.toggle("can-scroll-right", canScrollRight);
+    }
+
+    if (nav) {
+      let isDown = false;
+      let startX = 0;
+      let scrollLeft = 0;
+
+      nav.addEventListener("mousedown", (e) => {
+        // Only trigger on primary left mouse button
+        if (e.button !== 0) return;
+        isDown = true;
+        hasDragged = false;
+        nav.classList.add("is-dragging");
+        startX = e.pageX - nav.offsetLeft;
+        scrollLeft = nav.scrollLeft;
+      });
+
+      window.addEventListener("mouseup", () => {
+        if (!isDown) return;
+        isDown = false;
+        setTimeout(() => {
+          nav.classList.remove("is-dragging");
+          hasDragged = false;
+        }, 50);
+      });
+
+      nav.addEventListener("mousemove", (e) => {
+        if (!isDown) return;
+        e.preventDefault();
+        const x = e.pageX - nav.offsetLeft;
+        const walk = (x - startX) * 1.5;
+        if (Math.abs(x - startX) > 6) {
+          hasDragged = true;
+        }
+        nav.scrollLeft = scrollLeft - walk;
+        updateNavScrollIndicators();
+      });
+
+      nav.addEventListener("scroll", updateNavScrollIndicators, { passive: true });
+      window.addEventListener("resize", updateNavScrollIndicators, { passive: true });
+      setTimeout(updateNavScrollIndicators, 100);
+    }
+
+    // Arrow button click listeners
+    if (prevArrow && nav) {
+      prevArrow.addEventListener("click", () => {
+        nav.scrollBy({ left: -260, behavior: "smooth" });
+      });
+    }
+
+    if (nextArrow && nav) {
+      nextArrow.addEventListener("click", () => {
+        nav.scrollBy({ left: 260, behavior: "smooth" });
+      });
+    }
+
+    // 4. ScrollSpy: Highlight active tab as user scrolls down with rAF throttle
     let isScrollTicking = false;
     window.addEventListener(
       "scroll",
@@ -1233,6 +1314,9 @@ document.addEventListener("DOMContentLoaded", () => {
                   tab.getAttribute("data-target") === currentSectionId;
                 tab.classList.toggle("active", matches);
                 tab.setAttribute("aria-selected", matches ? "true" : "false");
+                if (matches && !nav.classList.contains("is-dragging")) {
+                  tab.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
+                }
               });
             }
             isScrollTicking = false;
@@ -2594,4 +2678,38 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
   initTidioMascot();
+
+  // ---------------------------------------------------------------------------
+  // Back To Top Button Handler
+  // ---------------------------------------------------------------------------
+  function initBackToTop() {
+    const backToTopBtn = document.getElementById("backToTopBtn");
+    if (!backToTopBtn) return;
+
+    const toggleBackToTop = () => {
+      const scrollY = window.scrollY || document.documentElement.scrollTop;
+      if (scrollY > 300) {
+        backToTopBtn.classList.add("is-visible");
+      } else {
+        backToTopBtn.classList.remove("is-visible");
+      }
+    };
+
+    window.addEventListener("scroll", toggleBackToTop, { passive: true });
+    toggleBackToTop();
+
+    backToTopBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      if (typeof lenis !== "undefined" && lenis && typeof lenis.scrollTo === "function") {
+        lenis.scrollTo(0);
+      } else {
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth"
+        });
+      }
+    });
+  }
+  initBackToTop();
 });
+

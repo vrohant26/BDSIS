@@ -80,6 +80,7 @@ html {
     scroll-behavior: smooth;
     overflow-x: hidden !important;
     max-width: 100vw;
+    background-color: var(--clr-primary-purple, #49274A);
 }
 
 body {
@@ -420,7 +421,8 @@ ol {
     right: 0;
     width: 100%;
     z-index: 1000;
-    background-color: #FFFFFF;
+    background-color: var(--clr-primary-purple, #49274A);
+    padding-top: env(safe-area-inset-top, 0px);
 }
 
 .top-marquee {
@@ -2519,6 +2521,7 @@ body.theme-purple-mode .timeline-progress-bar {
     position: relative;
     background-color: #FFFFFF;
     padding-top: clamp(4.5rem, 9vw, 9.5rem);
+    padding-bottom: max(1.5rem, env(safe-area-inset-bottom, 0px));
 }
 
 /* Top Overlapping Submerged Cards Row */
@@ -3606,17 +3609,113 @@ body.theme-purple-mode .timeline-progress-bar {
     position: sticky;
     top: clamp(110px, 8vw, 130px);
     z-index: 100;
+    transition: box-shadow 0.25s ease;
 }
 
+/* Gradient Fade Masks on Overflow */
+.faq-nav-bar-wrapper::before,
+.faq-nav-bar-wrapper::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 38px;
+    border-radius: 12px;
+    pointer-events: none;
+    z-index: 6;
+    opacity: 0;
+    transition: opacity 0.25s ease;
+}
+
+.faq-nav-bar-wrapper::before {
+    left: 0;
+    background: linear-gradient(to right, #49274A 20%, transparent);
+}
+
+.faq-nav-bar-wrapper::after {
+    right: 0;
+    background: linear-gradient(to left, #49274A 20%, transparent);
+}
+
+.faq-nav-bar-wrapper.can-scroll-left::before {
+    opacity: 1;
+}
+
+.faq-nav-bar-wrapper.can-scroll-right::after {
+    opacity: 1;
+}
+
+/* Navigation Arrow Scroll Buttons (Only on Hover) */
+.faq-nav-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: var(--clr-primary-yellow);
+    border: none;
+    color: #371D38;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.15rem;
+    cursor: pointer;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+    z-index: 12;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease, transform 0.2s ease, background-color 0.2s ease;
+}
+
+.faq-nav-arrow:hover {
+    background-color: #FFFFFF;
+    color: #371D38;
+    transform: translateY(-50%) scale(1.1);
+}
+
+.faq-nav-arrow.prev-arrow {
+    left: -14px;
+}
+
+.faq-nav-arrow.next-arrow {
+    right: -14px;
+}
+
+/* Only display arrows on hover if there is content to scroll */
+.faq-nav-bar-wrapper.can-scroll-left:hover .faq-nav-arrow.prev-arrow {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.faq-nav-bar-wrapper.can-scroll-right:hover .faq-nav-arrow.next-arrow {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* Draggable Navigation Container */
 .faq-category-nav {
     width: 100%;
     overflow-x: auto;
     scrollbar-width: none;
     -ms-overflow-style: none;
+    cursor: grab;
+    user-select: none;
+    -webkit-user-select: none;
+    scroll-behavior: smooth;
 }
 
 .faq-category-nav::-webkit-scrollbar {
     display: none;
+}
+
+.faq-category-nav.is-dragging {
+    cursor: grabbing !important;
+    scroll-behavior: auto !important;
+}
+
+.faq-category-nav.is-dragging * {
+    cursor: grabbing !important;
 }
 
 .faq-nav-tabs {
@@ -3646,6 +3745,7 @@ body.theme-purple-mode .timeline-progress-bar {
     position: relative;
     transition: var(--transition-fast);
     white-space: nowrap;
+    cursor: grab;
 }
 
 .faq-tab-link:hover {
@@ -3771,6 +3871,33 @@ body.theme-purple-mode .timeline-progress-bar {
 
 .faq-card-content p {
     margin: 0;
+}
+
+.faq-card-content p+p {
+    margin-top: 0.75rem;
+}
+
+.faq-card-content .faq-inner-list {
+    margin: 0.75rem 0;
+    padding-left: 1.5rem;
+    list-style-type: disc;
+}
+
+.faq-card-content .faq-inner-list li {
+    margin-bottom: 0.4rem;
+    color: #EAE0EC;
+}
+
+.faq-card-content a {
+    color: var(--clr-primary-yellow);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    font-weight: 500;
+    transition: color 0.2s ease;
+}
+
+.faq-card-content a:hover {
+    color: #FFFFFF;
 }
 
 /* Group Divider Line */
@@ -11191,5 +11318,68 @@ body.tidio-chat-is-open iframe#tidio-chat-code {
     .bds-mascot-red-close-btn svg {
         width: 8px;
         height: 8px;
+    }
+}
+
+/* ==========================================================================
+   Back To Top Floating Button
+   ========================================================================== */
+.back-to-top-btn {
+    position: fixed;
+    bottom: 120px;
+    left: 28px;
+    z-index: 99999;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background-color: var(--clr-primary, #49274A);
+    color: #FFFFFF;
+    border: 2px solid rgba(255, 255, 255, 0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateY(15px) scale(0.9);
+    transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.back-to-top-btn.is-visible {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateY(0) scale(1);
+}
+
+.back-to-top-btn:hover {
+    background-color: var(--clr-accent, #F1C822);
+    color: #2B182C;
+    border-color: var(--clr-accent, #F1C822);
+    transform: translateY(-4px) scale(1.08);
+    box-shadow: 0 8px 22px rgba(73, 39, 74, 0.4);
+}
+
+.back-to-top-btn:active {
+    transform: translateY(-1px) scale(0.98);
+}
+
+.back-to-top-btn svg {
+    transition: transform 0.25s ease;
+}
+
+.back-to-top-btn:hover svg {
+    transform: translateY(-2px);
+}
+
+/* Mobile responsive adjustments */
+@media (max-width: 768px) {
+    .back-to-top-btn {
+        bottom: 30px;
+        left: 20px;
+        width: 42px;
+        height: 42px;
     }
 }
