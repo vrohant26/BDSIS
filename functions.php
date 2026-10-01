@@ -1398,30 +1398,49 @@ add_action( 'add_meta_boxes', 'theme_add_gallery_metaboxes' );
 function theme_gallery_images_metabox_callback( $post ) {
 	wp_nonce_field( 'theme_save_gallery_images', 'theme_gallery_nonce' );
 	$image_ids = get_post_meta( $post->ID, '_bds_gallery_image_ids', true );
-	$ids_array = ! empty( $image_ids ) ? explode( ',', $image_ids ) : array();
+	$ids_array = ! empty( $image_ids ) ? array_filter( array_map( 'intval', explode( ',', $image_ids ) ) ) : array();
 	?>
 	<div id="bds-gallery-metabox-wrapper">
-		<p class="description"><?php esc_html_e( 'Upload or select photos for this gallery item. Select categories in the right sidebar.', 'bd-somani' ); ?></p>
-		<input type="hidden" name="bds_gallery_image_ids" id="bds_gallery_image_ids" value="<?php echo esc_attr( $image_ids ); ?>">
-		<div id="bds-thumbs-container" style="display: flex; flex-wrap: wrap; gap: 10px; margin-block: 15px;">
+		<p class="description" style="margin-bottom: 12px; font-size: 13px;">
+			<?php esc_html_e( 'Upload or select photos for this album. Newly added photos will append to your existing ones. Drag and drop thumbnails to rearrange order.', 'bd-somani' ); ?>
+		</p>
+		<input type="hidden" name="bds_gallery_image_ids" id="bds_gallery_image_ids" value="<?php echo esc_attr( implode( ',', $ids_array ) ); ?>">
+		
+		<div id="bds-thumbs-container" style="display: flex; flex-wrap: wrap; gap: 12px; min-height: 100px; padding: 12px; background: #f8f9fa; border: 2px dashed #c3c4c7; border-radius: 8px; align-items: flex-start;">
 			<?php
 			if ( ! empty( $ids_array ) ) {
 				foreach ( $ids_array as $img_id ) {
-					$img_id = intval( trim( $img_id ) );
 					if ( $img_id > 0 ) {
 						$thumb_src = wp_get_attachment_image_url( $img_id, 'thumbnail' );
 						if ( $thumb_src ) {
-							echo '<div class="bds-thumb-item" data-id="' . $img_id . '" style="position: relative; width: 90px; height: 90px; border-radius: 8px; overflow: hidden; border: 1px solid #ccc;">';
-							echo '<img src="' . esc_url( $thumb_src ) . '" style="width: 100%; height: 100%; object-fit: cover;">';
-							echo '<button type="button" class="bds-remove-thumb" style="position: absolute; top: 4px; right: 4px; background: #e74c3c; color: #fff; border: none; border-radius: 50%; width: 20px; height: 20px; cursor: pointer; font-size: 12px; line-height: 1; text-align: center;">&times;</button>';
-							echo '</div>';
+							?>
+							<div class="bds-thumb-item" data-id="<?php echo esc_attr( $img_id ); ?>" style="position: relative; width: 96px; height: 96px; border-radius: 8px; overflow: hidden; border: 1px solid #dcdcde; background: #fff; cursor: grab; box-shadow: 0 1px 3px rgba(0,0,0,0.08);">
+								<img src="<?php echo esc_url( $thumb_src ); ?>" style="width: 100%; height: 100%; object-fit: cover; display: block; pointer-events: none;">
+								<button type="button" class="bds-remove-thumb" title="<?php esc_attr_e( 'Remove photo', 'bd-somani' ); ?>" style="position: absolute; top: 4px; right: 4px; background: rgba(220, 53, 69, 0.9); color: #fff; border: none; border-radius: 50%; width: 22px; height: 22px; cursor: pointer; font-size: 14px; font-weight: bold; line-height: 1; display: flex; align-items: center; justify-content: center; box-shadow: 0 1px 4px rgba(0,0,0,0.3); transition: background 0.2s;">&times;</button>
+							</div>
+							<?php
 						}
 					}
 				}
 			}
 			?>
 		</div>
-		<button type="button" class="button button-primary" id="bds-upload-gallery-btn"><?php esc_html_e( '+ Add / Manage Photos', 'bd-somani' ); ?></button>
+
+		<div style="display: flex; gap: 12px; align-items: center; margin-top: 14px; flex-wrap: wrap;">
+			<button type="button" class="button button-primary" id="bds-upload-gallery-btn">
+				<span class="dashicons dashicons-images-alt2" style="vertical-align: text-top; margin-right: 4px; font-size: 17px; width: 17px; height: 17px;"></span>
+				<?php esc_html_e( '+ Add Photos', 'bd-somani' ); ?>
+			</button>
+			<button type="button" class="button" id="bds-clear-gallery-btn" style="color: #b32d2e; border-color: #dcdcde; <?php echo empty( $ids_array ) ? 'display: none;' : ''; ?>">
+				<?php esc_html_e( 'Clear All', 'bd-somani' ); ?>
+			</button>
+			<span id="bds-photo-count" style="color: #646970; font-size: 13px; font-weight: 500;">
+				<?php 
+				$count = count( $ids_array );
+				printf( _n( '%s photo', '%s photos', $count, 'bd-somani' ), number_format_i18n( $count ) ); 
+				?>
+			</span>
+		</div>
 	</div>
 	<?php
 }
@@ -1448,6 +1467,7 @@ function theme_gallery_admin_scripts( $hook ) {
 	global $post_type;
 	if ( ( 'post.php' === $hook || 'post-new.php' === $hook ) && 'gallery' === $post_type ) {
 		wp_enqueue_media();
+		wp_enqueue_script( 'jquery-ui-sortable' );
 		add_action( 'admin_footer', 'theme_gallery_admin_footer_js' );
 	}
 }
@@ -1458,43 +1478,97 @@ function theme_gallery_admin_footer_js() {
 	<script>
 	jQuery(document).ready(function($) {
 		var frame;
+
+		function updateGalleryState() {
+			var ids = [];
+			$('#bds-thumbs-container .bds-thumb-item').each(function() {
+				var id = $(this).data('id');
+				if (id) {
+					ids.push(id);
+				}
+			});
+			$('#bds_gallery_image_ids').val(ids.join(','));
+			var count = ids.length;
+			var label = count === 1 ? '1 photo' : count + ' photos';
+			$('#bds-photo-count').text(label);
+			if (count > 0) {
+				$('#bds-clear-gallery-btn').show();
+			} else {
+				$('#bds-clear-gallery-btn').hide();
+			}
+		}
+
+		// Enable drag & drop sortable to rearrange order
+		if ($.fn.sortable) {
+			$('#bds-thumbs-container').sortable({
+				items: '.bds-thumb-item',
+				cursor: 'grabbing',
+				tolerance: 'pointer',
+				update: function() {
+					updateGalleryState();
+				}
+			});
+		}
+
 		$('#bds-upload-gallery-btn').on('click', function(e) {
 			e.preventDefault();
+			
 			if (frame) {
 				frame.open();
 				return;
 			}
+
 			frame = wp.media({
 				title: 'Select or Upload Gallery Images',
-				button: { text: 'Use Selected Images' },
+				button: { text: 'Add to Gallery' },
 				multiple: true
 			});
+
 			frame.on('select', function() {
 				var selection = frame.state().get('selection');
-				var ids = [];
-				var thumbsHtml = '';
+				var currentIds = $('#bds_gallery_image_ids').val()
+					? $('#bds_gallery_image_ids').val().split(',').map(function(id) { return parseInt(id.trim(), 10); }).filter(Boolean)
+					: [];
+
 				selection.each(function(attachment) {
 					var att = attachment.toJSON();
-					ids.push(att.id);
-					var url = att.sizes && att.sizes.thumbnail ? att.sizes.thumbnail.url : att.url;
-					thumbsHtml += '<div class="bds-thumb-item" data-id="' + att.id + '" style="position: relative; width: 90px; height: 90px; border-radius: 8px; overflow: hidden; border: 1px solid #ccc;">';
-					thumbsHtml += '<img src="' + url + '" style="width: 100%; height: 100%; object-fit: cover;">';
-					thumbsHtml += '<button type="button" class="bds-remove-thumb" style="position: absolute; top: 4px; right: 4px; background: #e74c3c; color: #fff; border: none; border-radius: 50%; width: 20px; height: 20px; cursor: pointer; font-size: 12px; line-height: 1; text-align: center;">&times;</button>';
-					thumbsHtml += '</div>';
+					var attId = parseInt(att.id, 10);
+
+					// Only add if not already in the gallery (prevents duplicate thumbnails)
+					if (currentIds.indexOf(attId) === -1) {
+						currentIds.push(attId);
+						var url = (att.sizes && att.sizes.thumbnail) ? att.sizes.thumbnail.url : ((att.sizes && att.sizes.medium) ? att.sizes.medium.url : att.url);
+						var thumbHtml = '<div class="bds-thumb-item" data-id="' + attId + '" style="position: relative; width: 96px; height: 96px; border-radius: 8px; overflow: hidden; border: 1px solid #dcdcde; background: #fff; cursor: grab; box-shadow: 0 1px 3px rgba(0,0,0,0.08);">' +
+							'<img src="' + url + '" style="width: 100%; height: 100%; object-fit: cover; display: block; pointer-events: none;">' +
+							'<button type="button" class="bds-remove-thumb" title="Remove photo" style="position: absolute; top: 4px; right: 4px; background: rgba(220, 53, 69, 0.9); color: #fff; border: none; border-radius: 50%; width: 22px; height: 22px; cursor: pointer; font-size: 14px; font-weight: bold; line-height: 1; display: flex; align-items: center; justify-content: center; box-shadow: 0 1px 4px rgba(0,0,0,0.3); transition: background 0.2s;">&times;</button>' +
+							'</div>';
+						$('#bds-thumbs-container').append(thumbHtml);
+					}
 				});
-				$('#bds_gallery_image_ids').val(ids.join(','));
-				$('#bds-thumbs-container').html(thumbsHtml);
+
+				updateGalleryState();
 			});
+
 			frame.open();
 		});
 
-		$(document).on('click', '.bds-remove-thumb', function() {
-			var $item = $(this).closest('.bds-thumb-item');
-			var removeId = $item.data('id');
-			$item.remove();
-			var currentIds = $('#bds_gallery_image_ids').val().split(',').filter(Boolean);
-			var newIds = currentIds.filter(function(id) { return parseInt(id) !== parseInt(removeId); });
-			$('#bds_gallery_image_ids').val(newIds.join(','));
+		// Remove individual thumbnail
+		$(document).on('click', '.bds-remove-thumb', function(e) {
+			e.preventDefault();
+			e.stopPropagation();
+			$(this).closest('.bds-thumb-item').fadeOut(180, function() {
+				$(this).remove();
+				updateGalleryState();
+			});
+		});
+
+		// Clear all photos button
+		$('#bds-clear-gallery-btn').on('click', function(e) {
+			e.preventDefault();
+			if (confirm('Are you sure you want to remove all photos from this album?')) {
+				$('#bds-thumbs-container').empty();
+				updateGalleryState();
+			}
 		});
 	});
 	</script>
