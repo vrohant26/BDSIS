@@ -18,7 +18,7 @@
 					
 					<!-- CTA Buttons -->
 					<div class="cta-buttons-group flex align-center gap-sm flex-wrap">
-						<a href="<?php echo esc_url( home_url( '/contact-us/#enquire' ) ); ?>" class="btn btn-yellow cta-btn-primary">
+						<a href="https://calendly.com/admissions_bdsiskharghar/campus-visit" target="_blank" rel="noopener noreferrer" class="btn btn-yellow cta-btn-primary">
 							<span><?php esc_html_e( 'SCHEDULE A CAMPUS VISIT', 'bd-somani' ); ?></span>
 							<svg class="btn-arrow" width="16" height="14" viewBox="0 0 16 14" fill="none" xmlns="http://www.w3.org/2000/svg">
 								<path d="M9 1L15 7M15 7L9 13M15 7H1" stroke="#2B182C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>

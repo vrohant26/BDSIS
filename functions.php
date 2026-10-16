@@ -49,8 +49,32 @@ add_action( 'after_setup_theme', 'theme_setup_features' );
  * Helper function to retrieve & render SVGs from the new icon set.
  */
 function bds_get_new_icon( $icon_name, $class = 'bds-new-icon' ) {
-	$file_path = get_template_directory() . '/assets/svgs/new icon set/' . $icon_name . '.svg';
-	if ( file_exists( $file_path ) ) {
+	$dir        = get_template_directory() . '/assets/svgs/new icon set/';
+	$candidates = array(
+		$icon_name . '.svg',
+		strtolower( $icon_name ) . '.svg',
+		str_replace( '-', ' ', $icon_name ) . '.svg',
+		str_replace( ' ', '-', $icon_name ) . '.svg',
+	);
+
+	if ( in_array( strtolower( $icon_name ), array( 'swimming', 'swimming pool', 'swimming pool person icon' ), true ) ) {
+		$candidates[] = 'swimming pool.svg';
+		$candidates[] = 'Swimming Pool Person Icon.svg';
+	}
+
+	if ( in_array( strtolower( $icon_name ), array( 'financial literacy', 'financial-literacy', 'finance' ), true ) ) {
+		$candidates[] = 'financial literacy.svg';
+	}
+
+	$file_path = '';
+	foreach ( $candidates as $candidate ) {
+		if ( file_exists( $dir . $candidate ) ) {
+			$file_path = $dir . $candidate;
+			break;
+		}
+	}
+
+	if ( ! empty( $file_path ) && file_exists( $file_path ) ) {
 		$svg = file_get_contents( $file_path );
 		if ( ! empty( $class ) ) {
 			$svg = str_replace( '<svg ', '<svg class="' . esc_attr( $class ) . '" ', $svg );
@@ -2195,6 +2219,3 @@ src="https://www.facebook.com/tr?id=4397700063823698&ev=PageView&noscript=1"/>
 	<?php
 }
 add_action( 'wp_head', 'bdsis_enqueue_meta_pixel', 1 );
-
-
-

@@ -67,12 +67,12 @@
 							<!-- Quote Details Box -->
 							<div class="parents-quote-box relative flex-column flex-between">
 								<div class="parents-quote-content">
-									<h3 class="parents-quote-heading">A School Where Happiness, Curiosity, And Holistic Learning Come Together.</h3>
+									<h3 class="parents-quote-heading">A School Where Happiness, Curiosity, and Holistic Learning Come Together</h3>
 									<p class="parents-quote-text">"As a parent, my priority is that my child is happy coming to school, and he truly loves being here. I appreciate the balance between academics and extracurricular activities, along with the school’s approach to encouraging children to think beyond textbooks. Every subject goes beyond simple question-and-answer learning, helping children think, explore, and connect what they learn to life. I’m very happy with his overall development, and I believe this is what truly sets the school apart."</p>
 								</div>
 								<div class="parents-quote-author">
 									<h4 class="parents-author-name">Ms. Zahabia Khairullah</h4>
-									<p class="parents-author-info">Mother of Ayaan Khairullah Grade 2 and Aqeel Khairullah Jr. KG</p>
+									<p class="parents-author-info">Mother of Ayaan Khairullah, Grade 2 and Aqeel Khairullah, Jr. KG</p>
 								</div>
 							</div>
 						</div>
@@ -95,7 +95,7 @@
 							<!-- Quote Details Box -->
 							<div class="parents-quote-box relative flex-column flex-between">
 								<div class="parents-quote-content">
-									<h3 class="parents-quote-heading">A School That Builds Confidence, Creativity, And Skills For The Future.</h3>
+									<h3 class="parents-quote-heading">A School that Builds Confidence, Creativity, and Skills for the Future</h3>
 									<p class="parents-quote-text">"Since joining B.D. Somani, I have seen a remarkable change in my daughter. She has become more confident, adaptable, and emotionally balanced, while continuing to excel academically. I especially appreciate how every child is given equal opportunities to participate in extracurricular activities. The unique initiatives like the Makers Lab and Radio Station provide children with a wonderful platform to explore their interests, build new skills, and prepare for the future. The balance between academics and extracurricular learning is truly what sets the school apart."</p>
 								</div>
 								<div class="parents-quote-author">
@@ -123,7 +123,7 @@
 							<!-- Quote Details Box -->
 							<div class="parents-quote-box relative flex-column flex-between">
 								<div class="parents-quote-content">
-									<h3 class="parents-quote-heading">The School’s Diverse Curriculum And Welcoming Environment Have Helped My Son Grow In Confidence, Communication, And Curiosity.</h3>
+									<h3 class="parents-quote-heading">The School’s Diverse Curriculum and Welcoming Environment Have Helped My Son Grow in Confidence, Communication, and Curiosity</h3>
 									<p class="parents-quote-text">"In just a year and a half, I’ve seen my son become much more confident and comfortable speaking with others. His English and Hindi communication skills have improved significantly, and his vocabulary continues to surprise us. I especially appreciate the diverse curriculum, which goes beyond academics to introduce children to the world around them. The school’s welcoming environment and infrastructure make it a place where we’re very happy to see him grow."</p>
 								</div>
 								<div class="parents-quote-author">
@@ -151,7 +151,7 @@
 							<!-- Quote Details Box -->
 							<div class="parents-quote-box relative flex-column flex-between">
 								<div class="parents-quote-content">
-									<h3 class="parents-quote-heading">The School’s Unique Learning Approach And Focus On Holistic Development Truly Set It Apart.</h3>
+									<h3 class="parents-quote-heading">The School’s Unique Learning Approach and Focus on Holistic Development Truly Set It Apart</h3>
 									<p class="parents-quote-text">"We are really glad that a reputed school like B.D. Somani International School has opened in Kharghar. My child is truly blessed to be part of this school. The teaching methods and techniques are very different and have helped my child grow both academically and through extracurricular activities. The Radio Station and Makers Lab are unique initiatives that I have not seen in other schools in Navi Mumbai. What I love most is that the school focuses not just on academics, but on the overall, holistic development of every child."</p>
 								</div>
 								<div class="parents-quote-author">
@@ -179,7 +179,7 @@
 							<!-- Quote Details Box -->
 							<div class="parents-quote-box relative flex-column flex-between">
 								<div class="parents-quote-content">
-									<h3 class="parents-quote-heading">A Happy Child, Practical Learning, And Personal Attention Make The School Stand Out.</h3>
+									<h3 class="parents-quote-heading">A Happy Child, Practical Learning, and Personal Attention Make the School Stand Out</h3>
 									<p class="parents-quote-text">"My daughter is in Grade 2 and this is her second year at the school. She is very happy here and always looks forward to coming to school. She especially enjoys the extracurricular activities, including Bharatanatyam and Taekwondo. We are very happy with the infrastructure and teaching methods, particularly the practical approach to learning and its application in daily life. The teachers and staff are wonderful and give personal attention to every child. We truly feel it is one of the best schools in Navi Mumbai."</p>
 								</div>
 								<div class="parents-quote-author">
@@ -207,7 +207,7 @@
 							<!-- Quote Details Box -->
 							<div class="parents-quote-box relative flex-column flex-between">
 								<div class="parents-quote-content">
-									<h3 class="parents-quote-heading">A School That Nurtures Responsible, Caring Individuals Through Values, Activities, And Genuine Support.</h3>
+									<h3 class="parents-quote-heading">A School that Nurtures Responsible, Caring Individuals Through Values, Activities, and Genuine Support</h3>
 									<p class="parents-quote-text">"As parents, we always worry about how our children will grow up to become responsible and caring individuals. I feel truly blessed to be a part of the B.D. Somani family. The school instils strong values in children and provides them with so many activities that help them grow and develop. I am also grateful to Ms. Shrutika for patiently listening to our concerns and guiding us with such warmth and understanding. We are truly blessed to be a part of this family."</p>
 								</div>
 								<div class="parents-quote-author">

@@ -43,7 +43,7 @@ get_header();
 						<?php echo bds_get_new_icon( 'bulb' ); ?>
 					</div>
 					<h1 class="faq-hero-title">Have a question?</h1>
-					<p class="faq-hero-subtitle">Everything you need to know about admissions, academics, school life and more all in one place.</p>
+					<p class="faq-hero-subtitle">Everything you need to know about admissions, academics, school life, and more — all in one place.</p>
 				</div>
 
 				<!-- Right Doodle SVG Illustration -->
@@ -344,7 +344,7 @@ get_header();
 						</button>
 						<div id="ans-adm-14" class="faq-card-body" role="region" aria-labelledby="q-adm-14">
 							<div class="faq-card-content">
-								<p>Families are encouraged to visit the campus before applying. Submit an <a href="<?php echo esc_url( home_url( '/admissions/#enquire' ) ); ?>">online enquiry</a>, and our Admissions Team will arrange a personalised campus tour at a convenient time.</p>
+								<p>Families are encouraged to visit the campus before applying. You can <a href="https://calendly.com/admissions_bdsiskharghar/campus-visit" target="_blank" rel="noopener noreferrer">schedule a campus visit directly here</a> or submit an <a href="<?php echo esc_url( home_url( '/admissions/#enquire' ) ); ?>">online enquiry</a>, and our Admissions Team will arrange a personalised campus tour at a convenient time.</p>
 							</div>
 						</div>
 					</div>
@@ -922,7 +922,7 @@ get_header();
 						</button>
 						<div id="ans-fv-43" class="faq-card-body" role="region" aria-labelledby="q-fv-43">
 							<div class="faq-card-content">
-								<p>Yes, the auditorium is 250+ seater with the latest LED screen, audio and video equipment.</p>
+								<p>Yes, the auditorium has a seating capacity of 250+ with the latest LED screen, audio and video equipment.</p>
 							</div>
 						</div>
 					</div>
@@ -954,7 +954,7 @@ get_header();
 						</button>
 						<div id="ans-fv-45" class="faq-card-body" role="region" aria-labelledby="q-fv-45">
 							<div class="faq-card-content">
-								<p>Yes, campus tours are available. Please <a href="<?php echo esc_url( home_url( '/admissions/#enquire' ) ); ?>">click here to schedule a visit</a> or submit an enquiry, and our Admissions Team will gladly host you.</p>
+								<p>Yes, campus tours are available. Please <a href="https://calendly.com/admissions_bdsiskharghar/campus-visit" target="_blank" rel="noopener noreferrer">click here to schedule a visit</a> or submit an enquiry, and our Admissions Team will gladly host you.</p>
 							</div>
 						</div>
 					</div>

@@ -57,7 +57,7 @@ get_header();
 							</div>
 							<div class="contact-detail-text">
 								<strong><?php esc_html_e( 'Address:', 'bd-somani' ); ?></strong><br>
-								<?php esc_html_e( 'BD Somani International School, Plot #92, Sector 27, Kharghar, Navi Mumbai 410210', 'bd-somani' ); ?>
+								<?php esc_html_e( 'B.D. Somani International School, Plot #92, Sector 27, Kharghar, Navi Mumbai 410210', 'bd-somani' ); ?>
 							</div>
 						</li>
 
@@ -238,7 +238,7 @@ get_header();
 								</div>
 								<div class="highlight-content">
 									<h3 class="highlight-item-title"><?php esc_html_e( 'ISKCON Kharghar', 'bd-somani' ); ?></h3>
-									<p class="highlight-item-desc"><?php esc_html_e( 'temple and cultural centre', 'bd-somani' ); ?></p>
+									<p class="highlight-item-desc"><?php esc_html_e( 'Temple and cultural centre', 'bd-somani' ); ?></p>
 								</div>
 							</div>
 
@@ -249,7 +249,7 @@ get_header();
 								</div>
 								<div class="highlight-content">
 									<h3 class="highlight-item-title"><?php esc_html_e( 'Kharghar Valley Golf Course', 'bd-somani' ); ?></h3>
-									<p class="highlight-item-desc"><?php esc_html_e( 'Green Spaces and recreation', 'bd-somani' ); ?></p>
+									<p class="highlight-item-desc"><?php esc_html_e( 'Green spaces and recreation', 'bd-somani' ); ?></p>
 								</div>
 							</div>
 

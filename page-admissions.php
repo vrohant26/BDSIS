@@ -47,7 +47,7 @@ get_header();
 					</h1>
 
 					<p class="contact-hero-subtitle admissions-lead">
-						<?php esc_html_e( 'Thank you for choosing the B.D. Somani International School, Kharghar. We are delighted to welcome families who share our belief in meaningful learning and holistic growth.', 'bd-somani' ); ?>
+						<?php esc_html_e( 'Thank you for choosing B.D. Somani International School, Kharghar. We are delighted to welcome families who share our belief in meaningful learning and holistic growth.', 'bd-somani' ); ?>
 					</p>
 
 					<p class="contact-hero-subtitle admissions-lead">
@@ -56,7 +56,7 @@ get_header();
 
 					<!-- Action Buttons -->
 					<div class="admissions-cta-buttons flex align-center gap-sm flex-wrap">
-						<a href="#apply" class="btn btn-yellow radius-md flex-center">
+						<a href="https://calendly.com/admissions_bdsiskharghar/campus-visit" target="_blank" rel="noopener noreferrer" class="btn btn-yellow radius-md flex-center">
 							<span><?php esc_html_e( 'SCHEDULE A SCHOOL VISIT', 'bd-somani' ); ?></span>
 							<svg class="btn-arrow" width="16" height="14" viewBox="0 0 16 14" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-left: 8px;">
 								<path d="M9 1L15 7M15 7L9 13M15 7H1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -324,8 +324,8 @@ get_header();
 									<?php echo bds_get_new_icon( 'rocket' ); ?>
 								</div>
 							</div>
-							<h3 class="process-card-title"><?php esc_html_e( 'Welcome to B.D. Somani Kharghar Community', 'bd-somani' ); ?></h3>
-							<p class="process-card-desc"><?php esc_html_e( 'Once your child’s admission is confirmed, the next chapter begins. We will guide your family through enrolment and help make the transition into the B.D. Somani, Kharghar community a warm and welcoming one.', 'bd-somani' ); ?></p>
+							<h3 class="process-card-title"><?php esc_html_e( 'Welcome to the B.D. Somani Kharghar Community', 'bd-somani' ); ?></h3>
+							<p class="process-card-desc"><?php esc_html_e( 'Once your child’s admission is confirmed, the next chapter begins. We will guide your family through enrolment and help make the transition into the B.D. Somani Kharghar community a warm and welcoming one.', 'bd-somani' ); ?></p>
 						</div>
 
 					</div>

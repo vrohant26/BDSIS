@@ -96,7 +96,7 @@ get_header();
 						<div class="approach-card" data-accordion>
 							<button class="approach-card-header" aria-expanded="false" aria-controls="approach-body-3">
 								<span class="approach-card-badge">Design Thinking</span>
-								<span class="approach-card-title">Design &amp; Problem-Solving Approach:</span>
+								<span class="approach-card-title">Design &amp; Problem-Solving Approach</span>
 								<svg class="approach-card-arrow" width="12" height="8" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
 									<path d="M1 1L5 5L9 1" stroke="#49274A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 								</svg>
@@ -187,7 +187,7 @@ get_header();
 				
 				<!-- Left Column: Content -->
 				<div class="about-potential-content">
-					<h2 class="about-potential-title">From Little Dreams to Big Achievements.</h2>
+					<h2 class="about-potential-title">From Little Dreams to Big Achievements</h2>
 					<p class="about-potential-lead">Every champion begins with a small dream, nurtured with learning, shaped by courage, and celebrated through achievement.</p>
 				</div>
 

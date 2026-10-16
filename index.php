@@ -15,7 +15,7 @@ get_header();
 						<h1 class="hero-title">Tomorrow’s Endeavour Begins Now</h1>
 						<p class="hero-subtitle">An ecosystem of growth where every experience helps children become thoughtful, confident, and compassionate individuals.</p>
 						<div class="hero-actions">
-							<a href="#visit" class="btn btn-yellow hero-btn">
+							<a href="https://calendly.com/admissions_bdsiskharghar/campus-visit" target="_blank" rel="noopener noreferrer" class="btn btn-yellow hero-btn">
 								<span>VISIT OUR SCHOOL</span>
 								<svg class="btn-arrow" width="18" height="14" viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg">
 									<path d="M11 1L17 7M17 7L11 13M17 7H1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -34,7 +34,7 @@ get_header();
 						<h1 class="hero-title">Learning That Inspires. Education That Endures.</h1>
 						<p class="hero-subtitle">A thoughtfully designed classroom experience where academic excellence meets creativity, curiosity, and real-world readiness.</p>
 						<div class="hero-actions">
-							<a href="#schedule" class="btn btn-yellow hero-btn">
+							<a href="https://calendly.com/admissions_bdsiskharghar/campus-visit" target="_blank" rel="noopener noreferrer" class="btn btn-yellow hero-btn">
 								<span>SCHEDULE A CAMPUS VISIT</span>
 								<svg class="btn-arrow" width="18" height="14" viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg">
 									<path d="M11 1L17 7M17 7L11 13M17 7H1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -127,7 +127,7 @@ get_header();
 
 			<!-- Header Content -->
 			<div class="philosophy-header text-center flex-column align-center gap-sm">
-				<h2 class="section-title">A School for Who They will Become</h2>
+				<h2 class="section-title">A School for Who They Will Become</h2>
 				<p class="section-subtitle">The world our children will grow into is changing faster than we can predict, so the real question isn't what they will study, but who they'll become.</p>
 			</div>
 

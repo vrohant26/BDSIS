@@ -195,9 +195,6 @@ get_header();
 								<div class="gallery-card-item <?php echo esc_attr( $category_class ); ?>" data-category="<?php echo esc_attr( $category_class ); ?>">
 									<div class="gallery-card-inner">
 										<img src="<?php echo esc_url( $img_item['url'] ); ?>" alt="<?php echo esc_attr( $img_item['title'] ); ?>" class="gallery-img" loading="lazy" decoding="async">
-										<div class="gallery-card-overlay">
-											<iconify-icon icon="lucide:zoom-in" class="zoom-icon"></iconify-icon>
-										</div>
 									</div>
 								</div>
 								<?php
@@ -272,9 +269,6 @@ get_header();
 						<div class="gallery-card-item <?php echo esc_attr( $item['category'] ); ?>" data-category="<?php echo esc_attr( $item['category'] ); ?>">
 							<div class="gallery-card-inner">
 								<img src="<?php echo esc_url( $item['img'] ); ?>" alt="<?php echo esc_attr( $item['title'] ); ?>" class="gallery-img" loading="lazy" decoding="async">
-								<div class="gallery-card-overlay">
-									<iconify-icon icon="lucide:zoom-in" class="zoom-icon"></iconify-icon>
-								</div>
 							</div>
 						</div>
 						<?php

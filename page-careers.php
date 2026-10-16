@@ -117,128 +117,20 @@ if ( empty( $location ) ) {
 
 	
 
-		<!-- WE ARE HIRING / Positions Section -->
-		<!-- <section id="openings" class="careers-openings-section relative">
-			<div class="careers-section-header text-center">
-				<div class="hiring-tag-banner flex-center">
-					<iconify-icon icon="ph:megaphone-simple-fill" class="hiring-megaphone"></iconify-icon>
-					<span><?php esc_html_e( 'WE ARE HIRING • ACADEMIC YEAR 2026-27', 'bd-somani' ); ?></span>
-					<iconify-icon icon="ph:megaphone-simple-fill" class="hiring-megaphone flipped"></iconify-icon>
+		<!-- We Are Hiring / Openings Poster Section -->
+		<section id="openings" class="careers-poster-section relative">
+			<div class="careers-poster-container text-center">
+				<div class="careers-poster-wrap">
+					<img 
+						src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/careers page.jpeg' ); ?>" 
+						alt="<?php esc_attr_e( 'We Are Hiring - Inviting Applications for Academic Year 2027', 'bd-somani' ); ?>" 
+						class="careers-poster-img"
+						loading="lazy"
+						decoding="async"
+					>
 				</div>
-				<h2 class="careers-section-title"><?php esc_html_e( 'Current Open Positions', 'bd-somani' ); ?></h2>
-				<p class="careers-section-subtitle"><?php esc_html_e( 'BDSISK is seeking passionate individuals committed to imparting quality education for the academic year 2026-27. Explore our open roles below:', 'bd-somani' ); ?></p>
-			</div> -->
-
-			<!-- Open Positions Table -->
-			<!-- <div class="careers-table-wrapper overflow-hidden">
-				<table class="careers-positions-table">
-					<thead>
-						<tr>
-							<th class="col-position"><?php esc_html_e( 'Position', 'bd-somani' ); ?></th>
-							<th class="col-qualification"><?php esc_html_e( 'Qualification & Experience Requirements', 'bd-somani' ); ?></th>
-							<th class="col-action"><?php esc_html_e( 'Action', 'bd-somani' ); ?></th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td class="col-position">
-								<div class="position-title-wrap">
-									<div class="position-icon flex-center" style="width: 24px; height: 24px; color: var(--clr-primary-purple);"><?php echo bds_get_new_icon( 'school bag' ); ?></div>
-									<span class="position-name"><?php esc_html_e( 'Pre-School Teachers', 'bd-somani' ); ?></span>
-								</div>
-							</td>
-							<td class="col-qualification"><?php esc_html_e( 'Graduates with a Diploma in Early Childhood Education.', 'bd-somani' ); ?></td>
-							<td class="col-action">
-								<a href="mailto:<?php echo esc_attr( $hr_email ); ?>?subject=Application%20for%20Pre-School%20Teachers" class="apply-table-btn"><?php esc_html_e( 'Apply Now', 'bd-somani' ); ?></a>
-							</td>
-						</tr>
-
-						<tr>
-							<td class="col-position">
-								<div class="position-title-wrap">
-									<div class="position-icon flex-center" style="width: 24px; height: 24px; color: var(--clr-primary-purple);"><?php echo bds_get_new_icon( 'notebook' ); ?></div>
-									<span class="position-name"><?php esc_html_e( 'Primary Teachers', 'bd-somani' ); ?></span>
-								</div>
-							</td>
-							<td class="col-qualification"><?php esc_html_e( 'Graduates with a B.Ed in any subject.', 'bd-somani' ); ?></td>
-							<td class="col-action">
-								<a href="mailto:<?php echo esc_attr( $hr_email ); ?>?subject=Application%20for%20Primary%20Teachers" class="apply-table-btn"><?php esc_html_e( 'Apply Now', 'bd-somani' ); ?></a>
-							</td>
-						</tr>
-
-						<tr>
-							<td class="col-position">
-								<div class="position-title-wrap">
-									<div class="position-icon flex-center" style="width: 24px; height: 24px; color: var(--clr-primary-purple);"><?php echo bds_get_new_icon( 'calculator' ); ?></div>
-									<span class="position-name"><?php esc_html_e( 'Middle School Teachers (ICSE)', 'bd-somani' ); ?></span>
-								</div>
-							</td>
-							<td class="col-qualification"><?php esc_html_e( 'Graduates with a B.Ed in any subject and a minimum of 3 years of teaching experience in Classes VI–X in a recognized school.', 'bd-somani' ); ?></td>
-							<td class="col-action">
-								<a href="mailto:<?php echo esc_attr( $hr_email ); ?>?subject=Application%20for%20Middle%20School%20Teachers%20(ICSE)" class="apply-table-btn"><?php esc_html_e( 'Apply Now', 'bd-somani' ); ?></a>
-							</td>
-						</tr>
-
-						<tr>
-							<td class="col-position">
-								<div class="position-title-wrap">
-									<div class="position-icon flex-center" style="width: 24px; height: 24px; color: var(--clr-primary-purple);"><?php echo bds_get_new_icon( 'earth' ); ?></div>
-									<span class="position-name"><?php esc_html_e( 'Middle School Teachers (IGCSE)', 'bd-somani' ); ?></span>
-								</div>
-							</td>
-							<td class="col-qualification"><?php esc_html_e( 'Graduates with a B.Ed in any subject and a minimum of 3 years of teaching experience in Classes VI–X in a recognized school.', 'bd-somani' ); ?></td>
-							<td class="col-action">
-								<a href="mailto:<?php echo esc_attr( $hr_email ); ?>?subject=Application%20for%20Middle%20School%20Teachers%20(IGCSE)" class="apply-table-btn"><?php esc_html_e( 'Apply Now', 'bd-somani' ); ?></a>
-							</td>
-						</tr>
-
-						<tr>
-							<td class="col-position">
-								<div class="position-title-wrap">
-									<div class="position-icon flex-center" style="width: 24px; height: 24px; color: var(--clr-primary-purple);"><?php echo bds_get_new_icon( 'bulb' ); ?></div>
-									<span class="position-name"><?php esc_html_e( 'IGCSE Co-ordinator', 'bd-somani' ); ?></span>
-								</div>
-							</td>
-							<td class="col-qualification"><?php esc_html_e( 'Graduate/Master\'s degree in Education or a relevant field with a minimum of 5 years of experience in the Cambridge IGCSE curriculum. Must possess proven leadership and organizational skills, strong communication and interpersonal abilities, and familiarity with CAIE guidelines, documentation, and assessments.', 'bd-somani' ); ?></td>
-							<td class="col-action">
-								<a href="mailto:<?php echo esc_attr( $hr_email ); ?>?subject=Application%20for%20IGCSE%20Co-ordinator" class="apply-table-btn"><?php esc_html_e( 'Apply Now', 'bd-somani' ); ?></a>
-							</td>
-						</tr>
-
-						<tr>
-							<td class="col-position">
-								<div class="position-title-wrap">
-									<div class="position-icon flex-center" style="width: 24px; height: 24px; color: var(--clr-primary-purple);"><?php echo bds_get_new_icon( 'sun' ); ?></div>
-									<span class="position-name"><?php esc_html_e( 'Special Educator', 'bd-somani' ); ?></span>
-								</div>
-							</td>
-							<td class="col-qualification"><?php esc_html_e( 'Master\'s degree in Psychology with excellent communication skills and a minimum of 5 years of relevant experience.', 'bd-somani' ); ?></td>
-							<td class="col-action">
-								<a href="mailto:<?php echo esc_attr( $hr_email ); ?>?subject=Application%20for%20Special%20Educator" class="apply-table-btn"><?php esc_html_e( 'Apply Now', 'bd-somani' ); ?></a>
-							</td>
-						</tr>
-
-						<tr>
-							<td class="col-position">
-								<div class="position-title-wrap">
-									<iconify-icon icon="ph:users-four-fill" class="position-icon"></iconify-icon>
-									<span class="position-name"><?php esc_html_e( 'Other Positions', 'bd-somani' ); ?></span>
-								</div>
-							</td>
-							<td class="col-qualification">
-								<div class="other-positions-details">
-									<p><strong><?php esc_html_e( 'Teaching Roles:', 'bd-somani' ); ?></strong> <?php esc_html_e( 'Computer, Music, Art & Craft, Dance, Language Teachers (Sanskrit, French, Hindi, Marathi), Physical Education, Lab Assistant, Theatre.', 'bd-somani' ); ?></p>
-									<p><strong><?php esc_html_e( 'Administrative Roles:', 'bd-somani' ); ?></strong> <?php esc_html_e( 'Accountant, Admin Manager, HR, Admissions Head, Front Desk Executive.', 'bd-somani' ); ?></p>
-								</div>
-							</td>
-							<td class="col-action">
-								<a href="mailto:<?php echo esc_attr( $hr_email ); ?>?subject=Application%20for%20Other%20Positions" class="apply-table-btn"><?php esc_html_e( 'Apply Now', 'bd-somani' ); ?></a>
-							</td>
-						</tr>
-					</tbody>
-				</table>
 			</div>
-		</section> -->
+		</section>
 
 		<!-- How to Apply & HR Contact Section -->
 		<section class="careers-apply-section relative overflow-hidden">

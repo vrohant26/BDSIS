@@ -113,7 +113,7 @@ get_header();
 
 			<!-- Center Text & CTA Button -->
 			<div class="programme-center-content">
-				<h2 class="programme-title"><?php esc_html_e( 'Every Day Shapes <br>  Tomorrow.', 'bd-somani' ); ?></h2>
+				<h2 class="programme-title"><?php esc_html_e( 'Every Day Shapes <br> Tomorrow', 'bd-somani' ); ?></h2>
 				<p class="programme-desc"><?php esc_html_e( 'Campus life at B.D. Somani is built around experiences that inspire curiosity, encourage collaboration, and nurture confidence. Whether inside the classroom or beyond it, every moment is an opportunity to discover new passions, build meaningful friendships, and grow into a future-ready individual.', 'bd-somani' ); ?></p>
 				
 				<div class="programme-pdf-wrap flex-center">
@@ -220,7 +220,7 @@ get_header();
 									</div>
 
 									<div class="academics-exp-text-wrap relative">
-										<h3 class="academics-exp-sub-title"><?php esc_html_e( 'We nurture lifelong learners.', 'bd-somani' ); ?></h3>
+										<h3 class="academics-exp-sub-title"><?php esc_html_e( 'We Nurture Lifelong Learners', 'bd-somani' ); ?></h3>
 										<p class="academics-exp-sub-desc"><?php esc_html_e( 'In this journey, every doubt of “Will I be able to?” becomes a confident “I can” through the experiences we create.', 'bd-somani' ); ?></p>
 
 										<div class="academics-exp-chess-doodle" aria-hidden="true">
@@ -233,10 +233,10 @@ get_header();
 							<div class="swiper-slide experiences-card-slide">
 								<div class="experiences-purple-card" style="transform: rotate(-2.5deg);">
 									<div class="experiences-card-img-wrap">
-										<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/find-their-voice.webp' ); ?>" alt="<?php esc_attr_e( 'Find their Voice', 'bd-somani' ); ?>" class="experiences-card-photo" style="width:100%; height:100%; object-fit:cover; display:block;">
+										<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/find-their-voice.webp' ); ?>" alt="<?php esc_attr_e( 'Find Their Voice', 'bd-somani' ); ?>" class="experiences-card-photo" style="width:100%; height:100%; object-fit:cover; display:block;">
 									</div>
 									<div class="experiences-card-content">
-										<h4 class="experiences-card-title"><?php esc_html_e( 'Find their Voice', 'bd-somani' ); ?></h4>
+										<h4 class="experiences-card-title"><?php esc_html_e( 'Find Their Voice', 'bd-somani' ); ?></h4>
 										<p class="experiences-card-desc"><?php esc_html_e( 'Our culture of open dialogue encourages students to participate with confidence through discussions, assemblies, and student-led initiatives.', 'bd-somani' ); ?></p>
 									</div>
 								</div>

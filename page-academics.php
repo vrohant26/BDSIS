@@ -579,16 +579,16 @@ $sub_img_url  = $sub_img_id ? wp_get_attachment_image_url( $sub_img_id, 'full' )
 									<?php echo bds_get_new_icon( 'paint brush' ); ?>
 								</div>
 								<h4 class="interest-item-title"><?php esc_html_e( 'Young Rembrandts\' Art', 'bd-somani' ); ?></h4>
-								<p class="interest-item-desc"><?php esc_html_e( 'A vibrant art programme where imagination comes to life through drawing, painting and sculpting. Every session inspires creative expression while sharpening students’ focus, observation and coordination.', 'bd-somani' ); ?></p>
+								<p class="interest-item-desc"><?php esc_html_e( 'A vibrant art programme where imagination comes to life through drawing, painting, and sculpting. Every session inspires creative expression while sharpening students’ focus, observation, and coordination.', 'bd-somani' ); ?></p>
 							</div>
 
-							<!-- Item 3: Sanskar Varg -->
+							<!-- Item 3: Financial Literacy -->
 							<div class="interest-item-box">
 								<div class="interest-item-icon-wrap flex-center">
-									<?php echo bds_get_new_icon( 'sun' ); ?>
+									<?php echo bds_get_new_icon( 'financial literacy' ); ?>
 								</div>
-								<h4 class="interest-item-title"><?php esc_html_e( 'Sanskar Varg', 'bd-somani' ); ?></h4>
-								<p class="interest-item-desc"><?php esc_html_e( 'Rooted in Indian traditions, Sanskar Varg introduces students to Sanskrit mantras and cultural practices in an engaging way. Every session supports speech, breathing, and holistic well-being.', 'bd-somani' ); ?></p>
+								<h4 class="interest-item-title"><?php esc_html_e( 'Financial Literacy', 'bd-somani' ); ?></h4>
+								<p class="interest-item-desc"><?php esc_html_e( 'Practical financial literacy sessions help students learn the value of money, smart saving, and responsible spending. Each session builds decision-making, planning, and numeracy skills while giving students the confidence to make informed choices and plan for their future.', 'bd-somani' ); ?></p>
 							</div>
 						</div>
 					</div>
@@ -617,7 +617,7 @@ $sub_img_url  = $sub_img_id ? wp_get_attachment_image_url( $sub_img_id, 'full' )
 									<?php echo bds_get_new_icon( 'performing arts' ); ?>
 								</div>
 								<h4 class="interest-item-title"><?php esc_html_e( 'Pyjama Drama', 'bd-somani' ); ?></h4>
-								<p class="interest-item-desc"><?php esc_html_e( 'An internationally acclaimed drama programme that brings stories to life through music, movement and imaginative play. Students learn to collaborate and communicate while building social connections.', 'bd-somani' ); ?></p>
+								<p class="interest-item-desc"><?php esc_html_e( 'An internationally acclaimed drama programme that brings stories to life through music, movement, and imaginative play. Students learn to collaborate and communicate while building social connections.', 'bd-somani' ); ?></p>
 							</div>
 
 							<!-- Item 3: Speech & Drama -->
@@ -646,7 +646,7 @@ $sub_img_url  = $sub_img_id ? wp_get_attachment_image_url( $sub_img_id, 'full' )
 									<?php echo bds_get_new_icon( 'football' ); ?>
 								</div>
 								<h4 class="interest-item-title"><?php esc_html_e( 'Football', 'bd-somani' ); ?></h4>
-								<p class="interest-item-desc"><?php esc_html_e( 'Delivered in partnership with LaLiga Academy, students build technique, game awareness and teamwork through structured coaching and match play. Every challenge on the field instils resilience, discipline and the confidence to keep pushing further.', 'bd-somani' ); ?></p>
+								<p class="interest-item-desc"><?php esc_html_e( 'Delivered in partnership with LaLiga Academy, students build technique, game awareness, and teamwork through structured coaching and match play. Every challenge on the field instils resilience, discipline, and the confidence to keep pushing further.', 'bd-somani' ); ?></p>
 							</div>
 
 							<!-- Item 2: Basketball -->
@@ -655,16 +655,25 @@ $sub_img_url  = $sub_img_id ? wp_get_attachment_image_url( $sub_img_id, 'full' )
 									<?php echo bds_get_new_icon( 'basket ball' ); ?>
 								</div>
 								<h4 class="interest-item-title"><?php esc_html_e( 'Basketball', 'bd-somani' ); ?></h4>
-								<p class="interest-item-desc"><?php esc_html_e( 'Powered by NBA Basketball School, students hone their technical skills, coordination and teamwork through structured training and gameplay. Every game reinforces quick decision-making, perseverance and the confidence to perform under pressure.', 'bd-somani' ); ?></p>
+								<p class="interest-item-desc"><?php esc_html_e( 'Powered by NBA Basketball School, students hone their technical skills, coordination, and teamwork through structured training and gameplay. Every game reinforces quick decision-making, perseverance, and the confidence to perform under pressure.', 'bd-somani' ); ?></p>
 							</div>
 
 							<!-- Item 3: Taekwondo -->
-							<div class="interest-item-box">
+							<!-- <div class="interest-item-box">
 								<div class="interest-item-icon-wrap flex-center">
 									<?php echo bds_get_new_icon( 'taekwondo' ); ?>
 								</div>
 								<h4 class="interest-item-title"><?php esc_html_e( 'Taekwondo', 'bd-somani' ); ?></h4>
 								<p class="interest-item-desc"><?php esc_html_e( 'Through structured Taekwondo training, students develop strength, coordination and self-discipline. Each session builds focus, resilience and respect while giving students the confidence to challenge themselves and grow.', 'bd-somani' ); ?></p>
+							</div> -->
+
+							<!-- Item 4: Swimming -->
+							<div class="interest-item-box">
+								<div class="interest-item-icon-wrap flex-center">
+									<?php echo bds_get_new_icon( 'swimming pool' ); ?>
+								</div>
+								<h4 class="interest-item-title"><?php esc_html_e( 'Swimming', 'bd-somani' ); ?></h4>
+								<p class="interest-item-desc"><?php esc_html_e( 'Through structured swimming training, students develop strength, endurance, and water confidence. Each session builds focus, resilience, and discipline while giving students the confidence to challenge themselves and grow.', 'bd-somani' ); ?></p>
 							</div>
 						</div>
 					</div>

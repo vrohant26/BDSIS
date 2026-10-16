@@ -60,7 +60,7 @@
 							<!-- Quote Details Box -->
 							<div class="teachers-quote-box relative flex-column flex-between">
 								<div class="teachers-quote-content">
-									<h3 class="teachers-quote-heading">Nurturing Independent, Confident, And Lifelong Learners.</h3>
+									<h3 class="teachers-quote-heading">Nurturing Independent, Confident, and Lifelong Learners</h3>
 									<p class="teachers-quote-text">"At B.D. Somani International School, Kharghar, we nurture independent, confident, and lifelong learners who are encouraged to make meaningful connections with the world around them.</p>
 									<p class="teachers-quote-text" style="margin-top: 0.75rem;">We believe in empowering students to take ownership of their learning and become agents of positive change. By connecting learning with real-world experiences and purposeful action, we inspire our learners to engage deeply, think independently, and make a meaningful contribution to society.</p>
 									<p class="teachers-quote-text" style="margin-top: 0.75rem;">Our high-quality infrastructure provides a stimulating learning environment that supports curiosity, creativity, collaboration, and critical thinking. We equip our learners with the knowledge, skills, and mindset required to transition confidently into higher education and the workplace."</p>
@@ -83,7 +83,7 @@
 							<!-- Quote Details Box -->
 							<div class="teachers-quote-box relative flex-column flex-between">
 								<div class="teachers-quote-content">
-									<h3 class="teachers-quote-heading">Planting The Seeds For A Sustainable, Compassionate Future.</h3>
+									<h3 class="teachers-quote-heading">Planting the Seeds for a Sustainable, Compassionate Future</h3>
 									<p class="teachers-quote-text">"As a Pre-Primary Coordinator, my vision is built on a simple truth: it takes a whole village to raise a child. I believe in establishing a close, collaborative partnership between students, teachers, and parents. By working hand in hand, we create a nurturing ecosystem where our youngest learners can truly thrive.<br><br>Our collective goal is to prepare students to become dynamic, global, honest, and disciplined individuals. Education at this foundational stage goes beyond traditional academics; it is about character building and fostering deep empathy. We guide our children to coexist peacefully not only with the people around them but also with plants, animals, and the entire environment. Together, we are planting the seeds for a sustainable, compassionate, and harmonious future."</p>
 								</div>
 								<div class="teachers-quote-author">
@@ -104,12 +104,12 @@
 							<!-- Quote Details Box -->
 							<div class="teachers-quote-box relative flex-column flex-between">
 								<div class="teachers-quote-content">
-									<h3 class="teachers-quote-heading">Empowering Effective Communication And Global Perspectives.</h3>
-									<p class="teachers-quote-text">"We guide students to articulate their thoughts clearly, appreciate diverse cultures, and develop strong analytical skills. The warm, inclusive atmosphere at B.D. Somani brings out the best in both educators and students alike."</p>
+									<h3 class="teachers-quote-heading">Empowering Effective Communication and Global Perspectives</h3>
+									<p class="teachers-quote-text">"As the Coordinator for Grades 5–7, I am excited to share how we nurture our pre-teens through this period of rapid personal and academic growth. At this stage, our socio-emotional curriculum focuses on building emotional resilience, positive peer relationships, and responsible digital citizenship.<br><br>We channel student creativity into critical thinking, design-thinking challenges, and collaborative problem-solving across all subjects. To accommodate diverse learning styles, our teachers utilize differentiated instruction to cater to each student's individual needs. <br><br> We also actively coach essential executive functioning skills—like organization and time management—to cultivate true academic independence. Thank you for your continued partnership as we guide your children toward becoming confident, compassionate, and capable young leaders."</p>
 								</div>
 								<div class="teachers-quote-author">
 									<h4 class="teachers-author-name">Ms. Pooja Shukla</h4>
-									<p class="teachers-author-info">Middle School Coordinator - ICSE</p>
+									<p class="teachers-author-info">Middle School Coordinator – ICSE</p>
 								</div>
 							</div>
 						</div>
@@ -125,7 +125,7 @@
 							<!-- Quote Details Box -->
 							<div class="teachers-quote-box relative flex-column flex-between">
 								<div class="teachers-quote-content">
-									<h3 class="teachers-quote-heading">Learning, Leading and Growing Together</h3>
+									<h3 class="teachers-quote-heading">Learning, Leading, and Growing Together</h3>
 									<p class="teachers-quote-text">"My journey at B.D. Somani International School, Kharghar, has been one of continuous learning, reflection, and growth. As a Coordinator, I have had the privilege of working alongside students, teachers, and parents in a community that values curiosity, courage, and collaboration.<br><br>What I find most rewarding is being part of an environment where learning is not confined to the classroom. Students are encouraged to question, explore, take risks, and learn from their experiences, while educators are equally encouraged to evolve and reimagine their practice."</p>
 								</div>
 								<div class="teachers-quote-author">

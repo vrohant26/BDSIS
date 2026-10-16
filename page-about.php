@@ -30,7 +30,7 @@ get_header();
 					?>
 				</a>
 				<span class="breadcrumb-separator">/</span>
-				<span class="breadcrumb-current">About us</span>
+				<span class="breadcrumb-current">About Us</span>
 			</nav>
 
 			<!-- 2-Column Hero Flex Grid: Left Text Content + Right SVG Illustration -->
@@ -39,7 +39,7 @@ get_header();
 				<!-- Left Text Box -->
 				<div class="about-hero-content flex-column pr-md">
 					<h1 class="about-hero-title">Welcome to B.D. Somani International School, Kharghar</h1>
-					<p class="about-hero-desc">At B.D. Somani International School, Kharghar, education is not simply imparted, it is carried forward as a legacy of thought, purpose, and possibility.</p>
+					<p class="about-hero-desc">At B.D. Somani International School, Kharghar, education is not simply imparted; it is carried forward as a legacy of thought, purpose, and possibility.</p>
 					<p class="about-hero-desc">Rooted in the enduring B.D. Somani legacy, our institution remains committed to nurturing individuals whose education shapes not only what they achieve, but who they become.</p>
 				</div>
 
@@ -619,7 +619,7 @@ get_header();
 							}
 							?>
 						</div>
-						<h3 class="about-merit-title">Subject-matter Experts</h3>
+						<h3 class="about-merit-title">Subject-Matter Experts</h3>
 					</div>
 
 					<!-- Card 3: Evolving Pedagogy -->
