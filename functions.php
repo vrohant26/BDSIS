@@ -2219,3 +2219,218 @@ src="https://www.facebook.com/tr?id=4397700063823698&ev=PageView&noscript=1"/>
 	<?php
 }
 add_action( 'wp_head', 'bdsis_enqueue_meta_pixel', 1 );
+
+/**
+ * 17. CALENDLY TO MICM EDUSPRINT INTEGRATION
+ * Automatically syncs Calendly campus visit bookings into MICM EduSprint CRM & WP Leads
+ */
+add_action( 'rest_api_init', function () {
+	register_rest_route(
+		'bds/v1',
+		'/calendly-webhook',
+		array(
+			'methods'             => array( 'GET', 'POST' ),
+			'callback'            => 'bdsis_handle_calendly_webhook',
+			'permission_callback' => '__return_true',
+		)
+	);
+} );
+
+function bdsis_handle_calendly_webhook( WP_REST_Request $request ) {
+	// If GET request, return health check confirmation
+	if ( 'GET' === $request->get_method() ) {
+		return new WP_REST_Response( array( 'status' => 'active', 'message' => 'Calendly webhook endpoint is active.' ), 200 );
+	}
+
+	$body = $request->get_json_params();
+	if ( empty( $body ) || ! is_array( $body ) ) {
+		return new WP_REST_Response( array( 'status' => 'error', 'message' => 'Empty or invalid JSON payload.' ), 400 );
+	}
+
+	$event_type = isset( $body['event'] ) ? sanitize_text_field( $body['event'] ) : '';
+
+	// Only process invitee.created events
+	if ( 'invitee.created' !== $event_type ) {
+		return new WP_REST_Response( array( 'status' => 'ignored', 'event' => $event_type ), 200 );
+	}
+
+	$payload = isset( $body['payload'] ) && is_array( $body['payload'] ) ? $body['payload'] : array();
+
+	$parent_name  = isset( $payload['name'] ) ? sanitize_text_field( $payload['name'] ) : 'Parent';
+	$parent_email = isset( $payload['email'] ) ? sanitize_email( $payload['email'] ) : '';
+
+	// Extract scheduled event time
+	$scheduled_event = isset( $payload['scheduled_event'] ) && is_array( $payload['scheduled_event'] ) ? $payload['scheduled_event'] : array();
+	$start_time_raw  = isset( $scheduled_event['start_time'] ) ? sanitize_text_field( $scheduled_event['start_time'] ) : '';
+	$visit_formatted = '';
+	if ( ! empty( $start_time_raw ) ) {
+		try {
+			$dt = new DateTime( $start_time_raw );
+			$dt->setTimezone( new DateTimeZone( 'Asia/Kolkata' ) );
+			$visit_formatted = $dt->format( 'd M Y, h:i A' );
+		} catch ( Exception $e ) {
+			$visit_formatted = $start_time_raw;
+		}
+	}
+
+	// Extract answers from custom questions
+	$phone_raw       = '';
+	$child_grade_raw = '';
+
+	if ( ! empty( $payload['questions_and_answers'] ) && is_array( $payload['questions_and_answers'] ) ) {
+		foreach ( $payload['questions_and_answers'] as $qa ) {
+			$q = strtolower( isset( $qa['question'] ) ? $qa['question'] : '' );
+			$a = isset( $qa['answer'] ) ? trim( $qa['answer'] ) : '';
+
+			if ( strpos( $q, 'whatsapp' ) !== false || strpos( $q, 'phone' ) !== false || strpos( $q, 'mobile' ) !== false ) {
+				$phone_raw = $a;
+			} elseif ( strpos( $q, 'child' ) !== false || strpos( $q, 'grade' ) !== false ) {
+				$child_grade_raw = $a;
+			}
+		}
+	}
+
+	// Format mobile number: 10 digits
+	$phone = preg_replace( '/[^\d]/', '', $phone_raw );
+	if ( strlen( $phone ) > 10 && '91' === substr( $phone, 0, 2 ) ) {
+		$phone = substr( $phone, 2 );
+	}
+	if ( strlen( $phone ) > 10 ) {
+		$phone = substr( $phone, -10 );
+	}
+
+	// Grade and ClassMasterID resolution
+	$grade_map = array(
+		'play group' => 34,
+		'playgroup'  => 34,
+		'nursery'    => 35,
+		'jr. kg'     => 36,
+		'junior'     => 36,
+		'jr kg'      => 36,
+		'sr. kg'     => 37,
+		'senior'     => 37,
+		'sr kg'      => 37,
+		'grade 1'    => 38,
+		'1st'        => 38,
+		'grade 2'    => 39,
+		'2nd'        => 39,
+		'grade 3'    => 40,
+		'3rd'        => 40,
+		'grade 4'    => 41,
+		'4th'        => 41,
+		'grade 5'    => 42,
+		'5th'        => 42,
+		'grade 6'    => 43,
+		'6th'        => 43,
+		'grade 7'    => 44,
+		'7th'        => 44,
+		'grade 8'    => 55,
+		'8th'        => 55,
+	);
+
+	$cg_lower = strtolower( $child_grade_raw );
+	$class_id = 34; // Default Playgroup
+
+	// Check for IGCSE
+	if ( strpos( $cg_lower, 'igcse' ) !== false ) {
+		if ( strpos( $cg_lower, '6' ) !== false ) {
+			$class_id = 57;
+		} elseif ( strpos( $cg_lower, '7' ) !== false ) {
+			$class_id = 58;
+		} elseif ( strpos( $cg_lower, '8' ) !== false ) {
+			$class_id = 59;
+		} else {
+			$class_id = 57;
+		}
+	} else {
+		foreach ( $grade_map as $term => $id ) {
+			if ( strpos( $cg_lower, $term ) !== false ) {
+				$class_id = $id;
+				break;
+			}
+		}
+	}
+
+	$is_igcse         = in_array( $class_id, array( 57, 58, 59 ), true );
+	$school_shortname = $is_igcse ? 'bdskig' : 'bdsk';
+	$enquiry_channel  = $is_igcse ? '81' : '35'; // 35 = Website
+
+	// Extract child name by removing grade-related phrases
+	$clean_child_name = preg_replace( '/(?i)(?:-|\/|,|\bfor\b|\bin\b)?\s*(?:grade\s*\d+|nursery|play\s*group|playgroup|jr\.?\s*kg|sr\.?\s*kg|igcse)/', '', $child_grade_raw );
+	$clean_child_name = trim( preg_replace( '/[\s\-_]+$/', '', trim( $clean_child_name ) ) );
+	if ( empty( $clean_child_name ) ) {
+		$clean_child_name = $parent_name;
+	}
+
+	$child_parts = array_values( array_filter( explode( ' ', $clean_child_name ) ) );
+	$child_first = ! empty( $child_parts[0] ) ? $child_parts[0] : 'Applicant';
+	if ( count( $child_parts ) > 1 ) {
+		array_shift( $child_parts );
+		$child_last = implode( ' ', $child_parts );
+	} else {
+		$child_last = '-';
+	}
+	$child_print = trim( $child_first . ' ' . ( '-' !== $child_last ? $child_last : '' ) );
+
+	// Build payload for EduSprint
+	$edusprint_payload = array(
+		'ShortName'          => $school_shortname,
+		'Description'        => '2026-2027',
+		'ChildFirstName'     => $child_first,
+		'ChildMiddleName'    => '',
+		'ChildLastName'      => $child_last,
+		'ChildPrintName'     => $child_print,
+		'ContactEmailID'     => $parent_email,
+		'ContactMobileNo'    => $phone,
+		'DOB'                => '1994-07-17 00:00:00',
+		'ClassMasterID'      => (string) $class_id,
+		'EnquiryChannelID'   => (string) $enquiry_channel,
+		'GenderID'           => 3,
+		'UtmSource'          => 'Website - Calendly',
+		'UtmMedium'          => ! empty( $visit_formatted ) ? 'Visit: ' . $visit_formatted : 'Campus Visit',
+		'UtmCampaign'        => 'Schedule a Visit',
+		'UtmTerm'            => $child_grade_raw,
+		'UtmContent'         => '',
+		'ResidentialAddress' => '',
+	);
+
+	// Send to EduSprint
+	$crm_result = bdsis_send_edusprint_enquiry( $edusprint_payload );
+
+	$edusprint_status   = ! empty( $crm_result['success'] ) ? 'Synced' : 'Failed';
+	$edusprint_response = ! empty( $crm_result['success'] )
+		? ( isset( $crm_result['raw'] ) ? $crm_result['raw'] : 'Success' )
+		: ( isset( $crm_result['error'] ) ? $crm_result['error'] : 'Error' );
+
+	// Save Lead in WordPress Admin
+	$lead_title = sprintf( 'Campus Visit - %s (%s)', $parent_name, $visit_formatted ? $visit_formatted : date_i18n( 'd M Y, h:i A' ) );
+	$lead_id    = wp_insert_post(
+		array(
+			'post_title'  => $lead_title,
+			'post_type'   => 'bds_lead',
+			'post_status' => 'publish',
+		)
+	);
+
+	if ( $lead_id && ! is_wp_error( $lead_id ) ) {
+		update_post_meta( $lead_id, '_lead_form_type', 'Campus Visit (Calendly)' );
+		update_post_meta( $lead_id, '_lead_name', $parent_name );
+		update_post_meta( $lead_id, '_lead_email', $parent_email );
+		update_post_meta( $lead_id, '_lead_phone', $phone );
+		update_post_meta( $lead_id, '_lead_grade', sprintf( 'Child: %s | Grade Input: %s | Scheduled: %s', $clean_child_name, $child_grade_raw, $visit_formatted ) );
+		update_post_meta( $lead_id, '_lead_message', 'Scheduled Campus Visit on ' . $visit_formatted );
+		update_post_meta( $lead_id, '_lead_utm_source', 'Website - Calendly' );
+		update_post_meta( $lead_id, '_lead_utm_campaign', 'Schedule a Visit' );
+		update_post_meta( $lead_id, '_edusprint_status', $edusprint_status );
+		update_post_meta( $lead_id, '_edusprint_response', $edusprint_response );
+	}
+
+	return new WP_REST_Response(
+		array(
+			'status'           => 'success',
+			'edusprint_status' => $edusprint_status,
+			'lead_id'          => $lead_id,
+		),
+		200
+	);
+}
