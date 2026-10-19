@@ -2050,7 +2050,7 @@ function bdsis_handle_form_submission() {
 	// Admissions specific fields
 	$child_name    = isset( $_POST['child_name'] ) ? sanitize_text_field( wp_unslash( $_POST['child_name'] ) ) : '';
 	$dob_raw       = isset( $_POST['date_of_birth'] ) ? sanitize_text_field( wp_unslash( $_POST['date_of_birth'] ) ) : '';
-	$academic_year = isset( $_POST['academic_year'] ) ? sanitize_text_field( wp_unslash( $_POST['academic_year'] ) ) : '2026-2027';
+	$academic_year = isset( $_POST['academic_year'] ) ? sanitize_text_field( wp_unslash( $_POST['academic_year'] ) ) : '2027-2028';
 	$class_id      = isset( $_POST['class_master_id'] ) ? absint( $_POST['class_master_id'] ) : 0;
 	$found_via     = isset( $_POST['found_via'] ) ? sanitize_text_field( wp_unslash( $_POST['found_via'] ) ) : '';
 
@@ -2375,7 +2375,7 @@ function bdsis_handle_calendly_webhook( WP_REST_Request $request ) {
 	// Build payload for EduSprint
 	$edusprint_payload = array(
 		'ShortName'          => $school_shortname,
-		'Description'        => '2026-2027',
+		'Description'        => '2027-2028',
 		'ChildFirstName'     => $child_first,
 		'ChildMiddleName'    => '',
 		'ChildLastName'      => $child_last,

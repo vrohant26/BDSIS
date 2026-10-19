@@ -178,8 +178,8 @@ get_header();
 											<div class="select-wrap relative">
 												<select id="adm_academic_year" name="academic_year" required>
 													<option value="" disabled><?php esc_html_e( 'Choose academic year', 'bd-somani' ); ?></option>
-													<option value="2026-2027" selected>2026 - 2027</option>
-													<option value="2027-2028">2027 - 2028</option>
+													<option value="2026-2027">2026 - 2027</option>
+													<option value="2027-2028" selected>2027 - 2028</option>
 												</select>
 												<iconify-icon icon="lucide:chevron-down" class="select-arrow-icon"></iconify-icon>
 											</div>
