@@ -2275,6 +2275,8 @@ function bdsis_handle_calendly_webhook( WP_REST_Request $request ) {
 
 	// Extract answers from custom questions
 	$phone_raw       = '';
+	$child_name_raw  = '';
+	$child_dob_raw   = '';
 	$child_grade_raw = '';
 
 	if ( ! empty( $payload['questions_and_answers'] ) && is_array( $payload['questions_and_answers'] ) ) {
@@ -2284,8 +2286,12 @@ function bdsis_handle_calendly_webhook( WP_REST_Request $request ) {
 
 			if ( strpos( $q, 'whatsapp' ) !== false || strpos( $q, 'phone' ) !== false || strpos( $q, 'mobile' ) !== false ) {
 				$phone_raw = $a;
-			} elseif ( strpos( $q, 'child' ) !== false || strpos( $q, 'grade' ) !== false ) {
+			} elseif ( strpos( $q, 'birth' ) !== false || strpos( $q, 'dob' ) !== false ) {
+				$child_dob_raw = $a;
+			} elseif ( strpos( $q, 'grade' ) !== false ) {
 				$child_grade_raw = $a;
+			} elseif ( strpos( $q, 'child' ) !== false || strpos( $q, 'name' ) !== false ) {
+				$child_name_raw = $a;
 			}
 		}
 	}
@@ -2299,65 +2305,99 @@ function bdsis_handle_calendly_webhook( WP_REST_Request $request ) {
 		$phone = substr( $phone, -10 );
 	}
 
-	// Grade and ClassMasterID resolution
-	$grade_map = array(
-		'play group' => 34,
-		'playgroup'  => 34,
-		'nursery'    => 35,
-		'jr. kg'     => 36,
-		'junior'     => 36,
-		'jr kg'      => 36,
-		'sr. kg'     => 37,
-		'senior'     => 37,
-		'sr kg'      => 37,
-		'grade 1'    => 38,
-		'1st'        => 38,
-		'grade 2'    => 39,
-		'2nd'        => 39,
-		'grade 3'    => 40,
-		'3rd'        => 40,
-		'grade 4'    => 41,
-		'4th'        => 41,
-		'grade 5'    => 42,
-		'5th'        => 42,
-		'grade 6'    => 43,
-		'6th'        => 43,
-		'grade 7'    => 44,
-		'7th'        => 44,
-		'grade 8'    => 55,
-		'8th'        => 55,
+	// Grade, ClassMasterID and Realistic DOB Mapping (for 2027-2028 Academic Year)
+	$grade_data = array(
+		'playgroup'  => array( 'class_id' => 34, 'dob' => '2024-06-01 00:00:00', 'label' => 'Playgroup' ),
+		'play group' => array( 'class_id' => 34, 'dob' => '2024-06-01 00:00:00', 'label' => 'Playgroup' ),
+		'nursery'    => array( 'class_id' => 35, 'dob' => '2023-06-01 00:00:00', 'label' => 'Nursery' ),
+		'jr. kg'     => array( 'class_id' => 36, 'dob' => '2022-06-01 00:00:00', 'label' => 'Jr. KG' ),
+		'jr kg'      => array( 'class_id' => 36, 'dob' => '2022-06-01 00:00:00', 'label' => 'Jr. KG' ),
+		'junior'     => array( 'class_id' => 36, 'dob' => '2022-06-01 00:00:00', 'label' => 'Jr. KG' ),
+		'sr. kg'     => array( 'class_id' => 37, 'dob' => '2021-06-01 00:00:00', 'label' => 'Sr. KG' ),
+		'sr kg'      => array( 'class_id' => 37, 'dob' => '2021-06-01 00:00:00', 'label' => 'Sr. KG' ),
+		'senior'     => array( 'class_id' => 37, 'dob' => '2021-06-01 00:00:00', 'label' => 'Sr. KG' ),
+		'grade 1'    => array( 'class_id' => 38, 'dob' => '2020-06-01 00:00:00', 'label' => 'Grade 1' ),
+		'1st'        => array( 'class_id' => 38, 'dob' => '2020-06-01 00:00:00', 'label' => 'Grade 1' ),
+		'grade 2'    => array( 'class_id' => 39, 'dob' => '2019-06-01 00:00:00', 'label' => 'Grade 2' ),
+		'2nd'        => array( 'class_id' => 39, 'dob' => '2019-06-01 00:00:00', 'label' => 'Grade 2' ),
+		'grade 3'    => array( 'class_id' => 40, 'dob' => '2018-06-01 00:00:00', 'label' => 'Grade 3' ),
+		'3rd'        => array( 'class_id' => 40, 'dob' => '2018-06-01 00:00:00', 'label' => 'Grade 3' ),
+		'grade 4'    => array( 'class_id' => 41, 'dob' => '2017-06-01 00:00:00', 'label' => 'Grade 4' ),
+		'4th'        => array( 'class_id' => 41, 'dob' => '2017-06-01 00:00:00', 'label' => 'Grade 4' ),
+		'grade 5'    => array( 'class_id' => 42, 'dob' => '2016-06-01 00:00:00', 'label' => 'Grade 5' ),
+		'5th'        => array( 'class_id' => 42, 'dob' => '2016-06-01 00:00:00', 'label' => 'Grade 5' ),
+		'grade 6'    => array( 'class_id' => 43, 'dob' => '2015-06-01 00:00:00', 'label' => 'Grade 6' ),
+		'6th'        => array( 'class_id' => 43, 'dob' => '2015-06-01 00:00:00', 'label' => 'Grade 6' ),
+		'grade 7'    => array( 'class_id' => 44, 'dob' => '2014-06-01 00:00:00', 'label' => 'Grade 7' ),
+		'7th'        => array( 'class_id' => 44, 'dob' => '2014-06-01 00:00:00', 'label' => 'Grade 7' ),
+		'grade 8'    => array( 'class_id' => 55, 'dob' => '2013-06-01 00:00:00', 'label' => 'Grade 8' ),
+		'8th'        => array( 'class_id' => 55, 'dob' => '2013-06-01 00:00:00', 'label' => 'Grade 8' ),
 	);
 
-	$cg_lower = strtolower( $child_grade_raw );
-	$class_id = 34; // Default Playgroup
+	$cg_lower    = strtolower( trim( $child_grade_raw ) );
+	$class_id    = 34; // Default Playgroup
+	$dob         = '2024-06-01 00:00:00';
+	$grade_label = ! empty( $child_grade_raw ) ? $child_grade_raw : 'Playgroup';
 
 	// Check for IGCSE
 	if ( strpos( $cg_lower, 'igcse' ) !== false ) {
 		if ( strpos( $cg_lower, '6' ) !== false ) {
 			$class_id = 57;
+			$dob      = '2015-06-01 00:00:00';
 		} elseif ( strpos( $cg_lower, '7' ) !== false ) {
 			$class_id = 58;
+			$dob      = '2014-06-01 00:00:00';
 		} elseif ( strpos( $cg_lower, '8' ) !== false ) {
 			$class_id = 59;
+			$dob      = '2013-06-01 00:00:00';
 		} else {
 			$class_id = 57;
+			$dob      = '2015-06-01 00:00:00';
 		}
 	} else {
-		foreach ( $grade_map as $term => $id ) {
+		foreach ( $grade_data as $term => $val ) {
 			if ( strpos( $cg_lower, $term ) !== false ) {
-				$class_id = $id;
+				$class_id    = $val['class_id'];
+				$dob         = $val['dob'];
+				$grade_label = $val['label'];
 				break;
 			}
 		}
 	}
 
+	// Parse actual parent-entered Date of Birth (DD/MM/YYYY) if provided
+	if ( ! empty( $child_dob_raw ) ) {
+		$clean_dob_str = str_replace( array( '.', '-' ), '/', trim( $child_dob_raw ) );
+		$parsed_dob    = DateTime::createFromFormat( 'd/m/Y', $clean_dob_str );
+		if ( ! $parsed_dob ) {
+			$parsed_dob = DateTime::createFromFormat( 'j/n/Y', $clean_dob_str );
+		}
+		if ( ! $parsed_dob ) {
+			$parsed_dob = DateTime::createFromFormat( 'Y-m-d', $clean_dob_str );
+		}
+		if ( ! $parsed_dob ) {
+			$ts = strtotime( $child_dob_raw );
+			if ( $ts ) {
+				$parsed_dob = new DateTime();
+				$parsed_dob->setTimestamp( $ts );
+			}
+		}
+
+		if ( $parsed_dob ) {
+			$year = (int) $parsed_dob->format( 'Y' );
+			if ( $year >= 2005 && $year <= 2027 ) {
+				$dob = $parsed_dob->format( 'Y-m-d 00:00:00' );
+			}
+		}
+	}
+
+
 	$is_igcse         = in_array( $class_id, array( 57, 58, 59 ), true );
 	$school_shortname = $is_igcse ? 'bdskig' : 'bdsk';
 	$enquiry_channel  = $is_igcse ? '81' : '35'; // 35 = Website
 
-	// Extract child name by removing grade-related phrases
-	$clean_child_name = preg_replace( '/(?i)(?:-|\/|,|\bfor\b|\bin\b)?\s*(?:grade\s*\d+|nursery|play\s*group|playgroup|jr\.?\s*kg|sr\.?\s*kg|igcse)/', '', $child_grade_raw );
-	$clean_child_name = trim( preg_replace( '/[\s\-_]+$/', '', trim( $clean_child_name ) ) );
+	// Extract clean child name
+	$clean_child_name = trim( $child_name_raw );
 	if ( empty( $clean_child_name ) ) {
 		$clean_child_name = $parent_name;
 	}
@@ -2382,17 +2422,18 @@ function bdsis_handle_calendly_webhook( WP_REST_Request $request ) {
 		'ChildPrintName'     => $child_print,
 		'ContactEmailID'     => $parent_email,
 		'ContactMobileNo'    => $phone,
-		'DOB'                => '1994-07-17 00:00:00',
+		'DOB'                => $dob,
 		'ClassMasterID'      => (string) $class_id,
 		'EnquiryChannelID'   => (string) $enquiry_channel,
 		'GenderID'           => 3,
 		'UtmSource'          => 'Website - Calendly',
 		'UtmMedium'          => ! empty( $visit_formatted ) ? 'Visit: ' . $visit_formatted : 'Campus Visit',
 		'UtmCampaign'        => 'Schedule a Visit',
-		'UtmTerm'            => $child_grade_raw,
+		'UtmTerm'            => $grade_label,
 		'UtmContent'         => '',
 		'ResidentialAddress' => '',
 	);
+
 
 	// Send to EduSprint
 	$crm_result = bdsis_send_edusprint_enquiry( $edusprint_payload );
@@ -2424,7 +2465,7 @@ function bdsis_handle_calendly_webhook( WP_REST_Request $request ) {
 		update_post_meta( $lead_id, '_lead_name', $parent_name );
 		update_post_meta( $lead_id, '_lead_email', $parent_email );
 		update_post_meta( $lead_id, '_lead_phone', $phone );
-		update_post_meta( $lead_id, '_lead_grade', sprintf( 'Child: %s | Grade Input: %s | Scheduled: %s', $clean_child_name, $child_grade_raw, $visit_formatted ) );
+		update_post_meta( $lead_id, '_lead_grade', sprintf( 'Child: %s | Grade: %s | DOB: %s | Scheduled: %s', $clean_child_name, $grade_label, $child_dob_raw ? $child_dob_raw : substr( $dob, 0, 10 ), $visit_formatted ) );
 		update_post_meta( $lead_id, '_lead_message', 'Scheduled Campus Visit on ' . $visit_formatted );
 		update_post_meta( $lead_id, '_lead_utm_source', 'Website - Calendly' );
 		update_post_meta( $lead_id, '_lead_utm_campaign', 'Schedule a Visit' );
