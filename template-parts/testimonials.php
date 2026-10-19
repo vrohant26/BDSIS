@@ -96,7 +96,7 @@
 							<div class="parents-quote-box relative flex-column flex-between">
 								<div class="parents-quote-content">
 									<h3 class="parents-quote-heading">A School that Builds Confidence, Creativity, and Skills for the Future</h3>
-									<p class="parents-quote-text">"Since joining B.D. Somani, I have seen a remarkable change in my daughter. She has become more confident, adaptable, and emotionally balanced, while continuing to excel academically. I especially appreciate how every child is given equal opportunities to participate in extracurricular activities. The unique initiatives like the Makers Lab and Radio Station provide children with a wonderful platform to explore their interests, build new skills, and prepare for the future. The balance between academics and extracurricular learning is truly what sets the school apart."</p>
+									<p class="parents-quote-text">"Since joining B.D. Somani, I have seen a remarkable change in my daughter. She has become more confident, adaptable, and emotionally balanced, while continuing to excel academically. I especially appreciate how every child is given equal opportunities to participate in extracurricular activities. The unique initiatives like the Maker's Lab and Podcast Studio provide children with a wonderful platform to explore their interests, build new skills, and prepare for the future. The balance between academics and extracurricular learning is truly what sets the school apart."</p>
 								</div>
 								<div class="parents-quote-author">
 									<h4 class="parents-author-name">Ms. Jasmita Kaur Kohli</h4>
@@ -152,7 +152,7 @@
 							<div class="parents-quote-box relative flex-column flex-between">
 								<div class="parents-quote-content">
 									<h3 class="parents-quote-heading">The School’s Unique Learning Approach and Focus on Holistic Development Truly Set It Apart</h3>
-									<p class="parents-quote-text">"We are really glad that a reputed school like B.D. Somani International School has opened in Kharghar. My child is truly blessed to be part of this school. The teaching methods and techniques are very different and have helped my child grow both academically and through extracurricular activities. The Radio Station and Makers Lab are unique initiatives that I have not seen in other schools in Navi Mumbai. What I love most is that the school focuses not just on academics, but on the overall, holistic development of every child."</p>
+									<p class="parents-quote-text">"We are really glad that a reputed school like B.D. Somani International School has opened in Kharghar. My child is truly blessed to be part of this school. The teaching methods and techniques are very different and have helped my child grow both academically and through extracurricular activities. The Podcast Studio and Maker's Lab are unique initiatives that I have not seen in other schools in Navi Mumbai. What I love most is that the school focuses not just on academics, but on the overall, holistic development of every child."</p>
 								</div>
 								<div class="parents-quote-author">
 									<h4 class="parents-author-name">Ms. Meenu Dhoot</h4>

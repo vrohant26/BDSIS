@@ -167,7 +167,7 @@ get_header();
 							</button>
 							<div id="approach-body-6" class="approach-card-body">
 								<div class="approach-card-content">
-									<p>The way students learn is as important as what they learn. We instill positive habits of mind that encourage reflection, perseverance and continuous growth.</p>
+									<p>The way students learn is as important as what they learn. We instil positive habits of mind that encourage reflection, perseverance and continuous growth.</p>
 								</div>
 							</div>
 						</div>
@@ -234,7 +234,7 @@ get_header();
 							<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/pre-primary 1.webp' ); ?>" alt="Pre-Primary Classroom" loading="lazy">
 						</div>
 						<div class="secondary-photo-card">
-							<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/pre-primary 2.webp' ); ?>" alt="Pre-Primary Play Group" loading="lazy">
+							<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/pre-primary 2.webp' ); ?>" alt="Pre-Primary Playgroup" loading="lazy">
 						</div>
 						<div class="curriculum-doodle-icon media-doodle-1" style="color: rgba(73, 39, 74, 0.22);"><?php echo bds_get_new_icon( 'puzzle piece' ); ?></div>
 						<div class="curriculum-doodle-icon media-doodle-2" style="color: rgba(241, 200, 34, 0.28);"><?php echo bds_get_new_icon( 'paint brush' ); ?></div>
@@ -319,7 +319,7 @@ get_header();
 					</div>
 					<div class="approach-info-box">
 						<h3 class="approach-stage-title">Post-School Activities</h3>
-						<p class="approach-stage-desc">Our Post-School Programme helps students explore sports, arts, performance, and more while building confidence, creativity, skills, and connections.</p>
+						<p class="approach-stage-desc">Our Post-School Activities help students explore sports, arts, performance, and more while building confidence, creativity, skills, and connections.</p>
 						<div class="approach-cta-wrapper">
 							<a href="<?php echo esc_url( home_url( '/academics/post-school-activities/' ) ); ?>" class="btn btn-yellow">
 								<span>EXPLORE POST-SCHOOL ACTIVITIES</span>

@@ -372,7 +372,10 @@ function theme_careers_hero_metabox_callback( $post ) {
 	$sub      = metadata_exists( 'post', $post->ID, '_bds_careers_hero_subtitle' ) ? get_post_meta( $post->ID, '_bds_careers_hero_subtitle', true ) : __( 'At B.D. Somani International School, our educators embody a unique blend of compassion, creativity, and enthusiasm. With open minds and a commitment to lifelong learning, they serve as facilitators, encouraging inquiry and exploration in the classroom.', 'bd-somani' );
 	$hr_email = metadata_exists( 'post', $post->ID, '_bds_careers_hr_email' ) ? get_post_meta( $post->ID, '_bds_careers_hr_email', true ) : 'hr@bdsiskharghar.org';
 	$hr_phone = metadata_exists( 'post', $post->ID, '_bds_careers_hr_phone' ) ? get_post_meta( $post->ID, '_bds_careers_hr_phone', true ) : '+91 86577 97826';
-	$location = metadata_exists( 'post', $post->ID, '_bds_careers_location' ) ? get_post_meta( $post->ID, '_bds_careers_location', true ) : __( 'B.D. Somani International School, Plot No. 92, Ranjanpada, Sector 27, Kharghar', 'bd-somani' );
+	$location = metadata_exists( 'post', $post->ID, '_bds_careers_location' ) ? get_post_meta( $post->ID, '_bds_careers_location', true ) : __( 'Plot #92, Sector 27, Kharghar, Navi Mumbai 410210', 'bd-somani' );
+	if ( strpos( $location, 'Ranjanpada' ) !== false ) {
+		$location = __( 'Plot #92, Sector 27, Kharghar, Navi Mumbai 410210', 'bd-somani' );
+	}
 	?>
 	<div id="bds-careers-metabox" style="display: flex; flex-direction: column; gap: 16px; margin-top: 10px;">
 		<div>
@@ -481,7 +484,7 @@ function theme_academics_hero_metabox_callback( $post ) {
 	$sub_img_id    = get_post_meta( $post->ID, '_bds_academics_sub_img_id', true );
 
 	if ( empty( $breadcrumb ) ) {
-		$breadcrumb = 'Academics / Daycare';
+		$breadcrumb = 'Academics / Day Care';
 	}
 	if ( empty( $cta_url ) ) {
 		$cta_url = '#';
@@ -493,8 +496,8 @@ function theme_academics_hero_metabox_callback( $post ) {
 	<div id="bds-academics-hero-metabox" style="display: flex; flex-direction: column; gap: 16px; margin-top: 10px;">
 		<div>
 			<label for="bds_academics_breadcrumb" style="font-weight: 600; display: block; margin-bottom: 4px;"><?php esc_html_e( 'Breadcrumb Sub-Path', 'bd-somani' ); ?></label>
-			<input type="text" id="bds_academics_breadcrumb" name="bds_academics_breadcrumb" value="<?php echo esc_attr( $breadcrumb ); ?>" class="large-text" placeholder="Academics / Daycare">
-			<span class="description"><?php esc_html_e( 'Appears next to the Home icon in the sub-page breadcrumbs (e.g. Academics / Daycare)', 'bd-somani' ); ?></span>
+			<input type="text" id="bds_academics_breadcrumb" name="bds_academics_breadcrumb" value="<?php echo esc_attr( $breadcrumb ); ?>" class="large-text" placeholder="Academics / Day Care">
+			<span class="description"><?php esc_html_e( 'Appears next to the Home icon in the sub-page breadcrumbs (e.g. Academics / Day Care)', 'bd-somani' ); ?></span>
 		</div>
 
 		<div>
@@ -557,7 +560,7 @@ function theme_academics_hero_metabox_callback( $post ) {
 }
 
 function theme_academics_programme_metabox_callback( $post ) {
-	$tagline   = metadata_exists( 'post', $post->ID, '_bds_academics_overview_tagline' ) ? get_post_meta( $post->ID, '_bds_academics_overview_tagline', true ) : __( 'Daycare at B.D. Somani International School, Kharghar', 'bd-somani' );
+	$tagline   = metadata_exists( 'post', $post->ID, '_bds_academics_overview_tagline' ) ? get_post_meta( $post->ID, '_bds_academics_overview_tagline', true ) : __( 'Day Care at B.D. Somani International School, Kharghar', 'bd-somani' );
 	$title     = metadata_exists( 'post', $post->ID, '_bds_academics_overview_title' ) ? get_post_meta( $post->ID, '_bds_academics_overview_title', true ) : __( 'A Programme Rooted in Caring and Learning', 'bd-somani' );
 	$desc      = metadata_exists( 'post', $post->ID, '_bds_academics_overview_desc' ) ? get_post_meta( $post->ID, '_bds_academics_overview_desc', true ) : __( 'A warm and nurturing environment where children feel safe, build confidence, and begin their learning journey through play, care, and meaningful everyday experiences.', 'bd-somani' );
 	$pdf_label = metadata_exists( 'post', $post->ID, '_bds_academics_overview_pdf_label' ) ? get_post_meta( $post->ID, '_bds_academics_overview_pdf_label', true ) : __( 'Download Day Care Programme Overview', 'bd-somani' );
@@ -666,7 +669,7 @@ function theme_academics_approach_metabox_callback( $post ) {
 			}
 			$app_desc = implode( "\n\n", $parts );
 		} else {
-			$app_desc = "Monday–Friday • 11:30 AM – 5:30 PM\n\nA child's first experience away from home should feel safe, comforting and filled with joyful moments. At B.D. Somani International School, Kharghar, we create a nurturing environment where children begin their learning journey with a smile.\n\nOur programme centers around creating familiar routines, playful exploration, and warm interactions. While children learn, parents can go about their day knowing they are in safe and caring hands.";
+			$app_desc = "Monday–Friday • 11:30 AM – 5:30 PM\n\nA child's first experience away from home should feel safe, comforting and filled with joyful moments. At B.D. Somani International School, Kharghar, we create a nurturing environment where children begin their learning journey with a smile.\n\nOur programme centres around creating familiar routines, playful exploration, and warm interactions. While children learn, parents can go about their day knowing they are in safe and caring hands.";
 		}
 	}
 
@@ -980,7 +983,7 @@ function theme_academics_cornerstones_metabox_callback( $post ) {
 							<?php if ( $tab_thumb ) : ?>
 								<img src="<?php echo esc_url( $tab_thumb ); ?>" style="max-width: 100%; max-height: 120px; object-fit: cover;">
 							<?php else : ?>
-								<span style="color: #999; font-size: 12px;"><?php esc_html_e( 'Default Daycare Photo', 'bd-somani' ); ?></span>
+								<span style="color: #999; font-size: 12px;"><?php esc_html_e( 'Default Day Care Photo', 'bd-somani' ); ?></span>
 							<?php endif; ?>
 						</div>
 						<button type="button" class="button button-secondary" id="bds-upload-cs-tab<?php echo $i; ?>-img-btn"><?php esc_html_e( 'Select Photo', 'bd-somani' ); ?></button>
@@ -2100,7 +2103,7 @@ function bdsis_handle_form_submission() {
 	}
 
 	$grade_labels = array(
-		34 => 'Play Group',
+		34 => 'Playgroup',
 		35 => 'Nursery',
 		36 => 'Jr. KG',
 		37 => 'Sr. KG',
@@ -2115,6 +2118,7 @@ function bdsis_handle_form_submission() {
 		57 => 'Grade 6 - IGCSE',
 		58 => 'Grade 7 - IGCSE',
 		59 => 'Grade 8 - IGCSE',
+		60 => 'Grade 9 - IGCSE',
 	);
 	$grade_name = isset( $grade_labels[ $class_id ] ) ? $grade_labels[ $class_id ] : ( $class_id ? "Class #{$class_id}" : 'Unspecified' );
 
@@ -2332,6 +2336,8 @@ function bdsis_handle_calendly_webhook( WP_REST_Request $request ) {
 		'7th'        => array( 'class_id' => 44, 'dob' => '2014-06-01 00:00:00', 'label' => 'Grade 7' ),
 		'grade 8'    => array( 'class_id' => 55, 'dob' => '2013-06-01 00:00:00', 'label' => 'Grade 8' ),
 		'8th'        => array( 'class_id' => 55, 'dob' => '2013-06-01 00:00:00', 'label' => 'Grade 8' ),
+		'grade 9'    => array( 'class_id' => 60, 'dob' => '2012-06-01 00:00:00', 'label' => 'Grade 9 - IGCSE' ),
+		'9th'        => array( 'class_id' => 60, 'dob' => '2012-06-01 00:00:00', 'label' => 'Grade 9 - IGCSE' ),
 	);
 
 	$cg_lower    = strtolower( trim( $child_grade_raw ) );
@@ -2350,6 +2356,9 @@ function bdsis_handle_calendly_webhook( WP_REST_Request $request ) {
 		} elseif ( strpos( $cg_lower, '8' ) !== false ) {
 			$class_id = 59;
 			$dob      = '2013-06-01 00:00:00';
+		} elseif ( strpos( $cg_lower, '9' ) !== false ) {
+			$class_id = 60;
+			$dob      = '2012-06-01 00:00:00';
 		} else {
 			$class_id = 57;
 			$dob      = '2015-06-01 00:00:00';

@@ -1186,8 +1186,54 @@ document.addEventListener("DOMContentLoaded", () => {
       { passive: true },
     );
 
-    // 2. Smooth Scroll on Tab Clicks
+    // 2. Navigation Elements & Helpers
+    const nav = faqContainer.querySelector(".faq-category-nav");
+    const navWrapper = faqContainer.querySelector(".faq-nav-bar-wrapper");
+    const prevArrow = document.getElementById("faqNavPrev");
+    const nextArrow = document.getElementById("faqNavNext");
+
+    function getFAQScrollOffset() {
+      const header = document.querySelector(".site-header-fixed");
+      let headerHeight = header ? header.getBoundingClientRect().height : 90;
+      let navHeight = navWrapper ? navWrapper.getBoundingClientRect().height : 50;
+      return headerHeight + navHeight + 15;
+    }
+
+    function centerTabInNav(tab, smooth = true) {
+      if (!nav || !tab) return;
+      const navRect = nav.getBoundingClientRect();
+      const tabRect = tab.getBoundingClientRect();
+      const currentScrollLeft = nav.scrollLeft;
+      const targetScrollLeft =
+        currentScrollLeft +
+        (tabRect.left - navRect.left) -
+        navRect.width / 2 +
+        tabRect.width / 2;
+
+      if (typeof nav.scrollTo === "function") {
+        nav.scrollTo({
+          left: Math.max(0, targetScrollLeft),
+          behavior: smooth ? "smooth" : "auto",
+        });
+      } else {
+        nav.scrollLeft = Math.max(0, targetScrollLeft);
+      }
+    }
+
+    function updateNavScrollIndicators() {
+      if (!nav || !navWrapper) return;
+      const maxScroll = nav.scrollWidth - nav.clientWidth;
+      const canScrollLeft = nav.scrollLeft > 10;
+      const canScrollRight = nav.scrollLeft < maxScroll - 10;
+      navWrapper.classList.toggle("can-scroll-left", canScrollLeft);
+      navWrapper.classList.toggle("can-scroll-right", canScrollRight);
+    }
+
+    // 3. Smooth Scroll on Tab Clicks
     let hasDragged = false;
+    let isProgrammaticScroll = false;
+    let scrollTimeout = null;
+    let lastActiveSectionId = "";
 
     categoryTabs.forEach((tab) => {
       tab.addEventListener("click", (e) => {
@@ -1204,41 +1250,42 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (!targetSection) return;
 
+        // Prevent ScrollSpy from fighting smooth scroll during transition
+        isProgrammaticScroll = true;
+        clearTimeout(scrollTimeout);
+
         categoryTabs.forEach((t) => {
-          t.classList.remove("active");
-          t.setAttribute("aria-selected", "false");
+          const matches = t === tab;
+          t.classList.toggle("active", matches);
+          t.setAttribute("aria-selected", matches ? "true" : "false");
         });
-        tab.classList.add("active");
-        tab.setAttribute("aria-selected", "true");
+        lastActiveSectionId = targetId;
 
-        // Keep clicked tab in view inside the draggable navbar
-        tab.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
+        // Safely center tab horizontally in category bar WITHOUT touching vertical window scroll
+        centerTabInNav(tab, true);
 
-        const offsetTop =
-          targetSection.getBoundingClientRect().top + window.scrollY - 220;
+        const offset = getFAQScrollOffset();
+        const targetScrollY =
+          targetSection.getBoundingClientRect().top + window.scrollY - offset;
+
         if (typeof lenis !== "undefined" && lenis) {
-          lenis.scrollTo(offsetTop, { duration: 1.2 });
+          lenis.scrollTo(targetScrollY, {
+            duration: 1.0,
+            onComplete: () => {
+              isProgrammaticScroll = false;
+            },
+          });
         } else {
-          window.scrollTo({ top: offsetTop, behavior: "smooth" });
+          window.scrollTo({ top: targetScrollY, behavior: "smooth" });
         }
+
+        scrollTimeout = setTimeout(() => {
+          isProgrammaticScroll = false;
+        }, 1100);
       });
     });
 
-    // 3. Draggable Horizontal Navigation & Arrows
-    const nav = faqContainer.querySelector(".faq-category-nav");
-    const navWrapper = faqContainer.querySelector(".faq-nav-bar-wrapper");
-    const prevArrow = document.getElementById("faqNavPrev");
-    const nextArrow = document.getElementById("faqNavNext");
-
-    function updateNavScrollIndicators() {
-      if (!nav || !navWrapper) return;
-      const maxScroll = nav.scrollWidth - nav.clientWidth;
-      const canScrollLeft = nav.scrollLeft > 10;
-      const canScrollRight = nav.scrollLeft < maxScroll - 10;
-      navWrapper.classList.toggle("can-scroll-left", canScrollLeft);
-      navWrapper.classList.toggle("can-scroll-right", canScrollRight);
-    }
-
+    // 4. Draggable Horizontal Navigation & Arrows
     if (nav) {
       let isDown = false;
       let startX = 0;
@@ -1293,29 +1340,51 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     }
 
-    // 4. ScrollSpy: Highlight active tab as user scrolls down with rAF throttle
+    // 5. ScrollSpy: Highlight active tab as user scrolls down with rAF throttle
     let isScrollTicking = false;
     window.addEventListener(
       "scroll",
       () => {
+        if (isProgrammaticScroll) return;
+
         if (!isScrollTicking) {
           window.requestAnimationFrame(() => {
+            const offset = getFAQScrollOffset();
+            const threshold = offset + 60;
             let currentSectionId = "";
-            sections.forEach((sec) => {
-              const secTop = sec.offsetTop - 230;
-              if (window.scrollY >= secTop) {
-                currentSectionId = sec.getAttribute("id");
-              }
-            });
 
-            if (currentSectionId) {
+            // Check if user is near the bottom of the page
+            if (
+              window.innerHeight + window.scrollY >=
+              document.documentElement.scrollHeight - 60
+            ) {
+              if (sections.length > 0) {
+                currentSectionId = sections[sections.length - 1].getAttribute("id");
+              }
+            } else {
+              sections.forEach((sec) => {
+                const rect = sec.getBoundingClientRect();
+                if (rect.top <= threshold) {
+                  currentSectionId = sec.getAttribute("id");
+                }
+              });
+            }
+
+            // Fallback to first section if user is at the top of FAQ container
+            if (!currentSectionId && sections.length > 0) {
+              currentSectionId = sections[0].getAttribute("id");
+            }
+
+            // ONLY update classes and scroll horizontally if active section has actually changed
+            if (currentSectionId && currentSectionId !== lastActiveSectionId) {
+              lastActiveSectionId = currentSectionId;
               categoryTabs.forEach((tab) => {
                 const matches =
                   tab.getAttribute("data-target") === currentSectionId;
                 tab.classList.toggle("active", matches);
                 tab.setAttribute("aria-selected", matches ? "true" : "false");
                 if (matches && !nav.classList.contains("is-dragging")) {
-                  tab.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
+                  centerTabInNav(tab, true);
                 }
               });
             }

@@ -136,27 +136,27 @@ get_header();
 				<div class="coverflow-stage">
 					<div class="coverflow-slide-item">
 						<div class="coverflow-card">
-							<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/coverflow carousel 1.webp' ); ?>" alt="BD Somani Campus &amp; Activities 1" loading="lazy">
+							<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/coverflow carousel 1.webp' ); ?>" alt="B.D. Somani Campus &amp; Activities 1" loading="lazy">
 						</div>
 					</div>
 					<div class="coverflow-slide-item">
 						<div class="coverflow-card">
-							<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/coverflow carousel 2.webp' ); ?>" alt="BD Somani Campus &amp; Activities 2" loading="lazy">
+							<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/coverflow carousel 2.webp' ); ?>" alt="B.D. Somani Campus &amp; Activities 2" loading="lazy">
 						</div>
 					</div>
 					<div class="coverflow-slide-item">
 						<div class="coverflow-card">
-							<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/coverflow carousel 3.webp' ); ?>" alt="BD Somani Campus Building" loading="lazy">
+							<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/coverflow carousel 3.webp' ); ?>" alt="B.D. Somani Campus Building" loading="lazy">
 						</div>
 					</div>
 					<div class="coverflow-slide-item">
 						<div class="coverflow-card">
-							<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/coverflow carousel 4.webp' ); ?>" alt="BD Somani Campus &amp; Activities 4" loading="lazy">
+							<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/coverflow carousel 4.webp' ); ?>" alt="B.D. Somani Campus &amp; Activities 4" loading="lazy">
 						</div>
 					</div>
 					<div class="coverflow-slide-item">
 						<div class="coverflow-card">
-							<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/coverflow carousel 5.webp' ); ?>" alt="BD Somani Campus &amp; Activities 5" loading="lazy">
+							<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/coverflow carousel 5.webp' ); ?>" alt="B.D. Somani Campus &amp; Activities 5" loading="lazy">
 						</div>
 					</div>
 				</div>
@@ -201,7 +201,7 @@ get_header();
 							<!-- Rotating Text on Purple Ring Band -->
 							<text fill="#FFFFFF" font-family="Montserrat" font-size="13" font-weight="700" letter-spacing="0.8">
 								<textPath href="#legacyTextPath" startOffset="0%">
-									50+ years of legacy • 50+ years of legacy •
+									50 Years of Legacy • 50 Years of Legacy •
 								</textPath>
 							</text>
 						</svg>
@@ -215,7 +215,7 @@ get_header();
 
 					<!-- Video Poster Placeholder Image -->
 					<div class="video-poster-box">
-						<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/coverflow carousel 5.webp' ); ?>" alt="BD Somani Auditorium & Facilities" class="video-poster-img" loading="lazy">
+						<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/coverflow carousel 5.webp' ); ?>" alt="B.D. Somani Auditorium & Facilities" class="video-poster-img" loading="lazy">
 						<div class="video-overlay"></div>
 					</div>
 
@@ -274,7 +274,7 @@ get_header();
 				<div class="experiential-info-box flex-column gap-md relative">
 					<div class="experiential-header flex-column gap-xs">
 						<h2 class="experiential-title">Learning Enriched by Experience</h2>
-						<p class="experiential-desc">A well-rounded education complements academics with experiential learning. Our co-curricular programs are designed to encourage students to pursue their interests, develop confidence and discover their potential across a wide range of opportunities.</p>
+						<p class="experiential-desc">A well-rounded education complements academics with experiential learning. Our co-curricular programmes are designed to encourage students to pursue their interests, develop confidence and discover their potential across a wide range of opportunities.</p>
 					</div>
 
 					<!-- Bullet Points Carousel Tabs -->
@@ -310,7 +310,7 @@ get_header();
 
 					<div class="experiential-cta-wrapper margin-top-xs">
 						<a href="<?php echo esc_url( home_url( '/campus-life/' ) ); ?>" class="btn btn-yellow">
-							<span>EXPLORE STUDENT LIFE AT BDSIS</span>
+							<span>EXPLORE STUDENT LIFE<span class="hide-mobile"> AT BDSIS</span></span>
 							<svg class="btn-arrow" width="18" height="14" viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg">
 								<path d="M11 1L17 7M17 7L11 13M17 7H1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 							</svg>

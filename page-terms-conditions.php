@@ -59,7 +59,7 @@ get_header();
 							</thead>
 							<tbody style="background-color: #FFFFFF; font-family: var(--font-body); font-size: 0.98rem; color: #333333;">
 								<tr style="border-bottom: 1px solid #EAE2D8;">
-									<td style="padding: 14px 18px; font-weight: 600;">Play Group</td>
+									<td style="padding: 14px 18px; font-weight: 600;">Playgroup</td>
 									<td style="padding: 14px 18px;">₹2,000.00</td>
 									<td style="padding: 14px 18px;">₹25,000.00</td>
 									<td style="padding: 14px 18px; font-weight: 700; color: var(--clr-primary-purple, #49274A);">₹1,75,000.00</td>
@@ -96,10 +96,10 @@ get_header();
 					<div class="legal-block-body">
 						<p><?php esc_html_e( 'Our fee structure is divided into slabs, with revisions occurring at specific grade transitions:', 'bd-somani' ); ?></p>
 						<ul style="margin-bottom: 1rem; padding-left: 1.5rem; line-height: 1.8;">
-							<li>Play Group to Nursery</li>
+							<li>Playgroup to Nursery</li>
 							<li>Sr. KG to Grade 1</li>
 							<li>Grade 5 to Grade 6</li>
-							<li>Grade 8</li>
+							<li>Grade 8 to Grade 9</li>
 						</ul>
 						<p><strong><?php esc_html_e( 'When a student transitions to a new slab, the applicable academic fee structure for that particular slab will be applicable.', 'bd-somani' ); ?></strong></p>
 						<p><?php esc_html_e( 'In addition to slab-based revisions, the school implements an annual fee increase ranging from ', 'bd-somani' ); ?><strong>7.5% to 10%</strong>.</p>
@@ -125,7 +125,7 @@ get_header();
 				</div>
 
 				<!-- Admission Fees Policy -->
-				<div class="legal-block">
+				<!-- <div class="legal-block">
 					<div class="legal-block-header flex align-center gap-xs">
 						<iconify-icon icon="ph:student-bold" class="legal-icon"></iconify-icon>
 						<h2 class="legal-block-title"><?php esc_html_e( 'Admission Fees Policy', 'bd-somani' ); ?></h2>
@@ -136,13 +136,13 @@ get_header();
 							<li>A <strong>one-time, non-refundable Application Fee of ₹2,000</strong> must be submitted along with the printed application form. This initiates the admission process but does not guarantee acceptance.</li>
 							<li>A <strong>one-time, non-refundable Admission Fee</strong> is payable upon acceptance:
 								<ul>
-									<li><strong>₹25,000</strong> for Play Group</li>
+									<li><strong>₹25,000</strong> for Playgroup</li>
 									<li><strong>₹50,000</strong> for Nursery to Grade 7</li>
 								</ul>
 							</li>
 						</ul>
 					</div>
-				</div>
+				</div> -->
 
 				<!-- Refund Policy -->
 				<div class="legal-block">
@@ -157,14 +157,7 @@ get_header();
 							<li>Refunds may be considered if a valid reason for cancellation is provided.</li>
 							<li>Supporting <strong>documentary evidence</strong> justifying the transfer must be submitted.</li>
 							<li>The school holds the <strong>final authority</strong> on whether to approve the cancellation and refund.</li>
-							<li>If a refund is approved, the following terms apply:
-								<ul>
-									<li>The <strong>admission fee is non-refundable</strong>.</li>
-									<li>Withdrawal applications must be submitted <strong>by March 15, 2027</strong>. Applications received after this date will not be eligible for a refund.</li>
-									<li>If the withdrawal is approved before <strong>March 15, 2027</strong>, the <strong>full first installment</strong> will be refunded.</li>
-									<li>The refund process requires a <strong>minimum of 45 days</strong> for completion.</li>
-								</ul>
-							</li>
+						
 						</ol>
 					</div>
 				</div>

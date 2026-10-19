@@ -188,6 +188,8 @@ ol {
     justify-content: space-between;
 }
 
+
+
 .flex-wrap {
     display: flex;
     flex-wrap: wrap;
@@ -199,6 +201,10 @@ ol {
 
 .justify-center {
     justify-content: center;
+}
+
+.hide-mobile {
+    display: inline;
 }
 
 /* Gap Helpers */
@@ -885,6 +891,15 @@ ol {
 }
 
 @media (max-width: 768px) {
+
+    .hide-mobile {
+        display: none !important;
+    }
+
+    .contact-box-item {
+        flex-direction: column;
+    }
+
     .coverflow-slide-item.slot-0 {
         transform: translate3d(-130%, 0, -100px) scale(0.68);
         opacity: 1;
@@ -7480,7 +7495,8 @@ body.theme-purple-mode .timeline-progress-bar {
 
 .admissions-form-doodle {
     position: absolute;
-    left: 30%;
+    left: 50%;
+    bottom: -20%;
 }
 
 .extra-link-item {
@@ -8270,14 +8286,39 @@ body.theme-purple-mode .timeline-progress-bar {
 }
 
 .admissions-cta-buttons {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.85rem;
     margin-bottom: 2.5rem;
+    max-width: 100%;
 }
 
-.admissions-cta-buttons .btn,
-.admissions-cta-buttons .btn-outline-purple {
+.admissions-cta-buttons .btn {
+    width: 100%;
     padding: 0.85rem 1.6rem;
     font-size: 0.85rem;
     font-weight: 800;
+    box-sizing: border-box;
+    text-align: center;
+    border: 2px solid transparent;
+}
+
+.admissions-cta-buttons .btn.btn-outline-purple {
+    border-color: var(--clr-primary-purple);
+}
+
+@media (max-width: 480px) {
+    .admissions-cta-buttons {
+        width: 100%;
+        display: flex;
+    }
+
+    .admissions-cta-buttons .btn {
+        width: 100%;
+        padding: 0.85rem 1.2rem;
+        font-size: 0.82rem;
+    }
 }
 
 .admissions-title {

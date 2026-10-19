@@ -201,7 +201,7 @@ get_header();
 						allowfullscreen="" 
 						loading="lazy" 
 						referrerpolicy="no-referrer-when-downgrade"
-						title="BD Somani International School Kharghar Google Map Location">
+						title="B.D. Somani International School Kharghar Google Map Location">
 					</iframe>
 				</div>
 

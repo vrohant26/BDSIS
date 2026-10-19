@@ -32,8 +32,8 @@ if ( empty( $hr_email ) ) {
 if ( empty( $hr_phone ) ) {
 	$hr_phone = '+91 86577 97826';
 }
-if ( empty( $location ) ) {
-	$location = __( 'B.D. Somani International School, Plot No. 92, Ranjanpada, Sector 27, Kharghar', 'bd-somani' );
+if ( empty( $location ) || strpos( $location, 'Ranjanpada' ) !== false ) {
+	$location = __( 'Plot #92, Sector 27, Kharghar, Navi Mumbai 410210', 'bd-somani' );
 }
 ?>
 
@@ -72,10 +72,7 @@ if ( empty( $location ) ) {
 					</div>
 
 					<div class="careers-hero-actions">
-						<a href="#openings" class="careers-primary-btn">
-							<?php esc_html_e( 'VIEW OPEN POSITIONS', 'bd-somani' ); ?>
-							<iconify-icon icon="lucide:arrow-down" class="btn-arrow-icon"></iconify-icon>
-						</a>
+						
 						<a href="mailto:<?php echo esc_attr( $hr_email ); ?>" class="careers-secondary-btn">
 							<iconify-icon icon="lucide:mail"></iconify-icon>
 							<?php esc_html_e( 'SEND RESUME', 'bd-somani' ); ?>

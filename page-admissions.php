@@ -55,7 +55,7 @@ get_header();
 					</p>
 
 					<!-- Action Buttons -->
-					<div class="admissions-cta-buttons flex align-center gap-sm flex-wrap">
+					<div class="admissions-cta-buttons">
 						<a href="https://calendly.com/admissions_bdsiskharghar/campus-visit" target="_blank" rel="noopener noreferrer" class="btn btn-yellow radius-md flex-center">
 							<span><?php esc_html_e( 'SCHEDULE A SCHOOL VISIT', 'bd-somani' ); ?></span>
 							<svg class="btn-arrow" width="16" height="14" viewBox="0 0 16 14" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-left: 8px;">
@@ -153,7 +153,7 @@ get_header();
 											<div class="select-wrap relative">
 												<select id="adm_grade" name="class_master_id" required>
 													<option value="" disabled selected><?php esc_html_e( 'Choose Grade', 'bd-somani' ); ?></option>
-													<option value="34">Play Group</option>
+													<option value="34">Playgroup</option>
 													<option value="35">Nursery</option>
 													<option value="36">Jr. KG</option>
 													<option value="37">Sr. KG</option>
@@ -168,6 +168,7 @@ get_header();
 													<option value="57">Grade 6 - IGCSE</option>
 													<option value="58">Grade 7 - IGCSE</option>
 													<option value="59">Grade 8 - IGCSE</option>
+													<option value="60">Grade 9 - IGCSE</option>
 												</select>
 												<iconify-icon icon="lucide:chevron-down" class="select-arrow-icon"></iconify-icon>
 											</div>
@@ -178,7 +179,6 @@ get_header();
 											<div class="select-wrap relative">
 												<select id="adm_academic_year" name="academic_year" required>
 													<option value="" disabled><?php esc_html_e( 'Choose academic year', 'bd-somani' ); ?></option>
-													<option value="2026-2027">2026 - 2027</option>
 													<option value="2027-2028" selected>2027 - 2028</option>
 												</select>
 												<iconify-icon icon="lucide:chevron-down" class="select-arrow-icon"></iconify-icon>

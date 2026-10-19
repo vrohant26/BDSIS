@@ -81,7 +81,7 @@
 									<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/pre-primary 1.webp' ); ?>" alt="Pre-Primary Classroom" loading="lazy">
 								</div>
 								<div class="secondary-photo-card placeholder-card">
-									<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/pre-primary 2.webp' ); ?>" alt="Pre-Primary Play Group" loading="lazy">
+									<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/pre-primary 2.webp' ); ?>" alt="Pre-Primary Playgroup" loading="lazy">
 								</div>
 								<!-- Background Iconify Doodle Icons -->
 								<div class="curriculum-doodle-icon media-doodle-1" style="color: rgba(73, 39, 74, 0.22);"><?php echo bds_get_new_icon( 'puzzle piece' ); ?></div>
@@ -190,7 +190,7 @@
 							<!-- Right Topic Details Box -->
 							<div class="curriculum-info-box flex-column gap-sm relative">
 								<h3 class="curriculum-topic-title">Post-School Activities</h3>
-								<p class="curriculum-topic-desc">Our Post-School Programme helps students explore sports, arts, performance, and more while building confidence, creativity, skills, and connections.</p>
+								<p class="curriculum-topic-desc">Our Post-School Activities help students explore sports, arts, performance, and more while building confidence, creativity, skills, and connections.</p>
 
 								<div class="curriculum-cta-wrapper">
 									<a href="<?php echo esc_url( home_url( '/academics/post-school-activities/' ) ); ?>" class="btn btn-yellow">

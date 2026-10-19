@@ -20,7 +20,7 @@ $main_img_id   = get_post_meta( $post_id, '_bds_academics_main_img_id', true );
 $sub_img_id    = get_post_meta( $post_id, '_bds_academics_sub_img_id', true );
 
 if ( empty( $breadcrumb ) ) {
-	$breadcrumb = 'Academics / Daycare';
+	$breadcrumb = 'Academics / Day Care';
 }
 if ( empty( $hero_title ) ) {
 	$hero_title = __( 'A Safe Space to Learn, Play and Grow', 'bd-somani' );
@@ -132,7 +132,7 @@ $sub_img_url  = $sub_img_id ? wp_get_attachment_image_url( $sub_img_id, 'full' )
 
 	// Set default fallback values if meta has not been saved yet
 	if ( ! $ov_has_tagline && empty( $ov_tagline ) ) {
-		$ov_tagline = __( 'Daycare at B.D. Somani International School, Kharghar', 'bd-somani' );
+		$ov_tagline = __( 'Day Care at B.D. Somani International School, Kharghar', 'bd-somani' );
 	}
 	if ( ! $ov_has_title && empty( $ov_title ) ) {
 		$ov_title = __( 'A Programme Rooted in Caring and Learning', 'bd-somani' );
@@ -325,7 +325,7 @@ $sub_img_url  = $sub_img_id ? wp_get_attachment_image_url( $sub_img_id, 'full' )
 			}
 			$app_desc = implode( "\n\n", $parts );
 		} else {
-			$app_desc = "Monday–Friday • 11:30 AM – 5:30 PM\n\nA child's first experience away from home should feel safe, comforting and filled with joyful moments. At B.D. Somani International School, Kharghar, we create a nurturing environment where children begin their learning journey with a smile.\n\nOur programme centers around creating familiar routines, playful exploration, and warm interactions. While children learn, parents can go about their day knowing they are in safe and caring hands.";
+			$app_desc = "Monday–Friday • 11:30 AM – 5:30 PM\n\nA child's first experience away from home should feel safe, comforting and filled with joyful moments. At B.D. Somani International School, Kharghar, we create a nurturing environment where children begin their learning journey with a smile.\n\nOur programme centres around creating familiar routines, playful exploration, and warm interactions. While children learn, parents can go about their day knowing they are in safe and caring hands.";
 		}
 	}
 
@@ -843,7 +843,7 @@ $sub_img_url  = $sub_img_id ? wp_get_attachment_image_url( $sub_img_id, 'full' )
 
 										<div class="academics-exp-cta-wrap" style="margin-top: 1.5rem; position: relative; z-index: 2;">
 											<a href="<?php echo esc_url( home_url( '/campus-life/' ) ); ?>" class="btn btn-yellow">
-												<span><?php esc_html_e( 'EXPLORE STUDENT LIFE AT BDSIS', 'bd-somani' ); ?></span>
+												<span><?php esc_html_e( 'EXPLORE STUDENT LIFE', 'bd-somani' ); ?><span class="hide-mobile"> <?php esc_html_e( 'AT BDSIS', 'bd-somani' ); ?></span></span>
 												<svg class="btn-arrow" width="18" height="14" viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg">
 													<path d="M11 1L17 7M17 7L11 13M17 7H1" stroke="#3D213E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 												</svg>

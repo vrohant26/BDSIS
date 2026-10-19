@@ -419,7 +419,7 @@ get_header();
 									<li><?php esc_html_e( 'Hands-on experiments that reinforce scientific concepts through application.', 'bd-somani' ); ?></li>
 									<li><?php esc_html_e( 'Safe, well-equipped spaces that encourage exploration with precision and responsibility.', 'bd-somani' ); ?></li>
 									<li><?php esc_html_e( 'Opportunities to investigate, analyse, and draw evidence-based conclusions.', 'bd-somani' ); ?></li>
-									<li><?php esc_html_e( 'Practical experiences that instill scientific temper and analytical thinking.', 'bd-somani' ); ?></li>
+									<li><?php esc_html_e( 'Practical experiences that instil scientific temper and analytical thinking.', 'bd-somani' ); ?></li>
 								</ul>
 							</div>
 						</div>
@@ -437,7 +437,7 @@ get_header();
 								<h3 class="spaces-highlights-heading"><?php esc_html_e( 'Highlights', 'bd-somani' ); ?></h3>
 								<ul class="spaces-highlights-list">
 									<li><?php esc_html_e( 'A well-rounded sports programme across indoor and outdoor disciplines.', 'bd-somani' ); ?></li>
-									<li><?php esc_html_e( 'Coaching across cricket, football, basketball, chess, taekwondo, and more.', 'bd-somani' ); ?></li>
+									<li><?php esc_html_e( 'Coaching across cricket, football, basketball, chess, taekwondo, swimming and more.', 'bd-somani' ); ?></li>
 									<li><?php esc_html_e( 'Regular training that builds discipline, perseverance, and team spirit.', 'bd-somani' ); ?></li>
 									<li><?php esc_html_e( 'Competitive opportunities that inspire resilience and sportsmanship.', 'bd-somani' ); ?></li>
 									<li><?php esc_html_e( 'Physical activity that promotes fitness, confidence, and overall well-being.', 'bd-somani' ); ?></li>

@@ -67,7 +67,7 @@ get_header();
 						<!-- Rotating Dark Purple Text on Yellow Ring Band -->
 						<text fill="#2B182C" font-family="Montserrat" font-size="13" font-weight="700" letter-spacing="0.8">
 							<textPath href="#aboutLegacyTextPath" startOffset="0%">
-								50+ Years of legacy • 50+ Years of legacy •
+								50 Years of Legacy • 50 Years of Legacy •
 							</textPath>
 						</text>
 					</svg>
@@ -363,7 +363,7 @@ get_header();
 			<!-- Row 1: Image Left / Vision Text Right -->
 			<div class="about-purpose-row">
 				<div class="about-purpose-img-wrap">
-					<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/our vision.webp' ); ?>" alt="Our Vision – BD Somani building" loading="lazy" decoding="async">
+					<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/our vision.webp' ); ?>" alt="Our Vision – B.D. Somani building" loading="lazy" decoding="async">
 				</div>
 				<div class="about-purpose-text">
 					<h3 class="about-purpose-subtitle">Our Vision</h3>
