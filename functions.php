@@ -2402,6 +2402,13 @@ function bdsis_handle_calendly_webhook( WP_REST_Request $request ) {
 		? ( isset( $crm_result['raw'] ) ? $crm_result['raw'] : 'Success' )
 		: ( isset( $crm_result['error'] ) ? $crm_result['error'] : 'Error' );
 
+	// Trigger instant WhatsApp confirmation via WATI
+	$wati_status = 'Not Sent';
+	if ( ! empty( $phone ) ) {
+		$wati_res    = bdsis_send_wati_campus_visit_whatsapp( $phone, $parent_name, $visit_formatted );
+		$wati_status = ! empty( $wati_res['result'] ) ? 'Sent' : 'Failed';
+	}
+
 	// Save Lead in WordPress Admin
 	$lead_title = sprintf( 'Campus Visit - %s (%s)', $parent_name, $visit_formatted ? $visit_formatted : date_i18n( 'd M Y, h:i A' ) );
 	$lead_id    = wp_insert_post(
@@ -2423,14 +2430,66 @@ function bdsis_handle_calendly_webhook( WP_REST_Request $request ) {
 		update_post_meta( $lead_id, '_lead_utm_campaign', 'Schedule a Visit' );
 		update_post_meta( $lead_id, '_edusprint_status', $edusprint_status );
 		update_post_meta( $lead_id, '_edusprint_response', $edusprint_response );
+		update_post_meta( $lead_id, '_wati_whatsapp_status', $wati_status );
 	}
 
 	return new WP_REST_Response(
 		array(
 			'status'           => 'success',
 			'edusprint_status' => $edusprint_status,
+			'wati_status'      => $wati_status,
 			'lead_id'          => $lead_id,
 		),
 		200
 	);
 }
+
+/**
+ * Send Instant WhatsApp Campus Visit Confirmation via WATI
+ */
+function bdsis_send_wati_campus_visit_whatsapp( $phone, $parent_name, $visit_formatted ) {
+	$clean_phone = preg_replace( '/[^\d]/', '', $phone );
+	if ( 10 === strlen( $clean_phone ) ) {
+		$clean_phone = '91' . $clean_phone;
+	}
+
+	$wati_endpoint = 'https://live-mt-server.wati.io/10271281/api/v1/sendTemplateMessage?whatsappNumber=' . $clean_phone;
+	$wati_token    = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImFkbWlzc2lvbnNAYmRzaXNraGFyZ2hhci5vcmciLCJuYW1laWQiOiJhZG1pc3Npb25zQGJkc2lza2hhcmdoYXIub3JnIiwiZW1haWwiOiJhZG1pc3Npb25zQGJkc2lza2hhcmdoYXIub3JnIiwiYXV0aF90aW1lIjoiMTAvMTUvMjAyNiAwOToyNDoyOSIsInRlbmFudF9pZCI6IjEwMjcxMjgxIiwiZGJfbmFtZSI6Im10LXByb2QtVGVuYW50cyIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkFETUlOSVNUUkFUT1IiLCJleHAiOjI1MzQwMjMwMDgwMCwiaXNzIjoiQ2xhcmVfQUkiLCJhdWQiOiJDbGFyZV9BSSJ9.lk5d2ft-3wkfV7knOgZwDWGNF4eDuiReQcyjkKyNLGs';
+
+	$payload = array(
+		'template_name'  => 'campus_visit_confirmation',
+		'broadcast_name' => 'campus_visit_auto_' . time(),
+		'parameters'     => array(
+			array(
+				'name'  => '1',
+				'value' => ! empty( $parent_name ) ? $parent_name : 'Parent',
+			),
+			array(
+				'name'  => '2',
+				'value' => ! empty( $visit_formatted ) ? $visit_formatted : 'Your Scheduled Time',
+			),
+		),
+	);
+
+	$response = wp_remote_post(
+		$wati_endpoint,
+		array(
+			'method'  => 'POST',
+			'timeout' => 15,
+			'headers' => array(
+				'Authorization' => 'Bearer ' . $wati_token,
+				'Content-Type'  => 'application/json; charset=utf-8',
+			),
+			'body'    => wp_json_encode( $payload ),
+		)
+	);
+
+	if ( is_wp_error( $response ) ) {
+		error_log( 'WATI Instant WhatsApp Error: ' . $response->get_error_message() );
+		return false;
+	}
+
+	$body = json_decode( wp_remote_retrieve_body( $response ), true );
+	return $body;
+}
+
