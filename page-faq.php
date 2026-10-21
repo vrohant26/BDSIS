@@ -76,9 +76,7 @@ get_header();
 					<li class="faq-tab-item">
 						<a href="#safety-sec" class="faq-tab-link" data-target="safety-sec" role="tab" aria-selected="false">STUDENT WELL-BEING & SAFETY</a>
 					</li>
-					<li class="faq-tab-item">
-						<a href="#daycare-sec" class="faq-tab-link" data-target="daycare-sec" role="tab" aria-selected="false">DAY CARE</a>
-					</li>
+				
 					<li class="faq-tab-item">
 						<a href="#afterschool-sec" class="faq-tab-link" data-target="afterschool-sec" role="tab" aria-selected="false">POST-SCHOOL ACTIVITIES</a>
 					</li>
