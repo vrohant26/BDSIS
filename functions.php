@@ -2153,9 +2153,20 @@ function bdsis_handle_form_submission() {
 	$edusprint_response = '';
 
 	if ( 'Admissions' === $form_type ) {
+		// Format human-friendly source name for prominent display in MICM app Description
+		$found_via_labels = array(
+			'google'        => 'Google Search',
+			'social_media'  => 'Social Media',
+			'word_of_mouth' => 'Word of Mouth',
+			'newspaper_ad'  => 'Newspaper / Print Ad',
+			'other'         => 'Other',
+		);
+		$source_display   = isset( $found_via_labels[ $utm_source ] ) ? $found_via_labels[ $utm_source ] : ( ! empty( $utm_source ) ? $utm_source : 'Website' );
+		$micm_description = sprintf( '%s | Source: %s', $academic_year ? $academic_year : '2027-2028', $source_display );
+
 		$edusprint_payload = array(
 			'ShortName'          => $school_shortname,
-			'Description'        => $academic_year,
+			'Description'        => $micm_description,
 			'ChildFirstName'     => $child_first,
 			'ChildMiddleName'    => '',
 			'ChildLastName'      => $child_last,
@@ -2253,8 +2264,8 @@ function bdsis_handle_calendly_webhook( WP_REST_Request $request ) {
 
 	$event_type = isset( $body['event'] ) ? sanitize_text_field( $body['event'] ) : '';
 
-	// Only process invitee.created events
-	if ( 'invitee.created' !== $event_type ) {
+	// Process invitee.created and invitee.canceled events
+	if ( ! in_array( $event_type, array( 'invitee.created', 'invitee.canceled' ), true ) ) {
 		return new WP_REST_Response( array( 'status' => 'ignored', 'event' => $event_type ), 200 );
 	}
 
@@ -2307,6 +2318,67 @@ function bdsis_handle_calendly_webhook( WP_REST_Request $request ) {
 	}
 	if ( strlen( $phone ) > 10 ) {
 		$phone = substr( $phone, -10 );
+	}
+
+	// -------------------------------------------------------------------------
+	// Handle Cancellation Event (invitee.canceled)
+	// -------------------------------------------------------------------------
+	if ( 'invitee.canceled' === $event_type ) {
+		$cancellation  = isset( $payload['cancellation'] ) && is_array( $payload['cancellation'] ) ? $payload['cancellation'] : array();
+		$canceler_type = isset( $cancellation['canceler_type'] ) ? sanitize_text_field( $cancellation['canceler_type'] ) : '';
+		$cancel_reason = isset( $cancellation['reason'] ) ? sanitize_text_field( $cancellation['reason'] ) : '';
+
+		$wati_status = 'Not Sent';
+		if ( ! empty( $phone ) ) {
+			$wati_res    = bdsis_send_wati_campus_visit_cancellation_whatsapp( $phone, $parent_name, $visit_formatted );
+			$wati_status = ! empty( $wati_res['result'] ) ? 'Sent' : 'Failed';
+		}
+
+		// Look for existing lead to update, or create a cancellation record
+		$existing_leads = get_posts(
+			array(
+				'post_type'   => 'bds_lead',
+				'meta_key'    => '_lead_email',
+				'meta_value'  => $parent_email,
+				'post_status' => 'publish',
+				'numberposts' => 1,
+			)
+		);
+
+		if ( ! empty( $existing_leads ) ) {
+			$lead_id = $existing_leads[0]->ID;
+			update_post_meta( $lead_id, '_lead_form_type', 'Campus Visit Cancelled (Calendly)' );
+			update_post_meta( $lead_id, '_lead_cancellation_reason', $cancel_reason );
+			update_post_meta( $lead_id, '_lead_message', 'Visit CANCELLED for ' . $visit_formatted . ( $cancel_reason ? ' | Reason: ' . $cancel_reason : '' ) );
+			update_post_meta( $lead_id, '_wati_cancellation_status', $wati_status );
+		} else {
+			$lead_title = sprintf( 'Cancelled Visit - %s (%s)', $parent_name, $visit_formatted ? $visit_formatted : date_i18n( 'd M Y, h:i A' ) );
+			$lead_id    = wp_insert_post(
+				array(
+					'post_title'  => $lead_title,
+					'post_type'   => 'bds_lead',
+					'post_status' => 'publish',
+				)
+			);
+			if ( $lead_id && ! is_wp_error( $lead_id ) ) {
+				update_post_meta( $lead_id, '_lead_form_type', 'Campus Visit Cancelled (Calendly)' );
+				update_post_meta( $lead_id, '_lead_name', $parent_name );
+				update_post_meta( $lead_id, '_lead_email', $parent_email );
+				update_post_meta( $lead_id, '_lead_phone', $phone );
+				update_post_meta( $lead_id, '_lead_message', 'Cancelled Visit for ' . $visit_formatted . ( $cancel_reason ? ' | Reason: ' . $cancel_reason : '' ) );
+				update_post_meta( $lead_id, '_lead_cancellation_reason', $cancel_reason );
+				update_post_meta( $lead_id, '_wati_cancellation_status', $wati_status );
+			}
+		}
+
+		return new WP_REST_Response(
+			array(
+				'status'      => 'cancelled',
+				'wati_status' => $wati_status,
+				'lead_id'     => $lead_id,
+			),
+			200
+		);
 	}
 
 	// Grade, ClassMasterID and Realistic DOB Mapping (for 2027-2028 Academic Year)
@@ -2424,7 +2496,7 @@ function bdsis_handle_calendly_webhook( WP_REST_Request $request ) {
 	// Build payload for EduSprint
 	$edusprint_payload = array(
 		'ShortName'          => $school_shortname,
-		'Description'        => '2027-2028',
+		'Description'        => '2027-2028 | Source: Website - Calendly',
 		'ChildFirstName'     => $child_first,
 		'ChildMiddleName'    => '',
 		'ChildLastName'      => $child_last,
@@ -2542,4 +2614,54 @@ function bdsis_send_wati_campus_visit_whatsapp( $phone, $parent_name, $visit_for
 	$body = json_decode( wp_remote_retrieve_body( $response ), true );
 	return $body;
 }
+
+/**
+ * Send Instant WhatsApp Campus Visit Cancellation via WATI
+ */
+function bdsis_send_wati_campus_visit_cancellation_whatsapp( $phone, $parent_name, $visit_formatted ) {
+	$clean_phone = preg_replace( '/[^\d]/', '', $phone );
+	if ( 10 === strlen( $clean_phone ) ) {
+		$clean_phone = '91' . $clean_phone;
+	}
+
+	$wati_endpoint = 'https://live-mt-server.wati.io/10271281/api/v1/sendTemplateMessage?whatsappNumber=' . $clean_phone;
+	$wati_token    = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImFkbWlzc2lvbnNAYmRzaXNraGFyZ2hhci5vcmciLCJuYW1laWQiOiJhZG1pc3Npb25zQGJkc2lza2hhcmdoYXIub3JnIiwiZW1haWwiOiJhZG1pc3Npb25zQGJkc2lza2hhcmdoYXIub3JnIiwiYXV0aF90aW1lIjoiMTAvMTUvMjAyNiAwOToyNDoyOSIsInRlbmFudF9pZCI6IjEwMjcxMjgxIiwiZGJfbmFtZSI6Im10LXByb2QtVGVuYW50cyIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkFETUlOSVNUUkFUT1IiLCJleHAiOjI1MzQwMjMwMDgwMCwiaXNzIjoiQ2xhcmVfQUkiLCJhdWQiOiJDbGFyZV9BSSJ9.lk5d2ft-3wkfV7knOgZwDWGNF4eDuiReQcyjkKyNLGs';
+
+	$payload = array(
+		'template_name'  => 'campus_visit_cancellation',
+		'broadcast_name' => 'campus_visit_cancel_' . time(),
+		'parameters'     => array(
+			array(
+				'name'  => '1',
+				'value' => ! empty( $parent_name ) ? $parent_name : 'Parent',
+			),
+			array(
+				'name'  => '2',
+				'value' => ! empty( $visit_formatted ) ? $visit_formatted : 'Your Scheduled Time',
+			),
+		),
+	);
+
+	$response = wp_remote_post(
+		$wati_endpoint,
+		array(
+			'method'  => 'POST',
+			'timeout' => 15,
+			'headers' => array(
+				'Authorization' => 'Bearer ' . $wati_token,
+				'Content-Type'  => 'application/json; charset=utf-8',
+			),
+			'body'    => wp_json_encode( $payload ),
+		)
+	);
+
+	if ( is_wp_error( $response ) ) {
+		error_log( 'WATI Instant WhatsApp Cancellation Error: ' . $response->get_error_message() );
+		return false;
+	}
+
+	$body = json_decode( wp_remote_retrieve_body( $response ), true );
+	return $body;
+}
+
 
