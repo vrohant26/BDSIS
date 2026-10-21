@@ -663,7 +663,7 @@ get_header();
 						<div id="ans-safe-29" class="faq-card-body" role="region" aria-labelledby="q-safe-29">
 							<div class="faq-card-content">
 								<p>The campus is equipped with comprehensive safety measures, including CCTV surveillance across the school premises, trained staff, fire safety systems, and age-appropriate infrastructure.</p>
-								<p>The Day Care and Pre-Primary sections feature child-safe furniture, child-friendly door handles, and easily accessible drinking water stations, creating a secure environment for young learners.</p>
+								<p>Pre-Primary sections feature child-safe furniture, child-friendly door handles, and easily accessible drinking water stations, creating a secure environment for young learners.</p>
 							</div>
 						</div>
 					</div>
