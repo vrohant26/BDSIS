@@ -213,19 +213,58 @@ get_header();
 						</div>
 					</div>
 
-					<!-- Video Poster Placeholder Image -->
+					<!-- Brand Film Video Player -->
 					<div class="video-poster-box">
-						<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/coverflow carousel 5.webp' ); ?>" alt="B.D. Somani Auditorium & Facilities" class="video-poster-img" loading="lazy">
+						<video id="brandFilmVideo" class="brand-film-video"  loop playsinline webkit-playsinline preload="metadata" poster="<?php echo esc_url( get_template_directory_uri() . '/assets/images/coverflow carousel 5.webp' ); ?>">
+							<source src="<?php echo esc_url( get_template_directory_uri() . '/assets/video/brand-film-1080p.mp4' ); ?>" type="video/mp4">
+							<source src="<?php echo esc_url( get_template_directory_uri() . '/assets/video/Brand Film 1080 (1) (1) (1).mp4' ); ?>" type="video/mp4">
+						</video>
 						<div class="video-overlay"></div>
 					</div>
 
-					<!-- Bottom-Right Pause/Play Toggle Button -->
-					<button class="video-control-btn" aria-label="Toggle Video Playback">
-						<svg width="18" height="20" viewBox="0 0 18 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-							<rect width="5" height="18" rx="2" fill="#222222"/>
-							<rect x="11" width="5" height="18" rx="2" fill="#222222"/>
-						</svg>
-					</button>
+					<!-- Bottom-Right Controls Group (Sound & Playback) -->
+					<div class="video-controls-group">
+						<!-- Sound / Mute Toggle Button -->
+						<button class="video-control-btn sound-control-btn" id="brandFilmSoundBtn" type="button" aria-label="Toggle Sound">
+							<!-- Volume High Icon (shown when unmuted) -->
+							<svg class="icon-volume-on" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#222222" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+								<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" fill="#222222"></polygon>
+								<path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+								<path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
+							</svg>
+							<!-- Volume Muted Icon (shown when muted) -->
+							<svg class="icon-volume-off" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#222222" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none;">
+								<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" fill="#222222"></polygon>
+								<line x1="23" y1="9" x2="17" y2="15"></line>
+								<line x1="17" y1="9" x2="23" y2="15"></line>
+							</svg>
+						</button>
+
+						<!-- Pause/Play Toggle Button -->
+						<button class="video-control-btn play-control-btn" id="brandFilmToggleBtn" type="button" aria-label="Toggle Video Playback">
+							<!-- Pause Icon (shown when playing) -->
+							<svg class="icon-pause" width="18" height="20" viewBox="0 0 18 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<rect width="5" height="18" rx="2" fill="#222222"/>
+								<rect x="11" width="5" height="18" rx="2" fill="#222222"/>
+							</svg>
+							<!-- Play Icon (shown when paused) -->
+							<svg class="icon-play" width="18" height="20" viewBox="0 0 18 20" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:none; margin-left: 2px;">
+								<path d="M16 10L2 19V1L16 10Z" fill="#222222"/>
+							</svg>
+						</button>
+
+						<!-- Fullscreen Toggle Button -->
+						<button class="video-control-btn fullscreen-control-btn" id="brandFilmFullscreenBtn" type="button" aria-label="Toggle Fullscreen">
+							<!-- Enter Fullscreen Icon -->
+							<svg class="icon-fullscreen-enter" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#222222" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+								<path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path>
+							</svg>
+							<!-- Exit Fullscreen Icon (shown in fullscreen) -->
+							<svg class="icon-fullscreen-exit" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#222222" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none;">
+								<path d="M8 3v3a2 2 0 0 1-2 2H3m18 0h-3a2 2 0 0 1-2-2V3m0 18v-3a2 2 0 0 1 2-2h3M3 16h3a2 2 0 0 1 2 2v3"></path>
+							</svg>
+						</button>
+					</div>
 				</div>
 			</div>
 

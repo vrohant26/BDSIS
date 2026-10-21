@@ -1025,13 +1025,19 @@ ol {
     border-radius: calc(clamp(16px, 2.2vw, 24px) - 4px);
     overflow: hidden;
     position: relative;
+    background-color: #000000;
 }
 
-.video-poster-img {
+.video-poster-img,
+.brand-film-video {
     width: 100%;
     height: 100%;
     object-fit: cover;
     display: block;
+}
+
+.video-card-container {
+    cursor: pointer;
 }
 
 .video-overlay {
@@ -1073,14 +1079,21 @@ ol {
     height: auto;
 }
 
-/* Bottom-Right Pause/Play Toggle Button */
-.video-control-btn {
+/* Bottom-Right Controls Group (Sound, Playback & Fullscreen) */
+.video-controls-group {
     position: absolute;
     bottom: 20px;
     right: 20px;
     z-index: 10;
-    width: clamp(46px, 4.5vw, 56px);
-    height: clamp(46px, 4.5vw, 56px);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.video-control-btn {
+    position: relative;
+    width: clamp(44px, 4.2vw, 52px);
+    height: clamp(44px, 4.2vw, 52px);
     border-radius: 50%;
     background-color: var(--clr-accent-cream);
     border: none;
@@ -1095,6 +1108,61 @@ ol {
 .video-control-btn:hover {
     transform: scale(1.1);
     background-color: #FFFFFF;
+}
+
+.video-control-btn svg {
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+}
+
+/* Reduced size of video controls and icons on mobile devices */
+@media (max-width: 768px) {
+    .video-controls-group {
+        bottom: 12px;
+        right: 12px;
+        gap: 8px;
+    }
+
+    .video-control-btn {
+        width: 36px;
+        height: 36px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .video-control-btn svg {
+        width: 15px;
+        height: 15px;
+    }
+
+    .video-control-btn svg.icon-pause,
+    .video-control-btn svg.icon-play {
+        width: 13px;
+        height: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .video-controls-group {
+        bottom: 10px;
+        right: 10px;
+        gap: 6px;
+    }
+
+    .video-control-btn {
+        width: 32px;
+        height: 32px;
+    }
+
+    .video-control-btn svg {
+        width: 13px;
+        height: 13px;
+    }
+
+    .video-control-btn svg.icon-pause,
+    .video-control-btn svg.icon-play {
+        width: 11px;
+        height: 13px;
+    }
 }
 
 .global-future-cta {

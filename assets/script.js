@@ -2780,5 +2780,230 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
   initBackToTop();
+
+  // ---------------------------------------------------------------------------
+  // Brand Film Video Scroll-Into-View & Play/Pause & Sound Control
+  // ---------------------------------------------------------------------------
+  function initBrandFilmVideo() {
+    const video = document.getElementById("brandFilmVideo");
+    const toggleBtn = document.getElementById("brandFilmToggleBtn");
+    const soundBtn = document.getElementById("brandFilmSoundBtn");
+    const fullscreenBtn = document.getElementById("brandFilmFullscreenBtn");
+    const section = document.querySelector(".global-future-section");
+    const container = document.querySelector(".video-card-container");
+
+    if (!video || !toggleBtn) return;
+
+    let userManuallyPaused = false;
+
+    function updatePlayIcons(isPlaying) {
+      const pauseIcon = toggleBtn.querySelector(".icon-pause");
+      const playIcon = toggleBtn.querySelector(".icon-play");
+      if (pauseIcon && playIcon) {
+        pauseIcon.style.display = isPlaying ? "block" : "none";
+        playIcon.style.display = isPlaying ? "none" : "block";
+      }
+      toggleBtn.setAttribute("aria-label", isPlaying ? "Pause Video" : "Play Video");
+    }
+
+    function updateSoundIcons(isMuted) {
+      if (!soundBtn) return;
+      const volOn = soundBtn.querySelector(".icon-volume-on");
+      const volOff = soundBtn.querySelector(".icon-volume-off");
+      if (volOn && volOff) {
+        volOn.style.display = isMuted ? "none" : "block";
+        volOff.style.display = isMuted ? "block" : "none";
+      }
+      soundBtn.setAttribute("aria-label", isMuted ? "Unmute Sound" : "Mute Sound");
+    }
+
+    function isFullscreenActive() {
+      return !!(
+        document.fullscreenElement ||
+        document.webkitFullscreenElement ||
+        document.mozFullScreenElement ||
+        document.msFullscreenElement ||
+        video.webkitDisplayingFullscreen
+      );
+    }
+
+    function updateFullscreenIcons(inFullscreen) {
+      if (!fullscreenBtn) return;
+      const enterIcon = fullscreenBtn.querySelector(".icon-fullscreen-enter");
+      const exitIcon = fullscreenBtn.querySelector(".icon-fullscreen-exit");
+      if (enterIcon && exitIcon) {
+        enterIcon.style.display = inFullscreen ? "none" : "block";
+        exitIcon.style.display = inFullscreen ? "block" : "none";
+      }
+      fullscreenBtn.setAttribute("aria-label", inFullscreen ? "Exit Fullscreen" : "Enter Fullscreen");
+    }
+
+    function toggleFullscreen() {
+      if (!isFullscreenActive()) {
+        // Unmute and play when user requests fullscreen
+        if (video.muted) {
+          video.muted = false;
+          updateSoundIcons(false);
+        }
+        if (video.paused) {
+          userManuallyPaused = false;
+          video.play().catch(() => {});
+        }
+
+        // Trigger fullscreen on video element across all browsers & iOS Safari
+        if (video.requestFullscreen) {
+          video.requestFullscreen().catch(() => {
+            if (video.webkitEnterFullscreen) video.webkitEnterFullscreen();
+          });
+        } else if (video.webkitEnterFullscreen) {
+          video.webkitEnterFullscreen();
+        } else if (video.webkitRequestFullscreen) {
+          video.webkitRequestFullscreen();
+        } else if (video.msRequestFullscreen) {
+          video.msRequestFullscreen();
+        }
+      } else {
+        if (document.exitFullscreen) {
+          document.exitFullscreen().catch(() => {});
+        } else if (document.webkitExitFullscreen) {
+          document.webkitExitFullscreen().catch(() => {});
+        } else if (video.webkitExitFullscreen) {
+          video.webkitExitFullscreen();
+        }
+      }
+    }
+
+    // Keep icons in sync with real video events
+    video.addEventListener("play", () => updatePlayIcons(true));
+    video.addEventListener("pause", () => updatePlayIcons(false));
+    video.addEventListener("volumechange", () => updateSoundIcons(video.muted || video.volume === 0));
+
+    // Fullscreen state listeners
+    document.addEventListener("fullscreenchange", () => updateFullscreenIcons(isFullscreenActive()));
+    document.addEventListener("webkitfullscreenchange", () => updateFullscreenIcons(isFullscreenActive()));
+    video.addEventListener("webkitbeginfullscreen", () => updateFullscreenIcons(true));
+    video.addEventListener("webkitendfullscreen", () => updateFullscreenIcons(false));
+
+    // Initialize initial sound icon state
+    updateSoundIcons(video.muted);
+
+    // Play/Pause button click
+    toggleBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      if (video.paused) {
+        userManuallyPaused = false;
+        // If clicking to play, ensure sound is enabled on user gesture
+        if (video.muted) {
+          video.muted = false;
+          updateSoundIcons(false);
+        }
+        video.play().catch(() => {});
+      } else {
+        userManuallyPaused = true;
+        video.pause();
+      }
+    });
+
+    // Sound toggle button click
+    if (soundBtn) {
+      soundBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        video.muted = !video.muted;
+        updateSoundIcons(video.muted);
+        if (!video.muted && video.paused) {
+          userManuallyPaused = false;
+          video.play().catch(() => {});
+        }
+      });
+    }
+
+    // Fullscreen toggle button click
+    if (fullscreenBtn) {
+      fullscreenBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        toggleFullscreen();
+      });
+    }
+
+    // Clicking anywhere on the video card also toggles playback
+    if (container) {
+      container.addEventListener("click", (e) => {
+        if (
+          e.target.closest("#brandFilmToggleBtn") ||
+          e.target.closest("#brandFilmSoundBtn") ||
+          e.target.closest("#brandFilmFullscreenBtn") ||
+          e.target.closest(".legacy-badge-wrapper")
+        ) return;
+        if (video.paused) {
+          userManuallyPaused = false;
+          if (video.muted) {
+            video.muted = false;
+            updateSoundIcons(false);
+          }
+          video.play().catch(() => {});
+        } else {
+          userManuallyPaused = true;
+          video.pause();
+        }
+      });
+    }
+
+    // Attempt to play with sound first; fallback to muted if browser blocks unmuted autoplay
+    function playWithSoundFallback() {
+      video.muted = false;
+      const playPromise = video.play();
+      if (playPromise !== undefined) {
+        playPromise
+          .then(() => {
+            updateSoundIcons(false);
+          })
+          .catch(() => {
+            // Browser autoplay policy blocked unmuted playback on cold scroll
+            // Fall back to muted playback and show the Mute/Unmute button
+            video.muted = true;
+            updateSoundIcons(true);
+            video.play().catch(() => {});
+          });
+      }
+    }
+
+    // Unmute on first user interaction anywhere on the page
+    const unmuteOnFirstGesture = () => {
+      if (video && !video.paused && video.muted) {
+        video.muted = false;
+        updateSoundIcons(false);
+      }
+      window.removeEventListener("click", unmuteOnFirstGesture);
+      window.removeEventListener("keydown", unmuteOnFirstGesture);
+    };
+    window.addEventListener("click", unmuteOnFirstGesture, { once: true });
+    window.addEventListener("keydown", unmuteOnFirstGesture, { once: true });
+
+    // Play only when this section comes into view, pause when scrolled away
+    const targetElement = container || section;
+    if ("IntersectionObserver" in window && targetElement) {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              if (!userManuallyPaused && video.paused) {
+                playWithSoundFallback();
+              }
+            } else {
+              if (!video.paused) {
+                video.pause();
+              }
+            }
+          });
+        },
+        {
+          threshold: 0.25,
+        }
+      );
+
+      observer.observe(targetElement);
+    }
+  }
+  initBrandFilmVideo();
 });
 
