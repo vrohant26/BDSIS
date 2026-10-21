@@ -219,7 +219,7 @@ get_header();
 							<source src="<?php echo esc_url( get_template_directory_uri() . '/assets/video/Brand Film 1080p.mp4' ); ?>" type="video/mp4">
 							<source src="<?php echo esc_url( get_template_directory_uri() . '/assets/video/brand-film-1080p.mp4' ); ?>" type="video/mp4">
 						</video>
-						<div class="video-overlay"></div>
+
 					</div>
 
 					<!-- Bottom-Right Controls Group (Sound & Playback) -->
