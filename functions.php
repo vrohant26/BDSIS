@@ -1889,10 +1889,19 @@ function bds_leads_cpt_custom_column( $column, $post_id ) {
 			break;
 		case 'crm':
 			$crm_status = get_post_meta( $post_id, '_edusprint_status', true );
+			$enquiry_no = get_post_meta( $post_id, '_edusprint_enquiry_no', true );
+			$response   = get_post_meta( $post_id, '_edusprint_response', true );
 			if ( 'Synced' === $crm_status ) {
 				echo '<span style="display:inline-block; padding:3px 8px; background:#e6f4ea; color:#137333; border-radius:4px; font-size:11px; font-weight:700;">✓ Synced</span>';
+				if ( $enquiry_no ) {
+					echo '<br><span style="font-size:10px; color:#555; font-family:monospace; font-weight:600;">' . esc_html( $enquiry_no ) . '</span>';
+				}
 			} elseif ( 'Failed' === $crm_status ) {
-				echo '<span style="display:inline-block; padding:3px 8px; background:#fce8e6; color:#c5221f; border-radius:4px; font-size:11px; font-weight:700;">✕ Failed</span>';
+				$tip = esc_attr( wp_trim_words( $response, 15, '...' ) );
+				echo '<span style="display:inline-block; padding:3px 8px; background:#fce8e6; color:#c5221f; border-radius:4px; font-size:11px; font-weight:700;" title="' . $tip . '">✕ Failed</span>';
+				if ( $response ) {
+					echo '<br><span style="font-size:10px; color:#c5221f;" title="' . $tip . '">' . esc_html( wp_trim_words( $response, 5, '...' ) ) . '</span>';
+				}
 			} else {
 				echo '<span style="color:#888;">—</span>';
 			}
@@ -1913,6 +1922,84 @@ function bds_leads_cpt_custom_column( $column, $post_id ) {
 	}
 }
 add_action( 'manage_bds_lead_posts_custom_column', 'bds_leads_cpt_custom_column', 10, 2 );
+
+// Add "Sync to EduSprint" row action on leads list
+function bds_leads_row_actions( $actions, $post ) {
+	if ( 'bds_lead' === $post->post_type ) {
+		$sync_url = wp_nonce_url(
+			admin_url( 'admin-post.php?action=bdsis_resync_lead&post_id=' . $post->ID ),
+			'bdsis_resync_lead_' . $post->ID
+		);
+		$actions['sync_edusprint'] = '<a href="' . esc_url( $sync_url ) . '" style="color:#137333; font-weight:600;">' . __( 'Sync to EduSprint', 'bd-somani' ) . '</a>';
+	}
+	return $actions;
+}
+add_filter( 'post_row_actions', 'bds_leads_row_actions', 10, 2 );
+
+// Bulk action to sync multiple leads to EduSprint
+function bds_leads_bulk_actions( $bulk_actions ) {
+	$bulk_actions['sync_edusprint_bulk'] = __( 'Sync to EduSprint', 'bd-somani' );
+	return $bulk_actions;
+}
+add_filter( 'bulk_actions-edit-bds_lead', 'bds_leads_bulk_actions' );
+
+function bds_leads_handle_bulk_actions( $redirect_to, $doaction, $post_ids ) {
+	if ( 'sync_edusprint_bulk' === $doaction && ! empty( $post_ids ) ) {
+		$success_count = 0;
+		foreach ( $post_ids as $pid ) {
+			$r = bdsis_sync_lead_to_edusprint( $pid );
+			if ( ! empty( $r['success'] ) ) {
+				$success_count++;
+			}
+		}
+		$redirect_to = add_query_arg(
+			array(
+				'bulk_synced' => $success_count,
+				'bulk_total'  => count( $post_ids ),
+			),
+			$redirect_to
+		);
+	}
+	return $redirect_to;
+}
+add_filter( 'handle_bulk_actions-edit-bds_lead', 'bds_leads_handle_bulk_actions', 10, 3 );
+
+// Admin notices for sync feedback
+function bds_leads_admin_notices() {
+	if ( isset( $_GET['bulk_synced'] ) ) {
+		$synced = absint( $_GET['bulk_synced'] );
+		$total  = absint( $_GET['bulk_total'] );
+		echo '<div class="notice notice-success is-dismissible"><p>' . sprintf( esc_html__( 'EduSprint Sync: %d of %d lead(s) processed.', 'bd-somani' ), $synced, $total ) . '</p></div>';
+	} elseif ( isset( $_GET['edusprint_sync'] ) ) {
+		if ( 'success' === $_GET['edusprint_sync'] ) {
+			echo '<div class="notice notice-success is-dismissible"><p>' . esc_html__( 'Lead successfully synced to EduSprint CRM!', 'bd-somani' ) . '</p></div>';
+		} else {
+			echo '<div class="notice notice-error is-dismissible"><p>' . esc_html__( 'Failed to sync lead to EduSprint. Please check lead details.', 'bd-somani' ) . '</p></div>';
+		}
+	}
+}
+add_action( 'admin_notices', 'bds_leads_admin_notices' );
+
+// Handle single lead re-sync from admin row action
+function bdsis_handle_admin_resync_lead() {
+	if ( ! current_user_can( 'edit_posts' ) ) {
+		wp_die( 'Unauthorized' );
+	}
+	$post_id = isset( $_GET['post_id'] ) ? absint( $_GET['post_id'] ) : 0;
+	check_admin_referer( 'bdsis_resync_lead_' . $post_id );
+
+	$res = bdsis_sync_lead_to_edusprint( $post_id );
+	$redirect = add_query_arg(
+		array(
+			'post_type'      => 'bds_lead',
+			'edusprint_sync' => ! empty( $res['success'] ) ? 'success' : 'failed',
+		),
+		admin_url( 'edit.php' )
+	);
+	wp_safe_redirect( $redirect );
+	exit;
+}
+add_action( 'admin_post_bdsis_resync_lead', 'bdsis_handle_admin_resync_lead' );
 
 /**
  * ============================================================================
@@ -2015,14 +2102,179 @@ function bdsis_send_edusprint_enquiry( $enquiry_data ) {
 	$body_raw    = wp_remote_retrieve_body( $response );
 	$body        = json_decode( $body_raw, true );
 
-	$is_success = ( $status_code >= 200 && $status_code < 300 );
+	// EduSprint returns a double-encoded JSON string; unwrap if needed
+	if ( is_string( $body ) ) {
+		$decoded_inner = json_decode( $body, true );
+		if ( json_last_error() === JSON_ERROR_NONE && is_array( $decoded_inner ) ) {
+			$body = $decoded_inner;
+		}
+	}
+
+	// Determine true API success: HTTP 200 AND Success === true
+	$api_success = false;
+	if ( $status_code >= 200 && $status_code < 300 ) {
+		if ( is_array( $body ) && isset( $body['Success'] ) ) {
+			$api_success = ( true === $body['Success'] || 'true' === strtolower( (string) $body['Success'] ) );
+		} else {
+			$api_success = true;
+		}
+	}
+
+	$error_msg = '';
+	if ( ! $api_success ) {
+		if ( is_array( $body ) && ! empty( $body['ResponseData'] ) ) {
+			$error_msg = is_array( $body['ResponseData'] ) ? implode( '; ', $body['ResponseData'] ) : (string) $body['ResponseData'];
+		} elseif ( is_array( $body ) && ! empty( $body['ResponseMessage'] ) ) {
+			$error_msg = (string) $body['ResponseMessage'];
+		} else {
+			$error_msg = 'EduSprint rejected enquiry with HTTP ' . $status_code;
+		}
+	}
 
 	return array(
-		'success'     => $is_success,
+		'success'     => $api_success,
 		'status_code' => $status_code,
 		'response'    => $body,
 		'raw'         => $body_raw,
+		'error'       => $error_msg,
 	);
+}
+
+/**
+ * Re-sync an existing lead post to MICM EduSprint CRM
+ *
+ * @param int $lead_id The bds_lead post ID.
+ * @return array Sync result array with success flag and message.
+ */
+function bdsis_sync_lead_to_edusprint( $lead_id ) {
+	$lead_id = absint( $lead_id );
+	if ( ! $lead_id ) {
+		return array( 'success' => false, 'error' => 'Invalid lead ID.' );
+	}
+
+	$form_type  = get_post_meta( $lead_id, '_lead_form_type', true );
+	$full_name  = get_post_meta( $lead_id, '_lead_name', true );
+	$email      = get_post_meta( $lead_id, '_lead_email', true );
+	$phone      = get_post_meta( $lead_id, '_lead_phone', true );
+	$grade_meta = get_post_meta( $lead_id, '_lead_grade', true );
+	$message    = get_post_meta( $lead_id, '_lead_message', true );
+	$source     = get_post_meta( $lead_id, '_lead_utm_source', true );
+
+	// Structured meta if available, else extract from grade_meta string
+	$child_name    = get_post_meta( $lead_id, '_lead_child_name', true );
+	$dob           = get_post_meta( $lead_id, '_lead_child_dob', true );
+	$class_id      = get_post_meta( $lead_id, '_lead_class_id', true );
+	$academic_year = get_post_meta( $lead_id, '_lead_academic_year', true );
+
+	if ( empty( $child_name ) && ! empty( $grade_meta ) ) {
+		if ( preg_match( '/Child:\s*([^|]+)/i', $grade_meta, $m ) ) {
+			$child_name = trim( $m[1] );
+		}
+	}
+	if ( empty( $academic_year ) && ! empty( $grade_meta ) ) {
+		if ( preg_match( '/Year:\s*([^|]+)/i', $grade_meta, $m ) ) {
+			$academic_year = trim( $m[1] );
+		}
+	}
+	if ( empty( $academic_year ) ) {
+		$academic_year = '2027-2028';
+	}
+	if ( empty( $dob ) && ! empty( $grade_meta ) ) {
+		if ( preg_match( '/DOB:\s*([^|]+)/i', $grade_meta, $m ) ) {
+			$raw_d = trim( $m[1] );
+			$pt    = strtotime( str_replace( '/', '-', $raw_d ) );
+			$dob   = $pt ? date( 'Y-m-d 00:00:00', $pt ) : '1994-07-17 00:00:00';
+		}
+	}
+	if ( empty( $dob ) ) {
+		$dob = '1994-07-17 00:00:00';
+	}
+
+	$grade_name_map = array(
+		'playgroup' => 34,
+		'nursery'   => 35,
+		'jr. kg'    => 36,
+		'jr kg'     => 36,
+		'junior kg' => 36,
+		'sr. kg'    => 37,
+		'sr kg'     => 37,
+		'senior kg' => 37,
+		'grade 1'   => 38,
+		'grade 2'   => 39,
+		'grade 3'   => 40,
+		'grade 4'   => 41,
+		'grade 5'   => 42,
+		'grade 6'   => 43,
+		'grade 7'   => 44,
+		'grade 8'   => 55,
+	);
+	if ( empty( $class_id ) && ! empty( $grade_meta ) ) {
+		if ( preg_match( '/Grade:\s*([^|]+)/i', $grade_meta, $m ) ) {
+			$g_str = strtolower( trim( $m[1] ) );
+			if ( isset( $grade_name_map[ $g_str ] ) ) {
+				$class_id = $grade_name_map[ $g_str ];
+			}
+		}
+	}
+	if ( empty( $class_id ) ) {
+		$class_id = 34;
+	}
+
+	// Names
+	$name_for_parts = ! empty( $child_name ) ? $child_name : $full_name;
+	$parts          = array_values( array_filter( explode( ' ', trim( $name_for_parts ) ) ) );
+	$child_first    = ! empty( $parts[0] ) ? $parts[0] : 'Applicant';
+	if ( count( $parts ) > 1 ) {
+		array_shift( $parts );
+		$child_last = implode( ' ', $parts );
+	} else {
+		$child_last = '-';
+	}
+	$child_print = trim( $child_first . ' ' . ( '-' !== $child_last ? $child_last : '' ) );
+
+	$igcse_grade_ids  = array( 57, 58, 59 );
+	$school_shortname = in_array( (int) $class_id, $igcse_grade_ids, true ) ? 'bdskig' : 'bdsk';
+	$enquiry_channel  = in_array( (int) $class_id, $igcse_grade_ids, true ) ? 81 : 35;
+
+	$edusprint_payload = array(
+		'ShortName'          => $school_shortname,
+		'Description'        => $academic_year,
+		'ChildFirstName'     => $child_first,
+		'ChildMiddleName'    => '',
+		'ChildLastName'      => $child_last,
+		'ChildPrintName'     => $child_print,
+		'ContactEmailID'     => $email ? $email : 'admissions@bdsomani.com',
+		'ContactMobileNo'    => $phone,
+		'DOB'                => $dob,
+		'ClassMasterID'      => (string) $class_id,
+		'EnquiryChannelID'   => (string) $enquiry_channel,
+		'GenderID'           => 3,
+		'UtmSource'          => ! empty( $source ) ? $source : 'Website',
+		'UtmMedium'          => '',
+		'UtmCampaign'        => ! empty( $form_type ) ? $form_type : 'Admissions',
+		'UtmTerm'            => '',
+		'UtmContent'         => '',
+		'ResidentialAddress' => ! empty( $source ) ? 'Source: ' . $source : '',
+	);
+
+	$crm_result = bdsis_send_edusprint_enquiry( $edusprint_payload );
+
+	if ( ! empty( $crm_result['success'] ) ) {
+		$status   = 'Synced';
+		$response = isset( $crm_result['raw'] ) ? $crm_result['raw'] : 'Success';
+		update_post_meta( $lead_id, '_edusprint_status', $status );
+		update_post_meta( $lead_id, '_edusprint_response', $response );
+		if ( ! empty( $crm_result['raw'] ) && preg_match( '/(ENQ\/[0-9\-]+\/[0-9]+)/i', $crm_result['raw'], $matches ) ) {
+			update_post_meta( $lead_id, '_edusprint_enquiry_no', $matches[1] );
+		}
+		return array( 'success' => true, 'response' => $response );
+	} else {
+		$status   = 'Failed';
+		$response = isset( $crm_result['error'] ) ? $crm_result['error'] : 'Failed';
+		update_post_meta( $lead_id, '_edusprint_status', $status );
+		update_post_meta( $lead_id, '_edusprint_response', $response );
+		return array( 'success' => false, 'error' => $response );
+	}
 }
 
 // AJAX Handler for Contact & Admissions Forms -> MICM Edusprint CRM & WP CPT Integration
@@ -2162,11 +2414,11 @@ function bdsis_handle_form_submission() {
 			'other'         => 'Other',
 		);
 		$source_display   = isset( $found_via_labels[ $utm_source ] ) ? $found_via_labels[ $utm_source ] : ( ! empty( $utm_source ) ? $utm_source : 'Website' );
-		$micm_description = sprintf( '%s | Source: %s', $academic_year ? $academic_year : '2027-2028', $source_display );
 
+		// NOTE: 'Description' MUST be strictly the Academic Year (e.g. '2027-2028') for EduSprint to generate the Enquiry Reference Number
 		$edusprint_payload = array(
 			'ShortName'          => $school_shortname,
-			'Description'        => $micm_description,
+			'Description'        => $academic_year ? $academic_year : '2027-2028',
 			'ChildFirstName'     => $child_first,
 			'ChildMiddleName'    => '',
 			'ChildLastName'      => $child_last,
@@ -2177,12 +2429,12 @@ function bdsis_handle_form_submission() {
 			'ClassMasterID'      => (string) ( $class_id ? $class_id : 34 ),
 			'EnquiryChannelID'   => (string) $enquiry_channel,
 			'GenderID'           => 3, // Not Specified
-			'UtmSource'          => $utm_source,
+			'UtmSource'          => $source_display,
 			'UtmMedium'          => $utm_medium,
-			'UtmCampaign'        => $utm_campaign,
+			'UtmCampaign'        => $utm_campaign ? $utm_campaign : 'Admissions',
 			'UtmTerm'            => $utm_term,
 			'UtmContent'         => $utm_content,
-			'ResidentialAddress' => '',
+			'ResidentialAddress' => 'Source: ' . $source_display,
 		);
 
 		$crm_result = bdsis_send_edusprint_enquiry( $edusprint_payload );
@@ -2190,12 +2442,21 @@ function bdsis_handle_form_submission() {
 		if ( ! empty( $crm_result['success'] ) ) {
 			$edusprint_status   = 'Synced';
 			$edusprint_response = isset( $crm_result['raw'] ) ? $crm_result['raw'] : 'Success';
+
+			// Extract Enquiry Reference Number (e.g. ENQ/2027-2028/155)
+			if ( ! empty( $crm_result['raw'] ) && preg_match( '/(ENQ\/[0-9\-]+\/[0-9]+)/i', $crm_result['raw'], $matches ) ) {
+				update_post_meta( $lead_id, '_edusprint_enquiry_no', $matches[1] );
+			}
 		} else {
 			$edusprint_status   = 'Failed';
 			$edusprint_response = isset( $crm_result['error'] ) ? $crm_result['error'] : ( isset( $crm_result['raw'] ) ? $crm_result['raw'] : 'Error' );
 		}
 
 		if ( $lead_id && ! is_wp_error( $lead_id ) ) {
+			update_post_meta( $lead_id, '_lead_child_name', $child_name );
+			update_post_meta( $lead_id, '_lead_child_dob', $formatted_dob );
+			update_post_meta( $lead_id, '_lead_class_id', $class_id );
+			update_post_meta( $lead_id, '_lead_academic_year', $academic_year );
 			update_post_meta( $lead_id, '_edusprint_status', $edusprint_status );
 			update_post_meta( $lead_id, '_edusprint_response', $edusprint_response );
 		}
@@ -2494,9 +2755,10 @@ function bdsis_handle_calendly_webhook( WP_REST_Request $request ) {
 	$child_print = trim( $child_first . ' ' . ( '-' !== $child_last ? $child_last : '' ) );
 
 	// Build payload for EduSprint
+	// NOTE: 'Description' MUST be strictly the Academic Year (e.g. '2027-2028') for EduSprint to generate the Enquiry Reference Number
 	$edusprint_payload = array(
 		'ShortName'          => $school_shortname,
-		'Description'        => '2027-2028 | Source: Website - Calendly',
+		'Description'        => '2027-2028',
 		'ChildFirstName'     => $child_first,
 		'ChildMiddleName'    => '',
 		'ChildLastName'      => $child_last,
@@ -2512,7 +2774,7 @@ function bdsis_handle_calendly_webhook( WP_REST_Request $request ) {
 		'UtmCampaign'        => 'Schedule a Visit',
 		'UtmTerm'            => $grade_label,
 		'UtmContent'         => '',
-		'ResidentialAddress' => '',
+		'ResidentialAddress' => ! empty( $visit_formatted ) ? 'Campus Visit: ' . $visit_formatted : '',
 	);
 
 
@@ -2523,6 +2785,11 @@ function bdsis_handle_calendly_webhook( WP_REST_Request $request ) {
 	$edusprint_response = ! empty( $crm_result['success'] )
 		? ( isset( $crm_result['raw'] ) ? $crm_result['raw'] : 'Success' )
 		: ( isset( $crm_result['error'] ) ? $crm_result['error'] : 'Error' );
+
+	$edusprint_enquiry_no = '';
+	if ( ! empty( $crm_result['raw'] ) && preg_match( '/(ENQ\/[0-9\-]+\/[0-9]+)/i', $crm_result['raw'], $matches ) ) {
+		$edusprint_enquiry_no = $matches[1];
+	}
 
 	// Trigger instant WhatsApp confirmation via WATI
 	$wati_status = 'Not Sent';
@@ -2552,6 +2819,9 @@ function bdsis_handle_calendly_webhook( WP_REST_Request $request ) {
 		update_post_meta( $lead_id, '_lead_utm_campaign', 'Schedule a Visit' );
 		update_post_meta( $lead_id, '_edusprint_status', $edusprint_status );
 		update_post_meta( $lead_id, '_edusprint_response', $edusprint_response );
+		if ( ! empty( $edusprint_enquiry_no ) ) {
+			update_post_meta( $lead_id, '_edusprint_enquiry_no', $edusprint_enquiry_no );
+		}
 		update_post_meta( $lead_id, '_wati_whatsapp_status', $wati_status );
 	}
 
