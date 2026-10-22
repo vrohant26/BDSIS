@@ -2001,6 +2001,233 @@ function bdsis_handle_admin_resync_lead() {
 }
 add_action( 'admin_post_bdsis_resync_lead', 'bdsis_handle_admin_resync_lead' );
 
+// Add Date Range & Form Type Filters + Export Button to Leads Admin List
+function bds_leads_restrict_manage_posts() {
+	global $typenow;
+	if ( 'bds_lead' !== $typenow ) {
+		return;
+	}
+
+	$from_date     = isset( $_GET['bds_from_date'] ) ? sanitize_text_field( wp_unslash( $_GET['bds_from_date'] ) ) : '';
+	$to_date       = isset( $_GET['bds_to_date'] ) ? sanitize_text_field( wp_unslash( $_GET['bds_to_date'] ) ) : '';
+	$selected_type = isset( $_GET['bds_form_type'] ) ? sanitize_text_field( wp_unslash( $_GET['bds_form_type'] ) ) : '';
+	?>
+	<select name="bds_form_type" id="bds_form_type">
+		<option value=""><?php esc_html_e( 'All Form Types', 'bd-somani' ); ?></option>
+		<option value="Admissions" <?php selected( $selected_type, 'Admissions' ); ?>><?php esc_html_e( 'Admissions', 'bd-somani' ); ?></option>
+		<option value="Campus Visit (Calendly)" <?php selected( $selected_type, 'Campus Visit (Calendly)' ); ?>><?php esc_html_e( 'Campus Visit (Calendly)', 'bd-somani' ); ?></option>
+		<option value="Enquiry" <?php selected( $selected_type, 'Enquiry' ); ?>><?php esc_html_e( 'General Enquiry', 'bd-somani' ); ?></option>
+	</select>
+
+	<label for="bds_from_date" style="margin-left: 6px; font-weight: 600;"><?php esc_html_e( 'From:', 'bd-somani' ); ?></label>
+	<input type="date" id="bds_from_date" name="bds_from_date" value="<?php echo esc_attr( $from_date ); ?>" style="line-height: 28px; height: 28px; margin-right: 4px;" />
+
+	<label for="bds_to_date" style="margin-left: 6px; font-weight: 600;"><?php esc_html_e( 'To:', 'bd-somani' ); ?></label>
+	<input type="date" id="bds_to_date" name="bds_to_date" value="<?php echo esc_attr( $to_date ); ?>" style="line-height: 28px; height: 28px; margin-right: 4px;" />
+
+	<button type="submit" name="bds_export_csv" value="1" class="button button-primary" style="margin-left: 6px; display: inline-flex; align-items: center; gap: 4px;">
+		<span class="dashicons dashicons-download" style="font-size: 16px; width: 16px; height: 16px;"></span>
+		<span><?php esc_html_e( 'Export to CSV', 'bd-somani' ); ?></span>
+	</button>
+	<?php
+}
+add_action( 'restrict_manage_posts', 'bds_leads_restrict_manage_posts' );
+
+// Apply Date Range and Form Type filters to Leads WP_Query on screen
+function bds_leads_filter_query( $query ) {
+	global $pagenow, $typenow;
+	if ( ! is_admin() || 'edit.php' !== $pagenow || 'bds_lead' !== $typenow || ! $query->is_main_query() ) {
+		return;
+	}
+
+	$from_date = isset( $_GET['bds_from_date'] ) ? sanitize_text_field( wp_unslash( $_GET['bds_from_date'] ) ) : '';
+	$to_date   = isset( $_GET['bds_to_date'] ) ? sanitize_text_field( wp_unslash( $_GET['bds_to_date'] ) ) : '';
+	$form_type = isset( $_GET['bds_form_type'] ) ? sanitize_text_field( wp_unslash( $_GET['bds_form_type'] ) ) : '';
+
+	if ( ! empty( $from_date ) || ! empty( $to_date ) ) {
+		$date_query = array( 'inclusive' => true );
+		if ( ! empty( $from_date ) ) {
+			$date_query['after'] = $from_date . ' 00:00:00';
+		}
+		if ( ! empty( $to_date ) ) {
+			$date_query['before'] = $to_date . ' 23:59:59';
+		}
+		$query->set( 'date_query', array( $date_query ) );
+	}
+
+	if ( ! empty( $form_type ) ) {
+		$meta_query   = (array) $query->get( 'meta_query' );
+		$meta_query[] = array(
+			'key'   => '_lead_form_type',
+			'value' => $form_type,
+		);
+		$query->set( 'meta_query', $meta_query );
+	}
+}
+add_action( 'pre_get_posts', 'bds_leads_filter_query' );
+
+// Handle CSV Export
+function bds_leads_handle_csv_export() {
+	if ( ! is_admin() ) {
+		return;
+	}
+
+	if ( ! isset( $_GET['bds_export_csv'] ) || '1' !== $_GET['bds_export_csv'] ) {
+		return;
+	}
+
+	if ( ! isset( $_GET['post_type'] ) || 'bds_lead' !== $_GET['post_type'] ) {
+		return;
+	}
+
+	if ( ! current_user_can( 'edit_posts' ) ) {
+		wp_die( esc_html__( 'Unauthorized access.', 'bd-somani' ) );
+	}
+
+	$from_date = isset( $_GET['bds_from_date'] ) ? sanitize_text_field( wp_unslash( $_GET['bds_from_date'] ) ) : '';
+	$to_date   = isset( $_GET['bds_to_date'] ) ? sanitize_text_field( wp_unslash( $_GET['bds_to_date'] ) ) : '';
+	$form_type = isset( $_GET['bds_form_type'] ) ? sanitize_text_field( wp_unslash( $_GET['bds_form_type'] ) ) : '';
+
+	$query_args = array(
+		'post_type'      => 'bds_lead',
+		'post_status'    => 'publish',
+		'posts_per_page' => -1,
+		'orderby'        => 'date',
+		'order'          => 'DESC',
+	);
+
+	if ( ! empty( $from_date ) || ! empty( $to_date ) ) {
+		$date_query = array( 'inclusive' => true );
+		if ( ! empty( $from_date ) ) {
+			$date_query['after'] = $from_date . ' 00:00:00';
+		}
+		if ( ! empty( $to_date ) ) {
+			$date_query['before'] = $to_date . ' 23:59:59';
+		}
+		$query_args['date_query'] = array( $date_query );
+	}
+
+	if ( ! empty( $form_type ) ) {
+		$query_args['meta_query'] = array(
+			array(
+				'key'   => '_lead_form_type',
+				'value' => $form_type,
+			),
+		);
+	}
+
+	$leads = get_posts( $query_args );
+
+	$filename_part = '';
+	if ( $from_date && $to_date ) {
+		$filename_part = '_' . $from_date . '_to_' . $to_date;
+	} elseif ( $from_date ) {
+		$filename_part = '_from_' . $from_date;
+	} elseif ( $to_date ) {
+		$filename_part = '_until_' . $to_date;
+	}
+	$filename = sprintf( 'bds-leads%s_%s.csv', $filename_part, date( 'Ymd-His' ) );
+
+	// Output clean CSV headers
+	nocache_headers();
+	header( 'Content-Type: text/csv; charset=utf-8' );
+	header( 'Content-Disposition: attachment; filename="' . $filename . '"' );
+	header( 'Pragma: no-cache' );
+	header( 'Expires: 0' );
+
+	$output = fopen( 'php://output', 'w' );
+
+	// Output UTF-8 BOM so Excel opens with proper character encoding
+	fputs( $output, "\xEF\xBB\xBF" );
+
+	// Header Row
+	fputcsv(
+		$output,
+		array(
+			'Lead ID',
+			'Lead Title',
+			'Date Submitted',
+			'Form Type',
+			'Parent Name',
+			'Email',
+			'Phone',
+			'Child Name',
+			'Grade Applying For',
+			'Date of Birth',
+			'Academic Year',
+			'EduSprint CRM Status',
+			'EduSprint Enquiry No',
+			'EduSprint Response Note',
+			'Source',
+			'Campaign',
+			'Message / Notes',
+		)
+	);
+
+	foreach ( $leads as $lead ) {
+		$lead_id = $lead->ID;
+
+		$type       = get_post_meta( $lead_id, '_lead_form_type', true );
+		$name       = get_post_meta( $lead_id, '_lead_name', true );
+		$email      = get_post_meta( $lead_id, '_lead_email', true );
+		$phone      = get_post_meta( $lead_id, '_lead_phone', true );
+		$grade_meta = get_post_meta( $lead_id, '_lead_grade', true );
+		$message    = get_post_meta( $lead_id, '_lead_message', true );
+		$source     = get_post_meta( $lead_id, '_lead_utm_source', true );
+		$campaign   = get_post_meta( $lead_id, '_lead_utm_campaign', true );
+
+		$crm_status = get_post_meta( $lead_id, '_edusprint_status', true );
+		$enquiry_no = get_post_meta( $lead_id, '_edusprint_enquiry_no', true );
+		$crm_resp   = get_post_meta( $lead_id, '_edusprint_response', true );
+
+		// Parse structured values
+		$child_name = get_post_meta( $lead_id, '_lead_child_name', true );
+		$dob        = get_post_meta( $lead_id, '_lead_child_dob', true );
+		$year       = get_post_meta( $lead_id, '_lead_academic_year', true );
+		$grade_name = '';
+
+		if ( empty( $child_name ) && preg_match( '/Child:\s*([^|]+)/i', $grade_meta, $m ) ) {
+			$child_name = trim( $m[1] );
+		}
+		if ( empty( $dob ) && preg_match( '/DOB:\s*([^|]+)/i', $grade_meta, $m ) ) {
+			$dob = trim( $m[1] );
+		}
+		if ( empty( $year ) && preg_match( '/Year:\s*([^|]+)/i', $grade_meta, $m ) ) {
+			$year = trim( $m[1] );
+		}
+		if ( preg_match( '/Grade:\s*([^|]+)/i', $grade_meta, $m ) ) {
+			$grade_name = trim( $m[1] );
+		}
+
+		fputcsv(
+			$output,
+			array(
+				$lead_id,
+				$lead->post_title,
+				get_the_date( 'Y-m-d H:i:s', $lead_id ),
+				$type ? $type : 'Admissions',
+				$name,
+				$email,
+				$phone,
+				$child_name,
+				$grade_name ? $grade_name : $grade_meta,
+				$dob,
+				$year ? $year : '2027-2028',
+				$crm_status ? $crm_status : 'Not Synced',
+				$enquiry_no ? $enquiry_no : '—',
+				$crm_resp,
+				$source,
+				$campaign,
+				$message,
+			)
+		);
+	}
+
+	fclose( $output );
+	exit;
+}
+add_action( 'admin_init', 'bds_leads_handle_csv_export' );
+
 /**
  * ============================================================================
  * MICM EDUSPRINT CRM INTEGRATION
