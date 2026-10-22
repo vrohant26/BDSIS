@@ -2012,10 +2012,12 @@ add_action( 'admin_post_bdsis_resync_lead', 'bdsis_handle_admin_resync_lead' );
  *
  * @return string|false AuthToken string on success, false on failure.
  */
-function bdsis_get_edusprint_token() {
-	$cached_token = get_transient( 'bdsis_edusprint_token' );
-	if ( ! empty( $cached_token ) ) {
-		return $cached_token;
+function bdsis_get_edusprint_token( $force_refresh = false ) {
+	if ( ! $force_refresh ) {
+		$cached_token = get_transient( 'bdsis_edusprint_token' );
+		if ( ! empty( $cached_token ) ) {
+			return $cached_token;
+		}
 	}
 
 	$token_url   = 'https://sgs.edusprint.in/api/EduSprint/GetTokenByCredential';
@@ -2046,8 +2048,8 @@ function bdsis_get_edusprint_token() {
 
 	if ( ! empty( $body['ResponseData'] ) ) {
 		$token = sanitize_text_field( $body['ResponseData'] );
-		// Cache token in transient for 55 minutes
-		set_transient( 'bdsis_edusprint_token', $token, 55 * MINUTE_IN_SECONDS );
+		// EduSprint JWT token expires in 20 minutes (1200s); cache for 15 minutes to guarantee validity
+		set_transient( 'bdsis_edusprint_token', $token, 15 * MINUTE_IN_SECONDS );
 		return $token;
 	}
 
@@ -2059,9 +2061,10 @@ function bdsis_get_edusprint_token() {
  * Send Student Enquiry to MICM Edusprint CRM
  *
  * @param array $enquiry_data Formatted enquiry data.
+ * @param int   $retry_count  Current retry attempt.
  * @return array Result array with success flag, status code, and response details.
  */
-function bdsis_send_edusprint_enquiry( $enquiry_data ) {
+function bdsis_send_edusprint_enquiry( $enquiry_data, $retry_count = 0 ) {
 	$token = bdsis_get_edusprint_token();
 	if ( ! $token ) {
 		return array(
@@ -2099,6 +2102,14 @@ function bdsis_send_edusprint_enquiry( $enquiry_data ) {
 	}
 
 	$status_code = wp_remote_retrieve_response_code( $response );
+
+	// Auto-retry on HTTP 401 (AuthToken expired): force-refresh token and retry once
+	if ( 401 === (int) $status_code && $retry_count < 1 ) {
+		delete_transient( 'bdsis_edusprint_token' );
+		bdsis_get_edusprint_token( true );
+		return bdsis_send_edusprint_enquiry( $enquiry_data, $retry_count + 1 );
+	}
+
 	$body_raw    = wp_remote_retrieve_body( $response );
 	$body        = json_decode( $body_raw, true );
 
@@ -2110,10 +2121,21 @@ function bdsis_send_edusprint_enquiry( $enquiry_data ) {
 		}
 	}
 
-	// Determine true API success: HTTP 200 AND Success === true
+	// Detect if enquiry already exists in EduSprint
+	$is_already_exists = false;
+	if ( is_array( $body ) && ! empty( $body['ResponseData'] ) ) {
+		$resp_text = is_array( $body['ResponseData'] ) ? implode( ' ', $body['ResponseData'] ) : (string) $body['ResponseData'];
+		if ( stripos( $resp_text, 'Already Exist' ) !== false ) {
+			$is_already_exists = true;
+		}
+	}
+
+	// Determine true API success: HTTP 200 AND (Success === true OR lead already exists in CRM)
 	$api_success = false;
 	if ( $status_code >= 200 && $status_code < 300 ) {
-		if ( is_array( $body ) && isset( $body['Success'] ) ) {
+		if ( $is_already_exists ) {
+			$api_success = true;
+		} elseif ( is_array( $body ) && isset( $body['Success'] ) ) {
 			$api_success = ( true === $body['Success'] || 'true' === strtolower( (string) $body['Success'] ) );
 		} else {
 			$api_success = true;
@@ -2126,17 +2148,20 @@ function bdsis_send_edusprint_enquiry( $enquiry_data ) {
 			$error_msg = is_array( $body['ResponseData'] ) ? implode( '; ', $body['ResponseData'] ) : (string) $body['ResponseData'];
 		} elseif ( is_array( $body ) && ! empty( $body['ResponseMessage'] ) ) {
 			$error_msg = (string) $body['ResponseMessage'];
+		} elseif ( is_array( $body ) && ! empty( $body['Message'] ) ) {
+			$error_msg = (string) $body['Message'];
 		} else {
 			$error_msg = 'EduSprint rejected enquiry with HTTP ' . $status_code;
 		}
 	}
 
 	return array(
-		'success'     => $api_success,
-		'status_code' => $status_code,
-		'response'    => $body,
-		'raw'         => $body_raw,
-		'error'       => $error_msg,
+		'success'        => $api_success,
+		'already_exists' => $is_already_exists,
+		'status_code'    => $status_code,
+		'response'       => $body,
+		'raw'            => $body_raw,
+		'error'          => $error_msg,
 	);
 }
 
@@ -2260,8 +2285,12 @@ function bdsis_sync_lead_to_edusprint( $lead_id ) {
 	$crm_result = bdsis_send_edusprint_enquiry( $edusprint_payload );
 
 	if ( ! empty( $crm_result['success'] ) ) {
-		$status   = 'Synced';
-		$response = isset( $crm_result['raw'] ) ? $crm_result['raw'] : 'Success';
+		$status = 'Synced';
+		if ( ! empty( $crm_result['already_exists'] ) ) {
+			$response = 'Already recorded in EduSprint CRM';
+		} else {
+			$response = isset( $crm_result['raw'] ) ? $crm_result['raw'] : 'Success';
+		}
 		update_post_meta( $lead_id, '_edusprint_status', $status );
 		update_post_meta( $lead_id, '_edusprint_response', $response );
 		if ( ! empty( $crm_result['raw'] ) && preg_match( '/(ENQ\/[0-9\-]+\/[0-9]+)/i', $crm_result['raw'], $matches ) ) {
@@ -2441,7 +2470,11 @@ function bdsis_handle_form_submission() {
 
 		if ( ! empty( $crm_result['success'] ) ) {
 			$edusprint_status   = 'Synced';
-			$edusprint_response = isset( $crm_result['raw'] ) ? $crm_result['raw'] : 'Success';
+			if ( ! empty( $crm_result['already_exists'] ) ) {
+				$edusprint_response = 'Already recorded in EduSprint CRM';
+			} else {
+				$edusprint_response = isset( $crm_result['raw'] ) ? $crm_result['raw'] : 'Success';
+			}
 
 			// Extract Enquiry Reference Number (e.g. ENQ/2027-2028/155)
 			if ( ! empty( $crm_result['raw'] ) && preg_match( '/(ENQ\/[0-9\-]+\/[0-9]+)/i', $crm_result['raw'], $matches ) ) {
@@ -2781,10 +2814,14 @@ function bdsis_handle_calendly_webhook( WP_REST_Request $request ) {
 	// Send to EduSprint
 	$crm_result = bdsis_send_edusprint_enquiry( $edusprint_payload );
 
-	$edusprint_status   = ! empty( $crm_result['success'] ) ? 'Synced' : 'Failed';
-	$edusprint_response = ! empty( $crm_result['success'] )
-		? ( isset( $crm_result['raw'] ) ? $crm_result['raw'] : 'Success' )
-		: ( isset( $crm_result['error'] ) ? $crm_result['error'] : 'Error' );
+	$edusprint_status = ! empty( $crm_result['success'] ) ? 'Synced' : 'Failed';
+	if ( ! empty( $crm_result['already_exists'] ) ) {
+		$edusprint_response = 'Already recorded in EduSprint CRM';
+	} else {
+		$edusprint_response = ! empty( $crm_result['success'] )
+			? ( isset( $crm_result['raw'] ) ? $crm_result['raw'] : 'Success' )
+			: ( isset( $crm_result['error'] ) ? $crm_result['error'] : 'Error' );
+	}
 
 	$edusprint_enquiry_no = '';
 	if ( ! empty( $crm_result['raw'] ) && preg_match( '/(ENQ\/[0-9\-]+\/[0-9]+)/i', $crm_result['raw'], $matches ) ) {
