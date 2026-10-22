@@ -1895,6 +1895,8 @@ function bds_leads_cpt_custom_column( $column, $post_id ) {
 				echo '<span style="display:inline-block; padding:3px 8px; background:#e6f4ea; color:#137333; border-radius:4px; font-size:11px; font-weight:700;">✓ Synced</span>';
 				if ( $enquiry_no ) {
 					echo '<br><span style="font-size:10px; color:#555; font-family:monospace; font-weight:600;">' . esc_html( $enquiry_no ) . '</span>';
+				} elseif ( false !== stripos( (string) $response, 'Already' ) ) {
+					echo '<br><span style="font-size:10px; color:#666; font-weight:600;">Existing in CRM</span>';
 				}
 			} elseif ( 'Failed' === $crm_status ) {
 				$tip = esc_attr( wp_trim_words( $response, 15, '...' ) );

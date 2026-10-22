@@ -130,7 +130,7 @@ get_header();
 										</div>
 										<div class="form-group">
 											<label for="adm_mobile"><?php esc_html_e( 'Mobile Number *', 'bd-somani' ); ?></label>
-											<input type="tel" id="adm_mobile" name="mobile_number" placeholder="<?php esc_attr_e( '+91 9876543210', 'bd-somani' ); ?>" required />
+											<input type="tel" id="adm_mobile" name="mobile_number" placeholder="<?php esc_attr_e( '+919876543210', 'bd-somani' ); ?>" required />
 										</div>
 									</div>
 
