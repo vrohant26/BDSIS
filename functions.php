@@ -1909,21 +1909,143 @@ function bds_leads_cpt_custom_column( $column, $post_id ) {
 			}
 			break;
 		case 'details':
+			$type  = get_post_meta( $post_id, '_lead_form_type', true );
 			$grade = get_post_meta( $post_id, '_lead_grade', true );
 			$msg   = get_post_meta( $post_id, '_lead_message', true );
-			if ( $grade ) {
-				echo '<strong>' . esc_html( $grade ) . '</strong><br>';
-			}
-			if ( $msg ) {
-				echo esc_html( wp_trim_words( $msg, 10, '...' ) );
-			}
-			if ( ! $grade && ! $msg ) {
-				echo '—';
+
+			// For Contact Form enquiries or leads without grade info, show the full message prominently
+			$is_dummy_grade = ( false !== strpos( (string) $grade, 'Grade: Unspecified' ) );
+			if ( 'Enquiry' === $type || $is_dummy_grade ) {
+				if ( $msg ) {
+					echo '<div style="white-space:normal; max-width:420px; font-size:13px; line-height:1.45; color:#1d2327; background:#f0f0f1; padding:6px 10px; border-radius:4px; border-left:3px solid #3D213E;">' . nl2br( esc_html( $msg ) ) . '</div>';
+				} else {
+					echo '—';
+				}
+			} else {
+				if ( $grade ) {
+					echo '<strong>' . esc_html( $grade ) . '</strong><br>';
+				}
+				if ( $msg ) {
+					echo '<div style="white-space:normal; max-width:420px; font-size:12px; line-height:1.4; color:#555; margin-top:3px;">' . nl2br( esc_html( $msg ) ) . '</div>';
+				}
+				if ( ! $grade && ! $msg ) {
+					echo '—';
+				}
 			}
 			break;
 	}
 }
 add_action( 'manage_bds_lead_posts_custom_column', 'bds_leads_cpt_custom_column', 10, 2 );
+
+// Register Lead Details Metabox on bds_lead post edit screen
+function bds_leads_register_metabox() {
+	add_meta_box(
+		'bds_lead_details_metabox',
+		__( 'Lead Information & Full Message', 'bd-somani' ),
+		'bds_lead_render_details_metabox',
+		'bds_lead',
+		'normal',
+		'high'
+	);
+}
+add_action( 'add_meta_boxes', 'bds_leads_register_metabox' );
+
+function bds_lead_render_details_metabox( $post ) {
+	$lead_id    = $post->ID;
+	$type       = get_post_meta( $lead_id, '_lead_form_type', true );
+	$name       = get_post_meta( $lead_id, '_lead_name', true );
+	$email      = get_post_meta( $lead_id, '_lead_email', true );
+	$phone      = get_post_meta( $lead_id, '_lead_phone', true );
+	$grade_meta = get_post_meta( $lead_id, '_lead_grade', true );
+	$message    = get_post_meta( $lead_id, '_lead_message', true );
+	$source     = get_post_meta( $lead_id, '_lead_utm_source', true );
+	$campaign   = get_post_meta( $lead_id, '_lead_utm_campaign', true );
+
+	$crm_status = get_post_meta( $lead_id, '_edusprint_status', true );
+	$enquiry_no = get_post_meta( $lead_id, '_edusprint_enquiry_no', true );
+	$crm_resp   = get_post_meta( $lead_id, '_edusprint_response', true );
+	$is_dummy   = ( false !== strpos( (string) $grade_meta, 'Grade: Unspecified' ) );
+
+	$bg_type = ( 'Admissions' === $type ) ? '#F1C822; color:#3D213E;' : '#3D213E; color:#fff;';
+	?>
+	<div style="font-size: 14px; line-height: 1.6; padding: 6px 0;">
+		<!-- Top Meta Badges -->
+		<div style="display:flex; align-items:center; gap:12px; margin-bottom:16px; flex-wrap:wrap;">
+			<span style="background:<?php echo $bg_type; ?> padding:4px 10px; border-radius:4px; font-weight:700; font-size:12px;">
+				<?php echo esc_html( $type ? $type : 'Enquiry' ); ?>
+			</span>
+			<span style="color:#666; font-size:13px;">
+				<strong><?php esc_html_e( 'Date:', 'bd-somani' ); ?></strong> <?php echo esc_html( get_the_date( 'd M Y, h:i A', $lead_id ) ); ?>
+			</span>
+			<?php if ( 'Synced' === $crm_status ) : ?>
+				<span style="background:#e6f4ea; color:#137333; padding:4px 10px; border-radius:4px; font-weight:700; font-size:12px;">
+					✓ Synced to EduSprint <?php echo $enquiry_no ? '(' . esc_html( $enquiry_no ) . ')' : ''; ?>
+				</span>
+			<?php endif; ?>
+		</div>
+
+		<!-- Sender Contact Info Table -->
+		<table class="widefat striped" style="margin-bottom: 20px; border: 1px solid #c3c4c7;">
+			<tbody>
+				<tr>
+					<th style="width: 180px;"><?php esc_html_e( 'Parent / Sender Name', 'bd-somani' ); ?></th>
+					<td><strong><?php echo esc_html( $name ? $name : '—' ); ?></strong></td>
+				</tr>
+				<tr>
+					<th><?php esc_html_e( 'Email Address', 'bd-somani' ); ?></th>
+					<td>
+						<?php if ( $email ) : ?>
+							<a href="mailto:<?php echo esc_attr( $email ); ?>" style="text-decoration:none; font-weight:600;"><?php echo esc_html( $email ); ?></a>
+						<?php else : ?>
+							—
+						<?php endif; ?>
+					</td>
+				</tr>
+				<tr>
+					<th><?php esc_html_e( 'Phone Number', 'bd-somani' ); ?></th>
+					<td>
+						<?php if ( $phone ) : ?>
+							<a href="tel:<?php echo esc_attr( preg_replace( '/[^0-9+]/', '', $phone ) ); ?>" style="text-decoration:none; font-weight:600;"><?php echo esc_html( $phone ); ?></a>
+							<a href="https://wa.me/<?php echo esc_attr( preg_replace( '/[^0-9]/', '', $phone ) ); ?>" target="_blank" class="button button-small" style="margin-left: 8px;">
+								<?php esc_html_e( 'Chat on WhatsApp', 'bd-somani' ); ?>
+							</a>
+						<?php else : ?>
+							—
+						<?php endif; ?>
+					</td>
+				</tr>
+				<?php if ( $grade_meta && ! $is_dummy && 'Enquiry' !== $type ) : ?>
+				<tr>
+					<th><?php esc_html_e( 'Application / Visit Details', 'bd-somani' ); ?></th>
+					<td><?php echo esc_html( $grade_meta ); ?></td>
+				</tr>
+				<?php endif; ?>
+				<?php if ( $source || $campaign ) : ?>
+				<tr>
+					<th><?php esc_html_e( 'Attribution / Source', 'bd-somani' ); ?></th>
+					<td>
+						<?php echo esc_html( $source ? $source : 'Website' ); ?>
+						<?php echo $campaign ? ' (' . esc_html( $campaign ) . ')' : ''; ?>
+					</td>
+				</tr>
+				<?php endif; ?>
+			</tbody>
+		</table>
+
+		<!-- Message Box -->
+		<div style="background:#fff; border: 1px solid #ccd0d4; border-left: 4px solid #3D213E; padding: 16px 20px; border-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+			<h4 style="margin: 0 0 10px 0; font-size: 14px; text-transform: uppercase; letter-spacing: 0.5px; color: #3D213E;">
+				<?php esc_html_e( 'Parent Message', 'bd-somani' ); ?>
+			</h4>
+			<?php if ( $message ) : ?>
+				<div style="font-size: 15px; line-height: 1.7; color: #1d2327; white-space: pre-wrap; background:#f9f9f9; padding:12px 16px; border-radius:4px; border:1px solid #ebebeb;"><?php echo esc_html( $message ); ?></div>
+			<?php else : ?>
+				<em style="color: #666;"><?php esc_html_e( 'No written message provided with this submission.', 'bd-somani' ); ?></em>
+			<?php endif; ?>
+		</div>
+	</div>
+	<?php
+}
 
 // Add "Sync to EduSprint" row action on leads list
 function bds_leads_row_actions( $actions, $post ) {
@@ -2563,7 +2685,7 @@ function bdsis_handle_form_submission() {
 	// Admissions specific fields
 	$child_name    = isset( $_POST['child_name'] ) ? sanitize_text_field( wp_unslash( $_POST['child_name'] ) ) : '';
 	$dob_raw       = isset( $_POST['date_of_birth'] ) ? sanitize_text_field( wp_unslash( $_POST['date_of_birth'] ) ) : '';
-	$academic_year = isset( $_POST['academic_year'] ) ? sanitize_text_field( wp_unslash( $_POST['academic_year'] ) ) : '2027-2028';
+	$academic_year = isset( $_POST['academic_year'] ) ? sanitize_text_field( wp_unslash( $_POST['academic_year'] ) ) : ( 'Admissions' === $form_type ? '2027-2028' : '' );
 	$class_id      = isset( $_POST['class_master_id'] ) ? absint( $_POST['class_master_id'] ) : 0;
 	$found_via     = isset( $_POST['found_via'] ) ? sanitize_text_field( wp_unslash( $_POST['found_via'] ) ) : '';
 
@@ -2633,7 +2755,7 @@ function bdsis_handle_form_submission() {
 	$grade_name = isset( $grade_labels[ $class_id ] ) ? $grade_labels[ $class_id ] : ( $class_id ? "Class #{$class_id}" : 'Unspecified' );
 
 	$grade_details = '';
-	if ( ! empty( $child_name ) || $class_id || ! empty( $academic_year ) ) {
+	if ( 'Admissions' === $form_type && ( ! empty( $child_name ) || $class_id ) ) {
 		$grade_details = sprintf( 'Child: %s | Grade: %s | DOB: %s | Year: %s | Source: %s', $child_name, $grade_name, $dob_raw ? $dob_raw : $formatted_dob, $academic_year, $found_via );
 	}
 
