@@ -77,8 +77,7 @@
 					$is_contact         = is_page_template( 'page-contact-us.php' ) || is_page( 'contact-us' ) || is_page( 'contact' );
 					$is_home            = ( is_front_page() || is_home() ) && ! $is_faq && ! $is_about && ! $is_gallery && ! $is_approach && ! $is_academics_sub && ! $is_campus_life && ! $is_admissions && ! $is_contact;
 
-					$home_prefix = $is_home ? '' : $home_url;
-					$academics_nav_url = $is_home ? '#academics' : esc_url( home_url( '/#academics' ) );
+					$academics_nav_url = $approach_url;
 				?>
 				<!-- Desktop Navigation Menu -->
 				<nav class="main-nav" aria-label="Main Navigation">

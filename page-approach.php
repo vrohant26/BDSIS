@@ -21,7 +21,7 @@ get_header();
 					<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/svgs/home svg.svg' ); ?>" alt="Home" width="16" height="18" class="breadcrumb-home-icon">
 				</a>
 				<span class="breadcrumb-sep">/</span>
-				<a href="<?php echo esc_url( home_url( '/#academics' ) ); ?>" class="breadcrumb-link">Academics</a>
+				<a href="<?php echo esc_url( home_url( '/our-approach/' ) ); ?>" class="breadcrumb-link">Academics</a>
 				<span class="breadcrumb-sep">/</span>
 				<span class="breadcrumb-current">Our Approach</span>
 			</nav>
