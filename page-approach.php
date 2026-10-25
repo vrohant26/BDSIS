@@ -124,7 +124,7 @@ get_header();
 						<div class="approach-card" data-accordion>
 							<button class="approach-card-header" aria-expanded="false" aria-controls="approach-body-4">
 								<span class="approach-card-badge">Curriculum Design</span>
-								<span class="approach-card-title">Integrated-Interdisciplinary Teaching</span>
+								<span class="approach-card-title">Integrated and Interdisciplinary Teaching</span>
 								<svg class="approach-card-arrow" width="12" height="8" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
 									<path d="M1 1L5 5L9 1" stroke="#49274A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 								</svg>

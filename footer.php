@@ -116,7 +116,7 @@
 									<path d="M9 17C13.4183 17 17 13.4183 17 9C17 4.58172 13.4183 1 9 1C4.58172 1 1 4.58172 1 9C1 13.4183 4.58172 17 9 17Z" stroke="#49274A" stroke-width="1.8"/>
 									<path d="M9 4.5V9L12.5 11" stroke="#49274A" stroke-width="1.8" stroke-linecap="round"/>
 								</svg>
-								<span>Admission Desk Hours: Monday to Saturday | 8.00 AM to 4.00 PM</span>
+								<span>Admission Desk Hours: Monday to Saturday | 8:00 AM – 4:00 PM</span>
 							</li>
 							<li class="contact-item flex gap-xs align-center">
 								<svg class="contact-icon flex-shrink-0" width="18" height="14" viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -130,9 +130,9 @@
 
 					<?php
 						$f_home_url            = esc_url( home_url( '/' ) );
-						$f_about_url           = esc_url( home_url( '/about/' ) );
+						$f_about_url           = esc_url( home_url( '/about-us/' ) );
 						$f_faq_url             = esc_url( home_url( '/faq/' ) );
-						$f_approach_url        = esc_url( home_url( '/approach/' ) );
+						$f_approach_url        = esc_url( home_url( '/our-approach/' ) );
 						$f_pre_primary_url     = esc_url( home_url( '/academics/pre-primary-school/' ) );
 						$f_primary_url         = esc_url( home_url( '/academics/primary-school/' ) );
 						$f_middle_url          = esc_url( home_url( '/academics/middle-school/' ) );
@@ -161,7 +161,7 @@
 					<div class="footer-col">
 						<h3 class="footer-col-title">Quick Links</h3>
 						<ul class="footer-links">
-							<li><a href="<?php echo $f_admissions_url; ?>#enquire">Apply Now</a></li>
+							<li><a href="<?php echo $f_admissions_url; ?>#apply">Apply Now</a></li>
 							<li><a href="<?php echo $f_admissions_url; ?>" class="<?php echo $f_is_admissions ? 'active' : ''; ?>">Admissions</a></li>
 							<li><a href="<?php echo $f_approach_url; ?>" class="<?php echo $f_is_approach ? 'active' : ''; ?>">Our Approach</a></li>
 							<li><a href="<?php echo $f_campus_life_url; ?>" class="<?php echo $f_is_campus_life ? 'active' : ''; ?>">Campus Life</a></li>

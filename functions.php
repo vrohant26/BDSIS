@@ -84,6 +84,63 @@ function bds_get_new_icon( $icon_name, $class = 'bds-new-icon' ) {
 	return '';
 }
 
+/**
+ * Automatically clean and standardise copy from website audits across all outputs.
+ */
+function bds_clean_audit_copy( $text ) {
+	if ( ! is_string( $text ) || empty( $text ) ) {
+		return $text;
+	}
+	static $fixes = null;
+	if ( null === $fixes ) {
+		$fixes = array(
+			'realworld experiences'                              => 'real-world experiences',
+			'realworld'                                          => 'real-world',
+			'students have the opportunities to question ideas'  => 'students have opportunities to question ideas',
+			'have the opportunities to question'                 => 'have opportunities to question',
+			'hands on projects'                                  => 'hands-on projects',
+			'problem solving abilities'                          => 'problem-solving skills',
+			'Middle school Programme'                            => 'Middle School Programme',
+			'Middle school programme'                            => 'Middle School Programme',
+			'technology driven future'                           => 'technology-driven future',
+			'technology driven'                                  => 'technology-driven',
+			'research driven practices'                          => 'research-driven practices',
+			'research driven'                                    => 'research-driven',
+			'evidence based'                                     => 'evidence-based',
+			'A.I.'                                               => 'AI',
+			'A.I'                                                => 'AI',
+			'S.T.E.M.'                                           => 'STEM',
+			'S.T.E.M'                                            => 'STEM',
+			'Program Overview'                                   => 'Programme Overview',
+			'Integrated-Interdisciplinary Teaching'              => 'Integrated and Interdisciplinary Teaching',
+			'How to schedule a campus visit?'                    => 'How can I schedule a campus visit?',
+			'Our campus gives them the opportunities to explore' => 'Our campus gives them opportunities to explore',
+			'Our campus gives them the opportunities'            => 'Our campus gives them opportunities',
+			'A continuation of learning, exploration, and pursuing interests…' => 'Learning and exploration continue beyond the school day.',
+			'A continuation of learning, exploration, and pursuing interests...' => 'Learning and exploration continue beyond the school day.',
+			'A continuation of learning, exploration, and pursuing interests' => 'Learning and exploration continue beyond the school day.',
+			'8.00 AM to 4.00 PM'                                 => '8:00 AM – 4:00 PM',
+			'8:00 AM to 4:00 PM'                                 => '8:00 AM – 4:00 PM',
+			'8.00 AM - 4.00 PM'                                  => '8:00 AM – 4:00 PM',
+			'8:00 AM - 4:00 PM'                                  => '8:00 AM – 4:00 PM',
+		);
+	}
+	return str_replace( array_keys( $fixes ), array_values( $fixes ), $text );
+}
+add_filter( 'the_content', 'bds_clean_audit_copy', 20 );
+add_filter( 'the_title', 'bds_clean_audit_copy', 20 );
+
+/**
+ * Filter whole page output on frontend to guarantee all audit text fixes are applied.
+ */
+function bds_buffer_audit_copy_cleaner() {
+	if ( is_admin() || wp_doing_ajax() || ( function_exists( 'wp_is_json_request' ) && wp_is_json_request() ) ) {
+		return;
+	}
+	ob_start( 'bds_clean_audit_copy' );
+}
+add_action( 'template_redirect', 'bds_buffer_audit_copy_cleaner', 5 );
+
 // Enable SVG Upload Support in WordPress Media Library
 function theme_enable_svg_uploads( $mimes ) {
 	$mimes['svg']  = 'image/svg+xml';
@@ -317,7 +374,7 @@ add_action( 'add_meta_boxes', 'theme_add_academics_metaboxes', 10, 2 );
 function theme_academics_potential_metabox_callback( $post ) {
 	$visibility = metadata_exists( 'post', $post->ID, '_bds_academics_potential_visibility' ) ? get_post_meta( $post->ID, '_bds_academics_potential_visibility', true ) : 'show';
 	$title      = metadata_exists( 'post', $post->ID, '_bds_academics_potential_title' ) ? get_post_meta( $post->ID, '_bds_academics_potential_title', true ) : __( 'A Place to Discover Your Superpower', 'bd-somani' );
-	$desc       = metadata_exists( 'post', $post->ID, '_bds_academics_potential_desc' ) ? get_post_meta( $post->ID, '_bds_academics_potential_desc', true ) : __( 'Every student brings unique strengths. Our campus gives them the opportunities to explore, develop, and let those strengths shine.', 'bd-somani' );
+	$desc       = metadata_exists( 'post', $post->ID, '_bds_academics_potential_desc' ) ? get_post_meta( $post->ID, '_bds_academics_potential_desc', true ) : __( 'Every student brings unique strengths. Our campus gives them opportunities to explore, develop, and let those strengths shine.', 'bd-somani' );
 	$video_url  = metadata_exists( 'post', $post->ID, '_bds_academics_potential_video' ) ? get_post_meta( $post->ID, '_bds_academics_potential_video', true ) : '';
 	?>
 	<div id="bds-academics-potential-metabox" style="display: flex; flex-direction: column; gap: 16px; margin-top: 10px;">
@@ -486,8 +543,8 @@ function theme_academics_hero_metabox_callback( $post ) {
 	if ( empty( $breadcrumb ) ) {
 		$breadcrumb = 'Academics / Day Care';
 	}
-	if ( empty( $cta_url ) ) {
-		$cta_url = '#';
+	if ( empty( $cta_url ) || '#' === $cta_url || false !== strpos( $cta_url, '/contact' ) ) {
+		$cta_url = home_url( '/admissions/#apply' );
 	}
 
 	$main_thumb = $main_img_id ? wp_get_attachment_image_url( $main_img_id, 'medium' ) : '';

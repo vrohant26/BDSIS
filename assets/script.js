@@ -655,7 +655,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // Auto-close menu when clicking page links inside card (exclude dropdown toggles)
-    const mobileNavLinks = mobileNavWrapper.querySelectorAll("a:not([href='#academics'])");
+    const mobileNavLinks = mobileNavWrapper.querySelectorAll("a:not(.mobile-dropdown-toggle)");
     mobileNavLinks.forEach((link) => {
       link.addEventListener("click", () => {
         closeMobileMenu();
@@ -1142,7 +1142,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // 1. Accordion Card Open / Close Toggle
     accordionButtons.forEach((btn) => {
-      btn.addEventListener("click", () => {
+      btn.addEventListener("click", (e) => {
+        e.preventDefault();
         const isExpanded = btn.getAttribute("aria-expanded") === "true";
         const targetId = btn.getAttribute("aria-controls");
         const bodyEl = document.getElementById(targetId);
@@ -1153,14 +1154,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (isExpanded) {
           btn.setAttribute("aria-expanded", "false");
-          bodyEl.style.maxHeight = null;
+          bodyEl.style.maxHeight = "0px";
           bodyEl.classList.remove("is-open");
           if (iconMinus) iconMinus.style.display = "none";
           if (iconPlus) iconPlus.style.display = "block";
         } else {
           btn.setAttribute("aria-expanded", "true");
           bodyEl.classList.add("is-open");
-          bodyEl.style.maxHeight = bodyEl.scrollHeight + "px";
+          const naturalHeight = bodyEl.scrollHeight;
+          bodyEl.style.maxHeight = (naturalHeight > 0 ? naturalHeight : 350) + "px";
           if (iconMinus) iconMinus.style.display = "block";
           if (iconPlus) iconPlus.style.display = "none";
         }
@@ -1178,7 +1180,10 @@ document.addEventListener("DOMContentLoaded", () => {
             if (btn.getAttribute("aria-expanded") === "true") {
               const targetId = btn.getAttribute("aria-controls");
               const bodyEl = document.getElementById(targetId);
-              if (bodyEl) bodyEl.style.maxHeight = bodyEl.scrollHeight + "px";
+              if (bodyEl) {
+                const naturalHeight = bodyEl.scrollHeight;
+                bodyEl.style.maxHeight = (naturalHeight > 0 ? naturalHeight : 350) + "px";
+              }
             }
           });
         }, 100);
@@ -1196,7 +1201,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const header = document.querySelector(".site-header-fixed");
       let headerHeight = header ? header.getBoundingClientRect().height : 90;
       let navHeight = navWrapper ? navWrapper.getBoundingClientRect().height : 50;
-      return headerHeight + navHeight + 15;
+      return headerHeight + navHeight + 20;
     }
 
     function centerTabInNav(tab, smooth = true) {
@@ -1237,10 +1242,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     categoryTabs.forEach((tab) => {
       tab.addEventListener("click", (e) => {
-        // If mouse was dragged horizontally, prevent section jump
         if (hasDragged) {
           e.preventDefault();
-          e.stopImmediatePropagation();
           return;
         }
 
@@ -1250,7 +1253,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (!targetSection) return;
 
-        // Prevent ScrollSpy from fighting smooth scroll during transition
         isProgrammaticScroll = true;
         clearTimeout(scrollTimeout);
 
@@ -1261,16 +1263,19 @@ document.addEventListener("DOMContentLoaded", () => {
         });
         lastActiveSectionId = targetId;
 
-        // Safely center tab horizontally in category bar WITHOUT touching vertical window scroll
         centerTabInNav(tab, true);
 
         const offset = getFAQScrollOffset();
-        const targetScrollY =
-          targetSection.getBoundingClientRect().top + window.scrollY - offset;
+        const targetScrollY = Math.max(
+          0,
+          targetSection.getBoundingClientRect().top + window.scrollY - offset,
+        );
 
-        if (typeof lenis !== "undefined" && lenis) {
-          lenis.scrollTo(targetScrollY, {
-            duration: 1.0,
+        if (typeof lenis !== "undefined" && lenis && typeof lenis.scrollTo === "function") {
+          lenis.scrollTo(targetSection, {
+            offset: -offset,
+            duration: 0.9,
+            immediate: false,
             onComplete: () => {
               isProgrammaticScroll = false;
             },
@@ -1292,11 +1297,9 @@ document.addEventListener("DOMContentLoaded", () => {
       let scrollLeft = 0;
 
       nav.addEventListener("mousedown", (e) => {
-        // Only trigger on primary left mouse button
         if (e.button !== 0) return;
         isDown = true;
         hasDragged = false;
-        nav.classList.add("is-dragging");
         startX = e.pageX - nav.offsetLeft;
         scrollLeft = nav.scrollLeft;
       });
@@ -1304,22 +1307,26 @@ document.addEventListener("DOMContentLoaded", () => {
       window.addEventListener("mouseup", () => {
         if (!isDown) return;
         isDown = false;
-        setTimeout(() => {
-          nav.classList.remove("is-dragging");
-          hasDragged = false;
-        }, 50);
+        nav.classList.remove("is-dragging");
+        // Clear dragged status on next tick so click handler is not blocked
+        requestAnimationFrame(() => {
+          setTimeout(() => {
+            hasDragged = false;
+          }, 80);
+        });
       });
 
       nav.addEventListener("mousemove", (e) => {
         if (!isDown) return;
-        e.preventDefault();
         const x = e.pageX - nav.offsetLeft;
         const walk = (x - startX) * 1.5;
-        if (Math.abs(x - startX) > 6) {
+        if (Math.abs(x - startX) > 12) {
           hasDragged = true;
+          nav.classList.add("is-dragging");
+          e.preventDefault();
+          nav.scrollLeft = scrollLeft - walk;
+          updateNavScrollIndicators();
         }
-        nav.scrollLeft = scrollLeft - walk;
-        updateNavScrollIndicators();
       });
 
       nav.addEventListener("scroll", updateNavScrollIndicators, { passive: true });

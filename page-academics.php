@@ -31,8 +31,8 @@ if ( empty( $hero_subtitle ) ) {
 if ( empty( $cta_text ) ) {
 	$cta_text = __( 'ENQUIRE ABOUT DAYCARE', 'bd-somani' );
 }
-if ( empty( $cta_url ) ) {
-	$cta_url = '#';
+if ( empty( $cta_url ) || '#' === $cta_url || false !== strpos( $cta_url, '/contact' ) ) {
+	$cta_url = esc_url( home_url( '/admissions/#apply' ) );
 }
 
 $cta_text = str_ireplace( 'AFTER SCHOOL', 'POST SCHOOL', $cta_text );
@@ -237,7 +237,7 @@ $sub_img_url  = $sub_img_id ? wp_get_attachment_image_url( $sub_img_id, 'full' )
 	$show_potential_sec   = ( 'hide' !== $potential_visibility );
 
 	$potential_title = metadata_exists( 'post', $post_id, '_bds_academics_potential_title' ) ? get_post_meta( $post_id, '_bds_academics_potential_title', true ) : __( 'A Place to Discover Your Superpower', 'bd-somani' );
-	$potential_desc  = metadata_exists( 'post', $post_id, '_bds_academics_potential_desc' ) ? get_post_meta( $post_id, '_bds_academics_potential_desc', true ) : __( 'Every student brings unique strengths. Our campus gives them the opportunities to explore, develop, and let those strengths shine.', 'bd-somani' );
+	$potential_desc  = metadata_exists( 'post', $post_id, '_bds_academics_potential_desc' ) ? get_post_meta( $post_id, '_bds_academics_potential_desc', true ) : __( 'Every student brings unique strengths. Our campus gives them opportunities to explore, develop, and let those strengths shine.', 'bd-somani' );
 	$potential_video = get_post_meta( $post_id, '_bds_academics_potential_video', true );
 
 	if ( is_numeric( $potential_video ) ) {

@@ -50,11 +50,11 @@
 
 				<?php 
 					$home_url        = esc_url( home_url( '/' ) );
-					$about_url       = esc_url( home_url( '/about/' ) );
+					$about_url       = esc_url( home_url( '/about-us/' ) );
 					$faq_url         = esc_url( home_url( '/faq/' ) );
 					$gallery_url     = esc_url( home_url( '/gallery/' ) );
 
-					$approach_url        = esc_url( home_url( '/approach/' ) );
+					$approach_url        = esc_url( home_url( '/our-approach/' ) );
 					$pre_primary_url     = esc_url( home_url( '/academics/pre-primary-school/' ) );
 					$primary_url         = esc_url( home_url( '/academics/primary-school/' ) );
 					$middle_url          = esc_url( home_url( '/academics/middle-school/' ) );
@@ -78,6 +78,7 @@
 					$is_home            = ( is_front_page() || is_home() ) && ! $is_faq && ! $is_about && ! $is_gallery && ! $is_approach && ! $is_academics_sub && ! $is_campus_life && ! $is_admissions && ! $is_contact;
 
 					$home_prefix = $is_home ? '' : $home_url;
+					$academics_nav_url = $is_home ? '#academics' : esc_url( home_url( '/#academics' ) );
 				?>
 				<!-- Desktop Navigation Menu -->
 				<nav class="main-nav" aria-label="Main Navigation">
@@ -85,7 +86,7 @@
 						<li class="nav-item"><a href="<?php echo $home_url; ?>" class="nav-link <?php echo $is_home ? 'active' : ''; ?>">HOME</a></li>
 						<li class="nav-item"><a href="<?php echo $about_url; ?>" class="nav-link <?php echo $is_about ? 'active' : ''; ?>">ABOUT</a></li>
 						<li class="nav-item dropdown">
-							<a href="#academics" class="nav-link dropdown-toggle-link <?php echo ( $is_approach || $is_academics_sub ) ? 'active' : ''; ?>">
+							<a href="<?php echo $academics_nav_url; ?>" class="nav-link dropdown-toggle-link <?php echo ( $is_approach || $is_academics_sub ) ? 'active' : ''; ?>">
 								ACADEMICS
 								<svg class="dropdown-icon" width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
 									<path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -131,7 +132,7 @@
 						<li class="mobile-nav-item"><a href="<?php echo $about_url; ?>" class="mobile-link <?php echo $is_about ? 'active' : ''; ?>">ABOUT US</a></li>
 						<li class="mobile-nav-item mobile-dropdown-item">
 							<div class="mobile-dropdown-header flex-between align-center">
-								<a href="#academics" class="mobile-link mobile-dropdown-toggle <?php echo ( $is_approach || $is_academics_sub ) ? 'active' : ''; ?>">
+								<a href="<?php echo $academics_nav_url; ?>" class="mobile-link mobile-dropdown-toggle <?php echo ( $is_approach || $is_academics_sub ) ? 'active' : ''; ?>">
 									<span>ACADEMICS</span>
 									<svg class="mobile-dropdown-arrow" width="12" height="8" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
 										<path d="M1 1L5 5L9 1" stroke="#9C5E91" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>

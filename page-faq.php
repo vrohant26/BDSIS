@@ -235,7 +235,7 @@ get_header();
 						</button>
 						<div id="ans-adm-8" class="faq-card-body" role="region" aria-labelledby="q-adm-8">
 							<div class="faq-card-content">
-								<p> Please <a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>">contact</a> our Admissions Team to check programme availability and begin the application process.</p>
+								<p> Please <a href="<?php echo esc_url( home_url( '/contact-us/' ) ); ?>">contact</a> our Admissions Team to check programme availability and begin the application process.</p>
 							</div>
 						</div>
 					</div>
@@ -268,7 +268,7 @@ get_header();
 						</button>
 						<div id="ans-adm-10" class="faq-card-body" role="region" aria-labelledby="q-adm-10">
 							<div class="faq-card-content">
-								<p>You can visit our Admissions Office Monday to Saturday, 8:00 AM to 4:00 PM, submit an online enquiry, call us on <a href="tel:+912268066697">+91 22 68066697</a>, or email us at <a href="mailto:info@bdsiskharghar.org">info@bdsiskharghar.org</a>. Our team will be happy to answer your queries and guide you through the admissions process.</p>
+								<p>You can visit our Admissions Office Monday to Saturday, 8:00 AM – 4:00 PM, submit an online enquiry, call us on <a href="tel:+912268066697">+91 22 68066697</a>, or email us at <a href="mailto:info@bdsiskharghar.org">info@bdsiskharghar.org</a>. Our team will be happy to answer your queries and guide you through the admissions process.</p>
 							</div>
 						</div>
 					</div>
@@ -312,7 +312,7 @@ get_header();
 						</button>
 						<div id="ans-adm-12" class="faq-card-body" role="region" aria-labelledby="q-adm-12">
 							<div class="faq-card-content">
-								<p>Admission eligibility varies by programme and grade level. Please <a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>">contact</a> our Admissions Team to check programme availability and the application process.</p>
+								<p>Admission eligibility varies by programme and grade level. Please <a href="<?php echo esc_url( home_url( '/contact-us/' ) ); ?>">contact</a> our Admissions Team to check programme availability and the application process.</p>
 							</div>
 						</div>
 					</div>
@@ -320,7 +320,7 @@ get_header();
 					<!-- Q13 -->
 					<div class="faq-card-item">
 						<button class="faq-card-header" aria-expanded="false" aria-controls="ans-adm-13" id="q-adm-13">
-							<span class="faq-card-question">13. How to schedule a campus visit?</span>
+							<span class="faq-card-question">13. How can I schedule a campus visit?</span>
 							<span class="faq-card-toggle-icon" aria-hidden="true">
 								<iconify-icon icon="lucide:minus" class="icon-minus" style="display:none;"></iconify-icon>
 								<iconify-icon icon="lucide:plus" class="icon-plus"></iconify-icon>
@@ -328,7 +328,7 @@ get_header();
 						</button>
 						<div id="ans-adm-13" class="faq-card-body" role="region" aria-labelledby="q-adm-13">
 							<div class="faq-card-content">
-								<p>Families are encouraged to visit the campus before applying. You can <a href="https://calendly.com/admissions_bdsiskharghar/campus-visit" target="_blank" rel="noopener noreferrer">schedule a campus visit directly here</a> or submit an <a href="<?php echo esc_url( home_url( '/admissions/#enquire' ) ); ?>">online enquiry</a>, and our Admissions Team will arrange a personalised campus tour at a convenient time.</p>
+								<p>Families are encouraged to visit the campus before applying. You can <a href="https://calendly.com/admissions_bdsiskharghar/campus-visit" target="_blank" rel="noopener noreferrer">schedule a campus visit directly here</a> or submit an <a href="<?php echo esc_url( home_url( '/admissions/#apply' ) ); ?>">online enquiry</a>, and our Admissions Team will arrange a personalised campus tour at a convenient time.</p>
 							</div>
 						</div>
 					</div>

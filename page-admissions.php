@@ -63,7 +63,7 @@ get_header();
 							</svg>
 						</a>
 
-						<a href="<?php echo esc_url( home_url( '/about/' ) ); ?>" class="btn btn-outline-purple radius-md flex-center">
+						<a href="<?php echo esc_url( home_url( '/about-us/' ) ); ?>" class="btn btn-outline-purple radius-md flex-center">
 							<span><?php esc_html_e( 'LEARN MORE ABOUT US', 'bd-somani' ); ?></span>
 							<svg class="btn-arrow" width="16" height="14" viewBox="0 0 16 14" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-left: 8px;">
 								<path d="M9 1L15 7M15 7L9 13M15 7H1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -84,10 +84,12 @@ get_header();
 
 				<!-- Right Column: Purple Admissions Form Card -->
 				<div class="contact-hero-right" id="apply">
+					<span id="enquire" style="position:relative; top:-120px; display:block; visibility:hidden;" aria-hidden="true"></span>
 					<div class="contact-purple-card relative">
 						
 						<!-- Form Content (Gravity Forms or Fallback HTML Form) -->
 						<div class="contact-form-container">
+							<h3 class="admissions-card-heading"><?php esc_html_e( 'Online Admissions Application Form', 'bd-somani' ); ?></h3>
 							<?php
 							$gform_id = get_option( 'bds_admissions_gform_id', '' );
 							if ( ! empty( $gform_id ) && function_exists( 'gravity_form' ) ) {
@@ -203,7 +205,7 @@ get_header();
 									</div>
 
 									<div class="form-submit-wrap">
-										<button type="submit" class="btn-yellow-submit"><?php esc_html_e( 'SUBMIT', 'bd-somani' ); ?></button>
+										<button type="submit" class="btn-yellow-submit"><?php esc_html_e( 'SUBMIT APPLICATION', 'bd-somani' ); ?></button>
 									</div>
 								</form>
 								<?php
