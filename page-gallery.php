@@ -118,8 +118,9 @@ get_header();
 					'post_status'    => 'publish',
 				);
 
-				$gallery_query = new WP_Query( $args );
-				$has_cpt_images = false;
+				$gallery_query       = new WP_Query( $args );
+				$has_cpt_images      = false;
+				$rendered_card_count = 0;
 
 				if ( $gallery_query->have_posts() ) {
 					while ( $gallery_query->have_posts() ) {
@@ -141,11 +142,16 @@ get_header();
 						$images_to_display = array();
 
 						// 1. Featured Image
-						$featured_url = get_the_post_thumbnail_url( $post_id, 'full' );
-						if ( $featured_url ) {
+						$featured_full = get_the_post_thumbnail_url( $post_id, 'full' );
+						$featured_grid = get_the_post_thumbnail_url( $post_id, 'large' );
+						if ( ! $featured_grid ) {
+							$featured_grid = $featured_full;
+						}
+						if ( $featured_full ) {
 							$images_to_display[] = array(
-								'url'   => $featured_url,
-								'title' => $post_title,
+								'url'      => $featured_grid,
+								'full_url' => $featured_full,
+								'title'    => $post_title,
 							);
 						}
 
@@ -157,11 +163,16 @@ get_header();
 								$img_id = intval( trim( $img_id ) );
 								if ( $img_id > 0 ) {
 									$full_url = wp_get_attachment_image_url( $img_id, 'full' );
+									$grid_url = wp_get_attachment_image_url( $img_id, 'large' );
+									if ( ! $grid_url ) {
+										$grid_url = $full_url;
+									}
 									$alt_text = get_post_meta( $img_id, '_wp_attachment_image_alt', true );
 									if ( $full_url ) {
 										$images_to_display[] = array(
-											'url'   => $full_url,
-											'title' => ! empty( $alt_text ) ? $alt_text : $post_title,
+											'url'      => $grid_url,
+											'full_url' => $full_url,
+											'title'    => ! empty( $alt_text ) ? $alt_text : $post_title,
 										);
 									}
 								}
@@ -172,29 +183,39 @@ get_header();
 						$attachments = get_attached_media( 'image', $post_id );
 						if ( ! empty( $attachments ) ) {
 							foreach ( $attachments as $att ) {
-								$att_url = wp_get_attachment_image_url( $att->ID, 'full' );
-								if ( $att_url ) {
+								$full_url = wp_get_attachment_image_url( $att->ID, 'full' );
+								$grid_url = wp_get_attachment_image_url( $att->ID, 'large' );
+								if ( ! $grid_url ) {
+									$grid_url = $full_url;
+								}
+								if ( $full_url ) {
 									$images_to_display[] = array(
-										'url'   => $att_url,
-										'title' => ! empty( $att->post_title ) ? $att->post_title : $post_title,
+										'url'      => $grid_url,
+										'full_url' => $full_url,
+										'title'    => ! empty( $att->post_title ) ? $att->post_title : $post_title,
 									);
 								}
 							}
 						}
 
-						// De-duplicate images by URL
+						// De-duplicate images by full URL
 						$unique_images = array();
 						foreach ( $images_to_display as $item ) {
-							$unique_images[ $item['url'] ] = $item;
+							$unique_images[ $item['full_url'] ] = $item;
 						}
 
 						if ( ! empty( $unique_images ) ) {
 							$has_cpt_images = true;
 							foreach ( $unique_images as $img_item ) {
+								$rendered_card_count++;
+								$is_initial_batch = ( $rendered_card_count <= 20 );
+								$img_src          = $is_initial_batch ? esc_url( $img_item['url'] ) : "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 3'%3E%3C/svg%3E";
+								$data_src_attr    = $is_initial_batch ? '' : ' data-src="' . esc_url( $img_item['url'] ) . '"';
+								$hide_class       = $is_initial_batch ? '' : ' hide';
 								?>
-								<div class="gallery-card-item <?php echo esc_attr( $category_class ); ?>" data-category="<?php echo esc_attr( $category_class ); ?>">
+								<div class="gallery-card-item <?php echo esc_attr( trim( $category_class . $hide_class ) ); ?>" data-category="<?php echo esc_attr( $category_class ); ?>" data-full-src="<?php echo esc_url( $img_item['full_url'] ); ?>">
 									<div class="gallery-card-inner">
-										<img src="<?php echo esc_url( $img_item['url'] ); ?>" alt="<?php echo esc_attr( $img_item['title'] ); ?>" class="gallery-img" loading="lazy" decoding="async">
+										<img src="<?php echo $img_src; ?>"<?php echo $data_src_attr; ?> alt="<?php echo esc_attr( $img_item['title'] ); ?>" class="gallery-img" loading="lazy" decoding="async">
 									</div>
 								</div>
 								<?php
@@ -265,10 +286,15 @@ get_header();
 					);
 
 					foreach ( $fallback_items as $item ) {
+						$rendered_card_count++;
+						$is_initial_batch = ( $rendered_card_count <= 20 );
+						$img_src          = $is_initial_batch ? esc_url( $item['img'] ) : "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 3'%3E%3C/svg%3E";
+						$data_src_attr    = $is_initial_batch ? '' : ' data-src="' . esc_url( $item['img'] ) . '"';
+						$hide_class       = $is_initial_batch ? '' : ' hide';
 						?>
-						<div class="gallery-card-item <?php echo esc_attr( $item['category'] ); ?>" data-category="<?php echo esc_attr( $item['category'] ); ?>">
+						<div class="gallery-card-item <?php echo esc_attr( trim( $item['category'] . $hide_class ) ); ?>" data-category="<?php echo esc_attr( $item['category'] ); ?>" data-full-src="<?php echo esc_url( $item['img'] ); ?>">
 							<div class="gallery-card-inner">
-								<img src="<?php echo esc_url( $item['img'] ); ?>" alt="<?php echo esc_attr( $item['title'] ); ?>" class="gallery-img" loading="lazy" decoding="async">
+								<img src="<?php echo $img_src; ?>"<?php echo $data_src_attr; ?> alt="<?php echo esc_attr( $item['title'] ); ?>" class="gallery-img" loading="lazy" decoding="async">
 							</div>
 						</div>
 						<?php
@@ -276,6 +302,29 @@ get_header();
 				}
 				?>
 
+			</div><!-- /#galleryGrid -->
+
+			<!-- Empty State for Categories with No Photos -->
+			<div class="gallery-empty-state" id="galleryEmptyState" style="display: none;">
+				<div class="gallery-empty-icon">
+					<svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+						<rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+						<circle cx="8.5" cy="8.5" r="1.5"/>
+						<polyline points="21 15 16 10 5 21"/>
+					</svg>
+				</div>
+				<h3 class="gallery-empty-title"><?php esc_html_e( 'No Photos in This Category', 'bd-somani' ); ?></h3>
+				<p class="gallery-empty-desc"><?php esc_html_e( 'Photos for this category will be added soon. Please explore other categories above.', 'bd-somani' ); ?></p>
+			</div>
+
+			<!-- Load More Button Container -->
+			<div class="gallery-load-more-wrapper" id="galleryLoadMoreWrapper" style="<?php echo ( $rendered_card_count > 20 ) ? 'display: flex;' : 'display: none;'; ?>">
+				<button type="button" class="btn btn-yellow gallery-load-more-btn" id="galleryLoadMoreBtn" aria-label="<?php esc_attr_e( 'Load more gallery photos', 'bd-somani' ); ?>">
+					<span><?php esc_html_e( 'LOAD MORE PHOTOS', 'bd-somani' ); ?></span>
+					<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="load-more-icon">
+						<path d="M12 5v14M5 12h14"/>
+					</svg>
+				</button>
 			</div>
 		</div>
 

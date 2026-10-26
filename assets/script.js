@@ -1407,71 +1407,134 @@ document.addEventListener("DOMContentLoaded", () => {
   initFAQPageInteractive();
 
   // --------------------------------------------------------------------------
-  // Custom Gallery Page Functionality: Category Filtering & Lightbox Modal
+  // --------------------------------------------------------------------------
+  // Custom Gallery Page Functionality: Category Filtering, Pagination & Lightbox
   // --------------------------------------------------------------------------
   function initGalleryPageInteractive() {
     const galleryContainer = document.querySelector(".gallery-page-custom");
     if (!galleryContainer) return;
 
     const categoryTabs = galleryContainer.querySelectorAll(".gallery-tab-link");
-    const galleryCards =
-      galleryContainer.querySelectorAll(".gallery-card-item");
+    const galleryCards = Array.from(galleryContainer.querySelectorAll(".gallery-card-item"));
+    const loadMoreWrapper = document.getElementById("galleryLoadMoreWrapper");
+    const loadMoreBtn = document.getElementById("galleryLoadMoreBtn");
+    const emptyState = document.getElementById("galleryEmptyState");
+
     const lightboxModal = document.getElementById("galleryLightbox");
     const lightboxImg = document.getElementById("lightboxActiveImg");
-    const lightboxCaption = document.getElementById("lightboxCaption");
-    const lightboxCloseBtn = galleryContainer.querySelector(
-      ".lightbox-close-btn",
-    );
-    const lightboxBackdrop =
-      galleryContainer.querySelector(".lightbox-backdrop");
+    const lightboxCloseBtn = galleryContainer.querySelector(".lightbox-close-btn");
+    const lightboxBackdrop = galleryContainer.querySelector(".lightbox-backdrop");
     const prevBtn = document.getElementById("lightboxPrevBtn");
     const nextBtn = document.getElementById("lightboxNextBtn");
 
-    let currentVisibleCards = Array.from(galleryCards);
+    const BATCH_SIZE = 20;
+    let currentCategory = "all";
+    let visibleLimit = BATCH_SIZE;
+    let currentVisibleCards = [];
     let activeIndex = 0;
+
+    // Helper: update visible cards based on current category and visibleLimit
+    function updateGalleryView(isLoadMoreClick) {
+      const matchingCards = galleryCards.filter((card) => {
+        if (currentCategory === "all") return true;
+        const cardCategories = (card.getAttribute("data-category") || "").split(" ");
+        return cardCategories.includes(currentCategory);
+      });
+
+      const totalMatching = matchingCards.length;
+
+      // Handle Empty State
+      if (emptyState) {
+        emptyState.style.display = totalMatching === 0 ? "block" : "none";
+      }
+
+      const visibleBatch = matchingCards.slice(0, visibleLimit);
+
+      // Hide all cards not in the visible batch
+      galleryCards.forEach((card) => {
+        if (!visibleBatch.includes(card)) {
+          card.classList.add("hide");
+        }
+      });
+
+      // Reveal cards in the visible batch
+      visibleBatch.forEach((card) => {
+        const wasHidden = card.classList.contains("hide");
+        card.classList.remove("hide");
+
+        // Lazy-load image source if deferred via data-src
+        const img = card.querySelector(".gallery-img");
+        if (img && img.dataset.src) {
+          img.src = img.dataset.src;
+          img.removeAttribute("data-src");
+        }
+
+        // Smooth subtle entrance for newly revealed items on load-more
+        if (isLoadMoreClick && wasHidden) {
+          card.style.opacity = "0";
+          card.style.transform = "translateY(16px)";
+          requestAnimationFrame(() => {
+            card.style.transition = "opacity 0.35s ease, transform 0.35s ease";
+            card.style.opacity = "1";
+            card.style.transform = "translateY(0)";
+          });
+        }
+      });
+
+      currentVisibleCards = visibleBatch;
+
+      // Update Load More button
+      if (loadMoreWrapper && loadMoreBtn) {
+        if (totalMatching > visibleLimit) {
+          loadMoreWrapper.style.display = "flex";
+        } else {
+          loadMoreWrapper.style.display = "none";
+        }
+      }
+    }
 
     // 1. Category Filtering
     categoryTabs.forEach((tab) => {
       tab.addEventListener("click", () => {
         const selectedCategory = tab.getAttribute("data-category");
+        if (selectedCategory === currentCategory) return;
+
+        currentCategory = selectedCategory;
+        visibleLimit = BATCH_SIZE; // Reset back to 20 for each category!
 
         categoryTabs.forEach((t) => {
-          t.classList.remove("active");
-          t.setAttribute("aria-selected", "false");
+          const isActive = t === tab;
+          t.classList.toggle("active", isActive);
+          t.setAttribute("aria-selected", isActive ? "true" : "false");
         });
-        tab.classList.add("active");
-        tab.setAttribute("aria-selected", "true");
 
-        currentVisibleCards = [];
-
-        galleryCards.forEach((card) => {
-          const cardCategories = card.getAttribute("data-category") || "";
-          const categoryArray = cardCategories.split(" ");
-
-          if (
-            selectedCategory === "all" ||
-            categoryArray.includes(selectedCategory)
-          ) {
-            card.classList.remove("hide");
-            currentVisibleCards.push(card);
-          } else {
-            card.classList.add("hide");
-          }
-        });
+        updateGalleryView(false);
       });
     });
 
-    // 2. Lightbox Modal Preview
+    // 2. Load More Button Click
+    if (loadMoreBtn) {
+      loadMoreBtn.addEventListener("click", () => {
+        visibleLimit += BATCH_SIZE;
+        updateGalleryView(true);
+      });
+    }
+
+    // Initialize initial batch view
+    updateGalleryView(false);
+
+    // 3. Lightbox Modal Preview
     function openLightbox(index) {
       if (!lightboxModal || !currentVisibleCards[index]) return;
 
       activeIndex = index;
       const targetCard = currentVisibleCards[index];
       const imgEl = targetCard.querySelector(".gallery-img");
+      const fullSrc = targetCard.getAttribute("data-full-src");
 
-      if (imgEl && lightboxImg) {
-        lightboxImg.src = imgEl.src;
-        lightboxImg.alt = imgEl.alt || "Gallery Image";
+      if (lightboxImg) {
+        lightboxImg.src = fullSrc || (imgEl ? (imgEl.dataset.src || imgEl.src) : "");
+        lightboxImg.alt = imgEl ? (imgEl.alt || "Gallery Image") : "Gallery Image";
       }
 
       lightboxModal.classList.add("is-open");
@@ -1495,18 +1558,14 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
 
-    if (lightboxCloseBtn)
-      lightboxCloseBtn.addEventListener("click", closeLightbox);
-    if (lightboxBackdrop)
-      lightboxBackdrop.addEventListener("click", closeLightbox);
+    if (lightboxCloseBtn) lightboxCloseBtn.addEventListener("click", closeLightbox);
+    if (lightboxBackdrop) lightboxBackdrop.addEventListener("click", closeLightbox);
 
     if (prevBtn) {
       prevBtn.addEventListener("click", (e) => {
         e.stopPropagation();
         if (currentVisibleCards.length === 0) return;
-        const newIndex =
-          (activeIndex - 1 + currentVisibleCards.length) %
-          currentVisibleCards.length;
+        const newIndex = (activeIndex - 1 + currentVisibleCards.length) % currentVisibleCards.length;
         openLightbox(newIndex);
       });
     }
@@ -1522,8 +1581,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Keyboard Shortcuts (ESC to close, Left/Right arrows to navigate)
     window.addEventListener("keydown", (e) => {
-      if (!lightboxModal || !lightboxModal.classList.contains("is-open"))
-        return;
+      if (!lightboxModal || !lightboxModal.classList.contains("is-open")) return;
 
       if (e.key === "Escape") {
         closeLightbox();
