@@ -216,7 +216,6 @@ get_header();
 					<!-- Brand Film Video Player -->
 					<div class="video-poster-box">
 						<video id="brandFilmVideo" class="brand-film-video" loop playsinline webkit-playsinline preload="metadata" poster="<?php echo esc_url( get_template_directory_uri() . '/assets/images/coverflow carousel 5.webp' ); ?>">
-							<source src="<?php echo esc_url( get_template_directory_uri() . '/assets/video/Brand Film 1080p.mp4' ); ?>" type="video/mp4">
 							<source src="<?php echo esc_url( get_template_directory_uri() . '/assets/video/brand-film-1080p.mp4' ); ?>" type="video/mp4">
 						</video>
 
