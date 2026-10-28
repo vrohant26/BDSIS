@@ -129,10 +129,12 @@ get_header();
 										<div class="form-group">
 											<label for="adm_email"><?php esc_html_e( 'Email *', 'bd-somani' ); ?></label>
 											<input type="email" id="adm_email" name="email" placeholder="<?php esc_attr_e( 'xyz@example.com', 'bd-somani' ); ?>" required />
+											<div class="field-validation-message" id="adm_email_error" role="alert" aria-live="polite"></div>
 										</div>
 										<div class="form-group">
 											<label for="adm_mobile"><?php esc_html_e( 'Mobile Number *', 'bd-somani' ); ?></label>
-											<input type="tel" id="adm_mobile" name="mobile_number" placeholder="<?php esc_attr_e( '+919876543210', 'bd-somani' ); ?>" required />
+											<input type="tel" id="adm_mobile" name="mobile_number" placeholder="<?php esc_attr_e( '98765 43210', 'bd-somani' ); ?>" required autocomplete="tel" />
+											<div class="field-validation-message" id="adm_mobile_error" role="alert" aria-live="polite"></div>
 										</div>
 									</div>
 
@@ -141,10 +143,12 @@ get_header();
 										<div class="form-group">
 											<label for="adm_child_name"><?php esc_html_e( 'Child\'s name *', 'bd-somani' ); ?></label>
 											<input type="text" id="adm_child_name" name="child_name" placeholder="<?php esc_attr_e( 'Enter your child\'s name', 'bd-somani' ); ?>" required />
+											<div class="field-validation-message" id="adm_child_name_error" role="alert" aria-live="polite"></div>
 										</div>
 										<div class="form-group">
 											<label for="adm_dob"><?php esc_html_e( 'Date of birth *', 'bd-somani' ); ?></label>
-											<input type="date" id="adm_dob" name="date_of_birth" placeholder="YYYY-MM-DD" required />
+											<input type="date" id="adm_dob" name="date_of_birth" placeholder="YYYY-MM-DD" max="<?php echo esc_attr( date( 'Y-m-d' ) ); ?>" required />
+											<div class="field-validation-message" id="adm_dob_error" role="alert" aria-live="polite"></div>
 										</div>
 									</div>
 
@@ -174,6 +178,7 @@ get_header();
 												</select>
 												<iconify-icon icon="lucide:chevron-down" class="select-arrow-icon"></iconify-icon>
 											</div>
+											<div class="field-validation-message" id="adm_grade_error" role="alert" aria-live="polite"></div>
 										</div>
 
 										<div class="form-group">

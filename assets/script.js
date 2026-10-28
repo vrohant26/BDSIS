@@ -2368,14 +2368,315 @@ document.addEventListener("DOMContentLoaded", () => {
   }
   initUTMTracking();
 
+  // ---------------------------------------------------------------------------
+  // Admissions & Contact Form Validation & Submission System
+  // ---------------------------------------------------------------------------
+  const GRADE_AGE_CRITERIA = {
+    34: { min: 1.5, max: 4.5, name: "Playgroup", typical: "2 to 3 years" },
+    35: { min: 2.0, max: 5.5, name: "Nursery", typical: "3 to 4 years" },
+    36: { min: 2.5, max: 6.5, name: "Jr. KG", typical: "4 to 5 years" },
+    37: { min: 3.5, max: 7.5, name: "Sr. KG", typical: "5 to 6 years" },
+    38: { min: 4.5, max: 9.0, name: "Grade 1", typical: "6 to 7 years" },
+    39: { min: 5.5, max: 10.0, name: "Grade 2", typical: "7 to 8 years" },
+    40: { min: 6.5, max: 11.0, name: "Grade 3", typical: "8 to 9 years" },
+    41: { min: 7.5, max: 12.0, name: "Grade 4", typical: "9 to 10 years" },
+    42: { min: 8.5, max: 13.0, name: "Grade 5", typical: "10 to 11 years" },
+    43: { min: 9.5, max: 14.5, name: "Grade 6", typical: "11 to 12 years" },
+    44: { min: 10.5, max: 15.5, name: "Grade 7", typical: "12 to 13 years" },
+    55: { min: 11.5, max: 16.5, name: "Grade 8", typical: "13 to 14 years" },
+    57: { min: 9.5, max: 14.5, name: "Grade 6 - IGCSE", typical: "11 to 12 years" },
+    58: { min: 10.5, max: 15.5, name: "Grade 7 - IGCSE", typical: "12 to 13 years" },
+    59: { min: 11.5, max: 16.5, name: "Grade 8 - IGCSE", typical: "13 to 14 years" },
+    60: { min: 12.5, max: 17.5, name: "Grade 9 - IGCSE", typical: "14 to 15 years" },
+  };
+
+  function setFieldError(field, errorEl, message) {
+    if (field) {
+      field.classList.add("is-invalid");
+      field.setAttribute("aria-invalid", "true");
+    }
+    if (errorEl) {
+      errorEl.textContent = message;
+      errorEl.classList.add("is-visible");
+    }
+  }
+
+  function clearFieldError(field, errorEl) {
+    if (field) {
+      field.classList.remove("is-invalid");
+      field.removeAttribute("aria-invalid");
+    }
+    if (errorEl) {
+      errorEl.textContent = "";
+      errorEl.classList.remove("is-visible");
+    }
+  }
+
+  function validateDobAgainstGrade(dobInput, gradeSelect, yearSelect) {
+    const dobVal = dobInput ? dobInput.value : "";
+    const gradeVal = gradeSelect ? gradeSelect.value : "";
+    const yearVal = yearSelect ? yearSelect.value : "2027-2028";
+
+    if (!dobVal) {
+      return { valid: false, message: "Please enter the child's Date of Birth." };
+    }
+
+    const dobDate = new Date(dobVal);
+    if (isNaN(dobDate.getTime())) {
+      return { valid: false, message: "Please enter a valid Date of Birth (YYYY-MM-DD)." };
+    }
+
+    // Future date check
+    const now = new Date();
+    now.setHours(0, 0, 0, 0);
+    if (dobDate > now) {
+      return { valid: false, message: "Date of birth cannot be in the future." };
+    }
+
+    // Reference academic year start: June 1st of start year
+    const yearMatch = yearVal.match(/^(\d{4})/);
+    const refYear = yearMatch ? parseInt(yearMatch[1], 10) : 2027;
+    const sessionStart = new Date(refYear, 5, 1);
+    const ageInYears = (sessionStart - dobDate) / (365.25 * 24 * 60 * 60 * 1000);
+
+    if (ageInYears < 1.5) {
+      return {
+        valid: false,
+        message: "Child must be at least 1.5 years old for admission. Please check the child's birth date."
+      };
+    }
+
+    if (gradeVal && GRADE_AGE_CRITERIA[gradeVal]) {
+      const criteria = GRADE_AGE_CRITERIA[gradeVal];
+      if (ageInYears < criteria.min || ageInYears > criteria.max) {
+        const parts = dobVal.split("-");
+        const formattedDob = parts.length === 3 ? `${parts[2]}-${parts[1]}-${parts[0]}` : dobVal;
+        return {
+          valid: false,
+          message: `The date of birth (${formattedDob}) does not match eligibility for ${criteria.name}. Expected age for ${criteria.name} is ${criteria.typical} (approx. ${criteria.min} to ${criteria.max} years). Please ensure you enter the child's date of birth.`
+        };
+      }
+    }
+
+    return { valid: true };
+  }
+
+  function validatePhoneNumber(phoneInput, itiInstance) {
+    const rawValue = phoneInput ? phoneInput.value.trim() : "";
+    if (!rawValue) {
+      return { valid: false, message: "Please enter a mobile number." };
+    }
+
+    const clean = rawValue.replace(/[\s\-\(\)\.]/g, "");
+
+    // Detect double country code combinations (e.g. +4491..., +9144..., +9191...)
+    if (/^\+?(?:4491|9144|9191|191|911|97191|91971)/.test(clean)) {
+      return {
+        valid: false,
+        message: "Invalid phone number: multiple country codes detected (e.g. +44 and 91). Please provide a valid number with only one country code."
+      };
+    }
+
+    // Check with intl-tel-input instance if available
+    if (itiInstance) {
+      const countryData = itiInstance.getSelectedCountryData();
+      const dialCode = countryData ? countryData.dialCode : "91";
+
+      if (dialCode === "91" && clean.length === 12 && clean.startsWith("91")) {
+        return {
+          valid: false,
+          message: "It looks like the country code +91 was entered twice. Please enter your 10-digit mobile number without +91."
+        };
+      }
+
+      if (typeof itiInstance.isValidNumber === "function") {
+        const isValid = itiInstance.isValidNumber();
+        if (!isValid) {
+          const errorCode = typeof itiInstance.getValidationError === "function" ? itiInstance.getValidationError() : -1;
+          let msg = `Please enter a valid phone number for ${countryData.name || "the selected country"}.`;
+          if (errorCode === 2) {
+            msg = "Phone number is too short.";
+          } else if (errorCode === 3) {
+            msg = "Phone number is too long.";
+          } else if (errorCode === 1) {
+            msg = "Invalid country code.";
+          }
+          return { valid: false, message: msg };
+        }
+      }
+
+      const fullNumber = itiInstance.getNumber();
+      return { valid: true, fullNumber: fullNumber || rawValue };
+    }
+
+    // Fallback standard validation if iti is not loaded
+    if (!/^\+?[0-9]{7,15}$/.test(clean)) {
+      return { valid: false, message: "Phone number must be between 7 and 15 digits." };
+    }
+
+    if (clean.startsWith("+91") || (!clean.startsWith("+") && clean.length === 10)) {
+      const nat = clean.replace(/^\+91|^0/, "");
+      if (!/^[6-9][0-9]{9}$/.test(nat)) {
+        return { valid: false, message: "Please enter a valid 10-digit Indian mobile number starting with 6, 7, 8, or 9." };
+      }
+      return { valid: true, fullNumber: "+91" + nat };
+    }
+
+    if (clean.startsWith("+44")) {
+      const nat = clean.substring(3);
+      if (nat.length < 9 || nat.length > 10 || (nat.length === 10 && !/^[1237]/.test(nat))) {
+        return { valid: false, message: "Invalid UK phone number. UK mobile numbers start with 7 and have 10 digits." };
+      }
+      return { valid: true, fullNumber: "+44" + nat };
+    }
+
+    const fullNumber = clean.startsWith("+") ? clean : "+" + clean;
+    return { valid: true, fullNumber: fullNumber };
+  }
+
   // Handle Contact & Admissions Mock Forms AJAX Submit to Edusprint CRM & WP Lead CPT
   function initFormSubmissions() {
     const forms = document.querySelectorAll(".contact-mock-form");
     if (!forms.length) return;
 
     forms.forEach((form) => {
+      const phoneInput = form.querySelector("input[name='mobile_number']");
+      const phoneErrorEl = form.querySelector("#adm_mobile_error, #contact_mobile_error");
+      const dobInput = form.querySelector("input[name='date_of_birth']");
+      const dobErrorEl = form.querySelector("#adm_dob_error");
+      const gradeSelect = form.querySelector("select[name='class_master_id']");
+      const gradeErrorEl = form.querySelector("#adm_grade_error");
+      const yearSelect = form.querySelector("select[name='academic_year']");
+
+      let iti = null;
+
+      // Initialize International Telephone Input (intl-tel-input) if available
+      if (phoneInput && typeof window.intlTelInput === "function") {
+        try {
+          iti = window.intlTelInput(phoneInput, {
+            initialCountry: "in",
+            preferredCountries: ["in", "ae", "us", "gb", "sg", "ca", "au", "om", "qa", "kw"],
+            separateDialCode: true,
+            strictMode: true,
+            utilsScript: (typeof bdsis_ajax !== "undefined" && bdsis_ajax.intl_utils_url)
+              ? bdsis_ajax.intl_utils_url
+              : "https://cdn.jsdelivr.net/npm/intl-tel-input@23.8.1/build/js/utils.js",
+          });
+
+          phoneInput.addEventListener("countrychange", function () {
+            if (phoneInput.value.trim()) {
+              const res = validatePhoneNumber(phoneInput, iti);
+              if (res.valid) {
+                clearFieldError(phoneInput, phoneErrorEl);
+              } else {
+                setFieldError(phoneInput, phoneErrorEl, res.message);
+              }
+            }
+          });
+        } catch (err) {
+          console.warn("intlTelInput initialization:", err);
+        }
+      }
+
+      // Live Phone Validation Listeners
+      if (phoneInput) {
+        phoneInput.addEventListener("input", function () {
+          if (phoneInput.classList.contains("is-invalid") || phoneInput.value.trim().length > 6) {
+            const res = validatePhoneNumber(phoneInput, iti);
+            if (res.valid) {
+              clearFieldError(phoneInput, phoneErrorEl);
+            }
+          }
+        });
+
+        phoneInput.addEventListener("blur", function () {
+          if (phoneInput.value.trim()) {
+            const res = validatePhoneNumber(phoneInput, iti);
+            if (!res.valid) {
+              setFieldError(phoneInput, phoneErrorEl, res.message);
+            } else {
+              clearFieldError(phoneInput, phoneErrorEl);
+            }
+          } else {
+            clearFieldError(phoneInput, phoneErrorEl);
+          }
+        });
+      }
+
+      // Live DOB & Grade Validation Listeners (Admissions form)
+      if (dobInput) {
+        const revalidateDob = () => {
+          if (dobInput.value) {
+            const res = validateDobAgainstGrade(dobInput, gradeSelect, yearSelect);
+            if (!res.valid) {
+              setFieldError(dobInput, dobErrorEl, res.message);
+            } else {
+              clearFieldError(dobInput, dobErrorEl);
+            }
+          } else {
+            clearFieldError(dobInput, dobErrorEl);
+          }
+        };
+
+        dobInput.addEventListener("change", revalidateDob);
+        dobInput.addEventListener("blur", revalidateDob);
+
+        if (gradeSelect) {
+          gradeSelect.addEventListener("change", function () {
+            clearFieldError(gradeSelect, gradeErrorEl);
+            if (dobInput.value) {
+              revalidateDob();
+            }
+          });
+        }
+
+        if (yearSelect) {
+          yearSelect.addEventListener("change", function () {
+            if (dobInput.value) {
+              revalidateDob();
+            }
+          });
+        }
+      }
+
+      // Form Submit Handler
       form.addEventListener("submit", function (e) {
         e.preventDefault();
+
+        // 1. Validate Phone Number
+        if (phoneInput) {
+          const phoneRes = validatePhoneNumber(phoneInput, iti);
+          if (!phoneRes.valid) {
+            setFieldError(phoneInput, phoneErrorEl, phoneRes.message);
+            phoneInput.focus();
+            phoneInput.scrollIntoView({ behavior: "smooth", block: "center" });
+            return;
+          } else {
+            clearFieldError(phoneInput, phoneErrorEl);
+          }
+        }
+
+        // 2. Validate Admissions Specific Fields (Grade & DOB)
+        if (dobInput) {
+          if (gradeSelect && !gradeSelect.value) {
+            setFieldError(gradeSelect, gradeErrorEl, "Please select the Grade applying for.");
+            gradeSelect.focus();
+            gradeSelect.scrollIntoView({ behavior: "smooth", block: "center" });
+            return;
+          } else if (gradeSelect) {
+            clearFieldError(gradeSelect, gradeErrorEl);
+          }
+
+          const dobRes = validateDobAgainstGrade(dobInput, gradeSelect, yearSelect);
+          if (!dobRes.valid) {
+            setFieldError(dobInput, dobErrorEl, dobRes.message);
+            dobInput.focus();
+            dobInput.scrollIntoView({ behavior: "smooth", block: "center" });
+            return;
+          } else {
+            clearFieldError(dobInput, dobErrorEl);
+          }
+        }
 
         const submitBtn = form.querySelector("button[type='submit']");
         const originalText = submitBtn ? submitBtn.innerHTML : "SUBMIT";
@@ -2398,6 +2699,14 @@ document.addEventListener("DOMContentLoaded", () => {
         // Submit to WordPress backend handler (which saves CPT lead & syncs to MICM Edusprint)
         const formData = new FormData(form);
         formData.append("action", "bdsis_submit_form");
+
+        // Use formatted full E.164 phone number if available
+        if (phoneInput) {
+          const phoneRes = validatePhoneNumber(phoneInput, iti);
+          if (phoneRes.fullNumber) {
+            formData.set("mobile_number", phoneRes.fullNumber);
+          }
+        }
 
         const ajaxUrl = (typeof bdsis_ajax !== "undefined" && bdsis_ajax.ajax_url) ? bdsis_ajax.ajax_url : "/wp-admin/admin-ajax.php";
 
@@ -2428,6 +2737,11 @@ document.addEventListener("DOMContentLoaded", () => {
               msgBox.innerHTML = `<strong>${successText}</strong>`;
               form.reset();
 
+              // Reset intlTelInput country back to default if applicable
+              if (iti && typeof iti.setCountry === "function") {
+                iti.setCountry("in");
+              }
+
               // Track Meta Lead conversion event
               if (typeof window.fbq === "function") {
                 window.fbq("track", "Lead");
@@ -2435,8 +2749,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
               msgBox.scrollIntoView({ behavior: "smooth", block: "nearest" });
             } else {
+              const errMsg = (data && data.data && data.data.message) ? data.data.message : "An error occurred while submitting. Please try again.";
               msgBox.className = "form-message-box is-error";
-              msgBox.innerHTML = (data && data.data && data.data.message) ? data.data.message : "An error occurred while submitting. Please try again.";
+              msgBox.innerHTML = errMsg;
+
+              // Highlight relevant field if server validation reported an issue
+              if (/phone|mobile/i.test(errMsg) && phoneInput) {
+                setFieldError(phoneInput, phoneErrorEl, errMsg);
+              } else if (/date of birth|dob|born|age/i.test(errMsg) && dobInput) {
+                setFieldError(dobInput, dobErrorEl, errMsg);
+              } else if (/grade/i.test(errMsg) && gradeSelect) {
+                setFieldError(gradeSelect, gradeErrorEl, errMsg);
+              }
+
               msgBox.scrollIntoView({ behavior: "smooth", block: "nearest" });
             }
           })
@@ -2453,9 +2778,8 @@ document.addEventListener("DOMContentLoaded", () => {
               form.appendChild(msgBox);
             }
 
-            msgBox.className = "form-message-box is-success";
-            msgBox.innerHTML = `<strong>Form submitted successfully!</strong>`;
-            form.reset();
+            msgBox.className = "form-message-box is-error";
+            msgBox.innerHTML = "A network error occurred. Please check your connection and try again.";
             msgBox.scrollIntoView({ behavior: "smooth", block: "nearest" });
           });
       });

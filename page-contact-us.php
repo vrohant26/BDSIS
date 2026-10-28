@@ -152,10 +152,12 @@ get_header();
 										<div class="form-group">
 											<label for="email"><?php esc_html_e( 'Email ID', 'bd-somani' ); ?></label>
 											<input type="email" id="email" name="email" placeholder="<?php esc_attr_e( 'xyz@example.com', 'bd-somani' ); ?>" required />
+											<div class="field-validation-message" id="contact_email_error" role="alert" aria-live="polite"></div>
 										</div>
 										<div class="form-group">
 											<label for="mobile_number"><?php esc_html_e( 'Mobile Number', 'bd-somani' ); ?></label>
-											<input type="tel" id="mobile_number" name="mobile_number" placeholder="<?php esc_attr_e( '+91 9876543210', 'bd-somani' ); ?>" required />
+											<input type="tel" id="mobile_number" name="mobile_number" placeholder="<?php esc_attr_e( '98765 43210', 'bd-somani' ); ?>" required autocomplete="tel" />
+											<div class="field-validation-message" id="contact_mobile_error" role="alert" aria-live="polite"></div>
 										</div>
 									</div>
 

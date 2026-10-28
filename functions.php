@@ -189,8 +189,11 @@ function theme_enqueue_assets() {
 	// Swiper CSS for 3D Coverflow Carousel
 	wp_enqueue_style( 'swiper-style', 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css', array(), '11.0.0' );
 
+	// International Telephone Input (intl-tel-input)
+	wp_enqueue_style( 'intl-tel-input', 'https://cdn.jsdelivr.net/npm/intl-tel-input@23.8.1/build/css/intlTelInput.min.css', array(), '23.8.1' );
+
 	// Theme Stylesheet
-	wp_enqueue_style( 'theme-style', get_stylesheet_uri(), array( 'google-fonts-theme', 'swiper-style' ), $css_ver );
+	wp_enqueue_style( 'theme-style', get_stylesheet_uri(), array( 'google-fonts-theme', 'swiper-style', 'intl-tel-input' ), $css_ver );
 	wp_enqueue_style( 'lenis-style', 'https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.css', array(), '1.1.18' );
 
 	// GSAP Core & Plugins
@@ -204,15 +207,19 @@ function theme_enqueue_assets() {
 	// Swiper JS for 3D Coverflow
 	wp_enqueue_script( 'swiper-script', 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js', array(), '11.0.0', true );
 
+	// International Telephone Input Script (intl-tel-input)
+	wp_enqueue_script( 'intl-tel-input', 'https://cdn.jsdelivr.net/npm/intl-tel-input@23.8.1/build/js/intlTelInput.min.js', array(), '23.8.1', true );
+
 	// Iconify Web Component (https://icon-sets.iconify.design/)
 	wp_enqueue_script( 'iconify-icon', 'https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js', array(), '2.1.0', true );
 
-	// Custom Theme Script (depends on GSAP, Lenis, and Swiper)
-	wp_enqueue_script( 'theme-script', get_template_directory_uri() . '/assets/script.js', array( 'gsap', 'gsap-scrolltrigger', 'gsap-drawsvg', 'lenis', 'swiper-script' ), $js_ver, true );
+	// Custom Theme Script (depends on GSAP, Lenis, Swiper, and intl-tel-input)
+	wp_enqueue_script( 'theme-script', get_template_directory_uri() . '/assets/script.js', array( 'gsap', 'gsap-scrolltrigger', 'gsap-drawsvg', 'lenis', 'swiper-script', 'intl-tel-input' ), $js_ver, true );
 
 	wp_localize_script( 'theme-script', 'bdsis_ajax', array(
-		'ajax_url' => admin_url( 'admin-ajax.php' ),
-		'nonce'    => wp_create_nonce( 'bdsis_form_nonce' ),
+		'ajax_url'       => admin_url( 'admin-ajax.php' ),
+		'nonce'          => wp_create_nonce( 'bdsis_form_nonce' ),
+		'intl_utils_url' => 'https://cdn.jsdelivr.net/npm/intl-tel-input@23.8.1/build/js/utils.js',
 	) );
 }
 add_action( 'wp_enqueue_scripts', 'theme_enqueue_assets' );
@@ -2714,6 +2721,231 @@ function bdsis_sync_lead_to_edusprint( $lead_id ) {
 	}
 }
 
+/**
+ * Validate international telephone numbers for admissions & contact forms.
+ * Allows correct international numbers while rejecting invalid ones such as double country codes
+ * (e.g., +44 and 91 combined), malformed lengths, or invalid patterns.
+ *
+ * @param string $phone Raw phone string.
+ * @return array Array with 'valid' (bool), 'message' (string), and optional 'formatted' (string).
+ */
+function bdsis_validate_phone_number( $phone ) {
+	$phone = trim( (string) $phone );
+	if ( empty( $phone ) ) {
+		return array(
+			'valid'   => false,
+			'message' => __( 'Please enter a valid mobile number.', 'bd-somani' ),
+		);
+	}
+
+	// Remove common formatting characters: spaces, hyphens, parentheses, periods
+	$clean = preg_replace( '/[\s\-\(\)\.]/', '', $phone );
+
+	// Reject if contains invalid characters (anything other than digits and optional leading +)
+	if ( ! preg_match( '/^\+?[0-9]+$/', $clean ) ) {
+		return array(
+			'valid'   => false,
+			'message' => __( 'Phone number contains invalid characters. Please enter digits only.', 'bd-somani' ),
+		);
+	}
+
+	// Reject obvious double country code prefixes (e.g. +4491..., +9144..., +9191..., +191..., +97191...)
+	if ( preg_match( '/^\+?(?:4491|9144|9191|191|911|97191|91971)/', $clean ) ) {
+		return array(
+			'valid'   => false,
+			'message' => __( 'Invalid phone number: multiple country codes detected (e.g. +44 and 91). Please provide a valid number with only one country code.', 'bd-somani' ),
+		);
+	}
+
+	// General length check: International E.164 numbers are 7 to 15 digits
+	$digits_only = ltrim( $clean, '+' );
+	$len         = strlen( $digits_only );
+	if ( $len < 7 || $len > 15 ) {
+		return array(
+			'valid'   => false,
+			'message' => __( 'Phone number must be between 7 and 15 digits.', 'bd-somani' ),
+		);
+	}
+
+	// Country-specific pattern validations
+	if ( strpos( $clean, '+91' ) === 0 || ( strpos( $clean, '+' ) === false && 10 === $len ) ) {
+		// India: 10 digits starting with 6, 7, 8, or 9
+		$national = preg_replace( '/^\+91|^0/', '', $clean );
+		if ( strlen( $clean ) === 12 && substr( $clean, 0, 2 ) === '91' ) {
+			$national = substr( $clean, 2 );
+		}
+		if ( ! preg_match( '/^[6-9][0-9]{9}$/', $national ) ) {
+			return array(
+				'valid'   => false,
+				'message' => __( 'Please enter a valid 10-digit Indian mobile number starting with 6, 7, 8, or 9.', 'bd-somani' ),
+			);
+		}
+		return array( 'valid' => true, 'formatted' => '+91' . $national );
+	}
+
+	if ( strpos( $clean, '+44' ) === 0 ) {
+		// UK: 9 or 10 digits after +44; mobile numbers start with 7
+		$national = substr( $clean, 3 );
+		$uk_len   = strlen( $national );
+		if ( $uk_len < 9 || $uk_len > 10 ) {
+			return array(
+				'valid'   => false,
+				'message' => __( 'Invalid UK phone number. UK numbers must be 9 or 10 digits after +44.', 'bd-somani' ),
+			);
+		}
+		if ( 10 === $uk_len && ! in_array( $national[0], array( '7', '1', '2', '3' ), true ) ) {
+			return array(
+				'valid'   => false,
+				'message' => __( 'Invalid UK phone number format.', 'bd-somani' ),
+			);
+		}
+		return array( 'valid' => true, 'formatted' => '+44' . $national );
+	}
+
+	if ( strpos( $clean, '+1' ) === 0 ) {
+		// US / Canada: 10 digits after +1, area code 2-9
+		$national = substr( $clean, 2 );
+		if ( ! preg_match( '/^[2-9][0-9]{2}[2-9][0-9]{6}$/', $national ) ) {
+			return array(
+				'valid'   => false,
+				'message' => __( 'Please enter a valid 10-digit North American phone number.', 'bd-somani' ),
+			);
+		}
+		return array( 'valid' => true, 'formatted' => '+1' . $national );
+	}
+
+	if ( strpos( $clean, '+971' ) === 0 ) {
+		// UAE: 8 or 9 digits after +971
+		$national = substr( $clean, 4 );
+		if ( ! preg_match( '/^[2-9][0-9]{7,8}$/', $national ) ) {
+			return array(
+				'valid'   => false,
+				'message' => __( 'Please enter a valid UAE phone number (8-9 digits).', 'bd-somani' ),
+			);
+		}
+		return array( 'valid' => true, 'formatted' => '+971' . $national );
+	}
+
+	if ( strpos( $clean, '+65' ) === 0 ) {
+		// Singapore: 8 digits after +65
+		$national = substr( $clean, 3 );
+		if ( ! preg_match( '/^[689][0-9]{7}$/', $national ) ) {
+			return array(
+				'valid'   => false,
+				'message' => __( 'Please enter a valid 8-digit Singapore phone number.', 'bd-somani' ),
+			);
+		}
+		return array( 'valid' => true, 'formatted' => '+65' . $national );
+	}
+
+	// Other international numbers conforming to standard E.164
+	$formatted = ( strpos( $clean, '+' ) === 0 ) ? $clean : '+' . $clean;
+	return array( 'valid' => true, 'formatted' => $formatted );
+}
+
+/**
+ * Validate Date of Birth against the selected Grade and Academic Year.
+ * Verifies that the child's age aligns with the grade eligibility, allowing a 1-2 year buffer.
+ * Rejects adult DOBs, newborn/future dates, and impossible grade-age combinations.
+ *
+ * @param string $dob_str       Raw DOB string (e.g. 'YYYY-MM-DD' or 'DD-MM-YYYY').
+ * @param int    $class_id      The ClassMasterID selected.
+ * @param string $academic_year The academic year string (e.g. '2027-2028').
+ * @return array Array with 'valid' (bool) and 'message' (string).
+ */
+function bdsis_validate_dob_grade( $dob_str, $class_id, $academic_year = '2027-2028' ) {
+	$dob_str = trim( (string) $dob_str );
+	if ( empty( $dob_str ) ) {
+		return array(
+			'valid'   => false,
+			'message' => __( 'Please enter the child\'s Date of Birth.', 'bd-somani' ),
+		);
+	}
+
+	$dob_time = strtotime( $dob_str );
+	if ( false === $dob_time ) {
+		return array(
+			'valid'   => false,
+			'message' => __( 'Invalid Date of Birth format. Please use YYYY-MM-DD.', 'bd-somani' ),
+		);
+	}
+
+	// DOB cannot be in the future relative to current time
+	if ( $dob_time > time() ) {
+		return array(
+			'valid'   => false,
+			'message' => __( 'Date of birth cannot be in the future.', 'bd-somani' ),
+		);
+	}
+
+	// Class ID must be selected
+	if ( empty( $class_id ) ) {
+		return array(
+			'valid'   => false,
+			'message' => __( 'Please select the Grade applying for.', 'bd-somani' ),
+		);
+	}
+
+	// Extract reference academic year start year (e.g. 2027 from '2027-2028')
+	$ref_year = 2027;
+	if ( preg_match( '/^(\d{4})/', $academic_year, $matches ) ) {
+		$ref_year = (int) $matches[1];
+	}
+
+	// Reference school session start: June 1st of the academic year
+	$session_start = strtotime( "{$ref_year}-06-01" );
+	$age_in_years  = ( $session_start - $dob_time ) / ( 365.25 * 86400 );
+
+	// Absolute minimum age for school admission (Playgroup) is ~1.5 years old
+	if ( $age_in_years < 1.5 ) {
+		return array(
+			'valid'   => false,
+			'message' => __( 'Child must be at least 1.5 years old for admission. Please check the child\'s date of birth.', 'bd-somani' ),
+		);
+	}
+
+	// Grade eligibility criteria: [min_age, max_age, grade_name, typical_age_label]
+	// Allowing a generous 1 to 2 year buffer up and down for each grade
+	$grade_criteria = array(
+		34 => array( 'min' => 1.5, 'max' => 4.5,  'name' => 'Playgroup',        'typical' => '2 to 3 years' ),
+		35 => array( 'min' => 2.0, 'max' => 5.5,  'name' => 'Nursery',          'typical' => '3 to 4 years' ),
+		36 => array( 'min' => 2.5, 'max' => 6.5,  'name' => 'Jr. KG',           'typical' => '4 to 5 years' ),
+		37 => array( 'min' => 3.5, 'max' => 7.5,  'name' => 'Sr. KG',           'typical' => '5 to 6 years' ),
+		38 => array( 'min' => 4.5, 'max' => 9.0,  'name' => 'Grade 1',          'typical' => '6 to 7 years' ),
+		39 => array( 'min' => 5.5, 'max' => 10.0, 'name' => 'Grade 2',          'typical' => '7 to 8 years' ),
+		40 => array( 'min' => 6.5, 'max' => 11.0, 'name' => 'Grade 3',          'typical' => '8 to 9 years' ),
+		41 => array( 'min' => 7.5, 'max' => 12.0, 'name' => 'Grade 4',          'typical' => '9 to 10 years' ),
+		42 => array( 'min' => 8.5, 'max' => 13.0, 'name' => 'Grade 5',          'typical' => '10 to 11 years' ),
+		43 => array( 'min' => 9.5, 'max' => 14.5, 'name' => 'Grade 6',          'typical' => '11 to 12 years' ),
+		44 => array( 'min' => 10.5, 'max' => 15.5, 'name' => 'Grade 7',          'typical' => '12 to 13 years' ),
+		55 => array( 'min' => 11.5, 'max' => 16.5, 'name' => 'Grade 8',          'typical' => '13 to 14 years' ),
+		57 => array( 'min' => 9.5, 'max' => 14.5, 'name' => 'Grade 6 - IGCSE',  'typical' => '11 to 12 years' ),
+		58 => array( 'min' => 10.5, 'max' => 15.5, 'name' => 'Grade 7 - IGCSE',  'typical' => '12 to 13 years' ),
+		59 => array( 'min' => 11.5, 'max' => 16.5, 'name' => 'Grade 8 - IGCSE',  'typical' => '13 to 14 years' ),
+		60 => array( 'min' => 12.5, 'max' => 17.5, 'name' => 'Grade 9 - IGCSE',  'typical' => '14 to 15 years' ),
+	);
+
+	if ( isset( $grade_criteria[ $class_id ] ) ) {
+		$c = $grade_criteria[ $class_id ];
+		if ( $age_in_years < $c['min'] || $age_in_years > $c['max'] ) {
+			$formatted_dob = date( 'd-m-Y', $dob_time );
+			return array(
+				'valid'   => false,
+				'message' => sprintf(
+					__( 'The date of birth (%1$s) does not match eligibility for %2$s. Expected age for %2$s is %3$s (approx. %4$s to %5$s years). Please ensure you enter the child\'s date of birth.', 'bd-somani' ),
+					$formatted_dob,
+					$c['name'],
+					$c['typical'],
+					$c['min'],
+					$c['max']
+				),
+			);
+		}
+	}
+
+	return array( 'valid' => true );
+}
+
 // AJAX Handler for Contact & Admissions Forms -> MICM Edusprint CRM & WP CPT Integration
 function bdsis_handle_form_submission() {
 	// 1. Anti-spam Honeypot Check
@@ -2745,6 +2977,25 @@ function bdsis_handle_form_submission() {
 	$academic_year = isset( $_POST['academic_year'] ) ? sanitize_text_field( wp_unslash( $_POST['academic_year'] ) ) : ( 'Admissions' === $form_type ? '2027-2028' : '' );
 	$class_id      = isset( $_POST['class_master_id'] ) ? absint( $_POST['class_master_id'] ) : 0;
 	$found_via     = isset( $_POST['found_via'] ) ? sanitize_text_field( wp_unslash( $_POST['found_via'] ) ) : '';
+
+	// 3.5. Validation: Mobile / International Phone Number
+	$phone_check = bdsis_validate_phone_number( $phone );
+	if ( ! $phone_check['valid'] ) {
+		delete_transient( $rate_limit_key );
+		wp_send_json_error( array( 'message' => $phone_check['message'] ) );
+	}
+	if ( ! empty( $phone_check['formatted'] ) ) {
+		$phone = $phone_check['formatted'];
+	}
+
+	// 3.6. Admissions specific validation: Grade & Date of Birth matching
+	if ( 'Admissions' === $form_type ) {
+		$dob_check = bdsis_validate_dob_grade( $dob_raw, $class_id, $academic_year );
+		if ( ! $dob_check['valid'] ) {
+			delete_transient( $rate_limit_key );
+			wp_send_json_error( array( 'message' => $dob_check['message'] ) );
+		}
+	}
 
 	// UTM campaign attribution
 	$utm_source   = isset( $_POST['utm_source'] ) ? sanitize_text_field( wp_unslash( $_POST['utm_source'] ) ) : '';
