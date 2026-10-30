@@ -1924,17 +1924,38 @@ add_action( 'init', 'theme_register_leads_cpt' );
 // Custom Admin Columns for Form Leads
 function bds_leads_cpt_columns( $columns ) {
 	return array(
-		'cb'        => isset( $columns['cb'] ) ? $columns['cb'] : '',
-		'title'     => __( 'Lead Title', 'bd-somani' ),
-		'form_type' => __( 'Form Type', 'bd-somani' ),
-		'email'     => __( 'Email', 'bd-somani' ),
-		'phone'     => __( 'Phone', 'bd-somani' ),
-		'crm'       => __( 'Edusprint CRM', 'bd-somani' ),
-		'details'   => __( 'Details / Message', 'bd-somani' ),
-		'date'      => __( 'Date Submitted', 'bd-somani' ),
+		'cb'         => isset( $columns['cb'] ) ? $columns['cb'] : '',
+		'title'      => __( 'Lead Title', 'bd-somani' ),
+		'form_type'  => __( 'Form Type', 'bd-somani' ),
+		'email'      => __( 'Email', 'bd-somani' ),
+		'phone'      => __( 'Phone', 'bd-somani' ),
+		'crm'        => __( 'Edusprint CRM', 'bd-somani' ),
+		'crm_reason' => __( 'CRM Sync Reason / Error', 'bd-somani' ),
+		'details'    => __( 'Details / Message', 'bd-somani' ),
+		'date'       => __( 'Date Submitted', 'bd-somani' ),
 	);
 }
 add_filter( 'manage_bds_lead_posts_columns', 'bds_leads_cpt_columns' );
+
+// Custom column widths and styling for Leads screen
+function bds_leads_admin_css() {
+	global $typenow, $pagenow;
+	if ( 'bds_lead' !== $typenow || 'edit.php' !== $pagenow ) {
+		return;
+	}
+	?>
+	<style>
+		.wp-list-table .column-cb { width: 35px; }
+		.wp-list-table .column-form_type { width: 110px; }
+		.wp-list-table .column-email { width: 175px; word-break: break-all; }
+		.wp-list-table .column-phone { width: 130px; }
+		.wp-list-table .column-crm { width: 110px; text-align: center; }
+		.wp-list-table .column-crm_reason { width: 280px; min-width: 220px; }
+		.wp-list-table .column-date { width: 130px; }
+	</style>
+	<?php
+}
+add_action( 'admin_head', 'bds_leads_admin_css' );
 
 function bds_leads_cpt_custom_column( $column, $post_id ) {
 	switch ( $column ) {
@@ -1954,20 +1975,44 @@ function bds_leads_cpt_custom_column( $column, $post_id ) {
 		case 'crm':
 			$crm_status = get_post_meta( $post_id, '_edusprint_status', true );
 			$enquiry_no = get_post_meta( $post_id, '_edusprint_enquiry_no', true );
-			$response   = get_post_meta( $post_id, '_edusprint_response', true );
 			if ( 'Synced' === $crm_status ) {
-				echo '<span style="display:inline-block; padding:3px 8px; background:#e6f4ea; color:#137333; border-radius:4px; font-size:11px; font-weight:700;">✓ Synced</span>';
-				if ( $enquiry_no ) {
-					echo '<br><span style="font-size:10px; color:#555; font-family:monospace; font-weight:600;">' . esc_html( $enquiry_no ) . '</span>';
-				} elseif ( false !== stripos( (string) $response, 'Already' ) ) {
-					echo '<br><span style="font-size:10px; color:#666; font-weight:600;">Existing in CRM</span>';
-				}
+				echo '<span style="display:inline-block; padding:4px 8px; background:#e6f4ea; color:#137333; border-radius:4px; font-size:11px; font-weight:700;">✓ Synced</span>';
 			} elseif ( 'Failed' === $crm_status ) {
-				$tip = esc_attr( wp_trim_words( $response, 15, '...' ) );
-				echo '<span style="display:inline-block; padding:3px 8px; background:#fce8e6; color:#c5221f; border-radius:4px; font-size:11px; font-weight:700;" title="' . $tip . '">✕ Failed</span>';
-				if ( $response ) {
-					echo '<br><span style="font-size:10px; color:#c5221f;" title="' . $tip . '">' . esc_html( wp_trim_words( $response, 5, '...' ) ) . '</span>';
+				echo '<span style="display:inline-block; padding:4px 8px; background:#fce8e6; color:#c5221f; border-radius:4px; font-size:11px; font-weight:700;">✕ Failed</span>';
+				$sync_url = wp_nonce_url(
+					admin_url( 'admin-post.php?action=bdsis_resync_lead&post_id=' . $post_id ),
+					'bdsis_resync_lead_' . $post_id
+				);
+				echo '<br><a href="' . esc_url( $sync_url ) . '" class="button button-small" style="margin-top:6px; font-size:11px; height:24px; line-height:22px; padding:0 8px; color:#137333; border-color:#8bc34a; font-weight:600;">↻ Retry Sync</a>';
+			} else {
+				echo '<span style="color:#888;">—</span>';
+			}
+			break;
+		case 'crm_reason':
+			$crm_status = get_post_meta( $post_id, '_edusprint_status', true );
+			$response   = get_post_meta( $post_id, '_edusprint_response', true );
+			$enquiry_no = get_post_meta( $post_id, '_edusprint_enquiry_no', true );
+
+			if ( 'Failed' === $crm_status ) {
+				if ( ! empty( $response ) ) {
+					echo '<div style="font-size:11px; line-height:1.45; color:#c5221f; background:#fff5f5; border:1px solid #fad2cf; border-left:3px solid #c5221f; padding:6px 10px; border-radius:4px; max-width:320px; word-break:break-word;">';
+					echo '<strong style="display:block; margin-bottom:2px;">' . esc_html__( 'CRM Response:', 'bd-somani' ) . '</strong>';
+					echo '<div style="font-family:monospace; font-size:11px; white-space:pre-wrap;">' . esc_html( $response ) . '</div>';
+					echo '</div>';
+				} else {
+					echo '<span style="font-size:11px; color:#c5221f;">' . esc_html__( 'Failed (No error details recorded).', 'bd-somani' ) . '</span>';
 				}
+			} elseif ( 'Synced' === $crm_status ) {
+				echo '<div style="font-size:11px; color:#137333; line-height:1.4;">';
+				if ( $enquiry_no ) {
+					echo '<span style="font-weight:600;">' . esc_html__( 'Enquiry Ref:', 'bd-somani' ) . '</span><br>';
+					echo '<code style="font-size:11px; color:#137333; background:#e6f4ea; padding:2px 6px; border-radius:3px; font-weight:700;">' . esc_html( $enquiry_no ) . '</code>';
+				} elseif ( false !== stripos( (string) $response, 'Already' ) ) {
+					echo '<span style="color:#555; font-style:italic;">' . esc_html__( 'Already recorded in EduSprint CRM database.', 'bd-somani' ) . '</span>';
+				} else {
+					echo '<span>' . esc_html__( 'Successfully recorded in EduSprint CRM.', 'bd-somani' ) . '</span>';
+				}
+				echo '</div>';
 			} else {
 				echo '<span style="color:#888;">—</span>';
 			}
@@ -2045,8 +2090,36 @@ function bds_lead_render_details_metabox( $post ) {
 				<span style="background:#e6f4ea; color:#137333; padding:4px 10px; border-radius:4px; font-weight:700; font-size:12px;">
 					✓ Synced to EduSprint <?php echo $enquiry_no ? '(' . esc_html( $enquiry_no ) . ')' : ''; ?>
 				</span>
+			<?php elseif ( 'Failed' === $crm_status ) : ?>
+				<span style="background:#fce8e6; color:#c5221f; padding:4px 10px; border-radius:4px; font-weight:700; font-size:12px;">
+					✕ Failed to Sync to EduSprint
+				</span>
 			<?php endif; ?>
 		</div>
+
+		<?php if ( 'Failed' === $crm_status ) : ?>
+			<div style="background:#fff5f5; border:1px solid #fad2cf; border-left:4px solid #c5221f; padding:14px 18px; border-radius:4px; margin-bottom:20px;">
+				<div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+					<div>
+						<strong style="color:#c5221f; font-size:14px;">✕ EduSprint CRM Sync Failed</strong>
+						<div style="color:#666; font-size:12px; margin-top:2px;"><?php esc_html_e( 'The CRM returned the following response when submitting this lead:', 'bd-somani' ); ?></div>
+					</div>
+					<?php
+					$resync_url = wp_nonce_url(
+						admin_url( 'admin-post.php?action=bdsis_resync_lead&post_id=' . $lead_id ),
+						'bdsis_resync_lead_' . $lead_id
+					);
+					?>
+					<a href="<?php echo esc_url( $resync_url ); ?>" class="button button-primary" style="background:#137333; border-color:#0d5324;">
+						↻ <?php esc_html_e( 'Retry Sync to EduSprint', 'bd-somani' ); ?>
+					</a>
+				</div>
+				<div style="margin-top:12px;">
+					<strong style="font-size:12px; color:#333;"><?php esc_html_e( 'Full CRM Error / Response:', 'bd-somani' ); ?></strong>
+					<pre style="margin-top:4px; padding:10px 14px; background:#fff; border:1px solid #fad2cf; border-radius:4px; font-size:12px; white-space:pre-wrap; word-break:break-word; color:#c5221f; font-family:monospace;"><?php echo esc_html( $crm_resp ? $crm_resp : 'No response text captured.' ); ?></pre>
+				</div>
+			</div>
+		<?php endif; ?>
 
 		<!-- Sender Contact Info Table -->
 		<table class="widefat striped" style="margin-bottom: 20px; border: 1px solid #c3c4c7;">
@@ -2075,6 +2148,24 @@ function bds_lead_render_details_metabox( $post ) {
 							</a>
 						<?php else : ?>
 							—
+						<?php endif; ?>
+					</td>
+				</tr>
+				<tr>
+					<th><?php esc_html_e( 'EduSprint CRM Status', 'bd-somani' ); ?></th>
+					<td>
+						<?php if ( 'Synced' === $crm_status ) : ?>
+							<span style="color:#137333; font-weight:700;">✓ <?php esc_html_e( 'Synced', 'bd-somani' ); ?></span>
+							<?php if ( $enquiry_no ) : ?>
+								&nbsp;—&nbsp;<strong><?php esc_html_e( 'Enquiry Ref:', 'bd-somani' ); ?></strong> <code><?php echo esc_html( $enquiry_no ); ?></code>
+							<?php endif; ?>
+						<?php elseif ( 'Failed' === $crm_status ) : ?>
+							<span style="color:#c5221f; font-weight:700;">✕ <?php esc_html_e( 'Failed to sync', 'bd-somani' ); ?></span>
+							<?php if ( $crm_resp ) : ?>
+								<br><span style="color:#666; font-size:12px; font-family:monospace;"><?php echo esc_html( $crm_resp ); ?></span>
+							<?php endif; ?>
+						<?php else : ?>
+							<span style="color:#888;">—</span>
 						<?php endif; ?>
 					</td>
 				</tr>
@@ -2160,9 +2251,15 @@ function bds_leads_admin_notices() {
 		echo '<div class="notice notice-success is-dismissible"><p>' . sprintf( esc_html__( 'EduSprint Sync: %d of %d lead(s) processed.', 'bd-somani' ), $synced, $total ) . '</p></div>';
 	} elseif ( isset( $_GET['edusprint_sync'] ) ) {
 		if ( 'success' === $_GET['edusprint_sync'] ) {
-			echo '<div class="notice notice-success is-dismissible"><p>' . esc_html__( 'Lead successfully synced to EduSprint CRM!', 'bd-somani' ) . '</p></div>';
+			$post_id    = isset( $_GET['lead_id'] ) ? absint( $_GET['lead_id'] ) : 0;
+			$enquiry_no = $post_id ? get_post_meta( $post_id, '_edusprint_enquiry_no', true ) : '';
+			$extra      = $enquiry_no ? ' (Enquiry Ref: ' . $enquiry_no . ')' : '';
+			echo '<div class="notice notice-success is-dismissible"><p>' . sprintf( esc_html__( 'Lead successfully synced to EduSprint CRM!%s', 'bd-somani' ), ' <strong>' . esc_html( $extra ) . '</strong>' ) . '</p></div>';
 		} else {
-			echo '<div class="notice notice-error is-dismissible"><p>' . esc_html__( 'Failed to sync lead to EduSprint. Please check lead details.', 'bd-somani' ) . '</p></div>';
+			$transient_err = get_transient( 'bdsis_sync_err_' . get_current_user_id() );
+			delete_transient( 'bdsis_sync_err_' . get_current_user_id() );
+			$detail = $transient_err ? ' Error: ' . $transient_err : '';
+			echo '<div class="notice notice-error is-dismissible"><p>' . sprintf( esc_html__( 'Failed to sync lead to EduSprint.%s', 'bd-somani' ), ' <strong>' . esc_html( $detail ) . '</strong>' ) . '</p></div>';
 		}
 	}
 }
@@ -2177,13 +2274,27 @@ function bdsis_handle_admin_resync_lead() {
 	check_admin_referer( 'bdsis_resync_lead_' . $post_id );
 
 	$res = bdsis_sync_lead_to_edusprint( $post_id );
-	$redirect = add_query_arg(
-		array(
-			'post_type'      => 'bds_lead',
-			'edusprint_sync' => ! empty( $res['success'] ) ? 'success' : 'failed',
-		),
-		admin_url( 'edit.php' )
-	);
+	if ( ! empty( $res['success'] ) ) {
+		$redirect = add_query_arg(
+			array(
+				'post_type'      => 'bds_lead',
+				'edusprint_sync' => 'success',
+				'lead_id'        => $post_id,
+			),
+			admin_url( 'edit.php' )
+		);
+	} else {
+		$err_msg = ! empty( $res['error'] ) ? $res['error'] : ( ! empty( $res['response'] ) ? $res['response'] : 'Unknown error' );
+		set_transient( 'bdsis_sync_err_' . get_current_user_id(), $err_msg, 60 );
+		$redirect = add_query_arg(
+			array(
+				'post_type'      => 'bds_lead',
+				'edusprint_sync' => 'failed',
+				'lead_id'        => $post_id,
+			),
+			admin_url( 'edit.php' )
+		);
+	}
 	wp_safe_redirect( $redirect );
 	exit;
 }
@@ -2631,22 +2742,28 @@ function bdsis_sync_lead_to_edusprint( $lead_id ) {
 	}
 
 	$grade_name_map = array(
-		'playgroup' => 34,
-		'nursery'   => 35,
-		'jr. kg'    => 36,
-		'jr kg'     => 36,
-		'junior kg' => 36,
-		'sr. kg'    => 37,
-		'sr kg'     => 37,
-		'senior kg' => 37,
-		'grade 1'   => 38,
-		'grade 2'   => 39,
-		'grade 3'   => 40,
-		'grade 4'   => 41,
-		'grade 5'   => 42,
-		'grade 6'   => 43,
-		'grade 7'   => 44,
-		'grade 8'   => 55,
+		'playgroup'       => 34,
+		'nursery'         => 35,
+		'jr. kg'          => 36,
+		'jr kg'           => 36,
+		'junior kg'       => 36,
+		'sr. kg'          => 37,
+		'sr kg'           => 37,
+		'senior kg'       => 37,
+		'grade 1'         => 38,
+		'grade 2'         => 39,
+		'grade 3'         => 40,
+		'grade 4'         => 41,
+		'grade 5'         => 42,
+		'grade 6'         => 43,
+		'grade 7'         => 44,
+		'grade 8'         => 55,
+		'grade 6 - igcse' => 57,
+		'grade 7 - igcse' => 58,
+		'grade 8 - igcse' => 59,
+		'grade 9 - igcse' => 60,
+		'grade 9'         => 60,
+		'9th'             => 60,
 	);
 	if ( empty( $class_id ) && ! empty( $grade_meta ) ) {
 		if ( preg_match( '/Grade:\s*([^|]+)/i', $grade_meta, $m ) ) {
@@ -2672,7 +2789,7 @@ function bdsis_sync_lead_to_edusprint( $lead_id ) {
 	}
 	$child_print = trim( $child_first . ' ' . ( '-' !== $child_last ? $child_last : '' ) );
 
-	$igcse_grade_ids  = array( 57, 58, 59 );
+	$igcse_grade_ids  = array( 57, 58, 59, 60 );
 	$school_shortname = in_array( (int) $class_id, $igcse_grade_ids, true ) ? 'bdskig' : 'bdsk';
 	$enquiry_channel  = in_array( (int) $class_id, $igcse_grade_ids, true ) ? 81 : 35;
 
@@ -3032,8 +3149,8 @@ function bdsis_handle_form_submission() {
 	// Determine School ShortName and EnquiryChannelID based on selected class
 	// B. D. Somani International School - Kharghar:
 	// General Grades (34 to 44, 55): ShortName 'bdsk', OnlineChannelID 35
-	// IGCSE Grades (57, 58, 59): ShortName 'bdskig', OnlineChannelID 81
-	$igcse_grade_ids = array( 57, 58, 59 );
+	// IGCSE Grades (57, 58, 59, 60): ShortName 'bdskig', OnlineChannelID 81
+	$igcse_grade_ids = array( 57, 58, 59, 60 );
 	if ( in_array( $class_id, $igcse_grade_ids, true ) ) {
 		$school_shortname = 'bdskig';
 		$enquiry_channel  = 81;
@@ -3426,9 +3543,9 @@ function bdsis_handle_calendly_webhook( WP_REST_Request $request ) {
 	}
 
 
-	$is_igcse         = in_array( $class_id, array( 57, 58, 59 ), true );
+	$is_igcse         = in_array( $class_id, array( 57, 58, 59, 60 ), true );
 	$school_shortname = $is_igcse ? 'bdskig' : 'bdsk';
-	$enquiry_channel  = $is_igcse ? '81' : '35'; // 35 = Website
+	$enquiry_channel  = $is_igcse ? '81' : '35'; // 35 = Website, 81 = IGCSE Website
 
 	// Extract clean child name
 	$clean_child_name = trim( $child_name_raw );
